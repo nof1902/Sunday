@@ -5,6 +5,7 @@ import { loadBoards, addBoard, removeBoard } from '../store/board.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { userService } from '../services/user.service.js'
 import { boardService } from '../services/board.service.js'
+import { BoardIndexHeader } from '../cmps/BoardIndexHeader.jsx'
 
 export function BoardIndex() {
 
@@ -42,8 +43,8 @@ export function BoardIndex() {
     }
 
     return (
-        <div>
-            <h3>Boards App</h3>
+        <section className='board-index'>
+            <BoardIndexHeader />
             <main>
                 {/* <button onClick={onAddCar}>Add Car ⛐</button>
                 <ul className="car-list">
@@ -64,7 +65,7 @@ export function BoardIndex() {
                     }
                 </ul> */}
             </main>
-        </div>
+        </section>
     )
 }
 
