@@ -13,7 +13,7 @@ const initialState = {
     lastRemovedBoard: null
 }
 
-export function boardReducer(state = initialState, action) {
+export function boardReducer(state = initialState, action = {}) {
     var newState = state
     var boards
     switch (action.type) {
