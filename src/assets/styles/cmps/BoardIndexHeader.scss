@@ -39,7 +39,24 @@
         .addition-actions{
             display: grid;
             grid-template-columns: auto auto;
+            justify-content: start;
             
+            :hover{
+                background-color: $clr9;
+            }
+            
+            > * {
+                padding: 0.3rem;
+            }
+
+            .add-board{
+                border-radius: 0.2rem 0 0 0.2rem;
+
+
+            }
+            .add-group{
+                border-radius: 0 0.2rem 0.2rem 0;
+            }
         }
     }
 }
