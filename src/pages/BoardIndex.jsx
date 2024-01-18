@@ -7,7 +7,8 @@ import { userService } from "../services/user.service.js";
 import { boardService } from "../services/board.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
-import { BoardGroup } from "../cmps/BoardGroup.jsx";
+
+
 
 export function BoardIndex() {
   
@@ -44,19 +45,16 @@ export function BoardIndex() {
     return car.owner?._id === user._id;
   }
 
+
+  if (!boards) return <div>Loading...</div>
+
+  if (!boards) return <div>Loading...</div>
   return (
     <section className="board-index">
       <BoardIndexHeader boards={boards}/>
       <main>
-        <ul className="group-list">
-                     {/*
-            groups.map((group) => (
-             <li key={group.id}>
-             <BoardGroup />
-             </li>
-           ))*/}
-        </ul>
-        <GroupList />
+        <GroupList boards={boards} />
+        <GroupList boards={boards} />
 
         {/* <button onClick={onAddCar}>Add Car ⛐</button>
                 <ul className="car-list">

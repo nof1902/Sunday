@@ -1,19 +1,14 @@
+import { GroupPreview } from "./GroupPreview.jsx";
 
-export function GroupList() {
+export function GroupList({ boards }) {
 
     return (
-        <section className='group-list'>
-           <h3>GroupList</h3>
-
-           <ul>
-           {/*
-            emails.map((email) => (
-             <li key={email.id}>
-             <EmailPreview email={email} onUpdateEmail={onUpdateEmail} onRemoveEmail={onRemoveEmail} />
+           <ul className='group-preview'>
+           {boards.map((board) => (
+             <li key={board._id}>
+             <GroupPreview board={board} />
              </li>
-           ))*/}
+           ))}
          </ul>
-         
-        </section>
     )
 }
