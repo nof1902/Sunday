@@ -14,14 +14,16 @@
 
 // Views
 // @import "views/HomePage";
-@import "views/CarIndex";
+@import "views/BoardIndex";
+@import "views/RootCmp";
 
 
 // Components
 @import "cmps/AppHeader";
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
-@import "cmps/ShoppingCart";
+@import "cmps/BoardIndexHeader";
+
 
 
 

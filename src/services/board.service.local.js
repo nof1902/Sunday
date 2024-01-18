@@ -15,8 +15,18 @@ export const boardService = {
 }
 window.cs = boardService
 
+// _createBoards()
+
 async function query(filterBy = { txt: '', price: 0 }) {
-    var boards = await storageService.query(STORAGE_KEY)
+
+    let boards = utilService.loadFromStorage(STORAGE_KEY)
+    if (!boards || !boards.length){
+        _createBoards()
+    }
+
+   
+     boards = await storageService.query(STORAGE_KEY)
+    // _createBoards()
     // if (filterBy.txt) {
     //     const regex = new RegExp(filterBy.txt, 'i')
     //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
@@ -126,3 +136,115 @@ function getEmptyBoard() {
 
 
 
+function _createBoards(){
+    // let boards = utilService.loadFromStorage(STORAGE_KEY)
+    // if (!boards || !boards.length){
+       var boards = [
+            {
+                "_id": "b101",
+                "title": "first board",
+                "isStarred": false,
+                "archivedAt": 1589983468418,
+                "createdBy": {
+                    "_id": "",
+                    "fullname": "",
+                    "imgUrl": ""
+                },
+                "members": [
+                    {
+                        "_id": "",
+                        "fullname": "",
+                        "imgUrl": ""
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "g101",
+                        "title": "Group 1",
+                        "archivedAt": 1589983468418,
+                        "tasks": [
+                            {
+                                "id": "t101",
+                                "title": "Task 1",
+                                "archivedAt": 1589983468418,
+                            },
+                            {
+                                "id": "t102",
+                                "title": "Task 2",
+                                "status": "",
+                                "priority": "", 
+                                "comments": [
+                                    {
+                                        "id": "",
+                                        "txt": "",
+                                        "createdAt": 1590999817436,
+                                        "byMember": {
+                                            "_id": "",
+                                            "fullname": "",
+                                            "imgUrl": ""
+                                        }
+                                    }
+                                ],
+                            }
+                        ],
+                        "style": {}
+                    }
+                ]
+            },
+            {
+                "_id": "b102",
+                "title": "second board",
+                "isStarred": false,
+                "archivedAt": 1589983468418,
+                "createdBy": {
+                    "_id": "",
+                    "fullname": "",
+                    "imgUrl": ""
+                },
+                "members": [
+                    {
+                        "_id": "",
+                        "fullname": "",
+                        "imgUrl": ""
+                    }
+                ],
+                "groups": [
+                    {
+                        "id": "g102",
+                        "title": "Group 2",
+                        "archivedAt": 1589983468418,
+                        "tasks": [
+                            {
+                                "id": "t101",
+                                "title": "Task 1",
+                                "archivedAt": 1589983468418,
+                            },
+                            {
+                                "id": "t102",
+                                "title": "Task 2",
+                                "status": "",
+                                "priority": "", 
+                                "comments": [
+                                    {
+                                        "id": "",
+                                        "txt": "",
+                                        "createdAt": 1590999817436,
+                                        "byMember": {
+                                            "_id": "",
+                                            "fullname": "",
+                                            "imgUrl": ""
+                                        }
+                                    }
+                                ],
+                            }
+                        ],
+                        "style": {}
+                    }
+                ]
+            }
+        ]
+        
+    // }
+    utilService.saveToStorage(STORAGE_KEY, boards)
+    console.log(boards.length, boards[0], boards[1]);
+}
