@@ -210,6 +210,37 @@ function _createBoards(){
                             }
                         ],
                         "style": {}
+                    },
+                    {
+                        "id": "g102",
+                        "title": "Group 2",
+                        "archivedAt": 1589983468418,
+                        "tasks": [
+                            {
+                                "id": "t101",
+                                "title": "Task 1",
+                                "archivedAt": 1589983468418,
+                            },
+                            {
+                                "id": "t102",
+                                "title": "Task 2",
+                                "status": "",
+                                "priority": "", 
+                                "comments": [
+                                    {
+                                        "id": "",
+                                        "txt": "",
+                                        "createdAt": 1590999817436,
+                                        "byMember": {
+                                            "_id": "",
+                                            "fullname": "",
+                                            "imgUrl": ""
+                                        }
+                                    }
+                                ],
+                            }
+                        ],
+                        "style": {}
                     }
                 ]
             },

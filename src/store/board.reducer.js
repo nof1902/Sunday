@@ -23,7 +23,6 @@ export function boardReducer(state = initialState, action = {}) {
         case SET_BOARDS:
             newState = { ...state, boards: action.boards }
             // console.log("action.boards", action.boards);
-            
             break
         case SET_BOARD: 
             newState = { ...state, currBoard: action.board}

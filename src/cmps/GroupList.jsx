@@ -1,14 +1,26 @@
 import { GroupPreview } from "./GroupPreview.jsx";
+// import PropTypes from 'prop-types';
 
-export function GroupList({ boards }) {
+export function GroupList({ groups }) {
+  console.log("groups", groups);
+  return (
+    <ul className="group-list">
+      {
+        //   groups.map((group) => (
+        //    <li key={group.id}>
+        //    <GroupPreview group={group} />
+        //    </li>
+        //  ))
+      }
 
-    return (
-           <ul className='group-preview'>
-           {boards.map((board) => (
-             <li key={board._id}>
-             <GroupPreview board={board} />
-             </li>
-           ))}
-         </ul>
-    )
+      
+      <li>
+        <GroupPreview group={groups} />
+      </li>
+    </ul>
+  );
 }
+
+// GroupList.propTypes = {
+//   groups: PropTypes.array.isRequired,
+// };

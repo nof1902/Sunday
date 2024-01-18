@@ -41,7 +41,7 @@ export async function loadBoards() {
     }
 }
 
-export async function loadBoard(boardId) {
+export async function loadBoard(boardId = "b101") {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch({
