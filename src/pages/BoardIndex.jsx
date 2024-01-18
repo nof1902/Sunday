@@ -1,22 +1,29 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loadBoard, addBoard, removeBoard } from "../store/board.actions.js";
+import {useParams} from "react-router-dom";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { userService } from "../services/user.service.js";
-// import { boardService } from "../services/board.service.js";
+import { boardService } from "../services/board.service.local.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
 import { BoardGroup } from "../cmps/BoardGroup.jsx";
 
 export function BoardIndex() {
-  
-  const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
-
+  const params = useParams();
+  const boards = useSelector((storeState) => storeState.boardModule.boards);
+  const currBoard = boards.find(board => board._id === 'b101');
+ 
   useEffect(() => {
+    //loadBoard(params._id)
     loadBoard()
   }, [])
 
+  // var currBoard = boards.find(board => board._id === params._id)
+
+  console.log('currBoard' , currBoard)
+  
   async function onRemoveCar(carId) {
     try {
       await removeBoard(carId);
@@ -44,9 +51,11 @@ export function BoardIndex() {
     return car.owner?._id === user._id;
   }
 
+
+
   return (
     <section className="board-index">
-      <BoardIndexHeader currBoard={currBoard}/>
+      <BoardIndexHeader currBoardId={'b101'}/>
       <main>
         <ul className="group-list">
                      {/*
