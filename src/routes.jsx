@@ -7,17 +7,18 @@ const routes = [
     {
         path: '/',
         component: <HomePage />,
-        label: 'Home',
+        label: 'welcome',
+    },
+    {
+        // for meantime
+        path: 'board/id',
+        component: <BoardIndex />,
+        label: 'Board-name',
     },
     {
         path: 'home',
         component: <BoardsIndex />,
-        label: 'Boards',
-    },
-    {
-        path: 'board',
-        component: <BoardIndex />,
-        label: 'Board'
+        label: 'Home'
     }
 ]
 

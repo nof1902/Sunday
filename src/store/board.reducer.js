@@ -5,14 +5,12 @@ export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
-
 // export const ADD_TO_CART = 'ADD_TO_CART'
 // export const CLEAR_CART = 'CLEAR_CART'
 // export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 
 const initialState = {
     boards: [],
-    currBoard: {},
     lastRemovedBoard: null
 }
 
@@ -24,8 +22,9 @@ export function boardReducer(state = initialState, action = {}) {
             newState = { ...state, boards: action.boards }
             // console.log("action.boards", action.boards);
             break
-        case SET_BOARD: 
-            newState = { ...state, currBoard: action.board}
+        case SET_BOARD:
+            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+            newState = { ...state, boards }
             break;
         case REMOVE_BOARD:
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
