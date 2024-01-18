@@ -1,5 +1,6 @@
 import { HomePage } from './pages/HomePage.jsx'
 import { BoardIndex } from './pages/BoardIndex.jsx'
+import { BoardsIndex } from './cmps/BoardsIndex.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -9,9 +10,14 @@ const routes = [
         label: 'Home',
     },
     {
+        path: 'home',
+        component: <BoardsIndex />,
+        label: 'Boards',
+    },
+    {
         path: 'board',
         component: <BoardIndex />,
-        label: 'Boards'
+        label: 'Board'
     }
 ]
 

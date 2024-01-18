@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { loadBoards, addBoard, removeBoard } from "../store/board.actions.js";
+import { loadBoard, addBoard, removeBoard } from "../store/board.actions.js";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { userService } from "../services/user.service.js";
@@ -10,27 +10,28 @@ import { GroupList } from "../cmps/GroupList.jsx";
 import { BoardGroup } from "../cmps/BoardGroup.jsx";
 
 export function BoardIndex() {
-  const boards = useSelector((storeState) => storeState.boardModule.boards);
+  
+  const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
 
   useEffect(() => {
-    loadBoards();
-  }, []);
+    loadBoard()
+  }, [])
 
   async function onRemoveCar(carId) {
     try {
       await removeBoard(carId);
-      showSuccessMsg("Car removed");
+      showSuccessMsg("Car removed")
     } catch (err) {
-      showErrorMsg("Cannot remove car");
+      showErrorMsg("Cannot remove car")
     }
   }
 
   async function onAddCar() {
-    const board = boardService.getEmptyBoard();
+    const board = boardService.getEmptyBoard()
     board.title = prompt("Title?");
     try {
-      const savedBoard = await addBoard(board);
-      showSuccessMsg(`board added (id: ${savedBoard._id})`);
+      const savedBoard = await addBoard(board)
+      showSuccessMsg(`board added (id: ${savedBoard._id})`)
     } catch (err) {
       showErrorMsg("Cannot add board");
     }
@@ -45,7 +46,7 @@ export function BoardIndex() {
 
   return (
     <section className="board-index">
-      <BoardIndexHeader />
+      <BoardIndexHeader boards={boards}/>
       <main>
         <ul className="group-list">
                      {/*
