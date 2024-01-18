@@ -6,7 +6,6 @@ import {useParams} from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { userService } from "../services/user.service.js";
 import { boardService } from "../services/board.service.local.js";
-import { boardService } from "../services/board.service.local.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
 
@@ -60,7 +59,7 @@ export function BoardIndex() {
   return (
     <section className="board-index">
       <BoardIndexHeader boards={currBoard} />
-      <main>
+      <section>
        <GroupList groups={groups} />
 
         {/* <button onClick={onAddCar}>Add Car ⛐</button>
@@ -81,7 +80,7 @@ export function BoardIndex() {
                         </li>)
                     }
                 </ul> */}
-      </main>
+      </section>
     </section>
   );
 }
