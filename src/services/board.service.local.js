@@ -11,22 +11,21 @@ export const boardService = {
     save,
     remove,
     getEmptyBoard,
-    addBoardMsg
+    addBoardMsg,
+    saveTask
 }
 window.cs = boardService
 
 // _createBoards()
 
-async function query(filterBy = { txt: '', price: 0 }) {
+async function query(filterBy = { status: '', title: '' }) {
 
     let boards = utilService.loadFromStorage(STORAGE_KEY)
     if (!boards || !boards.length){
         _createBoards()
     }
-
    
-     boards = await storageService.query(STORAGE_KEY)
-    // _createBoards()
+    boards = await storageService.query(STORAGE_KEY)
     // if (filterBy.txt) {
     //     const regex = new RegExp(filterBy.txt, 'i')
     //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
@@ -56,6 +55,29 @@ async function save(board) {
         savedBoard = await storageService.post(STORAGE_KEY, board)
     }
     return savedBoard
+}
+
+function getGroupFromBoardById(board, groupId) {
+    return board.find(group => group.id === groupId)
+}
+
+async function saveTask(boardId, groupId, task, activity) {
+    const board = await getById(boardId)
+    const group = getGroupFromBoardById(board, groupId)
+    
+    // check if it an update
+    if(task.id){
+        group = group.map((existTask) => {
+            return existTask.id === task.id ? task : existTask
+        }) } else { // else - new task   
+        group.push(task)
+    }
+
+    board.groups = board.groups.map(g => g.id === groupId ? group : g)
+
+    board.activities.unshift(activity)
+    saveBoard(board)
+    return board
 }
 
 async function addBoardMsg(boardId, txt) {

@@ -76,19 +76,11 @@ export function updateBoard(board) {
         })
 }
 
-// export function addToBoard(board) {
-//     store.dispatch({
-//         type: ADD_TO_BOARD,
-//         board
-//     })
-// }
-
-// export function removeFromBoard(BoardId) {
-//     store.dispatch({
-//         type: REMOVE_FROM_BOARD,
-//         BoardId
-//     })
-// }
+export async function storeSaveTask(boardId, groupId, task, activity) {
+    const board = await boardService.getById(boardId)
+    board = await boardService.saveTask(boardId, groupId, task, activity)
+    updateBoard(board)
+}
 
 
 // Demo for Optimistic Mutation 
