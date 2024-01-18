@@ -4,7 +4,7 @@ import { loadBoard, addBoard, removeBoard } from "../store/board.actions.js";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { userService } from "../services/user.service.js";
-import { boardService } from "../services/board.service.js";
+// import { boardService } from "../services/board.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
 import { BoardGroup } from "../cmps/BoardGroup.jsx";
@@ -46,7 +46,7 @@ export function BoardIndex() {
 
   return (
     <section className="board-index">
-      <BoardIndexHeader boards={boards}/>
+      <BoardIndexHeader currBoard={currBoard}/>
       <main>
         <ul className="group-list">
                      {/*
