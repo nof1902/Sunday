@@ -1,3 +1,45 @@
-.board-link{
-    display: grid;
+
+.board-card {
+    all: unset;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+    height: fit-content;
+
+    &:hover {
+        box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
+    }
+
+    a {
+        all:unset;
+        cursor: pointer;
+        display: grid;
+        grid-template-rows: 1fr repeat(2, 2rem);
+        grid-template-columns: auto 1fr;
+        align-content: center;
+        align-items: center;
+        margin: 0.8rem;
+        
+        .card-image {
+            grid-area: 1 / 1 / 1 / 3;
+            margin-bottom: 0.8rem;
+        }
+    
+        .board-title {
+            grid-area: 2 / 1 / 2 / 3;
+            font-size: 1.1rem;
+        }
+        
+        .board-num-of-groups {
+            grid-area: 3 / 1 / 3 / 3;
+            font-size: 0.8rem;
+            font-weight: 200;
+            color: #555;
+        }
+    }
+   
+
 }
+

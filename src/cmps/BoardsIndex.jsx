@@ -17,10 +17,7 @@ export function BoardsIndex() {
 
   return (
       <ul className="boards-list">
-          {boards.map(board => (
-            <li key={board._id}>
-              <BoardPreview  board={board}/>
-            </li>
+          {boards.map(board => ( <BoardPreview key={board._id} board={board}/>
           ))}
       </ul>
   )
