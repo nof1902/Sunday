@@ -1,19 +1,17 @@
+import { GroupPreview } from "./GroupPreview.jsx";
 
-export function GroupList() {
-
-    return (
-        <section className='group-list'>
-           <h3>GroupList</h3>
-
-           <ul>
-           {/*
-            emails.map((email) => (
-             <li key={email.id}>
-             <EmailPreview email={email} onUpdateEmail={onUpdateEmail} onRemoveEmail={onRemoveEmail} />
-             </li>
-           ))*/}
-         </ul>
-         
-        </section>
-    )
+export function GroupList({ groups }) {
+  // console.log("groups", groups)
+  return (
+    <ul className="group-list">
+      {
+          groups.map((group) => (
+           <li key={group.id}>
+           <GroupPreview group={group} />
+           </li>
+         ))
+      }
+    </ul>
+  );
 }
+

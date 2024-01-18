@@ -8,7 +8,6 @@ import { userService } from "../services/user.service.js";
 import { boardService } from "../services/board.service.local.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
-import { BoardGroup } from "../cmps/BoardGroup.jsx";
 
 export function BoardIndex() {
   const params = useParams();
@@ -27,18 +26,18 @@ export function BoardIndex() {
   async function onRemoveCar(carId) {
     try {
       await removeBoard(carId);
-      showSuccessMsg("Car removed")
+      showSuccessMsg("Car removed");
     } catch (err) {
-      showErrorMsg("Cannot remove car")
+      showErrorMsg("Cannot remove car");
     }
   }
 
   async function onAddCar() {
-    const board = boardService.getEmptyBoard()
+    const board = boardService.getEmptyBoard();
     board.title = prompt("Title?");
     try {
-      const savedBoard = await addBoard(board)
-      showSuccessMsg(`board added (id: ${savedBoard._id})`)
+      const savedBoard = await addBoard(board);
+      showSuccessMsg(`board added (id: ${savedBoard._id})`);
     } catch (err) {
       showErrorMsg("Cannot add board");
     }
@@ -53,19 +52,15 @@ export function BoardIndex() {
 
 
 
+  const { groups } = currBoard;
+  console.log('_groups', groups);
+
+  if (!currBoard) return <div>Loading...</div>;
   return (
     <section className="board-index">
-      <BoardIndexHeader currBoardId={'b101'}/>
-      <main>
-        <ul className="group-list">
-                     {/*
-            groups.map((group) => (
-             <li key={group.id}>
-             <BoardGroup />
-             </li>
-           ))*/}
-        </ul>
-        <GroupList />
+      <BoardIndexHeader boards={currBoard} />
+      <section>
+       <GroupList groups={groups} />
 
         {/* <button onClick={onAddCar}>Add Car ⛐</button>
                 <ul className="car-list">
@@ -85,7 +80,7 @@ export function BoardIndex() {
                         </li>)
                     }
                 </ul> */}
-      </main>
+      </section>
     </section>
   );
 }
