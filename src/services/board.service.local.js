@@ -63,20 +63,29 @@ function getGroupFromBoardById(board, groupId) {
 
 async function saveTask(boardId, groupId, task, activity) {
     const board = await getById(boardId)
-    const group = getGroupFromBoardById(board, groupId)
     
-    // check if it an update
-    if(task.id){
-        group = group.map((existTask) => {
-            return existTask.id === task.id ? task : existTask
-        }) } else { // else - new task   
-        group.push(task)
+    // if there is not specific group -> add to first group
+    var groups = board.groups[0];
+
+    console.log('groups' , groups)
+    
+    // if there is specific group -> add according to groupId
+    if(groupId){
+        groups = getGroupFromBoardById(board, groupId)
     }
 
-    board.groups = board.groups.map(g => g.id === groupId ? group : g)
+    // check if it an update
+    if(task && task.id){
+        groups = groups.map((existTask) => {
+            return existTask.id === task.id ? task : existTask
+        }) } else { // else - new task   
+        task = getEmptyTask()
+        groups.tasks.push(task)
+    }
 
-    board.activities.unshift(activity)
-    saveBoard(board)
+    board.groups = board.groups.map(g => g.id === groupId ? groups : g)
+    // board.activities.unshift(activity)
+    save(board)
     return board
 }
 
@@ -94,6 +103,27 @@ async function addBoardMsg(boardId, txt) {
     await storageService.put(STORAGE_KEY, board)
 
     return msg
+}
+
+function getEmptyTask(){
+    return {
+        "id": utilService.makeId(),
+        "title": "New Task",
+        "status": "",
+        "priority": "", 
+        "comments": [
+            {
+                "id": "",
+                "txt": "",
+                "createdAt": 1590999817436,
+                "byMember": {
+                    "_id": "",
+                    "fullname": "",
+                    "imgUrl": ""
+                }
+            }
+        ],
+    }
 }
 
 function getEmptyBoard() {
@@ -183,6 +213,37 @@ function _createBoards(){
                     {
                         "id": "g101",
                         "title": "Group 1",
+                        "archivedAt": 1589983468418,
+                        "tasks": [
+                            {
+                                "id": "t101",
+                                "title": "Task 1",
+                                "archivedAt": 1589983468418,
+                            },
+                            {
+                                "id": "t102",
+                                "title": "Task 2",
+                                "status": "",
+                                "priority": "", 
+                                "comments": [
+                                    {
+                                        "id": "",
+                                        "txt": "",
+                                        "createdAt": 1590999817436,
+                                        "byMember": {
+                                            "_id": "",
+                                            "fullname": "",
+                                            "imgUrl": ""
+                                        }
+                                    }
+                                ],
+                            }
+                        ],
+                        "style": {}
+                    },
+                    {
+                        "id": "g102",
+                        "title": "Group 2",
                         "archivedAt": 1589983468418,
                         "tasks": [
                             {

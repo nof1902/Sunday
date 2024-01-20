@@ -10,7 +10,8 @@ const routes = [
         label: 'welcome',
     },
     {
-        path: 'board/id?',
+        // for meantime
+        path: 'board/id',
         component: <BoardIndex />,
         label: 'Board-name',
     },
