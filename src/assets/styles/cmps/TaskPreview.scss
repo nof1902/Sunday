@@ -1,0 +1,86 @@
+.task-preview {
+    list-style: none;
+    padding-left: 0em;
+
+    display: grid;
+    grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
+    text-align: center;
+    color: #2B2C32;
+    border-block-end: 1px solid #e2e2e2;
+    height: 35px;
+    padding: 0;
+    border-inline-start: 5px solid rgb(162, 93, 220);
+    font-family: roboto;
+    border-end-start-radius: 2px;
+    
+    > * {
+        border-inline-end: 1px solid #e2e2e2;
+        font-size: 0.9em;
+        font-weight: 400;
+        margin: 0;
+        align-self: center;
+
+    }
+
+    .task-header {
+        display: grid;
+        grid-template-columns: auto 70px;
+
+        .task-txt {
+            border-inline-end: 1px solid #e2e2e2;
+            font-size: 0.9em;
+            font-weight: 400;
+            margin: 0;
+            align-self: center;
+            text-align: left;
+            padding-inline-start: 1em;
+        }
+
+    }
+
+
+    .tasks-header {
+        //  background-color: rgb(241, 249, 240);
+        // grid-template-rows: 1fr repeat(2, 2rem);
+        // grid-template-columns: auto 1fr;
+        display: grid;
+        grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
+        text-align: center;
+        color: #2B2C32;
+        border-block-start: 1px solid #e2e2e2;
+    border-block-end: 1px solid #e2e2e2;
+    height: 35px;
+    padding: 0;
+        // align-content: center;
+        // align-items: center;
+        border-inline-start: 5px solid rgb(162, 93, 220);
+        border-start-start-radius: 5px;
+        > * {
+            border-inline-end: 1px solid #e2e2e2;
+            font-size: 0.9em;
+            font-weight: 400;
+            margin: 0;
+            align-self: center;
+
+        }
+        
+
+
+        // #9E57DB
+
+        // .tasks-header-base {
+        //     background-color: rgb(255, 0, 55);
+        //     // display: grid;
+        //     // grid-template-columns: 20px auto;
+
+        // }
+        
+        
+
+        // .div3{
+        //     background-color: rgb(122, 107, 64);
+        // }
+    }
+
+
+}
