@@ -7,12 +7,13 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { store } from './store/store'
 import { RootCmp } from './RootCmp'
 import './assets/styles/main.scss'
+import { RootCmp2 } from './RootCmp2'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>
     <Router>
-      <RootCmp />
+      <RootCmp2 />
     </Router>
   </Provider>
 )

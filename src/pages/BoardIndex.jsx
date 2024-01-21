@@ -12,11 +12,12 @@ import { GroupList } from "../cmps/GroupList.jsx";
 export function BoardIndex() {
   const params = useParams();
   const boards = useSelector((storeState) => storeState.boardModule.boards);
-  const currBoard = boards.find(board => board._id === 'b101');
+  const currBoard = boards.find(board => board._id === params.id);
  
+  console.log('params' , params)
   useEffect(() => {
     //loadBoard(params._id)
-    loadBoard()
+    loadBoard(params.id)
   }, [])
 
   // var currBoard = boards.find(board => board._id === params._id)
