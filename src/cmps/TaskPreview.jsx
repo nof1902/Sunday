@@ -1,12 +1,14 @@
-
-
 export function TaskPreview({ task }) {
-    
   return (
     <section className="task-preview">
-    <h4>{task.title}</h4>
+
+      <div className="task-header">
+        <span className="task-txt">{task.title}</span>
+        <div></div>
+      </div>
+
+      <span>2</span>
+      <span>3</span>
     </section>
   );
 }
-
-
