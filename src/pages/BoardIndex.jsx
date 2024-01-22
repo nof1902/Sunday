@@ -1,32 +1,24 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadBoard, addBoard, removeBoard } from "../store/board.actions.js";
+import { loadBoards, addBoard, removeBoard } from "../store/board.actions.js";
 import {useParams} from "react-router-dom";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { userService } from "../services/user.service.js";
 import { boardService } from "../services/board.service.local.js";
-import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
-import { GroupList } from "../cmps/GroupList.jsx";
+import { BoardsList } from "../cmps/BoardsList.jsx";
+import { BoardDetails } from "./BoardDetails.jsx";
+import { SideNav } from "../cmps/SideNav.jsx";
+import { AppHeader } from "../cmps/AppHeader.jsx";
 
 export function BoardIndex() {
   
-  const params = useParams();
+  const params = useParams()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
-  const [currBoard, setCurrBoard] = useState(null); // Use state for currBoard
- 
-  console.log('boards' , boards)
-  console.log('params' , params)
-
+  
   useEffect(() => {
-
-    const board = boards.find(board => board._id === params.id)
-    setCurrBoard(board)
-    loadBoard(board._id)
-    
+    loadBoards()
   }, [])
-
-  console.log('currBoard' , currBoard)
   
   async function onRemove(carId) {
     try {
@@ -47,44 +39,27 @@ export function BoardIndex() {
       showErrorMsg("Cannot add board");
     }
   }
-
+  
   function shouldShowActionBtns(car) {
     const user = userService.getLoggedinUser();
     if (!user) return false;
     if (user.isAdmin) return true;
     return car.owner?._id === user._id;
   }
-
-  if (!currBoard) return <div>Loading...</div>;
-
-  const { groups } = currBoard;
-  console.log('_groups', groups);
-  console.log('currBoard', currBoard);
-
+  
+  console.log('boards' , boards)
+  if (!boards) return <div>Loading...</div>;
+  
   return (
     <section className="board-index">
-      <BoardIndexHeader boards={currBoard} />
-      <section>
-       <GroupList groups={groups} />
-
-        {/* <button onClick={onAddCar}>Add Car ⛐</button>
-                <ul className="car-list">
-                    {boards.map(car =>
-                        <li className="car-preview" key={car._id}>
-                            <h4>{car.vendor}</h4>
-                            <h1>⛐</h1>
-                            <p>Price: <span>${car.price.toLocaleString()}</span></p>
-                            <p>Owner: <span>{car.owner && car.owner.fullname}</span></p>
-                            {shouldShowActionBtns(car) && <div>
-                                <button onClick={() => { onRemoveCar(car._id) }}>x</button>
-                                <button onClick={() => { onUpdateCar(car) }}>Edit</button>
-                            </div>}
-
-                            <button onClick={() => { onAddCarMsg(car) }}>Add car msg</button>
-                            <button className="buy" onClick={() => { onAddToCart(car) }}>Add to cart</button>
-                        </li>)
-                    }
-                </ul> */}
+      <section className="header">
+        <AppHeader />
+      </section>
+      <section className="side-nav">
+        <SideNav boards={boards}/>
+      </section>
+      <section className="board-main">
+        {params.id ? <BoardDetails /> : <BoardsList boards={boards}/>}
       </section>
     </section>
   );

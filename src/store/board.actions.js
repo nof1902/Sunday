@@ -3,7 +3,7 @@ import { userService } from '../services/user.service.js'
 import { store } from './store.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 //import { ADD_CAR, ADD_TO_CART, CLEAR_CART, REMOVE_CAR, REMOVE_FROM_CART, SET_CARS, UNDO_REMOVE_CAR, UPDATE_CAR } from './car.reducer.js'
-import { REMOVE_BOARD, ADD_BOARD, UPDATE_BOARD, SET_BOARDS, SET_BOARD ,UNDO_REMOVE_BOARD} from './board.reducer.js'
+import { REMOVE_BOARD, ADD_BOARD, UPDATE_BOARD, SET_BOARDS, GET_BOARD_BY_ID ,UNDO_REMOVE_BOARD} from './board.reducer.js'
 import { SET_SCORE } from './user.reducer.js'
 
 // Action Creators:
@@ -41,13 +41,15 @@ export async function loadBoards() {
     }
 }
 
-export async function loadBoard(boardId = "b101") {
+export async function getBoardById(boardId = "b101") {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch({
-            type: SET_BOARD,
+            type: GET_BOARD_BY_ID,
             board
         })
+
+        return board;
 
     } catch (err) {
         console.log('Cannot load Boards', err)

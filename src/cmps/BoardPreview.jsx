@@ -1,15 +1,11 @@
 
-import { Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
-export function BoardPreview( { board , onChooseBoard} ) {
-
-    function handleClick(e){
-        onChooseBoard(board._id)
-    }
+export function BoardPreview( { board } ) {
 
     console.log('board from board preview',board)
     return (
-        <li className="board-card" onClick={handleClick}>
+        <li className="board-card">
             <Link to={`${board._id}`} >
                 <img className='card-image' src="https://cdn.monday.com/images/quick_search_recent_board.svg"></img> 
                 <h1 className="board-title">{board.title}</h1>

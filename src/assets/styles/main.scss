@@ -15,6 +15,7 @@
 // Views
 // @import "views/HomePage";
 @import "views/BoardIndex";
+@import "views/BoardDetails";
 @import "views/RootCmp";
 @import "views/HomePage";
 
@@ -24,14 +25,17 @@
 @import "cmps/AppFooter";
 @import "cmps/UserMsg";
 @import "cmps/BoardIndexHeader";
-@import "cmps/BoardsIndex";
 @import "cmps/BoardPreview";
 @import "cmps/GroupPreview";
 @import "cmps/GroupList";
-@import "cmps/MainBoard";
 @import "cmps/SideNav";
 @import "cmps/TaskList";
 @import "cmps/TaskPreview";
+@import "cmps/BoardsList";
+
+
+
+
 
 
 

@@ -5,14 +5,23 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { store } from './store/store'
-import { RootCmp } from './RootCmp'
+import { Routes, Route } from 'react-router'
+import { BoardIndex } from "./pages/BoardIndex";
+import { HomePage } from "./pages/HomePage";
+import { BoardDetails } from './pages/BoardDetails';
 import './assets/styles/main.scss'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <Provider store={store}>
     <Router>
-      <RootCmp />
+      {/* <RootCmp /> */}
+      <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/boards" element={<BoardIndex />}>
+              <Route path="/boards/:id" element={<BoardDetails />}/>
+          </Route>
+      </Routes>
     </Router>
   </Provider>
 )
