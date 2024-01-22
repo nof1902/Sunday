@@ -1,21 +1,28 @@
-.main-board{
+.board-index{
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 280px 1fr;
     grid-template-rows:auto 1fr;
+    grid-template-areas:
+        "h h"
+        "sn m"
+        "sn m";
     background-color: $clr3;
+    height: 100vh;
 
-    .main-board-header{
-        grid-area: 1 / 1 / 1 / 3;
+
+    .header {
+        grid-area: h; 
     }
 
-    .side-nav{
-        grid-area: 2 / 1 / 2 / 2;
+    .side-nav {
+        grid-area: sn; 
+    }
 
+    .board-main {
+        grid-area: m; 
     }
-    
-    .boards-index{
-        grid-area: 2 / 2 / 2 / 3;
-    }
+
     
 }
+
 

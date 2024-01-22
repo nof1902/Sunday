@@ -1,7 +1,7 @@
 import { GroupPreview } from "./GroupPreview.jsx";
 
 export function GroupList({ groups }) {
-  // console.log("groups", groups)
+  console.log("groups", groups)
   return (
     <ul className="group-list">
       {

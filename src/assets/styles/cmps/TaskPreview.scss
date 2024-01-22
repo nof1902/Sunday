@@ -13,12 +13,19 @@
     font-family: roboto;
     border-end-start-radius: 2px;
     
+    &:hover {
+        z-index: 100;
+        box-shadow: 4px 3px 6px -3px #d0d4e4;
+        background-color: #F4F5F8;
+    }
+
     > * {
         border-inline-end: 1px solid #e2e2e2;
         font-size: 0.9em;
         font-weight: 400;
         margin: 0;
         align-self: center;
+        height: 100%;
 
     }
 
@@ -34,6 +41,7 @@
             align-self: center;
             text-align: left;
             padding-inline-start: 1em;
+            height: 100%;
         }
 
     }

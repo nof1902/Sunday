@@ -6,7 +6,7 @@ export function SideNav({ boards }) {
 
     // const params = useParams()
     return (
-        <nav>
+        <nav className="side-navigation">
             {/* {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)} */}
             <NavLink to={`/boards`}>Home</NavLink>
             {boards.map(board => <NavLink key={board._id} to={`/boards/${board._id}`}>{board.title}</NavLink>)}

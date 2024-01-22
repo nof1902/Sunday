@@ -21,14 +21,16 @@ export function BoardDetails() {
     setBoard(boardData);
   }
 
-  console.log("board", board);
+  
 
   if (!board) return <div>Loading...</div>;
-
+  const { groups } = board
+  console.log("board", board);
+  console.log("groups", groups);
   return (
     <section className="board-details">
       <BoardIndexHeader board={board} />
-      <GroupList groups={board.groups} />
+      <GroupList groups={groups} />
     </section>
   );
 }
