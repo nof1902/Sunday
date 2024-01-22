@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadBoard, addBoard, removeBoard } from "../store/board.actions.js";
 import {useParams} from "react-router-dom";
@@ -10,21 +10,25 @@ import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
 
 export function BoardIndex() {
+  
   const params = useParams();
-  const boards = useSelector((storeState) => storeState.boardModule.boards);
-  const currBoard = boards.find(board => board._id === params.id);
+  const boards = useSelector((storeState) => storeState.boardModule.boards)
+  const [currBoard, setCurrBoard] = useState(null); // Use state for currBoard
  
+  console.log('boards' , boards)
   console.log('params' , params)
-  useEffect(() => {
-    //loadBoard(params._id)
-    loadBoard(params.id)
-  }, [])
 
-  // var currBoard = boards.find(board => board._id === params._id)
+  useEffect(() => {
+
+    const board = boards.find(board => board._id === params.id)
+    setCurrBoard(board)
+    loadBoard(board._id)
+    
+  }, [])
 
   console.log('currBoard' , currBoard)
   
-  async function onRemoveCar(carId) {
+  async function onRemove(carId) {
     try {
       await removeBoard(carId);
       showSuccessMsg("Car removed");
@@ -33,7 +37,7 @@ export function BoardIndex() {
     }
   }
 
-  async function onAddCar() {
+  async function onAddGroup() {
     const board = boardService.getEmptyBoard();
     board.title = prompt("Title?");
     try {
@@ -51,12 +55,12 @@ export function BoardIndex() {
     return car.owner?._id === user._id;
   }
 
-
+  if (!currBoard) return <div>Loading...</div>;
 
   const { groups } = currBoard;
   console.log('_groups', groups);
+  console.log('currBoard', currBoard);
 
-  if (!currBoard) return <div>Loading...</div>;
   return (
     <section className="board-index">
       <BoardIndexHeader boards={currBoard} />

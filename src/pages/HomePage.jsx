@@ -33,7 +33,7 @@ export function HomePage() {
                 <div className='monday-markup-second'>
                 <h2>What would you like to manage with monday.com Work OS?</h2>              
                 </div>    
-                <Link to="/workspace/home">
+                <Link to="/boards">
                     <button className='btn-started'>Get Started</button>
                 </Link>
                 <div className='monday-markup-third'>

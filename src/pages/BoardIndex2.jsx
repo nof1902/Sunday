@@ -4,21 +4,26 @@ import { BoardsIndex } from "../cmps/BoardsIndex";
 import { SideNav } from "../cmps/SideNav";
 import { BoardIndex } from "./BoardIndex";
 import { useSelector } from "react-redux";
+import { BoardPreview } from "./BoardPreview.jsx";
 
-
-
-export function MainBoard() {
+export function MainBoard2() {
     
-    // const boards = useSelector((storeState) => storeState.boardModule.boards)
-    const [renderBoard, setRenderBoard] = useState(null)
-    // const [currBoard, setCurrBoard] = useState(null);
+    const boards = useSelector((storeState) => storeState.boardModule.boards)
+    const [isBoardsList, setIsBoardsList] = useState(true)
 
-    // useEffect(() => {
+    useEffect(() => {
+        loadBoards()
+      }, [])
 
-    // },[isBoardsList])
+      
 
-    function onChooseBoard(BoardId){
-        setRenderBoard(BoardId)
+    function onChooseBoard(){
+        setIsBoardsList(false)
+    }
+
+    function onChooseBoard(boardId){
+        setIsBoardsList(false)
+        
     }
     
     return (
@@ -27,7 +32,9 @@ export function MainBoard() {
                 <AppHeader />
             </section>
             <section className='boards-index'>
-            {!renderBoard ? <BoardsIndex onChooseBoard={onChooseBoard}/> : <BoardIndex/>}
+                {isBoardsList && <BoardsIndex onChooseBoard={onChooseBoard} boards={boards}/>}
+
+                {!isBoardsList && <BoardsIndex boards={boards}/>}
             </section>
             <section className='side-nav'>
                 <SideNav />

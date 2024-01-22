@@ -1,24 +1,25 @@
 import { HomePage } from './pages/HomePage.jsx'
 import { BoardIndex } from './pages/BoardIndex.jsx'
 import { BoardsIndex } from './cmps/BoardsIndex.jsx'
+import { MainBoard } from './pages/MainBoard.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
     {
         path: '/',
         component: <HomePage />,
-        label: 'welcome',
+        label: 'HomePage',
     },
     {
         // for meantime
-        path: '/workspace/home/board/:id',
-        component: <BoardIndex />,
-        label: 'Board-name',
+        path: '/boards',
+        component: <MainBoard />,
+        label: 'Boards List',
     },
     {
-        path: '/workspace/home',
-        component: <BoardsIndex />,
-        label: 'Home'
+        path: '/boards/:id',
+        component: <BoardIndex />,
+        label: 'Board'
     }
 ]
 
