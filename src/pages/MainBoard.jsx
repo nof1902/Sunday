@@ -6,13 +6,13 @@ import { SideNav } from "../cmps/SideNav";
 
 export function MainBoard() {
     
+    
     return (
         <main className="main-board">
             <section className='main-board-header'>
                 <AppHeader />
             </section>
             {/* 
-            
                 Outlet?  <BoardsIndex /> && <BoardIndex />
                 all boards & the board wuth all groups & tasks
             */}
