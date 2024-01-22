@@ -47,7 +47,7 @@ export function BoardIndex() {
     return car.owner?._id === user._id;
   }
   
-  console.log('boards' , boards)
+  // console.log('boards' , boards)
   if (!boards) return <div>Loading...</div>;
   
   return (

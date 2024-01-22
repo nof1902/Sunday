@@ -1,7 +1,48 @@
+import { useEffect, useState } from "react";
 import { TaskList } from "./TaskList.jsx";
+import { getEmptyTask, SaveTask } from "../store/board.actions.js"
+import { useParams } from "react-router";
 
+// SaveTask(boardId, groupId = null, task, activity = {})
 export function GroupPreview({ group }) {
+  // console.log("group", group)
   const { tasks } = group;
+  // console.log("tasks", tasks)
+  const param = useParams()
+
+  const [inputFocused, setInputFocused] = useState(null);
+  const [task, setTask] = useState(getEmptyTask());
+
+  useEffect(() => {
+    if(inputFocused === false){
+      SaveTask(param.id, group.id, task)
+      setInputFocused(null)
+    }
+    // console.log("log", inputFocused);
+  }, [inputFocused])
+
+
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setInputFocused(false);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // Handle Enter key press
+      setInputFocused(false); // You can also keep it true if desired
+      
+    }
+  };
+
+  function handleChange(ev){
+    const val = ev.target.value;
+    setTask(prevTask => ({ ...prevTask, title: val }))
+}
+
   return (
     <section className="group-preview">
       <section className="group-header">
@@ -29,6 +70,10 @@ export function GroupPreview({ group }) {
             name="newTask"
             type="text"
             placeholder="+ Add item"
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            onKeyDown={handleKeyPress}
+            onChange={handleChange}
           />
         </div>
         {
@@ -42,3 +87,5 @@ export function GroupPreview({ group }) {
     </section>
   );
 }
+
+// onKeyPress={handleKeyPress}

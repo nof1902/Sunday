@@ -1,333 +1,282 @@
+import { storageService } from "./async-storage.service.js";
+import { utilService } from "./util.service.js";
+import { userService } from "./user.service.js";
 
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
-
-const STORAGE_KEY = 'board'
+const STORAGE_KEY = "board";
 
 export const boardService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyBoard,
-    addBoardMsg,
-    saveTask
-}
-window.cs = boardService
+  query,
+  getById,
+  save,
+  remove,
+  getEmptyBoard,
+  addBoardMsg,
+  saveTask,
+};
+window.cs = boardService;
 
 // _createBoards()
 
-async function query(filterBy = { status: '', title: '' }) {
+async function query(filterBy = { status: "", title: "" }) {
+  let boards = utilService.loadFromStorage(STORAGE_KEY);
+  if (!boards || !boards.length) {
+    _createBoards();
+  }
 
-    let boards = utilService.loadFromStorage(STORAGE_KEY)
-    if (!boards || !boards.length){
-        _createBoards()
-    }
-   
-    boards = await storageService.query(STORAGE_KEY)
-    // if (filterBy.txt) {
-    //     const regex = new RegExp(filterBy.txt, 'i')
-    //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
-    // }
-    // if (filterBy.price) {
-    //     boards = boards.filter(board => car.price <= filterBy.price)
-    // }
-    return boards
+  boards = await storageService.query(STORAGE_KEY);
+  // if (filterBy.txt) {
+  //     const regex = new RegExp(filterBy.txt, 'i')
+  //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
+  // }
+  // if (filterBy.price) {
+  //     boards = boards.filter(board => car.price <= filterBy.price)
+  // }
+  return boards;
 }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+  return storageService.get(STORAGE_KEY, boardId);
 }
 
 async function remove(boardId) {
-    // throw new Error('Nope')
-    await storageService.remove(STORAGE_KEY, boardId)
+  // throw new Error('Nope')
+  await storageService.remove(STORAGE_KEY, boardId);
 }
 
 async function save(board) {
-    var savedBoard
-    if (board._id) {
-        savedBoard = await storageService.put(STORAGE_KEY, board)
-    } else {
-        // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
-    }
-    return savedBoard
+  var savedBoard;
+  if (board._id) {
+    savedBoard = await storageService.put(STORAGE_KEY, board);
+  } else {
+    // Later, owner is set by the backend
+    board.owner = userService.getLoggedinUser();
+    savedBoard = await storageService.post(STORAGE_KEY, board);
+  }
+  return savedBoard;
 }
 
 function getGroupFromBoardById(board, groupId) {
-    return board.find(group => group.id === groupId)
+  return board.groups.find((group) => group.id === groupId);
 }
 
 async function saveTask(boardId, groupId, task, activity) {
-    const board = await getById(boardId)
-    
-    // if there is not specific group -> add to first group
-    var groups = board.groups[0];
+  const board = await getById(boardId);
 
-    console.log('groups' , groups)
-    
-    // if there is specific group -> add according to groupId
-    if(groupId){
-        groups = getGroupFromBoardById(board, groupId)
-    }
+  // if there is not specific group -> add to first group
+  // var groups = board.groups[0];
+  var group;
+  // console.log('groups' , groups)
 
-    // check if it an update
-    if(task && task.id){
-        groups = groups.map((existTask) => {
-            return existTask.id === task.id ? task : existTask
-        }) } else { // else - new task   
-        task = getEmptyTask()
-        groups.tasks.push(task)
-    }
+  // if there is specific group -> add according to groupId
+  if (groupId) {
+    group = getGroupFromBoardById(board, groupId);
+  }
 
-    board.groups = board.groups.map(g => g.id === groupId ? groups : g)
-    // board.activities.unshift(activity)
-    save(board)
-    return board
+  // check if it an update
+  if (task && task.id) {
+    group = group.tasks.map((existTask) => {
+      return existTask.id === task.id ? task : existTask;
+    });
+  } else {
+    task.id = utilService.makeId();
+    group.tasks.push(task);
+  }
+
+  board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
+  // board.activities.unshift(activity)
+  save(board);
+  return board;
 }
 
 async function addBoardMsg(boardId, txt) {
-    // Later, this is all done by the backend
-    const board = await getById(boardId)
-    if (!board.msgs) board.msgs = []
+  // Later, this is all done by the backend
+  const board = await getById(boardId);
+  if (!board.msgs) board.msgs = [];
 
-    const msg = {
-        id: utilService.makeId(),
-        by: userService.getLoggedinUser(),
-        txt
-    }
-    board.msgs.push(msg)
-    await storageService.put(STORAGE_KEY, board)
+  const msg = {
+    id: utilService.makeId(),
+    by: userService.getLoggedinUser(),
+    txt,
+  };
+  board.msgs.push(msg);
+  await storageService.put(STORAGE_KEY, board);
 
-    return msg
+  return msg;
 }
 
-function getEmptyTask(){
-    return {
-        "id": utilService.makeId(),
-        "title": "New Task",
-        "status": "",
-        "priority": "", 
-        "comments": [
-            {
-                "id": "",
-                "txt": "",
-                "createdAt": 1590999817436,
-                "byMember": {
-                    "_id": "",
-                    "fullname": "",
-                    "imgUrl": ""
-                }
-            }
-        ],
-    }
-}
+// function getEmptyTask(){
+//     return {
+//         "id": "",
+//         "title": "New Task",
+//         "status": "",
+//         "priority": "",
+//     }
+// }
 
 function getEmptyBoard() {
-    return {
-            "_id": "b101",
-            "title": "first board",
-            "isStarred": false,
-            "archivedAt": 1589983468418,
-            "createdBy": {
-                "_id": "",
-                "fullname": "",
-                "imgUrl": ""
-            },
-            "members": [
-                {
-                    "_id": "",
-                    "fullname": "",
-                    "imgUrl": ""
-                }
+  return {
+    _id: utilService.makeId(),
+    title: "first board",
+    isStarred: false,
+    archivedAt: 1589983468418,
+    createdBy: {
+      _id: "",
+      fullname: "",
+      imgUrl: "",
+    },
+    members: [
+      {
+        _id: "",
+        fullname: "",
+        imgUrl: "",
+      },
+    ],
+    groups: [
+      {
+        id: utilService.makeId(),
+        title: "Group 1",
+        archivedAt: 1589983468418,
+        tasks: [
+          {
+            id: "t101",
+            title: "Task 1",
+            archivedAt: 1589983468418,
+          },
+          {
+            id: "t102",
+            title: "Task 2",
+            status: "",
+            priority: "",
+            comments: [
+              {
+                id: "",
+                txt: "",
+                createdAt: 1590999817436,
+                byMember: {
+                  _id: "",
+                  fullname: "",
+                  imgUrl: "",
+                },
+              },
             ],
-            "groups": [
-                {
-                    "id": "g102",
-                    "title": "Group 1",
-                    "archivedAt": 1589983468418,
-                    "tasks": [
-                        {
-                            "id": "t101",
-                            "title": "Task 1",
-                            "archivedAt": 1589983468418,
-                        },
-                        {
-                            "id": "t102",
-                            "title": "Task 2",
-                            "status": "",
-                            "priority": "", 
-                            "comments": [
-                                {
-                                    "id": "",
-                                    "txt": "",
-                                    "createdAt": 1590999817436,
-                                    "byMember": {
-                                        "_id": "",
-                                        "fullname": "",
-                                        "imgUrl": ""
-                                    }
-                                }
-                            ],
-                        }
-                    ],
-                    "style": {}
-                }
-            ]
-    }
+          },
+        ],
+        style: {},
+      },
+    ],
+  };
 }
-
-
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
-
-
-
-function _createBoards(){
-    // let boards = utilService.loadFromStorage(STORAGE_KEY)
-    // if (!boards || !boards.length){
-       var boards = [
+function _createBoards() {
+  // let boards = utilService.loadFromStorage(STORAGE_KEY)
+  // if (!boards || !boards.length){
+  var boards = [
+    {
+      _id: utilService.makeId(),
+      title: "first board",
+      isStarred: false,
+      archivedAt: 1589983468418,
+      createdBy: {
+        _id: "",
+        fullname: "",
+        imgUrl: "",
+      },
+      members: [
+        {
+          _id: "",
+          fullname: "",
+          imgUrl: "",
+        },
+      ],
+      groups: [
+        {
+          id: utilService.makeId(),
+          title: "Group 1",
+          archivedAt: 1589983468418,
+          tasks: [
             {
-                "_id": "b101",
-                "title": "first board",
-                "isStarred": false,
-                "archivedAt": 1589983468418,
-                "createdBy": {
-                    "_id": "",
-                    "fullname": "",
-                    "imgUrl": ""
-                },
-                "members": [
-                    {
-                        "_id": "",
-                        "fullname": "",
-                        "imgUrl": ""
-                    }
-                ],
-                "groups": [
-                    {
-                        "id": "g101",
-                        "title": "Group 1",
-                        "archivedAt": 1589983468418,
-                        "tasks": [
-                            {
-                                "id": "t101",
-                                "title": "Task 1",
-                                "archivedAt": 1589983468418,
-                            },
-                            {
-                                "id": "t102",
-                                "title": "Task 2",
-                                "status": "",
-                                "priority": "", 
-                                "comments": [
-                                    {
-                                        "id": "",
-                                        "txt": "",
-                                        "createdAt": 1590999817436,
-                                        "byMember": {
-                                            "_id": "",
-                                            "fullname": "",
-                                            "imgUrl": ""
-                                        }
-                                    }
-                                ],
-                            }
-                        ],
-                        "style": {}
-                    },
-                    {
-                        "id": "g102",
-                        "title": "Group 2",
-                        "archivedAt": 1589983468418,
-                        "tasks": [
-                            {
-                                "id": "t101",
-                                "title": "Task 1",
-                                "archivedAt": 1589983468418,
-                            },
-                            {
-                                "id": "t102",
-                                "title": "Task 2",
-                                "status": "",
-                                "priority": "", 
-                                "comments": [
-                                    {
-                                        "id": "",
-                                        "txt": "",
-                                        "createdAt": 1590999817436,
-                                        "byMember": {
-                                            "_id": "",
-                                            "fullname": "",
-                                            "imgUrl": ""
-                                        }
-                                    }
-                                ],
-                            }
-                        ],
-                        "style": {}
-                    }
-                ]
+              id: utilService.makeId(),
+              title: "Task 1",
+              status: "",
+              priority: "",
             },
             {
-                "_id": "b102",
-                "title": "second board",
-                "isStarred": false,
-                "archivedAt": 1589983468418,
-                "createdBy": {
-                    "_id": "",
-                    "fullname": "",
-                    "imgUrl": ""
-                },
-                "members": [
-                    {
-                        "_id": "",
-                        "fullname": "",
-                        "imgUrl": ""
-                    }
-                ],
-                "groups": [
-                    {
-                        "id": "g102",
-                        "title": "Group 2",
-                        "archivedAt": 1589983468418,
-                        "tasks": [
-                            {
-                                "id": "t101",
-                                "title": "Task 1",
-                                "archivedAt": 1589983468418,
-                            },
-                            {
-                                "id": "t102",
-                                "title": "Task 2",
-                                "status": "",
-                                "priority": "", 
-                                "comments": [
-                                    {
-                                        "id": "",
-                                        "txt": "",
-                                        "createdAt": 1590999817436,
-                                        "byMember": {
-                                            "_id": "",
-                                            "fullname": "",
-                                            "imgUrl": ""
-                                        }
-                                    }
-                                ],
-                            }
-                        ],
-                        "style": {}
-                    }
-                ]
-            }
-        ]
-        
-    // }
-    utilService.saveToStorage(STORAGE_KEY, boards)
-    console.log(boards.length, boards[0], boards[1]);
+              id: utilService.makeId(),
+              title: "Task 2",
+              status: "",
+              priority: "",
+            },
+          ],
+          style: {},
+        },
+        {
+          id: utilService.makeId(),
+          title: "Group 2",
+          archivedAt: 1589983468418,
+          tasks: [
+            {
+              id: utilService.makeId(),
+              title: "Task 1",
+              status: "",
+              priority: "",
+            },
+            {
+              id: utilService.makeId(),
+              title: "Task 2",
+              status: "",
+              priority: "",
+            },
+          ],
+          style: {},
+        },
+      ],
+    },
+    {
+      _id: utilService.makeId(),
+      title: "second board",
+      isStarred: false,
+      archivedAt: 1589983468418,
+      createdBy: {
+        _id: "",
+        fullname: "",
+        imgUrl: "",
+      },
+      members: [
+        {
+          _id: "",
+          fullname: "",
+          imgUrl: "",
+        },
+      ],
+      groups: [
+        {
+          id: utilService.makeId(),
+          title: "Group 2",
+          archivedAt: 1589983468418,
+          tasks: [
+            {
+              id: utilService.makeId(),
+              title: "Task 1",
+              status: "",
+              priority: "",
+            },
+            {
+              id: utilService.makeId(),
+              title: "Task 2",
+              status: "",
+              priority: "",
+            },
+          ],
+          style: {},
+        },
+      ],
+    },
+  ];
+
+  // }
+  utilService.saveToStorage(STORAGE_KEY, boards);
+  console.log(boards.length, boards[0], boards[1]);
 }

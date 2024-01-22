@@ -93,12 +93,20 @@ export function updateBoard(board) {
 }
 
 // by adding task from headerindex - the task automaticly
-export async function SaveTask(boardId, groupId = null, task, activity) {
+export async function SaveTask(boardId, groupId = null, task, activity = {}) {
     let board = await boardService.getById(boardId)
     board = await boardService.saveTask(boardId, groupId, task, activity)
     updateBoard(board)
 }
 
+export function getEmptyTask(){
+    return {
+        "id": "",
+        "title": "New Task",
+        "status": "",
+        "priority": ""
+    }
+}
 
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
