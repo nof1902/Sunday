@@ -13,11 +13,10 @@
     font-family: roboto;
     border-end-start-radius: 2px;
     
-    &:hover {
-        z-index: 100;
-        box-shadow: 4px 3px 6px -3px #d0d4e4;
-        background-color: #F4F5F8;
-    }
+    
+
+
+
 
     > * {
         border-inline-end: 1px solid #e2e2e2;
@@ -26,13 +25,19 @@
         margin: 0;
         align-self: center;
         height: 100%;
-
+        line-height: 2;
     }
 
     .task-header {
         display: grid;
-        grid-template-columns: auto 70px;
+        grid-template-columns: 30px auto 70px;
 
+        .delete-btn {
+            margin-inline-start: -37px;
+            width: 23px;
+            background: none; 
+            
+        }
         .task-txt {
             border-inline-end: 1px solid #e2e2e2;
             font-size: 0.9em;
@@ -40,10 +45,21 @@
             margin: 0;
             align-self: center;
             text-align: left;
-            padding-inline-start: 1em;
+            // padding-inline-start: 1em;
             height: 100%;
         }
 
+    }
+
+    &:hover {
+        z-index: 100;
+        box-shadow: 4px 3px 6px -3px #d0d4e4;
+        background-color: #F4F5F8;
+
+
+        .delete-btn {
+            background-color: #D0D4E4;
+        }
     }
 
 
@@ -92,3 +108,4 @@
 
 
 }
+

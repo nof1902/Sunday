@@ -2,9 +2,11 @@ import { useState } from "react";
 
 export function TaskPreview({ task }) {
 
+  // const [showBtn, setShowBtn] = useState(false)
+  // const deleteBtn = showBtn?  "delete-btn-show" : "delete-btn-hide"
   // const [editMode, setEditMode] = useState(false);
   // const [editedTitle, setEditedTitle] = useState(task.title);
-
+  
   // const handleToggleEditMode = () => {
   //   setEditMode(!editMode);
   // };
@@ -18,39 +20,44 @@ export function TaskPreview({ task }) {
   //   setEditMode(false);
   // };
 
+  // const { tasks } = group
+  const taskVal = Object.values(task)
+  // console.log(taskVal);
+
   return (
     <section className="task-preview">
-     
       <div className="task-header">
-      <span className="task-txt">{task.title}</span>
-      {
-      //   editMode ? (
-      //   <input
-      //     type="text"
-      //     value={editedTitle}
-      //     onChange={handleInputChange}
-      //     onBlur={handleInputBlur}
-      //   />
-      // ) : (
-      //   <span className="task-txt" onClick={handleToggleEditMode}>
-      //     {task.title}
-      //   </span>
-      // )
-    }
+      <button className="delete-btn"></button>
+        <span className="task-txt">{task.title}</span>
+          {
+          //   editMode ? (
+          //   <input
+          //     type="text"
+          //     value={editedTitle}
+          //     onChange={handleInputChange}
+          //     onBlur={handleInputBlur}
+          //   />
+          // ) : (
+          //   <span className="task-txt" onClick={handleToggleEditMode}>
+          //     {task.title}
+          //   </span>
+          // )
+        }
 
-
-  
         <div></div>
       </div>
-
-      <span>2</span>
-      <span>3</span>
+      {
+        taskVal.slice(2).map((Val, idx) => (
+          <span key={`${Val}${idx}`}>{Val}</span>
+        ))
+      }
     </section>
   );
 }
 
 // <span className="task-txt">{task.title}</span>
-
+// <span>2</span>
+// <span>3</span>
 
 
 // const [editable, setEditable] = useState(true);

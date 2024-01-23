@@ -1,5 +1,22 @@
 .group-preview {
     // border: 1px solid #e2e2e2;
+    margin-block-end: 3em;
+    // font-family: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+
+    .group-header{
+        .collapse-group {
+            color: rgb(162, 93, 220);
+            transition: transform .2s;
+            margin-inline: 0.5em;
+        }
+
+        h3 {
+            font-weight: 500;
+            color: rgb(162, 93, 220);
+            display: inline-block;
+        }
+
+    }
 
     .tasks-header {
         display: grid;
@@ -13,7 +30,7 @@
         padding: 0;
         border-inline-start: 5px solid rgb(162, 93, 220);
         border-start-start-radius: 5px;
-        font-family: roboto;
+        // font-family: roboto;
 
         > * {
             border-inline-end: 1px solid #e2e2e2;
@@ -22,7 +39,10 @@
             margin: 0;
             align-self: center;
             height: 100%;
+            line-height: 2;
         }
+
+
         
         // #9E57DB
 
@@ -44,16 +64,36 @@
             border-inline-start: 5px solid #a25ddc80;
             border-end-start-radius: 5px;
             border-start-start-radius: 0px;
-            font-family: roboto;
+            // font-family: roboto;
+
+            &:hover {
+                z-index: 100;
+                box-shadow: 4px 3px 6px -3px #d0d4e4;
+                background-color: #F4F5F8;
+
+                .new-task-input{
+                    background-color: #F4F5F8;  
+                    //  font-family: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+                    
+
+                }
+            }
+
 
             .new-task-input {
                 width: 320px;
                 margin-inline-start: 1em;
-                padding: 0.15em 0.5em 0.15em 1em;
+                padding-inline: 1em;
+                margin-block: 0.4em;
                 border: 1px solid transparent;
                 border-radius: 5px;
-                margin: 0.5em 1em 0.3em;
-                font-family: roboto;
+                // margin: 0.5em 1em 0.3em;
+                // font-family: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+                font-family: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+
+                &::placeholder {
+                    font-family: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+               }
 
                 &:hover {
                     border: 1px solid #e2e2e2; 
@@ -62,7 +102,7 @@
                 &:focus {
                     border: 1px solid #0073ea;
                     outline: none; 
-                    font-family: 'Roboto';
+                    // font-family: 'Roboto';
                 }
             }
 
@@ -80,15 +120,13 @@
             // border-start-start-radius: 5px;
             // font-family: roboto;
 
-
-
             // list-style: none;
             // padding-left: 0em;
             // display: grid;
             // grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
             text-align: center;
             color: #2B2C32;
-            border-block-end: 1px solid #e2e2e2;
+            // border-block-end: 1px solid #e2e2e2;
             height: 35px;
             padding: 0;
             // border-inline-start: 5px solid rgb(162, 93, 220);
@@ -104,8 +142,10 @@
                 // margin: 0;
                 // padding: 0;
                 align-self: center;
+                // background-color: #0073ea;
                 // border-block-end: 1px solid #e2e2e2;
-    
+                height: 100%;
+                border-block-end: 1px solid #e2e2e2;
             }
 
             > :first-child {
@@ -116,7 +156,7 @@
                 // background-color: red;
                 // margin: 0;
                 border-inline-start: 1px solid #e2e2e2;
-                border-end-start-radius: 5px;
+                border-end-start-radius: 10px;
                 // border-start-start-radius: 0px;
 
                 // border-inline-start: 5px solid rgb(162, 93, 220);
@@ -130,3 +170,27 @@
     }
 
 }
+
+
+
+.group-unpreview {
+    background-color: aqua;
+
+    .group-header{
+        .collapse-group {
+            color: rgb(162, 93, 220);
+            transition: transform .2s;
+            margin-inline: 0.5em;
+        }
+
+        h3 {
+            font-weight: 500;
+            color: rgb(162, 93, 220);
+            display: inline-block;
+        }
+
+    }
+
+
+}
+

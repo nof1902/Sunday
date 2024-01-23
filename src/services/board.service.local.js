@@ -196,7 +196,7 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "Group 1",
+          title: "Group 1 bord1",
           archivedAt: 1589983468418,
           tasks: [
             {
@@ -212,27 +212,27 @@ function _createBoards() {
               priority: "",
             },
           ],
-          style: {},
+          style: {color: "#9E57DB"},
         },
         {
           id: utilService.makeId(),
-          title: "Group 2",
+          title: "Group 2 bord1",
           archivedAt: 1589983468418,
           tasks: [
             {
               id: utilService.makeId(),
-              title: "Task 1",
+              title: "Task 3",
               status: "",
               priority: "",
             },
             {
               id: utilService.makeId(),
-              title: "Task 2",
+              title: "Task 4",
               status: "",
               priority: "",
             },
           ],
-          style: {},
+          style: {color: "#ff158a"},
         },
       ],
     },
@@ -256,23 +256,23 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "Group 2",
+          title: "Group 1 bord2",
           archivedAt: 1589983468418,
           tasks: [
             {
               id: utilService.makeId(),
-              title: "Task 1",
+              title: "Task 5",
               status: "",
               priority: "",
             },
             {
               id: utilService.makeId(),
-              title: "Task 2",
+              title: "Task 6",
               status: "",
               priority: "",
             },
           ],
-          style: {},
+          style: {color: "#579BFC"},
         },
       ],
     },
