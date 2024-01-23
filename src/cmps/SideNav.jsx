@@ -22,9 +22,9 @@ export function SideNav({ boards }) {
             
                 
                 {boards.map(board =>  (
-                        <div className="sidenav-home">
-                        <img src={boardIconUrl} />
-                        <NavLink key={board._id} to={`/boards/${board._id}`}>{board.title}    </NavLink>
+                        <div className="sidenav-home" key={board._id}>
+                            <img src={boardIconUrl} />
+                            <NavLink key={board._id} to={`/boards/${board._id}`}>{board.title}    </NavLink>
                         </div>
                         ))}
         </nav>
