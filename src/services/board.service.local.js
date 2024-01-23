@@ -15,6 +15,8 @@ export const boardService = {
 };
 window.cs = boardService;
 
+
+// localStorage.clear()
 // _createBoards()
 
 async function query(filterBy = { status: "", title: "" }) {
