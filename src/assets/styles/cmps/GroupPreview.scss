@@ -1,19 +1,28 @@
 .group-preview {
     // border: 1px solid #e2e2e2;
-    margin-block-end: 3em;
+    margin-block-end: 1.2em;
     // font-family: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
 
     .group-header{
+        display: flex;
+    justify-content: left;
+    align-items: center;
+    
         .collapse-group {
-            color: rgb(162, 93, 220);
+            color: $clr13;
             transition: transform .2s;
             margin-inline: 0.5em;
         }
 
         h3 {
             font-weight: 500;
-            color: rgb(162, 93, 220);
-            display: inline-block;
+            color: $clr13;
+            // display: inline-block;
+            margin-inline-start: 0.5em;
+        }
+
+        svg {
+            color: $clr13;
         }
 
     }
@@ -28,8 +37,8 @@
         border-block-end: 1px solid #e2e2e2;
         height: 35px;
         padding: 0;
-        border-inline-start: 5px solid rgb(162, 93, 220);
-        border-start-start-radius: 5px;
+        border-inline-start: 6px solid rgb(162, 93, 220);
+        border-start-start-radius: 6px;
         // font-family: roboto;
 
         > * {
@@ -61,8 +70,8 @@
             // color: #2B2C32;
             border-block-end: 1px solid #e2e2e2;
             height: 35px;
-            border-inline-start: 5px solid #a25ddc80;
-            border-end-start-radius: 5px;
+            border-inline-start: 6px solid #a25ddc80;
+            border-end-start-radius: 6px;
             border-start-start-radius: 0px;
             // font-family: roboto;
 
@@ -100,7 +109,7 @@
                 }
 
                 &:focus {
-                    border: 1px solid #0073ea;
+                    border: 1px solid $clr12;
                     outline: none; 
                     // font-family: 'Roboto';
                 }
