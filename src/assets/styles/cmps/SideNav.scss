@@ -1,6 +1,6 @@
 .side-navigation{
     display: grid;
-    grid-template-rows: repeat(3, 2rem);
+    grid-template-rows: repeat(4, 2rem);
     background-color: #ffffff;
     padding-left: 1em;
     border-start-end-radius: 10px;
@@ -21,4 +21,13 @@
 
 .sidenav-home:hover {
     background-color: rgb(218, 234, 236);
+}
+
+.sidenav-search {
+    height:20px;
+
+    img {
+        width:18px;
+        height:18px;
+    }
 }
