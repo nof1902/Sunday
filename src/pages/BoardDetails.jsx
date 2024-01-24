@@ -28,18 +28,12 @@ export function BoardDetails() {
 
   if (!board) return <div>Loading...</div>;
   const { groups } = board
-  // console.log("board", board);
-  // console.log("groups", groups);
-
-  // console.log('num of tasks from BoardDetails', board.groups[0].tasks.length)
-
-
-
-  // console.log('num of tasks', boards[1].groups[0].tasks.length)
+  console.log("board", board);
+  console.log("groups", groups);
   return (
     <section className="board-details">
-      <BoardIndexHeader board={board} onSaveTask={onSaveTask} />
-      <GroupList groups={groups} onSaveTask={onSaveTask}/>
+      <BoardIndexHeader board={board} />
+      <GroupList groups={groups} />
     </section>
   );
 }
