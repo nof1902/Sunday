@@ -32,8 +32,8 @@ export function BoardDetails() {
   console.log("groups", groups);
   return (
     <section className="board-details">
-      <BoardIndexHeader board={board} />
-      <GroupList groups={groups} />
+      <BoardIndexHeader board={board} onSaveTask={onSaveTask} />
+      <GroupList groups={groups} onSaveTask={onSaveTask} />
     </section>
   );
 }
