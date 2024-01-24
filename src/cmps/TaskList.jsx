@@ -1,7 +1,7 @@
 import { TaskPreview } from "./TaskPreview.jsx";
 
 export function TaskList({ tasks }) {
-  // console.log("tasks", tasks)
+  console.log("tasks", tasks.length)
 
   
   return (

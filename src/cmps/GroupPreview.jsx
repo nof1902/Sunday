@@ -7,7 +7,7 @@ import { MdOutlineExpandMore } from "react-icons/md";
 
 
 
-export function GroupPreview({ group }) {
+export function GroupPreview({ group, onSaveTask }) {
   // console.log("group", group)
   // const { tasks } = group;
   // console.log("tasks", tasks)
@@ -22,7 +22,7 @@ export function GroupPreview({ group }) {
 
   useEffect(() => {
     if(inputFocused === false){
-      SaveTask(param.id, group.id, task)
+      onSaveTask(param.id, group.id, task)
       setInputFocused(null)
     }
     // console.log("log", inputFocused);
@@ -52,6 +52,11 @@ export function GroupPreview({ group }) {
   const { tasks } = group
   const title = Object.keys(tasks[0])
 // console.log(title);
+
+// console.log('num of tasks', tasks.length)
+
+
+  console.log('task');
   return (
     <section className={groupClass}>
       <section className="group-header">
