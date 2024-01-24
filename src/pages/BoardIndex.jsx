@@ -31,6 +31,7 @@ export function BoardIndex() {
     try {
       SaveTask(boardId, groupId, task, activity)
       showSuccessMsg(`Task added successfully`)
+      loadBoards()
     } catch (err) {
       showSuccessMsg(`Could not add task`)
       console.log('error',err)
@@ -66,8 +67,7 @@ export function BoardIndex() {
       </section>
       <section className="board-main">
         {!params.id && (<BoardsList boards={boards}/>)}
-        <Outlet context={{ onSaveTask }} />
-        {/* {params.id ? <BoardDetails onSaveTask={onSaveTask}/> : <BoardsList boards={boards}/>} */}
+        <Outlet context={{ onSaveTask, boards}} />
       </section>
     </section>
   );

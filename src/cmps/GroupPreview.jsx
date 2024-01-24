@@ -22,11 +22,13 @@ export function GroupPreview({ group, onSaveTask }) {
 
   useEffect(() => {
     if(inputFocused === false){
-      onSaveTask(param.id, group.id, task)
+      const currTask = task
+      setTask(null)
       setInputFocused(null)
+      onSaveTask(param.id, group.id, currTask)
     }
     // console.log("log", inputFocused);
-  }, [inputFocused])
+  }, [inputFocused,task])
 
 
   const handleInputFocus = () => {

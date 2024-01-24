@@ -10,15 +10,16 @@ export function BoardDetails() {
   const params = useParams();
   const [board, setBoard] = useState(null);
   const { onSaveTask } = useOutletContext()
+  const { boards } = useOutletContext()
 
   useEffect(() => {
     loadBoard()
-  }, [params.id])
+  }, [params.id,boards] )
 
   async function loadBoard() {
     try{
-      const board = await getBoardById(params.id)
-      setBoard(board) 
+    const currBoard = boards.find(b => b._id === params.id);
+    setBoard(currBoard);
     } catch (error) {
       showErrorMsg("Could Not Loading Board");
       console.log("error:", error);
