@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import { svgService } from "../svg.service"
 
-export function TaskPreview({ task }) {
+export function TaskPreview({ task, onRemoveTask }) {
 
 
   // const addMessageIcon = svgService.getSvg('addMessage')
@@ -29,9 +29,13 @@ export function TaskPreview({ task }) {
   const taskVal = Object.values(task)
   // console.log(taskVal);
 
+
+
+  // boardId, groupId, task, activity
   return (
     <section className="task-preview">
       <div className="task-header">
+      {/* <button className="delete-btn" onClick={() => onRemoveTask(task)}></button> */}
       <button className="delete-btn"></button>
         <span className="task-txt">{task.title}</span>
           {

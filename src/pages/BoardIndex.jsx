@@ -1,61 +1,59 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById } from "../store/board.actions.js";
+import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById, RemoveTask } from "../store/board.actions.js";
 import {Outlet ,useParams} from "react-router-dom";
-
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
-import { userService } from "../services/user.service.js";
-import { boardService } from "../services/board.service.local.js";
 import { BoardsList } from "../cmps/BoardsList.jsx";
-import { BoardDetails } from "./BoardDetails.jsx";
 import { SideNav } from "../cmps/SideNav.jsx";
 import { AppHeader } from "../cmps/AppHeader.jsx";
-import { SaveTask, getEmptyTask } from "../store/board.actions"
+import { SaveTask } from "../store/board.actions"
 
 
 export function BoardIndex() {
   
   const params = useParams()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
-  // const [currBoard, setCurrBoard] = useState(null);
   
   useEffect(() => {
     loadBoards()
-
-    // if(params.id){
-    //   onGetBoardById()
-    // }
   }, [])
 
   async function onSaveTask(boardId, groupId, task, activity) {
     try {
       SaveTask(boardId, groupId, task, activity)
       showSuccessMsg(`Task added successfully`)
-      loadBoards()
     } catch (err) {
       showSuccessMsg(`Could not add task`)
       console.log('error',err)
     }
   }
 
-  // async function onGetBoardById() {
+  async function onRemoveTask(boardId, groupId, task, activity) {
+    try {
+      RemoveTask(boardId, groupId, task, activity)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
+  }
+
+
+
+  // async function onRemoveTask(boardId, groupId, task, activity) {
   //   try {
-  //     const board = await getBoardById(params.id)
-  //     setCurrBoard(board)
+  //     SaveTask(boardId, groupId, task, activity)
   //     showSuccessMsg(`Task added successfully`)
+  //     loadBoards()
   //   } catch (err) {
   //     showSuccessMsg(`Could not add task`)
   //     console.log('error',err)
   //   }
   // }
-  
-  // console.log('board index render')
-  if (!boards) return <div>Loading...</div>;
-  // console.log('num of tasks from BoardIndex', boards[1].groups[0].tasks.length)
 
-  // if(params.id){
-  //   getBoardById()
-  // }
+
+  
+  if (!boards) return <div>Loading...</div>;
 
   return (
     <section className="board-index">
@@ -67,7 +65,7 @@ export function BoardIndex() {
       </section>
       <section className="board-main">
         {!params.id && (<BoardsList boards={boards}/>)}
-        <Outlet context={{ onSaveTask, boards}} />
+        <Outlet context={{ onSaveTask, boards ,onRemoveTask}} />
       </section>
     </section>
   );

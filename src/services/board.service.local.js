@@ -12,6 +12,7 @@ export const boardService = {
   getEmptyBoard,
   addBoardMsg,
   saveTask,
+  removeTask
 };
 window.cs = boardService;
 
@@ -36,7 +37,7 @@ async function query(filterBy = { status: "", title: "" }) {
   return boards;
 }
 
-function getById(boardId) {
+async function getById(boardId) {
   return storageService.get(STORAGE_KEY, boardId);
 }
 
@@ -73,7 +74,7 @@ async function saveTask(boardId, groupId, task, activity) {
     group = getGroupFromBoardById(board, groupId);
   }
 
-  // check if it an update
+  // check if it is an update
   if (task && task.id) {
     group = group.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
@@ -82,6 +83,19 @@ async function saveTask(boardId, groupId, task, activity) {
     task.id = utilService.makeId();
     group.tasks.push(task);
   }
+
+  board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
+  // board.activities.unshift(activity)
+  save(board);
+  return board;
+}
+
+async function removeTask(boardId, groupId, task, activity) {
+  const board = await getById(boardId);
+  const group = getGroupFromBoardById(board, groupId)
+
+  group = group.tasks.filter((existTask) => {
+    return existTask.id !== task.id })
 
   board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
   // board.activities.unshift(activity)

@@ -11,6 +11,7 @@ export function BoardDetails() {
   const [board, setBoard] = useState(null);
   const { onSaveTask } = useOutletContext()
   const { boards } = useOutletContext()
+  const {onRemoveTask} = useOutletContext()
 
   useEffect(() => {
     loadBoard()
@@ -33,7 +34,7 @@ export function BoardDetails() {
   return (
     <section className="board-details">
       <BoardIndexHeader board={board} onSaveTask={onSaveTask} />
-      <GroupList groups={groups} onSaveTask={onSaveTask} />
+      <GroupList groups={groups} onSaveTask={onSaveTask} onRemoveTask={onRemoveTask}/>
     </section>
   );
 }

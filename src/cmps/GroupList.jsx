@@ -1,6 +1,6 @@
 import { GroupPreview } from "./GroupPreview.jsx";
 
-export function GroupList({ groups, onSaveTask }) {
+export function GroupList({ groups, onSaveTask, onRemoveTask }) {
   // console.log("groups", groups)
 
   // console.log('num of tasks', groups[0].tasks.length)
@@ -9,7 +9,7 @@ export function GroupList({ groups, onSaveTask }) {
       {
           groups.map((group) => (
            <li key={group.id}>
-            <GroupPreview group={group} onSaveTask={onSaveTask} />
+            <GroupPreview group={group} onSaveTask={onSaveTask} onRemoveTask={onRemoveTask} />
            </li>
          ))
       }

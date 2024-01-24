@@ -7,7 +7,7 @@ import { MdOutlineExpandMore } from "react-icons/md";
 
 
 
-export function GroupPreview({ group, onSaveTask }) {
+export function GroupPreview({ group, onSaveTask , onRemoveTask }) {
   // console.log("group", group)
   // const { tasks } = group;
   // console.log("tasks", tasks)
@@ -79,7 +79,7 @@ export function GroupPreview({ group, onSaveTask }) {
         }
       </section>
 
-    <TaskList tasks={tasks} />
+    <TaskList tasks={tasks} onRemoveTask={onRemoveTask} />
 
       <section className="group-footer">
         <div className="footer-new-task">

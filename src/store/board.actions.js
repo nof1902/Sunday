@@ -99,6 +99,13 @@ export async function SaveTask(boardId, groupId, task, activity = {}) {
     updateBoard(board)
 }
 
+export async function RemoveTask(boardId, groupId, task, activity = {}) {
+    let board = await boardService.getById(boardId)
+    board = await boardService.removeTask(boardId, groupId, task, activity)
+    updateBoard(board)
+}
+
+
 export function getEmptyTask(){
     return {
         "id": "",
