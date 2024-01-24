@@ -7,11 +7,6 @@ import { MdOutlineExpandMore } from "react-icons/md";
 
 
 
-import { MdOutlineExpandMore } from "react-icons/md";
-
-
-
-
 export function GroupPreview({ group }) {
   // console.log("group", group)
   // const { tasks } = group;
