@@ -3,7 +3,7 @@ import { TaskList } from "./TaskList.jsx";
 import { getEmptyTask, SaveTask } from "../store/board.actions.js"
 import { useParams } from "react-router";
 
-// SaveTask(boardId, groupId = null, task, activity = {})
+
 export function GroupPreview({ group }) {
   // console.log("group", group)
   const { tasks } = group;

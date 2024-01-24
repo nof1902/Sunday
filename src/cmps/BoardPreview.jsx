@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export function BoardPreview( { board } ) {
 
-    console.log('board from board preview',board)
+    // console.log('board from board preview',board)
     return (
         <li className="board-card">
             <Link to={`${board._id}`} >

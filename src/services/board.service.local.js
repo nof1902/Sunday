@@ -65,8 +65,7 @@ async function saveTask(boardId, groupId, task, activity) {
   const board = await getById(boardId);
 
   // if there is not specific group -> add to first group
-  // var groups = board.groups[0];
-  var group;
+  var group = board.groups[0];
   // console.log('groups' , groups)
 
   // if there is specific group -> add according to groupId

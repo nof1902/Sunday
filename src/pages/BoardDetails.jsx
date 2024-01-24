@@ -6,11 +6,11 @@ import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
 
-export function BoardDetails() {
+export function BoardDetails({boards}) {
   const params = useParams();
   const [board, setBoard] = useState(null);
 
-  console.log("params", params);
+  // console.log("params", params);
 
   useEffect(() => {
     loadBoard();
@@ -21,12 +21,10 @@ export function BoardDetails() {
     setBoard(boardData);
   }
 
-  
-
   if (!board) return <div>Loading...</div>;
   const { groups } = board
-  console.log("board", board);
-  console.log("groups", groups);
+  // console.log("board", board);
+  // console.log("groups", groups);
   return (
     <section className="board-details">
       <BoardIndexHeader board={board} />

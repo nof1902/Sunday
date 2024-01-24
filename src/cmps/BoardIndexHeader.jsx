@@ -5,11 +5,13 @@ import { SaveTask, getEmptyTask } from "../store/board.actions"
 // import { storeSaveTask } from "../store/board.actions"
 
 // two way data binding between sidenav to BoardIndexHeader - board name
-export function BoardIndexHeader( {board} ) {
+export function BoardIndexHeader( {board, onUpdateBoard} ) {
 
-    const task = getEmptyTask()
+    // console.log('BoardIndexHeader :' , board)
 
-    console.log('BoardIndexHeader :' , board)
+    // function onHandleAddTask(){
+
+    // }
       
     return (
         <section className='board-index-header'>
@@ -22,8 +24,7 @@ export function BoardIndexHeader( {board} ) {
             </section>
             <section className='board-actions'>
                 <section className='addition-actions'>
-                    <button className='add-task' onClick={() => SaveTask(board._id,board.groups[0].id,task)}>New Task</button>
-                    {/* SaveTask(boardId, groupId = null, task, activity = {}) */}
+                    <button className='add-task' onClick={() => SaveTask(board._id,null,getEmptyTask())}>New Task</button>
                     <button className='add-group'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                     </button>

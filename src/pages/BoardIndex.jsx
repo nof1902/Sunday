@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadBoards, addBoard, removeBoard } from "../store/board.actions.js";
+import { loadBoards, addBoard, removeBoard, updateBoard } from "../store/board.actions.js";
 import {useParams} from "react-router-dom";
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
@@ -46,9 +46,20 @@ export function BoardIndex() {
     if (user.isAdmin) return true;
     return car.owner?._id === user._id;
   }
+
+
+  // async function onUpdateBoard(boardToSave) {
+  //   try {
+  //       const savedBoard = await updateBoard(boardToSave)
+  //       showSuccessMsg(`board updated`)
+  //   } catch (err) {
+  //       showErrorMsg('Cannot update board')
+  //   }
+  // }
   
-  // console.log('boards' , boards)
+  // console.log('board index render')
   if (!boards) return <div>Loading...</div>;
+  // console.log('num of tasks', boards[1].groups[0].tasks.length)
   
   return (
     <section className="board-index">
@@ -59,7 +70,7 @@ export function BoardIndex() {
         <SideNav boards={boards}/>
       </section>
       <section className="board-main">
-        {params.id ? <BoardDetails /> : <BoardsList boards={boards}/>}
+        {params.id ? <BoardDetails boards={boards}/> : <BoardsList boards={boards}/>}
       </section>
     </section>
   );

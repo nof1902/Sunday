@@ -41,7 +41,7 @@ export async function loadBoards() {
     }
 }
 
-export async function getBoardById(boardId = "b101") {
+export async function getBoardById(boardId) {
     try {
         const board = await boardService.getById(boardId)
         store.dispatch({
@@ -93,7 +93,7 @@ export function updateBoard(board) {
 }
 
 // by adding task from headerindex - the task automaticly
-export async function SaveTask(boardId, groupId = null, task, activity = {}) {
+export async function SaveTask(boardId, groupId, task, activity = {}) {
     let board = await boardService.getById(boardId)
     board = await boardService.saveTask(boardId, groupId, task, activity)
     updateBoard(board)
