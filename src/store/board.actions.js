@@ -5,6 +5,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 //import { ADD_CAR, ADD_TO_CART, CLEAR_CART, REMOVE_CAR, REMOVE_FROM_CART, SET_CARS, UNDO_REMOVE_CAR, UPDATE_CAR } from './car.reducer.js'
 import { REMOVE_BOARD, ADD_BOARD, UPDATE_BOARD, SET_BOARDS, GET_BOARD_BY_ID ,UNDO_REMOVE_BOARD} from './board.reducer.js'
 import { SET_SCORE } from './user.reducer.js'
+import { utilService } from '../services/util.service.js'
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
@@ -106,14 +107,6 @@ export async function RemoveTask(boardId, groupId, task, activity = {}) {
 }
 
 
-export function getEmptyTask(){
-    return {
-        "id": "",
-        "title": "New Task",
-        "status": "",
-        "priority": ""
-    }
-}
 
 // Demo for Optimistic Mutation 
 // (IOW - Assuming the server call will work, so updating the UI first)
@@ -123,29 +116,68 @@ export function onRemoveBoardOptimistic(boardId) {
         boardId
     })
     showSuccessMsg('Board removed')
-
+    
     boardService.remove(carId)
-        .then(() => {
-            console.log('Server Reported - Deleted Successfully');
-        })
-        .catch(err => {
+    .then(() => {
+        console.log('Server Reported - Deleted Successfully');
+    })
+    .catch(err => {
             showErrorMsg('Cannot remove car')
             console.log('Cannot load cars', err)
             store.dispatch({
                 type: UNDO_REMOVE_BOARD,
             })
         })
-}
+    }
+    
+    
+    export async function checkout(total) {
+        try {
+            const score = await userService.changeScore(-total)
+            store.dispatch({ type: SET_SCORE, score })
+            store.dispatch({ type: CLEAR_BoardT })
+            return score
+        } catch (err) {
+            console.log('BoardActions: err in checkout', err)
+            throw err
+        }
+    }
+    
+    export function getEmptyTask(){
+        return {
+            "id": "",
+            "title": "New Task",
+            "status": "",
+            "priority": ""
+        }
+    }
 
-
-export async function checkout(total) {
-    try {
-        const score = await userService.changeScore(-total)
-        store.dispatch({ type: SET_SCORE, score })
-        store.dispatch({ type: CLEAR_BoardT })
-        return score
-    } catch (err) {
-        console.log('BoardActions: err in checkout', err)
-        throw err
+export function getEmptyBoard() {
+    return {
+        _id: "",
+        title: "New board",
+        isStarred: false,
+        archivedAt: 1589983468418,
+        createdBy: {
+            _id: "",
+            fullname: "",
+            imgUrl: "",
+        },
+        members: [
+            {
+                _id: "",
+                fullname: "",
+                imgUrl: "",
+            },
+        ],
+        groups: [
+            {
+                id: utilService.makeId(),
+                title: "New Group",
+                archivedAt: 1589983468418,
+                tasks: []
+            },
+        ],
+        style: {},
     }
 }

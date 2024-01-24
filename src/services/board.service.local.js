@@ -9,7 +9,6 @@ export const boardService = {
   getById,
   save,
   remove,
-  getEmptyBoard,
   addBoardMsg,
   saveTask,
   removeTask
@@ -128,59 +127,6 @@ async function addBoardMsg(boardId, txt) {
 //     }
 // }
 
-function getEmptyBoard() {
-  return {
-    _id: utilService.makeId(),
-    title: "first board",
-    isStarred: false,
-    archivedAt: 1589983468418,
-    createdBy: {
-      _id: "",
-      fullname: "",
-      imgUrl: "",
-    },
-    members: [
-      {
-        _id: "",
-        fullname: "",
-        imgUrl: "",
-      },
-    ],
-    groups: [
-      {
-        id: utilService.makeId(),
-        title: "Group 1",
-        archivedAt: 1589983468418,
-        tasks: [
-          {
-            id: "t101",
-            title: "Task 1",
-            archivedAt: 1589983468418,
-          },
-          {
-            id: "t102",
-            title: "Task 2",
-            status: "",
-            priority: "",
-            comments: [
-              {
-                id: "",
-                txt: "",
-                createdAt: 1590999817436,
-                byMember: {
-                  _id: "",
-                  fullname: "",
-                  imgUrl: "",
-                },
-              },
-            ],
-          },
-        ],
-        style: {},
-      },
-    ],
-  };
-}
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))

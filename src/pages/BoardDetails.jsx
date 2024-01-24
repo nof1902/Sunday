@@ -34,7 +34,6 @@ export function BoardDetails() {
   return (
     <section className="board-details">
       <BoardIndexHeader board={board} onSaveTask={onSaveTask} />
-      <GroupList groups={groups} onSaveTask={onSaveTask} onRemoveTask={onRemoveTask}/>
       <GroupList groups={groups} onSaveTask={onSaveTask} />
 
       

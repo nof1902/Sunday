@@ -53,7 +53,11 @@ export function GroupPreview({ group, onSaveTask , onRemoveTask }) {
 }
 
   const { tasks } = group
-  const title = Object.keys(tasks[0])
+
+  var title = Object.keys(getEmptyTask())
+  if(tasks && tasks.length !== 0){
+    title = Object.keys(tasks[0])
+  }
 // console.log(title);
 
 // console.log('num of tasks', tasks.length)

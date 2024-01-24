@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById, RemoveTask } from "../store/board.actions.js";
+import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById, RemoveTask, getEmptyBoard } from "../store/board.actions.js";
 import {Outlet ,useParams} from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardsList } from "../cmps/BoardsList.jsx";
@@ -18,6 +18,8 @@ export function BoardIndex() {
     loadBoards()
   }, [])
 
+
+  // not here
   async function onSaveTask(boardId, groupId, task, activity) {
     try {
       SaveTask(boardId, groupId, task, activity)
@@ -28,6 +30,7 @@ export function BoardIndex() {
     }
   }
 
+  // not here
   async function onRemoveTask(boardId, groupId, task, activity) {
     try {
       RemoveTask(boardId, groupId, task, activity)
@@ -39,17 +42,36 @@ export function BoardIndex() {
   }
 
 
+  async function onRemoveBoard(boardId) {
+    try {
+      await removeBoard(boardId)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
+  }
 
-  // async function onRemoveTask(boardId, groupId, task, activity) {
-  //   try {
-  //     SaveTask(boardId, groupId, task, activity)
-  //     showSuccessMsg(`Task added successfully`)
-  //     loadBoards()
-  //   } catch (err) {
-  //     showSuccessMsg(`Could not add task`)
-  //     console.log('error',err)
-  //   }
-  // }
+  async function onAddBoard() {
+    try {
+      const newBoard = getEmptyBoard()
+      addBoard(newBoard)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
+  }
+
+  async function onUpdateBoard(boardToSave) {
+    try {
+        await updateBoard(boardToSave)
+        showSuccessMsg(`board updated`)
+    } catch (err) {
+        showErrorMsg('Cannot update board')
+        console.log('error',err)
+    }
+  }
 
 
   
@@ -61,7 +83,7 @@ export function BoardIndex() {
         <AppHeader />
       </section>
       <section className="side-nav">
-        <SideNav boards={boards}/>
+        <SideNav boards={boards} onRemoveBoard={onRemoveBoard} onAddBoard={onAddBoard} onUpdateBoard={onUpdateBoard}/>
       </section>
       <section className="board-main">
         {!params.id && (<BoardsList boards={boards}/>)}
@@ -141,15 +163,5 @@ export function BoardIndex() {
     if (user.isAdmin) return true;
     return car.owner?._id === user._id;
   }
-
-
-  // async function onUpdateBoard(boardToSave) {
-  //   try {
-  //       const savedBoard = await updateBoard(boardToSave)
-  //       showSuccessMsg(`board updated`)
-  //   } catch (err) {
-  //       showErrorMsg('Cannot update board')
-  //   }
-  // }
 
 */
