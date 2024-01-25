@@ -1,34 +1,202 @@
 .side-navigation{
     display: grid;
-    grid-template-rows: repeat(4, 2rem);
+    grid-template-rows: auto 1fr;
     background-color: #ffffff;
-    padding-left: 1em;
     border-start-end-radius: 10px;
     height: 100%;
     font-family: $font-txt;
-}
+    padding: 0.5em;
 
-.sidenav-home {
-    display: block;
+    .sidenav-header {
+        
+        // padding-left: 12px;
+        // padding-right: 40px;
+        // padding-block: 12px;
+        // justify-content: flex-start;
+        border-block-end: 1px solid $clr11;
+        padding-block: 0.3em 0.75em;
+        padding-inline-end: 0.4em;
+
+        .sidnav-home {
+            display: grid;
+            grid-template-columns: 2em 1fr;
+            align-items: center;
+            padding: 0.4em 0.6em;
+            font-size: 12pt;
+            color: $clr2;
+            border-radius: 0.3em;
+
+            &:hover {
+                background-color: $clr15;
+           }
+        }
+
+        // img {       
+        //     width: 1.1em;
+        // }
+        svg {
+            width: 1.1em;
+        }
+
+
+    }
+
+
+
+    .sidenav-main {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 3px;
+        // padding-block-start: 0.75em;
+
+        .sidenav-search {
+            // display: grid;
+            // grid-template-columns: 1fr 3em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.15em 0.5em;
+            align-items: center;
+            color: $clr2;
+            padding-block: 0.75em 0.6em;
+            // gap: 0.7em;
+
+
+            .search-input {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border: 1px solid $clr11;
+                border-radius: 0.3em;
+                // padding: 0.6em 0.5em;
+                width: 80%;
+                height: 35px;
+
+                input {
+                    // border: 1px solid $clr11;
+                    // border-radius: 0.3em;
+                    // padding: 0.6em 0.5em;
+                    font-family: $font-txt;
+                    // width: 100%;
+                    // height: 35px;
+                    border: none;
     
-    // justify-content: flex-start;
+                    &::placeholder {
+                        font-family: $font-txt;
+                   }
+    
+    
+                    &:focus {
+                        // border: 1px solid $clr12;
+                        outline: none; 
+                        // font-family: 'Roboto';
+                    }
+    
+                }
 
-    img {       
-        width: 18px;
-        height: 18px;
-        margin-right: 1rem;
+
+            }
+
+
+            
+
+
+            .add-group-btn {
+                color: $clr10;
+                // height: 100%;
+                margin: 0;
+                border-radius: 0.3em;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                
+
+
+            }
+        }
+
+        
+        .sidenav-boards {
+            padding-inline-end: 0.4em;
+
+            // img {
+            //     width:18px;
+            //     height:18px;
+            // }
+
+
+            .sidenav-board {
+                display: grid;
+                grid-template-columns: 2em 1fr 2em;
+                align-items: center;
+                padding: 0.15em 0.6em;
+                // margin: 0.5em;
+                // font-size: 14px;
+                font-size: 12pt;
+                color: $clr2;
+                border-radius: 0.3em;
+
+                
+
+                &:hover {
+                    background-color: $clr15;
+
+
+                    .more-btn-show {
+                        color: $clr6;
+                        
+                        align-items: center;
+                        display: flex;
+                        justify-content: center;
+                        padding: 0.2em 0em;
+                        margin: 0.5em 0;
+                        border-radius: 0.3em;
+                        background-color: $clr15;
+                        opacity: 1;
+                    }
+
+
+                }
+
+                //לעשות מצב של אקטיב-סלקטד
+                a:active {
+                    // background-color: $clr14;
+                }
+
+                .more-btn-show {
+                    align-items: center;
+                    display: flex;
+                    justify-content: center;
+                    padding: 0.2em 0em;
+                    margin: 0.5em 0;
+                    border-radius: 0.3em;
+                    opacity: 0;
+                }
+                
+                
+
+            }
+        }
+
     }
-}
-
-.sidenav-home:hover {
-    background-color: rgb(218, 234, 236);
-}
-
-.sidenav-search {
-    height:20px;
-
-    img {
-        width:18px;
-        height:18px;
+    a {
+       color: $clr2;
     }
+
+    a:hover {
+        text-decoration: none;
+    }
+
 }
+
+
+
+
+
+
+
+
