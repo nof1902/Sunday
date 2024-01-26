@@ -1,21 +1,14 @@
 .side-navigation{
     display: grid;
     grid-template-rows: auto 1fr;
-    background-color: #ffffff;
+    background-color: $clr10;
     border-start-end-radius: 10px;
     height: 100%;
     font-family: $font-txt;
-    padding: 0.5em;
 
     .sidenav-header {
-        
-        // padding-left: 12px;
-        // padding-right: 40px;
-        // padding-block: 12px;
-        // justify-content: flex-start;
         border-block-end: 1px solid $clr11;
-        padding-block: 0.3em 0.75em;
-        padding-inline-end: 0.4em;
+        padding: 0.8em;
 
         .sidnav-home {
             display: grid;
@@ -30,15 +23,6 @@
                 background-color: $clr15;
            }
         }
-
-        // img {       
-        //     width: 1.1em;
-        // }
-        svg {
-            width: 1.1em;
-        }
-
-
     }
 
 
@@ -47,64 +31,109 @@
         display: grid;
         grid-template-rows: auto 1fr;
         gap: 3px;
-        // padding-block-start: 0.75em;
+
+        .main-header {
+            padding: 0.8em;
+
+            .main-title {
+                display: grid;
+                grid-template-columns: 2rem 1fr;
+                align-items: center;
+                padding: 0.4em 0.5em;
+                border-radius: 0.3em;
+
+                .workspace-name {
+                    background-color: $clr13;
+                    border-radius: 0.3em;
+                    color: $clr10;
+                    font-weight: 500;
+                    text-align: center;
+                    width: 75%;
+                    font-size: 12pt;
+                }
+
+                h2 {
+                    font-weight: 600;
+                    font-size: 13pt;
+                    margin: 0.3em 0;
+                }
+            }
+
+        }
+
+
 
         .sidenav-search {
-            // display: grid;
-            // grid-template-columns: 1fr 3em;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.15em 0.5em;
-            align-items: center;
             color: $clr2;
-            padding-block: 0.75em 0.6em;
-            // gap: 0.7em;
-
+            padding-block-start: 0.8em;
+            padding-inline: 0.2em;
 
             .search-input {
-                width: 100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 border: 1px solid $clr11;
                 border-radius: 0.3em;
-                // padding: 0.6em 0.5em;
                 width: 80%;
                 height: 35px;
 
-                input {
-                    // border: 1px solid $clr11;
-                    // border-radius: 0.3em;
-                    // padding: 0.6em 0.5em;
-                    font-family: $font-txt;
-                    // width: 100%;
-                    // height: 35px;
-                    border: none;
-    
-                    &::placeholder {
-                        font-family: $font-txt;
-                   }
-    
-    
-                    &:focus {
-                        // border: 1px solid $clr12;
-                        outline: none; 
-                        // font-family: 'Roboto';
+                .search-icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $clr6;
+                    padding: 0.3em;
+
+                    svg {
+                        padding: 0;
                     }
-    
                 }
 
+                .sidenav-filter-btn {
+                    padding: 0.3em;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 0.3em;
+                    background-color: transparent;
+                    color: transparent;
 
+                    &:hover {
+                        background-color: $clr15;
+                    }
+                }
+
+                //filter btn show on hover
+                &:hover {
+                    .sidenav-filter-btn{
+                        color: $clr6;
+                    }
+                }
+
+                input {
+                    font-family: $font-txt;
+                    border: none;
+                    width: 70%;
+                    font-size: 11pt;
+                    color: $clr2;
+
+                    &::placeholder {
+                        font-family: $font-txt;
+                        font-size: 11pt;
+                   }
+    
+                    &:focus {
+                        outline: none; 
+                    }
+                }
             }
 
-
             
-
-
-            .add-group-btn {
+            .add-board-btn {
                 color: $clr10;
-                // height: 100%;
                 margin: 0;
                 border-radius: 0.3em;
                 width: 35px;
@@ -113,42 +142,31 @@
                 justify-content: center;
                 align-items: center;
                 padding: 0;
-                
 
-
+                &:hover {
+                    background-color: $clr9;
+                }
             }
         }
 
         
         .sidenav-boards {
-            padding-inline-end: 0.4em;
-
-            // img {
-            //     width:18px;
-            //     height:18px;
-            // }
-
+            padding: 0 0.8em;
 
             .sidenav-board {
                 display: grid;
                 grid-template-columns: 2em 1fr 2em;
                 align-items: center;
                 padding: 0.15em 0.6em;
-                // margin: 0.5em;
-                // font-size: 14px;
                 font-size: 12pt;
                 color: $clr2;
                 border-radius: 0.3em;
 
-                
-
                 &:hover {
                     background-color: $clr15;
 
-
                     .more-btn-show {
-                        color: $clr6;
-                        
+                        color: $clr2;
                         align-items: center;
                         display: flex;
                         justify-content: center;
@@ -158,7 +176,6 @@
                         background-color: $clr15;
                         opacity: 1;
                     }
-
 
                 }
 
@@ -177,12 +194,11 @@
                     opacity: 0;
                 }
                 
-                
-
             }
         }
 
     }
+
     a {
        color: $clr2;
     }
