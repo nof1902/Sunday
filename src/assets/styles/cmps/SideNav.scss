@@ -10,7 +10,7 @@
         border-block-end: 1px solid $clr11;
         padding: 0.8em;
 
-        .sidnav-home {
+        .sidenav-home {
             display: grid;
             grid-template-columns: 2em 1fr;
             align-items: center;
@@ -68,7 +68,7 @@
             justify-content: space-between;
             align-items: center;
             color: $clr2;
-            padding-block-start: 0.8em;
+            padding-block: 0.8em;
             padding-inline: 0.2em;
 
             .search-input {
@@ -151,7 +151,7 @@
 
         
         .sidenav-boards {
-            padding: 0 0.8em;
+            // padding: 0 0.8em;
 
             .sidenav-board {
                 display: grid;
