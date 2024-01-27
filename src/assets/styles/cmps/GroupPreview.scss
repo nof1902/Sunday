@@ -87,7 +87,7 @@
                 padding-inline: 1em;
                 margin-block: 0.4em;
                 border: 1px solid transparent;
-                border-radius: 5px;
+                border-radius: $border-radius;
                 font-family: $font-txt;
 
                 &::placeholder {
