@@ -137,7 +137,7 @@ function _createBoards() {
   var boards = [
     {
       _id: utilService.makeId(),
-      title: "first board",
+      title: "First Board",
       isStarred: false,
       archivedAt: 1589983468418,
       createdBy: {
@@ -155,7 +155,7 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "Group 1 bord1",
+          title: "Group 1",
           archivedAt: 1589983468418,
           tasks: [
             {
@@ -175,7 +175,7 @@ function _createBoards() {
         },
         {
           id: utilService.makeId(),
-          title: "Group 2 bord1",
+          title: "Group 2",
           archivedAt: 1589983468418,
           tasks: [
             {
@@ -197,7 +197,7 @@ function _createBoards() {
     },
     {
       _id: utilService.makeId(),
-      title: "second board",
+      title: "Second Board",
       isStarred: false,
       archivedAt: 1589983468418,
       createdBy: {
@@ -215,7 +215,7 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "Group 1 bord2",
+          title: "Group 1",
           archivedAt: 1589983468418,
           tasks: [
             {
