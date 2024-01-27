@@ -38,7 +38,12 @@
         border-block-end: 1px solid #e2e2e2;
         height: 35px;
         padding: 0;
-
+        box-sizing: content-box;
+        position: sticky;
+        top: 0;
+        background-color: $clr10;
+        // box-shadow: 4px 6px 15px -8px #c3c6d4;
+        
         > * {
             border-inline-end: 1px solid #e2e2e2;
             font-size: 0.9em;
@@ -62,6 +67,7 @@
             border-inline-start: 7px solid #a25ddc80;
             border-end-start-radius: 7px;
             border-start-start-radius: 0px;
+            box-sizing: content-box;
             // font-family: roboto;
 
             &:hover {
@@ -95,6 +101,8 @@
                 &:focus {
                     border: 1px solid $clr12;
                     outline: none; 
+                    // background-color: $clr1WithAlpha;
+                    background-color: white;
                 }
             }
 
