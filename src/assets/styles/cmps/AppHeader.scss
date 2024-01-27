@@ -1,16 +1,52 @@
 .header-workspace{
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: repeat(2, auto) 1fr repeat(2, auto);
     grid-template-rows: auto;
     align-items: center;
-
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    margin-left: 0.6em;
     
     > * {
-        margin: 0.5rem;
+        margin: 0;
+        padding: 0;
     }
 
-    h1 span{
-        font-weight: 400;
+    .hover-back{
+        // margin-right: 0.8em;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        cursor: pointer;
+        padding: 0.5em;
+        border-radius: 0.3em;
+
+        .menu{
+            transition: color 0.3s;
+        }
+
+        
+        &:hover{
+            background-color: $clr7;
+            
+        }
+    }
+
+    .flower{
+        margin-left: 0.6em;
+    }
+
+    h1 {
+        font-size: 0.9rem; 
+        letter-spacing: -0.2px;
+        color: $clr16;
+     
+        .bold{
+            font-weight: 700;
+        }
+        .light{
+            font-weight: 300;
+        }
     }
 }
 
