@@ -4,15 +4,15 @@
 
     display: grid;
     grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
-    text-align: center;
-    color: #2B2C32;
+    // text-align: center;
+    color: $clr2;
     border-block-end: 1px solid $clr11;
     height: 35px;
     padding: 0;
     // border-inline-start: 6px solid rgb(162, 93, 220);
-    font-family: roboto;
+    font-family: $font-txt;
     border-end-start-radius: 2px;
-    
+    box-sizing: content-box;
     
 
 
@@ -25,7 +25,7 @@
         margin: 0;
         align-self: center;
         height: 100%;
-        line-height: 2;
+        // line-height: 2;
     }
 
     .task-header {
@@ -33,21 +33,68 @@
         grid-template-columns: 30px auto 70px;
 
         .delete-btn {
-            margin-inline-start: -37px;
             width: 23px;
-            background: none; 
-            
+            color: $clr2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin-block: 0.6em;
+            margin-inline-start: -39px;
+            border-radius: 0.3em;
+            background-color: $clr10;
+            opacity: 0;
+
+            &:hover {
+                background-color: $clr15;
+            }
         }
-        .task-txt {
+
+        .task-table {
             border-inline-end: 1px solid $clr11;
-            font-size: 0.9em;
-            font-weight: 400;
-            margin: 0;
-            align-self: center;
-            text-align: left;
-            // padding-inline-start: 1em;
-            height: 100%;
+            display: flex;
+            align-items: center;
+
+            .task-txt {
+                font-size: 0.9em;
+                font-weight: 400;
+                border: 1px solid transparent;
+                padding: 1px 6px;
+                border-radius: 0.3em;
+
+                &:hover {
+                    border: 1px solid $clr11;
+                }
+            }
+
+            input {
+                font-size: 0.9em;
+                font-weight: 400;
+                border: 1px solid $clr1;
+                padding: 1px 6px;
+                border-radius: 0.3em;
+                background-color: $clr10;
+                font-family: $font-txt;
+                width: 90%;
+
+                &:focus {
+                    background-color: $clr10;
+                    border: 1px solid $clr1;
+                    outline: none;
+
+
+                // .task-preview {
+                //     background-color: $clr13;
+                // }
+
+                }
+
+            }
+
+
         }
+
+        
 
         .addMessage-icon {
             color: $clr6;
@@ -60,37 +107,37 @@
             }
         }
 
-
     }
 
     &:hover {
         z-index: 100;
         box-shadow: 4px 3px 6px -3px #d0d4e4;
         background-color: #F4F5F8;
-
+        // background-color: $clr1WithAlpha;
 
         .delete-btn {
-            background-color: #D0D4E4;
+            opacity: 1;
         }
+
+        
+        
     }
 
-
+    // input:focus &{
+    //     background-color: $clr1WithAlpha;
+    // }
     .tasks-header {
-        //  background-color: rgb(241, 249, 240);
-        // grid-template-rows: 1fr repeat(2, 2rem);
-        // grid-template-columns: auto 1fr;
         display: grid;
         grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
         text-align: center;
         color: #2B2C32;
         border-block-start: 1px solid $clr11;
-    border-block-end: 1px solid $clr11;
-    height: 35px;
-    padding: 0;
-        // align-content: center;
-        // align-items: center;
-        border-inline-start: 6px solid rgb(162, 93, 220);
+        border-block-end: 1px solid $clr11;
+        height: 35px;
+        padding: 0;
+        border-inline-start: 6px solid $clr13;
         border-start-start-radius: 6px;
+
         > * {
             border-inline-end: 1px solid $clr11;
             font-size: 0.9em;
@@ -101,21 +148,6 @@
         }
         
 
-
-        // #9E57DB
-
-        // .tasks-header-base {
-        //     background-color: rgb(255, 0, 55);
-        //     // display: grid;
-        //     // grid-template-columns: 20px auto;
-
-        // }
-        
-        
-
-        // .div3{
-        //     background-color: rgb(122, 107, 64);
-        // }
     }
 
 
