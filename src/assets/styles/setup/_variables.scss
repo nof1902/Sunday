@@ -1,6 +1,6 @@
 // Colors
 $clr1: #0073ea; // buttons color
-$clr2: rgb(50, 51, 56); //text color
+$clr2: #323338; //text color
 $clr3: #ECEFF8; //background color
 $clr4: #95adbe;
 $clr5: #dff0ea;
@@ -23,6 +23,10 @@ $clr1WithAlpha: rgba($clr1, 0.2);
 //Fonts
 $font-txt: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
 $font-title: Poppins, Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+
+
+// $border-radius: 0.3em;
+$border-radius: 5px;
 
 // Breakpoints
 $mobile-breakpoint: 460px;

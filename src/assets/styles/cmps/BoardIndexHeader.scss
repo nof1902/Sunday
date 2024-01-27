@@ -1,32 +1,70 @@
 
 .board-index-header{
-    display:grid;
-    grid-template-rows: repeat(5, auto);
+    padding-block-start: 1.2em;
+
+    .head-title {
+
+        color: $clr2;
+        h1 {
+            margin-block: 0 0.5em;
+            font-size: 20pt;
+            font-weight: 500;
+        }
+
+        p {
+            font-family: $font-txt;
+            color: #676879;
+            font-size: 11pt;
+        }
+    }
+
     
-    * {
-        justify-items: start;
-        margin: 0;
-        padding: 0.1rem 0rem;
-    }
-
-    .board-name{
-        grid-area: 1 / 1 / 2 / -1;
-        font-weight: 500;
-    }
-
-    .board-info{
-        grid-area: 2 / 1 / 3 / -1;
-    }
-
     .board-data-display{
-        grid-area: 3 / 1 / 4 / -1;
-        display:grid;
-        grid-auto-flow: column;
-        align-items: end;
-        justify-content: start;
+        display: flex;
+        align-items: center;
+        border-block-end: 1px solid $clr11;
 
-        > * {
-            margin: 0.1rem;  
+        .selected-tab { 
+            border-block-end: 2px solid $clr1;
+            padding-block-end: 4px;
+
+            .main-table-tab {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.3em 0 0.3em 0.3em;
+    
+                &:hover {
+                    background-color: $clr15;
+                    border-radius: $border-radius;
+                }
+    
+                span {
+                    padding-inline: 0.5em 1em;
+                    font-size: 11pt;
+                    border-inline-end: 1px solid $clr11;
+                }
+            }
+
+        }
+
+        
+        .plus-btn {
+            color: $clr2;
+            margin: 0;
+            border-radius: $border-radius;
+            width: 35px;
+            height: 34px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background-color: transparent;
+            margin-block-end: 5px;
+
+            &:hover {
+                background-color: $clr15;
+            }
         }
 
         h1{
@@ -34,27 +72,34 @@
         }
     }
 
+
     .board-actions{
         .addition-actions{
             display: grid;
             grid-template-columns: auto auto;
+            padding: 1em 0;
             justify-content: start;
             
             :hover{
                 background-color: $clr9;
             }
             
-            > * {
-                padding: 0.3rem;
-            }
-
             .add-task{
-                border-radius: 0.2rem 0 0 0.2rem;
-
+                border-radius: 0.3em 0 0 0.3em;
+                margin: 0;
+                font-family: $font-txt;
+                font-size: 11pt;
+                padding: 0.4em 1em;
+                border-right: 1px solid $clr9;
 
             }
             .add-group{
-                border-radius: 0 0.2rem 0.2rem 0;
+                border-radius: 0 0.3em 0.3em 0;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                padding-inline: 0.5em;
             }
         }
     }
