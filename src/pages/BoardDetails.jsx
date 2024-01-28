@@ -36,9 +36,9 @@ export function BoardDetails() {
     }
   }
 
-  async function onRemoveTask(boardId, groupId, task, activity) {
+  async function onRemoveTask(groupId,taskId) {
     try {
-      RemoveTask(boardId, groupId, task, activity)
+      RemoveTask(params.id, groupId, taskId)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
       showSuccessMsg(`Could not add task`)

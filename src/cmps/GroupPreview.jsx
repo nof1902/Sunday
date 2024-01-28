@@ -47,6 +47,10 @@ export function GroupPreview({ group, onSaveTask , onRemoveTask, onRemoveGroup})
     }
   };
 
+  function deleteTask(taskId){
+    onRemoveTask(group.id,taskId)
+  }
+
   function handleChange(ev){
     const val = ev.target.value;
     setTask(prevTask => ({ ...prevTask, title: val }))
@@ -58,7 +62,7 @@ export function GroupPreview({ group, onSaveTask , onRemoveTask, onRemoveGroup})
   if(tasks && tasks.length !== 0){
     title = Object.keys(tasks[0])
   }
-console.log('group.style', group.style);
+// console.log('group.style', group.style);
 
 // console.log('num of tasks', tasks.length)
 
@@ -79,7 +83,7 @@ console.log('group.style', group.style);
         }
       </section>
 
-      <TaskList tasks={tasks} onRemoveTask={onRemoveTask} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} />
     </section>
       <section className="group-footer">
         <div className="footer-new-task" style={{ borderInlineStart: `7px solid ${group.style}`, opacity: '.5'}}>

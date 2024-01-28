@@ -88,13 +88,12 @@ async function saveTask(board, groupId, task, activity) {
   return board;
 }
 
-async function removeTask(board, groupId, task, activity) {
-  const group = getGroupFromBoardById(board, groupId)
-
-  group = group.tasks.filter((existTask) => {
-    return existTask.id !== task.id })
-
-  board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
+async function removeTask(board, groupId, taskId, activity) {
+  let group = getGroupFromBoardById(board, groupId)
+  const filteredTasks = group.tasks.filter(existTask => existTask.id !== taskId)
+  group = { ...group, tasks: filteredTasks }
+  board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
+  
   // board.activities.unshift(activity)
   return board;
 }
@@ -102,9 +101,9 @@ async function removeTask(board, groupId, task, activity) {
 async function removeGroup(board, groupId, activity) {
 
   const filteredGroups = board.groups.filter(g => g.id !== groupId)
-  const newBoard = { ...board, groups: filteredGroups }
+  board = { ...board, groups: filteredGroups }
   // board.activities.unshift(activity)
-  return newBoard;
+  return board;
 }
 
 async function saveGroup(board,index ,group, activity) {
