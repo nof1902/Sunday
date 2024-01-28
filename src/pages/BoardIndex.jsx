@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById, RemoveTask, getEmptyBoard } from "../store/board.actions.js";
-import {Outlet ,useParams} from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardsList } from "../cmps/BoardsList.jsx";
 import { SideNav } from "../cmps/SideNav.jsx";
 import { AppHeader } from "../cmps/AppHeader.jsx";
-import { SaveTask } from "../store/board.actions"
+import { BoardDetails } from "./BoardDetails.jsx";
 
 
 export function BoardIndex() {
@@ -17,29 +17,6 @@ export function BoardIndex() {
   useEffect(() => {
     loadBoards()
   }, [])
-
-
-  // not here
-  async function onSaveTask(boardId, groupId, task, activity) {
-    try {
-      SaveTask(boardId, groupId, task, activity)
-      showSuccessMsg(`Task added successfully`)
-    } catch (err) {
-      showSuccessMsg(`Could not add task`)
-      console.log('error',err)
-    }
-  }
-
-  // not here
-  async function onRemoveTask(boardId, groupId, task, activity) {
-    try {
-      RemoveTask(boardId, groupId, task, activity)
-      showSuccessMsg(`Task added successfully`)
-    } catch (err) {
-      showSuccessMsg(`Could not add task`)
-      console.log('error',err)
-    }
-  }
 
 
   async function onRemoveBoard(boardId) {
@@ -73,7 +50,6 @@ export function BoardIndex() {
     }
   }
 
-
   
   if (!boards) return <div>Loading...</div>;
 
@@ -87,7 +63,7 @@ export function BoardIndex() {
       </section>
       <section className="board-main">
         {!params.id && (<BoardsList boards={boards}/>)}
-        <Outlet context={{ onSaveTask, boards ,onRemoveTask}} />
+        {params.id && <BoardDetails />}
       </section>
     </section>
   );
