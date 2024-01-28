@@ -26,26 +26,6 @@ export function BoardDetails() {
     }
   }
 
-  async function onSaveTask(boardId, groupId, task, activity) {
-    try {
-      SaveTask(boardId, groupId, task, activity)
-      showSuccessMsg(`Task added successfully`)
-    } catch (err) {
-      showSuccessMsg(`Could not add task`)
-      console.log('error',err)
-    }
-  }
-
-  async function onRemoveTask(groupId,taskId) {
-    try {
-      RemoveTask(params.id, groupId, taskId)
-      showSuccessMsg(`Task added successfully`)
-    } catch (err) {
-      showSuccessMsg(`Could not add task`)
-      console.log('error',err)
-    }
-  }
-
   async function onSaveGroup(boardId, index ,group, activity) {
     try {
       SaveGroup(boardId, index, group, activity)
@@ -59,6 +39,39 @@ export function BoardDetails() {
   async function onRemoveGroup(groupId) {
     try {
       RemoveGroup(params.id, groupId)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
+  }
+
+  
+  // async function onUpdateGroup(boardId ,group, activity) {
+  //   try {
+  //     SaveGroup(boardId, index, group, activity)
+  //     showSuccessMsg(`Task added successfully`)
+  //   } catch (err) {
+  //     showSuccessMsg(`Could not add task`)
+  //     console.log('error',err)
+  //   }
+  // }
+
+
+
+  async function onSaveTask(boardId, groupId, task, activity) {
+    try {
+      SaveTask(boardId, groupId, task, activity)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
+  }
+
+  async function onRemoveTask(groupId,taskId) {
+    try {
+      RemoveTask(params.id, groupId, taskId)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
       showSuccessMsg(`Could not add task`)

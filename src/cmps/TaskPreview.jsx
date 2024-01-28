@@ -101,6 +101,7 @@ export function TaskPreview({ task, deleteTask }) {
   );
 }
 
+
 // <span className="task-txt">{task.title}</span>
 // <span>2</span>
 // <span>3</span>

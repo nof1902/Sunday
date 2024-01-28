@@ -193,12 +193,7 @@ export function getEmptyBoard() {
             },
         ],
         groups: [
-            {
-                id: utilService.makeId(),
-                title: "New Group",
-                archivedAt: 1589983468418,
-                tasks: []
-            },
+            getEmptyGroup()
         ],
         style: utilService.getRandomColor()
     }
