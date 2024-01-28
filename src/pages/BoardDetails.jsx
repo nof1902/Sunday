@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
-import { RemoveTask, SaveGroup, SaveTask, getEmptyGroup } from "../store/board.actions.js";
+import { RemoveGroup, RemoveTask, SaveGroup, SaveTask, getEmptyGroup } from "../store/board.actions.js";
 
 export function BoardDetails() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -56,14 +56,14 @@ export function BoardDetails() {
     }
   }
 
-  async function onRemoveGroup(boardId, groupId, task, activity) {
-    // try {
-    //   RemoveTask(boardId, groupId, task, activity)
-    //   showSuccessMsg(`Task added successfully`)
-    // } catch (err) {
-    //   showSuccessMsg(`Could not add task`)
-    //   console.log('error',err)
-    // }
+  async function onRemoveGroup(groupId) {
+    try {
+      RemoveGroup(params.id, groupId)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
   }
   
 

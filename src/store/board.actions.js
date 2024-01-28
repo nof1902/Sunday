@@ -112,6 +112,12 @@ export async function SaveGroup(boardId, index, group, activity = {}) {
     updateBoard(board)
 }
 
+export async function RemoveGroup(boardId, groupId, activity = {}) {
+    let board = await boardService.getById(boardId)
+    board = await boardService.removeGroup(board, groupId, activity)
+    updateBoard(board)
+}
+
 
 
 // Demo for Optimistic Mutation 

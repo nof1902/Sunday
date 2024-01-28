@@ -12,7 +12,8 @@ export const boardService = {
   addBoardMsg,
   saveTask,
   removeTask,
-  saveGroup
+  saveGroup,
+  removeGroup
 };
 window.cs = boardService;
 
@@ -96,6 +97,14 @@ async function removeTask(board, groupId, task, activity) {
   board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
   // board.activities.unshift(activity)
   return board;
+}
+
+async function removeGroup(board, groupId, activity) {
+
+  const filteredGroups = board.groups.filter(g => g.id !== groupId)
+  const newBoard = { ...board, groups: filteredGroups }
+  // board.activities.unshift(activity)
+  return newBoard;
 }
 
 async function saveGroup(board,index ,group, activity) {
