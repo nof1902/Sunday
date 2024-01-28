@@ -4,6 +4,7 @@ export const utilService = {
     getRandomIntInclusive,
     debounce,
     randomPastTime,
+    getRandomColor,
     saveToStorage,
     loadFromStorage
 }
@@ -52,6 +53,15 @@ function debounce(func, timeout = 300) {
         timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
+
+function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
 function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))

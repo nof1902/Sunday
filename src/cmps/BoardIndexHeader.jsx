@@ -1,27 +1,18 @@
 import { utilService } from "../services/util.service"
 import { svgService } from "../services/svg.service"
-import { SaveTask, getEmptyTask } from "../store/board.actions"
+import { SaveTask, getEmptyGroup, getEmptyTask } from "../store/board.actions"
+import { useState } from "react"
 
 // import { storeSaveTask } from "../store/board.actions"
 
-// two way data binding between sidenav to BoardIndexHeader - board name
-export function BoardIndexHeader( {board, onSaveTask} ) {
+export function BoardIndexHeader( {board, onSaveTask , onSaveGroup} ) {
 
-    // console.log('BoardIndexHeader :' , board)
-
-    // function onHandleAddTask(){
-
-    // }
+    // const [isModalShow,seIisModalShow] = useState(false)
       
     return (
         <section className='board-index-header'>
             <section className="head-title">
                 <h1>{board.title}</h1> 
-                {
-                    // <h1 className='board-name fs30'>{board.title}</h1> 
-                //     <p className='board-info fs14'>Manage any type of project. Assign owners, set timelines and keep track 
-                // of where your project stands</p>
-                }
                 <p>Manage any type of project. Assign owners, set timelines and keep track 
                 of where your project stands</p>
             </section>
@@ -41,7 +32,7 @@ export function BoardIndexHeader( {board, onSaveTask} ) {
             <section className="board-actions">
                 <section className='addition-actions'>
                     <button className='add-task' onClick={() => onSaveTask(board._id,null,getEmptyTask())}>New Task</button>
-                    <button className='add-group'>
+                    <button className='add-group' onClick={() => onSaveGroup(board._id,0,getEmptyGroup(), {})}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                 </section>

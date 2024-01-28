@@ -96,13 +96,19 @@ export function updateBoard(board) {
 // by adding task from headerindex - the task automaticly
 export async function SaveTask(boardId, groupId, task, activity = {}) {
     let board = await boardService.getById(boardId)
-    board = await boardService.saveTask(boardId, groupId, task, activity)
+    board = await boardService.saveTask(board, groupId, task, activity)
     updateBoard(board)
 }
 
 export async function RemoveTask(boardId, groupId, task, activity = {}) {
     let board = await boardService.getById(boardId)
-    board = await boardService.removeTask(boardId, groupId, task, activity)
+    board = await boardService.removeTask(board, groupId, task, activity)
+    updateBoard(board)
+}
+
+export async function SaveGroup(boardId, index, group, activity = {}) {
+    let board = await boardService.getById(boardId)
+    board = await boardService.saveGroup(board, index, group, activity)
     updateBoard(board)
 }
 
@@ -152,6 +158,16 @@ export function onRemoveBoardOptimistic(boardId) {
         }
     }
 
+    export function getEmptyGroup(){
+        return  {
+                id: utilService.makeId(),
+                title: "New Group",
+                archivedAt: 1589983468418,
+                tasks: [],
+                style: utilService.getRandomColor()
+            }
+    }
+
 export function getEmptyBoard() {
     return {
         _id: "",
@@ -178,6 +194,7 @@ export function getEmptyBoard() {
                 tasks: []
             },
         ],
-        style: {},
+        style: utilService.getRandomColor()
     }
 }
+

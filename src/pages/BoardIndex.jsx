@@ -50,8 +50,7 @@ export function BoardIndex() {
     }
   }
 
-  
-  if (!boards) return <div>Loading...</div>;
+  if (!boards) return <div>Loading...</div>
 
   return (
     <section className="board-index">

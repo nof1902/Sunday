@@ -1,8 +1,8 @@
 .group-preview {
     margin-block-end: 1.2em;
     
-    .taskks-table {
-        border-inline-start: 7px solid $clr13;
+    .tasks-table {
+        // border-inline-start: 7px solid #F1F879;
         border-start-start-radius: 7px;
     }
 
@@ -19,7 +19,6 @@
 
         h3 {
             font-weight: 500;
-            color: $clr13;
             margin-inline-start: 0.5em;
         }
 
@@ -64,11 +63,12 @@
         .footer-new-task {
             border-block-end: 1px solid #e2e2e2;
             height: 35px;
-            border-inline-start: 7px solid #a25ddc80;
+            border-inline-start: 7px solid #ededed80;
             border-end-start-radius: 7px;
             border-start-start-radius: 0px;
             box-sizing: content-box;
             // font-family: roboto;
+            border-inline-start: 7px solid; 
 
             &:hover {
                 z-index: 100;
@@ -105,8 +105,6 @@
                     background-color: white;
                 }
             }
-
-
         }
 
         .footer-stasus {

@@ -11,7 +11,8 @@ export const boardService = {
   remove,
   addBoardMsg,
   saveTask,
-  removeTask
+  removeTask,
+  saveGroup
 };
 window.cs = boardService;
 
@@ -61,9 +62,7 @@ function getGroupFromBoardById(board, groupId) {
   return board.groups.find((group) => group.id === groupId);
 }
 
-async function saveTask(boardId, groupId, task, activity) {
-  const board = await getById(boardId);
-
+async function saveTask(board, groupId, task, activity) {
   // if there is not specific group -> add to first group
   var group = board.groups[0];
   // console.log('groups' , groups)
@@ -85,12 +84,10 @@ async function saveTask(boardId, groupId, task, activity) {
 
   board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
   // board.activities.unshift(activity)
-  save(board);
   return board;
 }
 
-async function removeTask(boardId, groupId, task, activity) {
-  const board = await getById(boardId);
+async function removeTask(board, groupId, task, activity) {
   const group = getGroupFromBoardById(board, groupId)
 
   group = group.tasks.filter((existTask) => {
@@ -98,7 +95,22 @@ async function removeTask(boardId, groupId, task, activity) {
 
   board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
   // board.activities.unshift(activity)
-  save(board);
+  return board;
+}
+
+async function saveGroup(board,index ,group, activity) {
+
+  // if new group
+  if(index === 0){
+    board.groups.unshift(group)
+  } else if (index > 0){
+    board.groups.push(group)
+  } else { //if update
+    board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
+  }
+
+  // board.activities.unshift(activity)
+
   return board;
 }
 
@@ -171,7 +183,7 @@ function _createBoards() {
               priority: "",
             },
           ],
-          style: {color: "#9E57DB"},
+          style: utilService.getRandomColor(),
         },
         {
           id: utilService.makeId(),
@@ -191,7 +203,7 @@ function _createBoards() {
               priority: "",
             },
           ],
-          style: {color: "#ff158a"},
+          style: utilService.getRandomColor(),
         },
       ],
     },
@@ -231,7 +243,7 @@ function _createBoards() {
               priority: "",
             },
           ],
-          style: {color: "#579BFC"},
+          style: utilService.getRandomColor(),
         },
       ],
     },
