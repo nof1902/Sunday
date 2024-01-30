@@ -106,14 +106,14 @@ async function removeGroup(board, groupId, activity) {
   return board;
 }
 
-async function saveGroup(board,index ,group, activity) {
+async function saveGroup(board,index = null ,group, activity) {
 
   // if new group
   if(index === 0){
     board.groups.unshift(group)
   } else if (index > 0){
     board.groups.push(group)
-  } else { //if update
+  } else if(!index){ //if update
     board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
   }
 

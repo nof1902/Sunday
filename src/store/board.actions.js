@@ -83,7 +83,7 @@ export async function addBoard(board) {
 export function updateBoard(board) {
     return boardService.save(board)
         .then(savedBoard => {
-            console.log('Updated Board:', savedBoard)
+            // console.log('Updated Board:', savedBoard)
             store.dispatch(getActionUpdateBoard(savedBoard))
             return savedBoard
         })
@@ -157,10 +157,10 @@ export function onRemoveBoardOptimistic(boardId) {
     
     export function getEmptyTask(){
         return {
-            "id": "",
-            "title": "New Task",
-            "status": "",
-            "priority": ""
+            id: "",
+            title: "New Task",
+            status: "",
+            priority: ""
         }
     }
 

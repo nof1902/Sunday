@@ -10,7 +10,26 @@
         display: flex;
         justify-content: left;
         align-items: center;
-    
+
+        .delete-btn {
+            width: 23px;
+            color: $clr2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin-block: 0.6em;
+            margin-inline-start: -39px;
+            border-radius: $border-radius;
+            background-color: $clr10;
+            opacity: 0;
+
+            &:hover {
+                background-color: $clr15;
+                opacity: 1;
+            }
+        }
+        
         .collapse-group {
             color: $clr13;
             transition: transform .2s;
@@ -21,7 +40,10 @@
             font-weight: 500;
             margin-inline-start: 0.5em;
         }
+    }
 
+    .group-header:hover > * {
+        opacity: 1;
     }
 
     .tasks-header {
@@ -52,6 +74,32 @@
     }
 
 
+    .new-input {
+        width: 320px;
+        margin-inline-start: 1em;
+        padding-inline: 1em;
+        margin-block: 0.4em;
+        border: 1px solid transparent;
+        border-radius: $border-radius;
+        font-family: $font-txt;
+
+        &::placeholder {
+            font-family: $font-txt;
+       }
+
+        &:hover {
+            border: 1px solid #e2e2e2; 
+        }
+
+        &:focus {
+            border: 1px solid $clr12;
+            outline: none; 
+            // background-color: $clr1WithAlpha;
+            background-color: white;
+        }
+    }
+
+
     .group-footer {
         padding: 0;
         display: block;
@@ -77,30 +125,30 @@
             }
 
 
-            .new-task-input {
-                width: 320px;
-                margin-inline-start: 1em;
-                padding-inline: 1em;
-                margin-block: 0.4em;
-                border: 1px solid transparent;
-                border-radius: $border-radius;
-                font-family: $font-txt;
+            // .new-input {
+            //     width: 320px;
+            //     margin-inline-start: 1em;
+            //     padding-inline: 1em;
+            //     margin-block: 0.4em;
+            //     border: 1px solid transparent;
+            //     border-radius: $border-radius;
+            //     font-family: $font-txt;
 
-                &::placeholder {
-                    font-family: $font-txt;
-               }
+            //     &::placeholder {
+            //         font-family: $font-txt;
+            //    }
 
-                &:hover {
-                    border: 1px solid #e2e2e2; 
-                }
+            //     &:hover {
+            //         border: 1px solid #e2e2e2; 
+            //     }
 
-                &:focus {
-                    border: 1px solid $clr12;
-                    outline: none; 
-                    // background-color: $clr1WithAlpha;
-                    background-color: white;
-                }
-            }
+            //     &:focus {
+            //         border: 1px solid $clr12;
+            //         outline: none; 
+            //         // background-color: $clr1WithAlpha;
+            //         background-color: white;
+            //     }
+            // }
         }
 
         .footer-stasus {

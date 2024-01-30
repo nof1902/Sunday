@@ -47,16 +47,15 @@ export function BoardDetails() {
   }
 
   
-  // async function onUpdateGroup(boardId ,group, activity) {
-  //   try {
-  //     SaveGroup(boardId, index, group, activity)
-  //     showSuccessMsg(`Task added successfully`)
-  //   } catch (err) {
-  //     showSuccessMsg(`Could not add task`)
-  //     console.log('error',err)
-  //   }
-  // }
-
+  async function onUpdateGroup(boardId, group, activity) {
+    try {
+      SaveGroup(boardId, null, group, activity)
+      showSuccessMsg(`Task added successfully`)
+    } catch (err) {
+      showSuccessMsg(`Could not add task`)
+      console.log('error',err)
+    }
+  }
 
 
   async function onSaveTask(boardId, groupId, task, activity) {
@@ -89,7 +88,10 @@ export function BoardDetails() {
   return (
     <section className="board-details">
       <BoardIndexHeader board={board} onSaveTask={onSaveTask} onSaveGroup={onSaveGroup}/>
-      <GroupList groups={groups} onSaveTask={onSaveTask} onRemoveTask={onRemoveTask} onRemoveGroup={onRemoveGroup}/>
+      <GroupList groups={groups} onSaveTask={onSaveTask} 
+                                  onRemoveTask={onRemoveTask} 
+                                  onRemoveGroup={onRemoveGroup}
+                                  onUpdateGroup={onUpdateGroup} />
       <button className="new-group-btn" onClick={() => onSaveGroup(board._id, board.groups.length,getEmptyGroup(), {})}>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="#323338" width="24"><path d="M11.3 18.6v-5.9H5.4v-1.4h5.9V5.4h1.4v5.9h5.9v1.4h-5.9v5.9Z"></path></svg>
         Add new group
