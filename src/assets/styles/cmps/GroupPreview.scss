@@ -1,3 +1,9 @@
+// shared for group-title & input for change it
+.text-style{ 
+    font-weight: 500;
+    margin-inline-start: 0.5em;
+}
+
 .group-preview {
     margin-block-end: 1.2em;
     
@@ -36,7 +42,7 @@
             margin-inline: 0.5em;
         }
 
-        h3 {
+        .group-title {
             font-weight: 500;
             margin-inline-start: 0.5em;
         }
@@ -96,6 +102,10 @@
             outline: none; 
             // background-color: $clr1WithAlpha;
             background-color: white;
+        }
+
+        .group-title{
+            height: 20px;
         }
     }
 
