@@ -54,7 +54,15 @@ export function BoardDetails() {
 
   async function onUpdateGroup(boardId, group, activity) {
     try {
-      SaveGroup(boardId, null, group, activity);
+      // let updatedGroup;
+      // SaveGroup(boardId, null, group, activity).then(
+      //   updatedGroup = board.groups.filter(theGroup => theGroup.id === group.id)
+      // )
+      // showSuccessMsg(`Task added successfully`);
+      // console.log('updatedGroup',updatedGroup)
+      // return updatedGroup;
+      
+      SaveGroup(boardId, null, group, activity)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);

@@ -21,7 +21,7 @@ export function GroupPreview({
   const [currGroup, setCurrGroup] = useState(group);
   const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
-  const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(false);
+  const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
   const [ispreview, setIspreview] = useState(true);
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
 
@@ -34,23 +34,13 @@ export function GroupPreview({
     }
   }, [inputFocused]);
 
+
   useEffectUpdate(() => {
-    console.log("in useEffectUpdate")
-    console.log('currGroup',currGroup)
     onUpdateGroup(param.id, currGroup)
-  }, [debouncedGroup])
+  }, [debouncedGroup]);
 
-  function handleInputBlur({ target }) {
-    if (target.value !== "") setInputFocused(false)
-    target.value = ""
-  }
-
-  function deleteTask(taskId) {
-    onRemoveTask(group.id, taskId)
-  }
-
-  function handleGroupTitleBlur() {
-    setIsTitleGroupEditMode(false)
+  function handleGroupTitleBlur({ target }) {
+    if (target.value !== "") setIsTitleGroupEditMode(false)
   }
 
   function handleGroupTitleChange({ target }) {
@@ -58,18 +48,27 @@ export function GroupPreview({
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }))
   }
 
-  function handleInputFocus() {
-    setInputFocused(true);
+  function handleTaskInputBlur({ target }) {
+    if (target.value !== "") setInputFocused(false)
+    target.value = ""
   }
 
+  function handleTaskInputFocus() {
+    setInputFocused(true);
+  }
+  
   function handleTaskChange({ target }) {
     const { name: field, value } = target
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
     console.log("task", task);
   }
+  
+  function deleteTask(taskId) {
+    onRemoveTask(group.id, taskId)
+  }
 
   const { tasks } = group;
-
+  
   var title = Object.keys(getEmptyTask());
   if (tasks && tasks.length !== 0) {
     title = Object.keys(tasks[0]);
@@ -124,10 +123,10 @@ export function GroupPreview({
             name="title"
             type="text"
             id="edit-group-title"
-            value={group.title}
+            value={currGroup.title}
             onChange={handleGroupTitleChange}
             onBlur={handleGroupTitleBlur}
-          /> //
+          />
         ) : (
           <h3
             className="text-style"
@@ -169,9 +168,8 @@ export function GroupPreview({
             type="text"
             placeholder="+ Add item"
             onChange={handleTaskChange}
-            onBlur={handleInputBlur}
-            // autoFocus
-            onFocus={handleInputFocus}
+            onBlur={handleTaskInputBlur}
+            onFocus={handleTaskInputFocus}
           />
         </div>
         {
