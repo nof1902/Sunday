@@ -71,7 +71,6 @@ export function BoardDetails() {
   }
 
   async function onSaveTask(boardId, groupId, task, activity = {}) {
-    console.log("task befor save", task);
     try {
       let board = await SaveTask(boardId, groupId, task, activity)
       showSuccessMsg(`Task added successfully`)
@@ -80,7 +79,6 @@ export function BoardDetails() {
       showSuccessMsg(`Could not add task`);
       console.log("error", err);
     }
-      //  loadBoard()
   }
 
   async function onRemoveTask(groupId, taskId) {

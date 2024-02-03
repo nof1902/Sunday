@@ -66,7 +66,6 @@ function getGroupFromBoardById(board, groupId) {
 async function saveTask(board, groupId, task, activity) {
   // if there is not specific group -> add to first group
   var group = board.groups[0];
-  // console.log('groups' , groups)
 
   // if there is specific group -> add according to groupId
   if (groupId) {

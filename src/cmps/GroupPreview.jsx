@@ -62,7 +62,6 @@ export function GroupPreview({
     onSaveTask(param.id, group.id, task)
   }
 
-  function handleGroupTitleChange({ target }){
   
   function handleTaskChange({ target }) {
     const { name: field, value } = target

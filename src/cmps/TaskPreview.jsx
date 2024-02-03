@@ -4,7 +4,7 @@ import { useState } from "react";
 export function TaskPreview({ task, deleteTask, saveTaskCall }) {
 
   const [taskToEdit, setTaskToEdit] = useState(task);
-  console.log("taskToEdit", taskToEdit);
+
   // const addMessageIcon = svgService.getSvg('addMessage')
   //   const addMessageIconUrl = `data:image/svg+xml,${encodeURIComponent(addMessageIcon)}`
     
@@ -24,11 +24,14 @@ export function TaskPreview({ task, deleteTask, saveTaskCall }) {
   }
 
   function handleInputBlur() {
-    saveTaskCall(taskToEdit)
+    // Checking if there is a change and needs to be saved
+    if(taskToEdit.title != task.title) {
+      saveTaskCall(taskToEdit)
+    }
      setEditMode(false);
   }
 
-  function handleKeyDown() {
+  function handleKeyDown(ev) {
     // Check if the pressed key is Enter
     if (ev.key === 'Enter') {
       handleInputBlur();
