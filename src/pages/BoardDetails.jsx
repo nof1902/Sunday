@@ -70,10 +70,10 @@ export function BoardDetails() {
     }
   }
 
-  async function onSaveTask(boardId, groupId, task, activity) {
+  async function onSaveTask(boardId, groupId, task, activity = {}) {
     try {
       let board = await SaveTask(boardId, groupId, task, activity)
-      showSuccessMsg(`Task added successfully`);
+      showSuccessMsg(`Task added successfully`)
       return board
     } catch (err) {
       showSuccessMsg(`Could not add task`);

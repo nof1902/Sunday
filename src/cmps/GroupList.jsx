@@ -1,9 +1,8 @@
 import { GroupPreview } from "./GroupPreview.jsx";
 
 export function GroupList({ groups, onSaveTask, onRemoveTask, onRemoveGroup, onUpdateGroup}) {
-  // console.log("groups", groups)
 
-  // console.log('num of tasks', groups[0].tasks.length)
+  // if (!groups) return <div>Loading...</div>
   return (
     <ul className="group-list">
       {

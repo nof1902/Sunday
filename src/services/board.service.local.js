@@ -66,7 +66,6 @@ function getGroupFromBoardById(board, groupId) {
 async function saveTask(board, groupId, task, activity) {
   // if there is not specific group -> add to first group
   var group = board.groups[0];
-  // console.log('groups' , groups)
 
   // if there is specific group -> add according to groupId
   if (groupId) {
@@ -75,9 +74,10 @@ async function saveTask(board, groupId, task, activity) {
 
   // check if it is an update
   if (task && task.id) {
-    group = group.tasks.map((existTask) => {
+    const tasks = group.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
     });
+    group = {...group, tasks: tasks}
   } else {
     task.id = utilService.makeId();
     group.tasks.push(task);
