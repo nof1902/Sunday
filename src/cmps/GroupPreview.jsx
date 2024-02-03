@@ -26,7 +26,8 @@ export function GroupPreview({
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
 
   useEffect(() => {
-    if (inputFocused === false) {
+    console.log("inload group Prev");
+    if(inputFocused === false && task !== getEmptyTask()){
       onSaveTask(param.id, group.id, task)
       currGroup.tasks.push(task)
       setTask(getEmptyTask())
@@ -56,6 +57,12 @@ export function GroupPreview({
   function handleTaskInputFocus() {
     setInputFocused(true);
   }
+ 
+  function saveTaskCall(task){
+    onSaveTask(param.id, group.id, task)
+  }
+
+  function handleGroupTitleChange({ target }){
   
   function handleTaskChange({ target }) {
     const { name: field, value } = target
@@ -148,8 +155,8 @@ export function GroupPreview({
           ))}
         </section>
 
-        <TaskList tasks={tasks} deleteTask={deleteTask} />
-      </section>
+      <TaskList tasks={tasks} deleteTask={deleteTask} saveTaskCall={saveTaskCall} />
+    </section>
       <section className="group-footer">
         <div
           className="footer-new-task"

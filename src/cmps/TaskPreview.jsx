@@ -1,53 +1,62 @@
 import { useState } from "react";
 // import { svgService } from "../svg.service"
 
-export function TaskPreview({ task, deleteTask }) {
+export function TaskPreview({ task, deleteTask, saveTaskCall }) {
 
-
+  const [taskToEdit, setTaskToEdit] = useState(task);
+  console.log("taskToEdit", taskToEdit);
   // const addMessageIcon = svgService.getSvg('addMessage')
   //   const addMessageIconUrl = `data:image/svg+xml,${encodeURIComponent(addMessageIcon)}`
     
   // const [showBtn, setShowBtn] = useState(false)
   // const deleteBtn = showBtn?  "delete-btn-show" : "delete-btn-hide"
   const [editMode, setEditMode] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(task.title);
-  
-  const handleToggleEditMode = () => {
+  // const [editedTitle, setEditedTitle] = useState(task.title);
+
+
+  function handleToggleEditMode() {
     setEditMode(!editMode);
-  };
+  }
 
-  const handleInputChange = (ev) => {
+  function handleInputChange(ev) {
     const val = ev.target.value;
-    setEditedTitle(prevTitle => ({ ...prevTitle, title: val }))
-    // setEditedTitle(e.target.value);
-  };
+     setTaskToEdit(prevTitle => ({ ...prevTitle, title: val }))
+  }
 
-  const handleInputBlur = () => {
-    // Save changes or handle any necessary logic when the input loses focus
-    setEditMode(false);
-  };
+  function handleInputBlur() {
+    saveTaskCall(taskToEdit)
+     setEditMode(false);
+  }
 
-  // const { tasks } = group
+  function handleKeyDown() {
+    // Check if the pressed key is Enter
+    if (ev.key === 'Enter') {
+      handleInputBlur();
+    }
+  }
+
   const taskVal = Object.values(task)
-  // console.log(taskVal);
 
-
-//  const { title } = task
-  // boardId, groupId, task, activity
   return (
     <section className="task-preview">
       <div className="task-header">
-      {/* <button className="delete-btn" onClick={() => onRemoveTask(task)}></button> */}
         <button className="delete-btn" onClick={() => deleteTask(task.id)}>
         <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true" className="icon_d24b689566 noFocusStyle_07ecef1878" data-testid="icon"><path d="M6 10.5C6 11.3284 5.32843 12 4.5 12 3.67157 12 3 11.3284 3 10.5 3 9.67157 3.67157 9 4.5 9 5.32843 9 6 9.67157 6 10.5zM11.8333 10.5C11.8333 11.3284 11.1618 12 10.3333 12 9.50492 12 8.83334 11.3284 8.83334 10.5 8.83334 9.67157 9.50492 9 10.3333 9 11.1618 9 11.8333 9.67157 11.8333 10.5zM17.6667 10.5C17.6667 11.3284 16.9951 12 16.1667 12 15.3383 12 14.6667 11.3284 14.6667 10.5 14.6667 9.67157 15.3383 9 16.1667 9 16.9951 9 17.6667 9.67157 17.6667 10.5z" fill="currentColor"></path></svg>
         </button>
         <div className="task-table">
         {editMode ? (
-          <input type="text" value={editedTitle} onChange={handleInputChange} onBlur={handleInputBlur} />
+          <input type="text" 
+          id="taskTitle"
+          name="taskTitle"
+          value={taskToEdit.title} 
+          onChange={handleInputChange} 
+          onBlur={handleInputBlur}
+          onKeyDown={handleKeyDown}
+           />
+          
         ) : (
           <span className="task-txt" onClick={handleToggleEditMode}>{task.title}</span>
         )
-
         }
         </div>
 
@@ -64,30 +73,4 @@ export function TaskPreview({ task, deleteTask }) {
   );
 }
 
-
-// <span className="task-txt">{task.title}</span>
-// <span>2</span>
-// <span>3</span>
-
-
-// const [editable, setEditable] = useState(true);
-
-// const handleToggleEditable = () => {
-//   setEditable(!editable);
-// };
-
-
-// {editable ? (
-//   <span
-//     className="task-txt"
-//     contentEditable={true}
-//     onBlur={handleToggleEditable}
-//   >
-//     {task.title}
-//   </span>
-// ) : (
-//   <span className="task-txt" onClick={handleToggleEditable}>
-//     {task.title}
-//   </span>
-// )}
 

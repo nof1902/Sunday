@@ -75,9 +75,10 @@ async function saveTask(board, groupId, task, activity) {
 
   // check if it is an update
   if (task && task.id) {
-    group = group.tasks.map((existTask) => {
+    const tasks = group.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
     });
+    group = {...group, tasks: tasks}
   } else {
     task.id = utilService.makeId();
     group.tasks.push(task);
