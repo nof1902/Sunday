@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { onToggleModal } from "../store/actions/app.actions";
+import { SidePanelSlideHeader } from "./SidePanelSlideHeader";
 
 // import { svgService } from "../svg.service"
 
@@ -42,7 +43,7 @@ export function TaskPreview({ task, deleteTask, saveTaskCall }) {
 
   function onOpenTaskDetails(ev) {
     onToggleModal({
-        cmp: TaskDetails,
+        cmp: SidePanelSlideHeader,
         props: {
           taskToEdit,
             onApprove() {
@@ -98,21 +99,21 @@ export function TaskPreview({ task, deleteTask, saveTaskCall }) {
 
 
 
-export function TaskDetails({ taskToEdit, onApprove ,onCloseModal}) {
-  return (
-      <section className="modal-backdrop">
-        <button className="close" onClick={onCloseModal}>
-          <section className='btn-hover-svg'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-          </section>
-        </button>
-        <h2>Welcome {taskToEdit.title}!</h2>
+// export function TaskDetails({ taskToEdit, onApprove ,onCloseModal}) {
+//   return (
+//       <section className="modal-backdrop">
+//         <button className="close" onClick={onCloseModal}>
+//           <section className='btn-hover-svg'>
+//               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+//           </section>
+//         </button>
+//         <h2>Welcome {taskToEdit.title}!</h2>
         
-        <section className="modal content">
-          <p>Lorendixme, numquam!</p>
+//         <section className="modal content">
+//           <p>Lorendixme, numquam!</p>
 
-        </section>
-        <button onClick={onApprove} className="simple-button">Approve</button>
-      </section>
-  )
-}
+//         </section>
+//         <button onClick={onApprove} className="simple-button">Approve</button>
+//       </section>
+//   )
+// }

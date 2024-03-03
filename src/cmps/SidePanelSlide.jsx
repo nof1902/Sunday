@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { SET_MODAL_DATA } from "../store/reducers/app.reducer"
 import { useEffect, useRef } from "react"
 
-export function SlidePanelSlide() {
+export function SidePanelSlide() {
     const modalData = useSelector(storeState => storeState.appModule.modalData)
     const dispatch = useDispatch()
     const modalRef = useRef()
@@ -35,8 +35,7 @@ export function SlidePanelSlide() {
     const Cmp = modalData?.cmp
 
     return (
-        <div ref={modalRef} className="dynamic-modal">
-            <button className="close" onClick={onCloseModal}>X</button>
+        <div ref={modalRef} className="dynamic-modal">     
             <section className="content">
                 {Cmp && <Cmp {...modalData.props} />}
             </section>

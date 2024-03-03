@@ -1,0 +1,77 @@
+.silde-panel-slide-header{
+    display: grid;
+    grid-template-rows: repeat(3, auto) 1fr;
+    justify-items: start;
+    border-block-end: 1px solid $clr11;
+
+    button {
+        all: unset;
+        .btn-hover-svg{
+            margin: 1.2em 1.2em 0 1.2em;
+            padding: 0.15em;
+            margin-bottom: 0.2em;
+        }
+    }
+
+    input{
+        margin-left: 1.2em;
+        border: hidden;
+        margin-bottom: 0.5em;
+        width: 100%;
+
+        &:hover{
+            border: 1px solid $clr11;
+        }
+
+        &:focus{
+            background-color: $clr10;
+            border: 1px solid $clr1;
+            outline: none;
+        }
+    }
+
+    
+    .line{
+        border-block-end: 1px solid $clr11;
+        width: 100%;
+    }
+
+    .headers-general{
+        margin-left: 1.2em;
+        display: flex;
+        align-items: center;
+        
+        .selected-tab { 
+            border-block-end: 2px solid $clr1;
+    
+            .main-table-tab {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.1em 0 0.1em 0.1em;
+    
+                &:hover {
+                    background-color: $clr15;
+                    border-radius: $border-radius;
+                }
+    
+                span {
+                    padding-inline: 0.5em 1em;
+                    font-size: 11pt;
+                    border-inline-end: 1px solid $clr11;
+                }
+            }
+    
+        }
+    }
+
+    .no-updates-content{
+        margin-top: 5em;
+        align-self: center;
+        justify-self: center;
+
+    }
+
+
+    
+}
