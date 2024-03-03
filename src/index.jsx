@@ -10,6 +10,7 @@ import { BoardIndex } from "./pages/BoardIndex";
 import { HomePage } from "./pages/HomePage";
 import { BoardDetails } from './pages/BoardDetails';
 import './assets/styles/main.scss'
+import { SlidePanelSlide } from './cmps/SlidePanelSlide'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -22,6 +23,8 @@ root.render(
               <Route path="/boards/:id" element={<BoardDetails />}/>
           </Route>
       </Routes>
+      <SlidePanelSlide />
+      {/* <UserMsg /> */}
     </Router>
   </Provider>
 )

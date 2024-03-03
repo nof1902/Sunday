@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { CHANGE_COUNT } from '../store/user.reducer'
+import { CHANGE_COUNT } from '../store/reducers/user.reducer'
 
 
 export function HomePage() {

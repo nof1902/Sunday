@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { getBoardById, addBoard, removeBoard } from "../store/board.actions.js";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
@@ -11,7 +10,7 @@ import {
   SaveGroup,
   SaveTask,
   getEmptyGroup,
-} from "../store/board.actions.js";
+} from "../store/actions/board.actions.js";
 
 export function BoardDetails() {
   const boards = useSelector((storeState) => storeState.boardModule.boards);

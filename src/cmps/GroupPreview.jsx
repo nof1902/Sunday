@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { TaskList } from "./TaskList.jsx";
-import { getEmptyTask } from "../store/board.actions.js";
+import { getEmptyTask } from "../store/actions/board.actions.js";
 import { useParams } from "react-router";
 
 import { MdOutlineExpandMore } from "react-icons/md";

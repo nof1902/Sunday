@@ -1,11 +1,11 @@
-import { boardService } from '../services/board.service.local.js'
-import { userService } from '../services/user.service.js'
-import { store } from './store.js'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
+import { boardService } from '../../services/board.service.local.js'
+import { userService } from '../../services/user.service.js'
+import { store } from '../store.js'
+import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
 //import { ADD_CAR, ADD_TO_CART, CLEAR_CART, REMOVE_CAR, REMOVE_FROM_CART, SET_CARS, UNDO_REMOVE_CAR, UPDATE_CAR } from './car.reducer.js'
-import { REMOVE_BOARD, ADD_BOARD, UPDATE_BOARD, SET_BOARDS, GET_BOARD_BY_ID ,UNDO_REMOVE_BOARD} from './board.reducer.js'
-import { SET_SCORE } from './user.reducer.js'
-import { utilService } from '../services/util.service.js'
+import { REMOVE_BOARD, ADD_BOARD, UPDATE_BOARD, SET_BOARDS, GET_BOARD_BY_ID ,UNDO_REMOVE_BOARD} from '../reducers/board.reducer.js'
+import { SET_SCORE } from '../reducers/user.reducer.js'
+import { utilService } from '../../services/util.service.js'
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {

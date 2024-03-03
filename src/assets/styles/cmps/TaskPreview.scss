@@ -13,10 +13,6 @@
     font-family: $font-txt;
     border-end-start-radius: 2px;
     box-sizing: content-box;
-    
-
-
-
 
     > * {
         border-inline-end: 1px solid $clr11;
@@ -94,6 +90,8 @@
         
 
         .addMessage-icon {
+            all: unset;
+            cursor: pointer;
             color: $clr6;
             display: flex;
             justify-content: center;
@@ -148,5 +146,9 @@
     }
 
 
+}
+
+.page-content {
+    overflow-y: auto;
 }
 

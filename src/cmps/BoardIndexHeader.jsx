@@ -1,6 +1,6 @@
 import { utilService } from "../services/util.service"
 import { svgService } from "../services/svg.service"
-import { SaveTask, getEmptyGroup, getEmptyTask } from "../store/board.actions"
+import { SaveTask, getEmptyGroup, getEmptyTask } from "../store/actions/board.actions"
 import { useState } from "react"
 
 // import { storeSaveTask } from "../store/board.actions"
