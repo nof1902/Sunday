@@ -70,9 +70,9 @@
             input {
                 font-size: 0.9em;
                 font-weight: 400;
-                border: 1px solid $clr1;
+                border: 1px solid;
                 padding: 1px 6px;
-                border-radius: $border-radius;
+                border-radius: $border-radius ;
                 background-color: $clr10;
                 font-family: $font-txt;
                 width: 90%;

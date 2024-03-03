@@ -29,9 +29,10 @@ export function BoardIndex() {
     }
   }
 
-  async function onAddBoard() {
+  async function onAddBoard(Boardtitle) {
     try {
       const newBoard = getEmptyBoard()
+      newBoard.title = Boardtitle
       addBoard(newBoard)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {

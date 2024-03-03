@@ -2,9 +2,11 @@
 import { NavLink, useParams } from "react-router-dom";
 import { svgService } from "../svg.service";
 import { useState } from "react";
+import { AddBoardModal } from "./AddBoardModal";
 
 export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
   const [isShowTextBox, setIsShowTextBox] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [boardTitleToChang, setBoardTitleToChang] = useState("")
   const [inputFocused, setInputFocused] = useState(null)
 
@@ -18,14 +20,6 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
     setInputFocused(false);
     onUpdateBoard(board);
   };
-  // const homeIcon = svgService.getSvg("home");
-  // const homeIconUrl = `data:image/svg+xml,${encodeURIComponent(homeIcon)}`;
-
-  // const boardIcon = svgService.getSvg("clipboard");
-  // const boardIconUrl = `data:image/svg+xml,${encodeURIComponent(boardIcon)}`;
-
-  // const searchIcon = svgService.getSvg("search");
-  // const searchIconUrl = `data:image/svg+xml,${encodeURIComponent(searchIcon)}`;
 
   const filteredBoards = boards.filter ( board => board.title.includes(filterText))
  
@@ -37,6 +31,13 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
   function handleChange(ev) {
     const val = ev.target.value;
     setBoardTitleToChang((prevBoard) => ({ ...prevBoard, title: val }));
+  }
+
+  function handleOpenModal(){
+    setShowModal(true)
+  }
+  function handleCloseModal(){
+    setShowModal(false) 
   }
 
   // const params = useParams()
@@ -68,7 +69,8 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
               </button>
             </section>
 
-            <button className="add-board-btn" onClick={() => onAddBoard()}>
+            {/* <button className="add-board-btn" onClick={() => onAddBoard()}> */}
+            <button className="add-board-btn" onClick={handleOpenModal}>
               <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true" className="icon_d24b689566 noFocusStyle_07ecef1878" data-testid="icon"><path d="M10.75 6C10.75 5.58579 10.4142 5.25 10 5.25C9.58579 5.25 9.25 5.58579 9.25 6V9.25H6C5.58579 9.25 5.25 9.58579 5.25 10C5.25 10.4142 5.58579 10.75 6 10.75H9.25V14C9.25 14.4142 9.58579 14.75 10 14.75C10.4142 14.75 10.75 14.4142 10.75 14V10.75H14C14.4142 10.75 14.75 10.4142 14.75 10C14.75 9.58579 14.4142 9.25 14 9.25H10.75V6Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
             </button>
           </section>
@@ -90,6 +92,8 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
           </section>
         </section>
       </section>
+
+      {showModal && <AddBoardModal onAddBoard={onAddBoard} handleCloseModal={handleCloseModal}/>}
     </nav>
   );
 }

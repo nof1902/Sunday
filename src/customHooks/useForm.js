@@ -20,8 +20,9 @@ export const useForm = (initialState) => {
         setFields((prevFields) => ({ ...prevFields, [field]: value }))
     }
 
+    return [fields, handleChange]
 
-    return [fields, setFields, handleChange]
+    // return [fields, setFields, handleChange]
 
 
 }

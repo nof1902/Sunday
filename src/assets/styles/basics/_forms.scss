@@ -5,11 +5,35 @@ button {
     padding: 5px 10px;
     margin: 5px;
     cursor: pointer;
+    border-radius: $border-radius;
+}
+
+
+input {
+    font-size: 0.9em;
+    font-weight: 400;
+    border: 1px solid $clr11;
+    padding: 1px 6px;
+    border-radius: $border-radius;
+    background-color: $clr10;
+    font-family: $font-txt;
+    width: 90%;
+
+    &:focus {
+        background-color: $clr10;
+        border: 1px solid $clr1;
+        outline: none;
+    }
+}
+
+
+button:hover{
+    background-color: $clr9;
 }
 
 form > * {
     display: block;
-    width: 200px;
+    // width: 200px;
     margin: 10px 0px;
 }
 
@@ -19,7 +43,28 @@ form > * {
     text-decoration: underline;
     transition: .5s;
 }
+
 .btn-link:hover {
     background-color: $clr1;
     transform: scale(1.1);
+}
+
+.btn-hover-svg{
+    // margin-right: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    cursor: pointer;
+    padding: 0.5em;
+    border-radius: 0.3em;
+
+    .menu{
+        transition: color 0.3s;
+    }
+
+    
+    &:hover{
+        background-color: $clr7;
+        
+    }
 }
