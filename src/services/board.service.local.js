@@ -181,14 +181,14 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 1",
-              status: "",
-              priority: "",
+              status: "Done",
+              priority: "High",
             },
             {
               id: utilService.makeId(),
               title: "Task 2",
-              status: "",
-              priority: "",
+              status: "Stuck",
+              priority: "Medium",
             },
           ],
           style: utilService.getRandomColor(),
@@ -232,6 +232,7 @@ function _createBoards() {
           imgUrl: "",
         },
       ],
+
       groups: [
         {
           id: utilService.makeId(),
