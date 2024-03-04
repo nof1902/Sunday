@@ -1,0 +1,17 @@
+.dynamic-cmp-list-items{
+    position: fixed;
+    
+    
+    .items-container{
+        all: unset;
+        display: grid;
+        grid-template-rows: repeat(auto-fill , 200px);
+        width: 20px; 
+    }
+
+    .item{
+         
+    }
+
+
+}

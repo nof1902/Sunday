@@ -26,7 +26,7 @@ export function GroupPreview({
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
 
   useEffect(() => {
-    console.log("inload group Prev");
+
     if(inputFocused === false && task !== getEmptyTask()){
       onSaveTask(param.id, group.id, task)
       currGroup.tasks.push(task)
@@ -76,9 +76,10 @@ export function GroupPreview({
   const { tasks } = group;
   
   var title = Object.keys(getEmptyTask());
-  if (tasks && tasks.length !== 0) {
-    title = Object.keys(tasks[0]);
-  }
+
+  // if (tasks && tasks.length !== 0) {
+  //   title = Object.keys(tasks[0]);
+  // }
 
   // console.log('group.style', group.style);
   // console.log('num of tasks', tasks.length)
