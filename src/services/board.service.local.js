@@ -181,13 +181,13 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 1",
-              status: "",
+              status: {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'},
               priority: "",
             },
             {
               id: utilService.makeId(),
               title: "Task 2",
-              status: "",
+              status: {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'},
               priority: "",
             },
           ],
@@ -201,19 +201,22 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 3",
-              status: "Stuck",
+              status: {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'},
               priority: "High",
             },
             {
               id: utilService.makeId(),
               title: "Task 4",
-              status: "Not Started",
+              status: {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'},
               priority: "Medium",
             },
           ],
           style: utilService.getRandomColor(),
         },
       ],
+      cmpsOrder: ["status-picker", "priority-picker"],
+      statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
+
     },
     {
       _id: utilService.makeId(),
@@ -254,6 +257,9 @@ function _createBoards() {
           style: utilService.getRandomColor(),
         },
       ],
+      cmpsOrder: ["status-picker", "priority-picker"],
+      statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
+
     },
   ];
 
