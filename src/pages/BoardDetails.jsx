@@ -17,6 +17,9 @@ export function BoardDetails() {
   const [board, setBoard] = useState(null);
   const params = useParams();
 
+//   const cmpsOrder = board?.cmpsOrder
+// console.log('cmpsOrder', cmpsOrder);
+
   useEffect(() => {
     loadBoard();
   }, [params.id, boards]);
@@ -91,9 +94,9 @@ export function BoardDetails() {
   }
 
   if (!board) return <div>Loading...</div>;
-  const { groups } = board;
+  const { groups , cmpsOrder } = board;
 
-  // console.log("board", board);
+  console.log("board", board);
   // console.log("groups", groups);
 
   return (
@@ -109,6 +112,7 @@ export function BoardDetails() {
         onRemoveTask={onRemoveTask}
         onRemoveGroup={onRemoveGroup}
         onUpdateGroup={onUpdateGroup}
+        cmpsOrder={cmpsOrder}
       />
       <button
         className="new-group-btn"

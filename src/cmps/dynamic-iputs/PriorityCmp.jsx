@@ -15,17 +15,21 @@ export function PriorityCmp({ info, onUpdate }) {
     }
 
     console.log()
+    // className="dynamic-cmp-list-items"
+    return <section style={{ backgroundColor: "aquamarine" }}>
+        <span>PriorityCmp</span>
+    {
+    //     <ul className="items-container">
+    //     {
+    //         priorityInfo.map((priority) => 
+    //             <li className="item" key={priority.id} onClick={() => onChangePriority(priority)}
+    //                 style={{ backgroundColor: priority.backgroundColor }}
+    //                 label={priority.label}>
+    //             </li>
+    //         )
+    //     }
+    // </ul>
+    }
 
-    return <section className="dynamic-cmp-list-items">
-            <ul className="items-container">
-                {
-                    priorityInfo.map((priority) => 
-                        <li className="item" key={priority.id} onClick={() => onChangePriority(priority)}
-                            style={{ backgroundColor: priority.backgroundColor }}
-                            label={priority.label}>
-                        </li>
-                    )
-                }
-            </ul>
     </section>
 }

@@ -14,6 +14,7 @@ export function GroupPreview({
   onRemoveTask,
   onRemoveGroup,
   onUpdateGroup,
+  cmpsOrder,
 }) {
   const param = useParams();
 
@@ -75,7 +76,7 @@ export function GroupPreview({
 
   const { tasks } = group;
   
-  var title = Object.keys(getEmptyTask());
+  // var title = Object.keys(getEmptyTask());
 
   // if (tasks && tasks.length !== 0) {
   //   title = Object.keys(tasks[0]);
@@ -150,12 +151,12 @@ export function GroupPreview({
       >
         <section className="tasks-header">
           <h4>Item</h4>
-          {title.slice(2).map((key, idx) => (
+          {cmpsOrder.map((key, idx) => (
             <h4 key={`${key}${idx}`}>{key}</h4>
           ))}
         </section>
 
-      <TaskList tasks={tasks} deleteTask={deleteTask} saveTaskCall={saveTaskCall} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} saveTaskCall={saveTaskCall}  cmpsOrder={cmpsOrder}/>
     </section>
       <section className="group-footer">
         <div
@@ -182,7 +183,7 @@ export function GroupPreview({
         {
           <section className="footer-stasus">
             <span></span>
-            {title.slice(2).map((item, idx) => (
+            {cmpsOrder.map((item, idx) => (
               <span key={idx}></span>
             ))}
           </section>
