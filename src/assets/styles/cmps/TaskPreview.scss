@@ -4,7 +4,7 @@
 
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 350px repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: 350px repeat(auto-fill, minmax(145px, 1fr));
     
     text-align: center;
     color: $clr2;
@@ -108,7 +108,6 @@
     }
 
     .dynamic-cmps-section{
-
         .dynamic-cmps-sectio-list{
             // background-color: #9c1979;
            all: unset;
