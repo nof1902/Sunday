@@ -10,14 +10,6 @@ export function StatusCmp({ info, onUpdate }) {
         onUpdate(infoToEdit)
       }, [infoToEdit]);
 
- 
-// const cmp1 = {
-//   type: 'status-picker',
-//   info: {
-//       selectedStatus: {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'},
-//       statuses: [{}, {}]   
-//   }
-// }
 
     function onChangeStatus({ label, backgroundColor}) {
         setInfoToEdit(prevInfo => ({ ...prevInfo, selectedStatus: {label: label, backgroundColor: backgroundColor} }))
