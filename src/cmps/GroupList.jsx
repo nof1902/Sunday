@@ -1,7 +1,7 @@
 import { GroupPreview } from "./GroupPreview.jsx";
 
-export function GroupList({ groups, onSaveTask, onRemoveTask, onRemoveGroup, onUpdateGroup}) {
-
+export function GroupList({ groups, onSaveTask, onRemoveTask, onRemoveGroup, onUpdateGroup, cmpsOrder}) {
+console.log('cmpsOrder', cmpsOrder);
   // if (!groups) return <div>Loading...</div>
   return (
     <ul className="group-list">
@@ -12,7 +12,8 @@ export function GroupList({ groups, onSaveTask, onRemoveTask, onRemoveGroup, onU
                           onSaveTask={onSaveTask} 
                           onRemoveTask={onRemoveTask} 
                           onRemoveGroup={onRemoveGroup}
-                          onUpdateGroup={onUpdateGroup}/>
+                          onUpdateGroup={onUpdateGroup}
+                          cmpsOrder={cmpsOrder} />
            </li>
          ))
       }

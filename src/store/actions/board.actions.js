@@ -160,8 +160,8 @@ export function onRemoveBoardOptimistic(boardId) {
         return {
             id: "",
             title: "New Task",
+            priority: {},
             status: {},
-            priority: {}
         }
     }
 
@@ -196,7 +196,9 @@ export function getEmptyBoard() {
         groups: [
             getEmptyGroup()
         ],
-        style: utilService.getRandomColor()
+        style: utilService.getRandomColor(),
+        cmpsOrder: ["status-picker", "priority-picker"],
+        statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
     }
 }
 
