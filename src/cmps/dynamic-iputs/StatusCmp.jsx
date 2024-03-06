@@ -46,9 +46,9 @@ export function StatusCmp({ info, onUpdate }) {
         
         <span>{infoToEdit.selectedStatus.label}</span>
         {openEditModel && 
-            <section ref={modalRef} className="status-model">
+            <section className="status-model">
                 <section className="status-picker-content">
-                    <ul className="items-container">
+                    <ul ref={modalRef} className="items-container">
                     {
                         info.statuses.map((status, idx) => 
                             <li className="item" key={idx} onClick={() => onChangeStatus(status)}
