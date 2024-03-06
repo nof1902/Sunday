@@ -160,8 +160,8 @@ export function onRemoveBoardOptimistic(boardId) {
         return {
             id: "",
             title: "New Task",
-            priority: {},
-            status: {},
+            priority: "",
+            status: "Not Started",
         }
     }
 
