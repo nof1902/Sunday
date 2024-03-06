@@ -1,14 +1,16 @@
+import { utilService } from "../../services/util.service";
 
 export function dynamicCmpOrder() {
   const cmpsOrder = [
-    "priority-picker",
-    "status-picker"
+    "priority",
+    "status"
     // "member-picker",
     // "date-picker",
   ];
 
   return cmpsOrder
 }
+
 
 export function generateDefaultDynamicCmp(type) {
     return {

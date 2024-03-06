@@ -1,8 +1,8 @@
-
 .dynamic-cmp-list-items{
-    position: fixed;
     
-    
+    .selected-item{
+        // width: 100%;
+    }
     .items-container{
         all: unset;
         display: grid;
@@ -13,6 +13,5 @@
     .item{
          
     }
-
 
 }

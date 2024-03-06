@@ -15,7 +15,10 @@ export function StatusCmp({ info, onUpdate }) {
 
 
     return <section className="dynamic-cmp-list-items">
-            <ul className="items-container">
+            <section className="selected-item">
+                <h1 style={{ background: info.selectedStatus.backgroundColor }}> hey {info.selectedStatus.label}</h1>
+            </section>
+            {/* <ul className="items-container">
                 {
                     StatusInfo.map((status) => 
                         <li className="item" key={status.id} onClick={() => onChangeStatus(status)}
@@ -24,6 +27,6 @@ export function StatusCmp({ info, onUpdate }) {
                         </li>
                     )
                 }
-            </ul>
+            </ul> */}
     </section>
 }

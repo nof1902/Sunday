@@ -75,7 +75,7 @@ export function GroupPreview({
 
   const { tasks } = group;
   
-  var title = Object.keys(getEmptyTask());
+  var title = Object.keys(task);
 
   // if (tasks && tasks.length !== 0) {
   //   title = Object.keys(tasks[0]);

@@ -6,7 +6,7 @@
     grid-auto-flow: column;
     grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
     
-    // text-align: center;
+    text-align: center;
     color: $clr2;
     border-block-end: 1px solid $clr11;
     height: 35px;
@@ -23,6 +23,7 @@
         margin: 0;
         align-self: center;
         height: 100%;
+        
         // line-height: 2;
     }
 
@@ -104,16 +105,13 @@
 
     .dynamic-cmps-section{
 
-        background-color: #e0e0b7;
-
         .dynamic-cmps-sectio-list{
-           
-            background-color: #9c1979;
+            // background-color: #9c1979;
            all: unset;
             
             .dynamic-cmp-item{
                 border-inline-end: 1px solid $clr11;
-                background-color: #ff83de;
+                // background-color: #ff83de;
             }
         }
     }
@@ -131,6 +129,14 @@
         
         
     }
+
+  
+
+}
+
+.page-content {
+    overflow-y: auto;
+}
 
     // input:focus &{
     //     background-color: $clr1WithAlpha;
@@ -158,10 +164,4 @@
         
 
     // }
-
-}
-
-.page-content {
-    overflow-y: auto;
-}
 
