@@ -1,11 +1,26 @@
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function StatusCmp({ info, onUpdate }) {
     
     const [openEditModel, setOpenEditModel] = useState(false)
     const [infoToEdit, setInfoToEdit] = useState(info)
+    const modalRef = useRef()
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+          if (modalRef.current && !modalRef.current.contains(event.target)) {
+            handleCloseModal();
+          }
+        }
     
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [handleCloseModal]);
+
     useEffect(() => {
         onUpdate(infoToEdit)
       }, [infoToEdit]);
@@ -20,13 +35,18 @@ export function StatusCmp({ info, onUpdate }) {
       }
 
 
+    function handleCloseModal(){
+        setOpenEditModel(false)
+    }
+
+
     return (
         // className="dynamic-cmp-list-items"
         <section className="status-cmp" style={{backgroundColor : infoToEdit.selectedStatus.backgroundColor}} onClick={onOpenModal}>
         
         <span>{infoToEdit.selectedStatus.label}</span>
         {openEditModel && 
-            <section className="status-model">
+            <section ref={modalRef} className="status-model">
                 <section className="status-picker-content">
                     <ul className="items-container">
                     {

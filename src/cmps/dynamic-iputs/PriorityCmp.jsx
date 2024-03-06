@@ -34,5 +34,4 @@ export function PriorityCmp({ info, onUpdate }) {
     }
 
     </section>
-  );
 }

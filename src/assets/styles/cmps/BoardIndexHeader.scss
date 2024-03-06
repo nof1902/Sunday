@@ -3,18 +3,24 @@
     padding-block-start: 1.2em;
 
     .head-title {
-
         color: $clr2;
-        h1 {
-            margin-block: 0 0.5em;
+        input{
+            border: 1px solid transparent;
             font-size: 20pt;
             font-weight: 500;
+
+            &:focus {
+                background-color: $clr10;
+                border: 1px solid $clr1;
+                outline: none;
+            }
         }
 
         p {
             font-family: $font-txt;
             color: #676879;
             font-size: 11pt;
+            margin-left: 0.4rem;
         }
     }
 

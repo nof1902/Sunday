@@ -1,18 +1,29 @@
 import { utilService } from "../services/util.service"
 import { svgService } from "../services/svg.service"
 import { SaveTask, getEmptyGroup, getEmptyTask } from "../store/actions/board.actions"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useForm } from "../customHooks/useForm"
 
 // import { storeSaveTask } from "../store/board.actions"
 
-export function BoardIndexHeader( {board, onSaveTask , onSaveGroup} ) {
+export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onUpdateBoard} ) {
 
-    // const [isModalShow,seIisModalShow] = useState(false)
-      
+    const [editBoard, handleChange] = useForm(board)
+    const inputBoardTitle = useRef()
+
+    function handleBlur(){
+        onUpdateBoard(editBoard);
+    }
+
     return (
         <section className='board-index-header'>
             <section className="head-title">
-                <h1>{board.title}</h1> 
+            <input ref={inputBoardTitle} type="text" 
+                  name="title" 
+                  value={editBoard.title}
+                  placeholder="new board title" 
+                  onChange={handleChange}
+                  onBlur={handleBlur}/>
                 <p>Manage any type of project. Assign owners, set timelines and keep track 
                 of where your project stands</p>
             </section>

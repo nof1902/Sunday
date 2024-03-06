@@ -10,6 +10,7 @@ import {
   SaveGroup,
   SaveTask,
   getEmptyGroup,
+  updateBoard,
 } from "../store/actions/board.actions.js";
 
 export function BoardDetails() {
@@ -93,6 +94,18 @@ export function BoardDetails() {
     }
   }
 
+  async function onUpdateBoard(boardToSave) {
+    try {
+      await updateBoard(boardToSave)
+      showSuccessMsg(`Task added successfully`);
+    } catch (err) {
+      showSuccessMsg(`Could not add task`);
+      console.log("error", err);
+    }
+  }
+
+
+
   if (!board) return <div>Loading...</div>;
   const { groups , cmpsOrder } = board;
 
@@ -105,6 +118,7 @@ export function BoardDetails() {
         board={board}
         onSaveTask={onSaveTask}
         onSaveGroup={onSaveGroup}
+        onUpdateBoard={onUpdateBoard}
       />
       <GroupList
         groups={groups}

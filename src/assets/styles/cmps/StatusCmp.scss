@@ -1,7 +1,5 @@
 
 .status-cmp {
-    // background-color: transparent;
-    // background-color: burlywood;
     height: 100%;
     display: flex;
     align-items: center;
@@ -11,6 +9,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: pointer;
 
     // & > span {
         // display: flex;
