@@ -4,7 +4,7 @@
 
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 350px repeat(auto-fill, minmax(145px, 1fr));
+    grid-template-columns: 350px repeat(auto-fill, 145px);
     
     text-align: center;
     color: $clr2;
@@ -109,12 +109,10 @@
 
     .dynamic-cmps-section{
         .dynamic-cmps-sectio-list{
-            // background-color: #9c1979;
            all: unset;
             
             .dynamic-cmp-item{
                 border-inline-end: 1px solid $clr11;
-                // background-color: #ff83de;
             }
         }
     }
@@ -123,13 +121,11 @@
         z-index: 3;
         box-shadow: 4px 3px 6px -3px #d0d4e4;
         background-color: #F4F5F8;
-        // background-color: $clr1WithAlpha;
 
         .delete-btn {
             opacity: 1;
         }
 
-        
         
     }
 

@@ -81,14 +81,6 @@ export function GroupPreview({
 
   const { tasks } = group;
 
-  // var title = Object.keys(getEmptyTask());
-
-  // if (tasks && tasks.length !== 0) {
-  //   title = Object.keys(tasks[0]);
-  // }
-
-  // console.log('group.style', group.style);
-  // console.log('num of tasks', tasks.length)
 
   return (
     <section className={groupClass}>
