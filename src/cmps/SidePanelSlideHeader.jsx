@@ -1,10 +1,14 @@
 import { useState } from "react"
+import { useForm } from "../customHooks/useForm";
 
-export function SidePanelSlideHeader({ taskToEdit, onApprove ,onCloseModal}) {
+export function SidePanelSlideHeader({ taskToEdit ,onCloseModal, saveTaskCall}) {
     
-    const [isList, SetIsList] = useState(false)
+    const [isList, setIsList] = useState(false)
+    const [taskEdit, handleChange] = useForm(taskToEdit);
     
-    
+    function handleBlur(){
+        saveTaskCall(taskEdit);
+    }
     
     return (
         <section className="silde-panel-slide-header">
@@ -13,7 +17,14 @@ export function SidePanelSlideHeader({ taskToEdit, onApprove ,onCloseModal}) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </section>
             </button> 
-            <input placeholder={taskToEdit.title}/>
+
+            <input type="text" 
+                  name="title" 
+                  value={taskEdit.title} 
+                  placeholder={taskEdit.title} 
+                  onChange={handleChange}
+                  onBlur={handleBlur}/>
+
             <section className="line">
                 <section className="headers-general">
                     <div className="selected-tab">

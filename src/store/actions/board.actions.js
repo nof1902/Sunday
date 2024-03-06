@@ -167,8 +167,8 @@ export function getEmptyTask() {
   return {
     id: "",
     title: "New Task",
-    priority: "",
-    status: "Not Started",
+    // priority: "",
+    // status: "Not Started",
   };
 }
 
@@ -202,17 +202,19 @@ export function getEmptyBoard() {
     ],
     groups: [getEmptyGroup()],
 
-    cmpsOrder: ["status-picker", "priority-picker"],
+    cmpsOrder: ["status", "priority"],
     statusPicker: [
       { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
       { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
       { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
       { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
     ],
-    priorityPicker: [{ label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
-                    { label: "High", backgroundColor: "rgb(64, 22, 148)" },
-                    { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
-                    { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
-                    { label: "", backgroundColor: "rgb(196, 196, 196)" },],
+    priorityPicker: [
+      { label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
+    { label: "High", backgroundColor: "rgb(64, 22, 148)" },
+    { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
+    { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
+    { label: "", backgroundColor: "rgb(196, 196, 196)" },
+  ],
   };
 }

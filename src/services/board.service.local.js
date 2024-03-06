@@ -215,7 +215,7 @@ function _createBoards() {
           style: utilService.getRandomColor(),
         },
       ],
-      cmpsOrder: ["status-picker", "priority-picker"],
+      cmpsOrder: ["status", "priority"],
       statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
 
     },
@@ -259,9 +259,20 @@ function _createBoards() {
           style: utilService.getRandomColor(),
         },
       ],
-      cmpsOrder: ["status-picker", "priority-picker"],
+      cmpsOrder: ["status", "priority"],
       statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
-
+      priorityPicker: 
+      [{ label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
+      { label: "High", backgroundColor: "rgb(64, 22, 148)" },
+      { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
+      { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
+      { label: "", backgroundColor: "rgb(196, 196, 196)" },],
+      // priorityPicker: 
+      // [{ Critical: "rgb(51, 51, 51)" },
+      // { High: "rgb(64, 22, 148)" },
+      // { Medium: "rgb(85, 89, 223)" },
+      // { Low: "rgb(87, 155, 252)" },
+      // { NoLabel:  "rgb(196, 196, 196)" },]
     },
   ];
 

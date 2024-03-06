@@ -15,6 +15,17 @@ export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onUpdateBoar
         onUpdateBoard(editBoard);
     }
 
+
+  function createEmptyTask(){
+    const newTask = getEmptyTask()
+    board.cmpsOrder.forEach(component => {
+      newTask[component] = {}
+    });
+    
+    return newTask;
+
+  }
+
     return (
         <section className='board-index-header'>
             <section className="head-title">
@@ -42,7 +53,7 @@ export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onUpdateBoar
             </section>
             <section className="board-actions">
                 <section className='addition-actions'>
-                    <button className='add-task' onClick={() => onSaveTask(board._id,null,getEmptyTask())}>New Task</button>
+                    <button className='add-task' onClick={() => onSaveTask(board._id,null,createEmptyTask())}>New Task</button>
                     <button className='add-group' onClick={() => onSaveGroup(board._id,0,getEmptyGroup(), {})}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                     </button>

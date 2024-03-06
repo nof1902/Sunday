@@ -18,7 +18,7 @@ export function GroupPreview({
 }) {
   const param = useParams();
 
-  const [task, setTask] = useState(getEmptyTask());
+  const [task, setTask] = useState(createEmptyTask());
   const [currGroup, setCurrGroup] = useState(group);
   const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
@@ -27,55 +27,60 @@ export function GroupPreview({
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
 
   useEffect(() => {
-
-    if(inputFocused === false && task !== getEmptyTask()){
-      onSaveTask(param.id, group.id, task)
-      currGroup.tasks.push(task)
-      setTask(getEmptyTask())
-      setInputFocused(null)
+    if (inputFocused === false && task !== getEmptyTask()) {
+      onSaveTask(param.id, group.id, task);
+      currGroup.tasks.push(task);
+      setTask(getEmptyTask());
+      setInputFocused(null);
     }
   }, [inputFocused]);
 
-
   useEffectUpdate(() => {
-    onUpdateGroup(param.id, currGroup)
+    onUpdateGroup(param.id, currGroup);
   }, [debouncedGroup]);
 
+  function createEmptyTask() {
+    const newTask = getEmptyTask();
+    cmpsOrder.forEach((component) => {
+      newTask[component] = {};
+    });
+    return newTask;
+  }
+
   function handleGroupTitleBlur({ target }) {
-    if (target.value !== "") setIsTitleGroupEditMode(false)
+    if (target.value !== "") setIsTitleGroupEditMode(false);
   }
 
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
-    setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }))
+    setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
   }
 
   function handleTaskInputBlur({ target }) {
-    if (target.value !== "") setInputFocused(false)
-    target.value = ""
+    if (target.value !== "") setInputFocused(false);
+    target.value = "";
   }
 
   function handleTaskInputFocus() {
     setInputFocused(true);
   }
- 
-  function saveTaskCall(task){
-    onSaveTask(param.id, group.id, task)
+
+  function saveTaskCall(task) {
+    onSaveTask(param.id, group.id, task);
   }
 
-  
   function handleTaskChange({ target }) {
-    const { name: field, value } = target
+    const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
     console.log("task", task);
   }
-  
+
   function deleteTask(taskId) {
-    onRemoveTask(group.id, taskId)
+    onRemoveTask(group.id, taskId);
   }
 
   const { tasks } = group;
-  
+
   // var title = Object.keys(getEmptyTask());
 
   // if (tasks && tasks.length !== 0) {
@@ -156,8 +161,13 @@ export function GroupPreview({
           ))}
         </section>
 
-      <TaskList tasks={tasks} deleteTask={deleteTask} saveTaskCall={saveTaskCall}  cmpsOrder={cmpsOrder}/>
-    </section>
+        <TaskList
+          tasks={tasks}
+          deleteTask={deleteTask}
+          saveTaskCall={saveTaskCall}
+          cmpsOrder={cmpsOrder}
+        />
+      </section>
       <section className="group-footer">
         <div
           className="footer-new-task"

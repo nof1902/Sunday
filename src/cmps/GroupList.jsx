@@ -1,7 +1,6 @@
 import { GroupPreview } from "./GroupPreview.jsx";
 
 export function GroupList({ groups, onSaveTask, onRemoveTask, onRemoveGroup, onUpdateGroup, cmpsOrder}) {
-console.log('cmpsOrder', cmpsOrder);
   // if (!groups) return <div>Loading...</div>
   return (
     <ul className="group-list">

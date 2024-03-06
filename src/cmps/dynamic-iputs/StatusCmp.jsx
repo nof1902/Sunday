@@ -41,10 +41,10 @@ export function StatusCmp({ info, onUpdate }) {
 
 
     return (
-        // className="dynamic-cmp-list-items"
-        <section className="status-cmp" style={{backgroundColor : infoToEdit.selectedStatus.backgroundColor}} onClick={onOpenModal}>
+        // className="dynamic-cmp-list-items"infoToEdit.selectedPriority.backgroundColor
+        <section className="status-cmp" style={{backgroundColor : infoToEdit.selectedStatus?.backgroundColor || 'rgb(196, 196, 196)'}} onClick={onOpenModal}>
         
-        <span>{infoToEdit.selectedStatus.label}</span>
+        <span>{infoToEdit.selectedStatus?.label}</span>
         {openEditModel && 
             <section className="status-model">
                 <section className="status-picker-content">
@@ -53,7 +53,7 @@ export function StatusCmp({ info, onUpdate }) {
                         info.statuses.map((status, idx) => 
                             <li className="item" key={idx} onClick={() => onChangeStatus(status)}
                                 style={{ backgroundColor: status.backgroundColor }}
-                                label={status.label}>
+                                label={status.label || 'Not Started'}>
                                 {status.label}
                             </li>
                         )

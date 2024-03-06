@@ -104,12 +104,9 @@ export function BoardDetails() {
     }
   }
 
-
-
   if (!board) return <div>Loading...</div>;
   const { groups , cmpsOrder } = board;
 
-  console.log("board", board);
   // console.log("groups", groups);
 
   return (
