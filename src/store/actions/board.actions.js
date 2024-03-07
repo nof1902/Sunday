@@ -5,7 +5,6 @@ import {
   showSuccessMsg,
   showErrorMsg,
 } from "../../services/event-bus.service.js";
-//import { ADD_CAR, ADD_TO_CART, CLEAR_CART, REMOVE_CAR, REMOVE_FROM_CART, SET_CARS, UNDO_REMOVE_CAR, UPDATE_CAR } from './car.reducer.js'
 import {
   REMOVE_BOARD,
   ADD_BOARD,
@@ -14,7 +13,6 @@ import {
   GET_BOARD_BY_ID,
   UNDO_REMOVE_BOARD,
 } from "../reducers/board.reducer.js";
-import { SET_SCORE } from "../reducers/user.reducer.js";
 import { utilService } from "../../services/util.service.js";
 
 // Action Creators:
@@ -54,12 +52,11 @@ export async function loadBoards() {
 export async function getBoardById(boardId) {
   try {
     const board = await boardService.getById(boardId);
+    console.log('getBoardById-action - board ', board)
     store.dispatch({
       type: GET_BOARD_BY_ID,
       board,
     });
-
-    return board;
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
@@ -88,19 +85,18 @@ export async function addBoard(board) {
   }
 }
 
-export function updateBoard(board) {
+export async function updateBoard(board) {
   return boardService
     .save(board)
     .then((savedBoard) => {
-      // console.log('Updated Board:', savedBoard)
       store.dispatch(getActionUpdateBoard(savedBoard));
-      return savedBoard;
     })
     .catch((err) => {
       console.log("Cannot save Board", err);
       throw err;
     });
 }
+
 
 // by adding task from headerindex - the task automaticly
 export async function SaveTask(boardId, groupId, task, activity = {}) {

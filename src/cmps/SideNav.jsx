@@ -23,10 +23,10 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
 
   const filteredBoards = boards.filter ( board => board.title.includes(filterText))
  
-  function onChangeBoardTitle(boardId) {
-    setBoardTitleToChang(board);
-    setIsShowTextBox(true);
-  }
+  // function onChangeBoardTitle(boardId) {
+  //   setBoardTitleToChang(board);
+  //   setIsShowTextBox(true);
+  // }
 
   function handleChange(ev) {
     const val = ev.target.value;

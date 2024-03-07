@@ -6,15 +6,29 @@ import { useForm } from "../customHooks/useForm"
 
 // import { storeSaveTask } from "../store/board.actions"
 
-export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onUpdateBoard} ) {
+export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onSaveBoard} ) {
 
-    const [editBoard, handleChange] = useForm(board)
-    const inputBoardTitle = useRef()
+    const [boardToEdit, setBoardToEdit] = useState(board)
+    
+    function handleChange({target}){
+        let { value, name: field, type, checked } = target
+        switch (type) {
+            case 'number':
+            case 'range':
+                value = +value
+                break;
+            case 'checkbox':
+                value = checked
 
-    function handleBlur(){
-        onUpdateBoard(editBoard);
+            default:
+                break;
+        }
+        setBoardToEdit((prevFields) => ({ ...prevFields, [field]: value }))
     }
 
+    function handleBlur(){
+        onSaveBoard(boardToEdit);
+    }
 
   function createEmptyTask(){
     const newTask = getEmptyTask()
@@ -23,15 +37,15 @@ export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onUpdateBoar
     });
     
     return newTask;
-
   }
 
     return (
         <section className='board-index-header'>
+            <h1>{boardToEdit.title}</h1>
             <section className="head-title">
-            <input ref={inputBoardTitle} type="text" 
+            <input type="text" 
                   name="title" 
-                  value={editBoard.title}
+                  value={boardToEdit.title}
                   placeholder="new board title" 
                   onChange={handleChange}
                   onBlur={handleBlur}/>
@@ -53,8 +67,8 @@ export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onUpdateBoar
             </section>
             <section className="board-actions">
                 <section className='addition-actions'>
-                    <button className='add-task' onClick={() => onSaveTask(board._id,null,createEmptyTask())}>New Task</button>
-                    <button className='add-group' onClick={() => onSaveGroup(board._id,0,getEmptyGroup(), {})}>
+                    <button className='add-task' onClick={() => onSaveTask(null,createEmptyTask())}>New Task</button>
+                    <button className='add-group' onClick={() => onSaveGroup(0,getEmptyGroup(), {})}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                 </section>

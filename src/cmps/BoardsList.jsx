@@ -1,7 +1,7 @@
 
 import { BoardPreview } from "./BoardPreview.jsx";
 
-export function BoardsList({boards}) {
+export function BoardsList({ boards }) {
 
   return (
       <ul className="boards-list">

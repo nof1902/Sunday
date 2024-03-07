@@ -3,28 +3,26 @@ export const GET_BOARD_BY_ID = 'GET_BOARD_BY_ID'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
-export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
-// export const ADD_TO_CART = 'ADD_TO_CART'
-// export const CLEAR_CART = 'CLEAR_CART'
-// export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
 const initialState = {
     boards: [],
+    currBoard: null,
     lastRemovedBoard: null
 }
 
 export function boardReducer(state = initialState, action = {}) {
     var newState = state
     var boards
+    var currBoard
     switch (action.type) {
         case SET_BOARDS:
-            newState = { ...state, boards: action.boards }
-            // console.log("action.boards", action.boards);
+            newState = { ...state, boards: action.boards}
             break
         case GET_BOARD_BY_ID:
-            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            newState = { ...state, boards }
+            console.log('boardReducer - GET_BOARD_BY_ID -board ', action.board)
+            newState = {...state, currBoard: action.board}
             break;
         case REMOVE_BOARD:
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
@@ -32,11 +30,12 @@ export function boardReducer(state = initialState, action = {}) {
             newState = { ...state, boards, lastRemovedBoard }
             break
         case ADD_BOARD:
-            newState = { ...state, boards: [...state.boards, action.board] }
+            newState = { ...state, boards: [...state.boards, action.board] ,currBoard: action.board}
             break
         case UPDATE_BOARD:
+            currBoard = action.board
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            newState = { ...state, boards }
+            newState = { ...state, boards , currBoard}
             break
         case UNDO_REMOVE_BOARD:
             if (state.lastRemovedBoard) {
@@ -51,7 +50,11 @@ export function boardReducer(state = initialState, action = {}) {
 
 /* 
 
-        case ADD_TO_CART:
+        
+            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+            newState = { ...state, boards }
+
+case ADD_TO_CART:
             newState = { ...state, cart: [...state.cart, action.car] }
             break
         case REMOVE_FROM_CART:
