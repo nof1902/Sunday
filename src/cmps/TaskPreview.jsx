@@ -28,6 +28,7 @@ export function TaskPreview({ task, deleteTask, saveTaskCall, cmpsOrder }) {
     setTaskToEdit((prevTitle) => ({ ...prevTitle, title: val }));
   }
 
+
   function handleInputBlur() {
     // Checking if there is a change and needs to be saved
     if (taskToEdit.title != task.title) {
