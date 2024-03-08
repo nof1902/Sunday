@@ -19,18 +19,17 @@ export function BoardDetails() {
   const params = useParams();
 
   useEffect(() => {
-    loadBoard()
+    getBoardById(params.id)
+    // loadBoard()
   }, [params.id]);
 
   async function loadBoard(){
     try{
       await getBoardById(params.id)
-      
     } catch (err){
       showSuccessMsg(`Could not add task`);
       console.log("error", err);
     }
-    
   }
 
   async function onSaveGroup(index, group, activity) {
@@ -84,10 +83,10 @@ export function BoardDetails() {
     }
   }
 
-  async function onSaveBoard(updatedBoard) {
+  async function onSaveBoard(newBoardTitle) {
     try{
-      const updatedBoard2 = { ...currBoard, ...updatedBoard };
-      await updateBoard(updatedBoard2)
+      const updatedBoard = { ...currBoard, title: newBoardTitle };
+      updateBoard(updatedBoard)
       showSuccessMsg(`Board update successfully`);
       console.log(currBoard.title)
     } catch (err){
@@ -103,10 +102,11 @@ export function BoardDetails() {
   return (
     <section className="board-details">
       <BoardIndexHeader
-        board={currBoard}
+        boardTitle={currBoard.title}
         onSaveTask={onSaveTask}
         onSaveGroup={onSaveGroup}
         onSaveBoard={onSaveBoard}
+        cmpsOrder={cmpsOrder}
       />
       <GroupList
         groups={groups}

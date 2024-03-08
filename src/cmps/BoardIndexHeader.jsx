@@ -6,33 +6,21 @@ import { useForm } from "../customHooks/useForm"
 
 // import { storeSaveTask } from "../store/board.actions"
 
-export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onSaveBoard} ) {
+export function BoardIndexHeader( {boardTitle, onSaveTask , onSaveGroup ,onSaveBoard, cmpsOrder} ) {
 
-    const [boardToEdit, setBoardToEdit] = useState(board)
+    const [boardTitleToEdit, setBoardTitleToEdit] = useState(boardTitle)
     
     function handleChange({target}){
-        let { value, name: field, type, checked } = target
-        switch (type) {
-            case 'number':
-            case 'range':
-                value = +value
-                break;
-            case 'checkbox':
-                value = checked
-
-            default:
-                break;
-        }
-        setBoardToEdit((prevFields) => ({ ...prevFields, [field]: value }))
+        setBoardTitleToEdit(target.value)
     }
 
     function handleBlur(){
-        onSaveBoard(boardToEdit);
+        onSaveBoard(boardTitleToEdit);
     }
 
   function createEmptyTask(){
     const newTask = getEmptyTask()
-    board.cmpsOrder.forEach(component => {
+    cmpsOrder.forEach(component => {
       newTask[component] = {}
     });
     
@@ -41,11 +29,10 @@ export function BoardIndexHeader( {board, onSaveTask , onSaveGroup ,onSaveBoard}
 
     return (
         <section className='board-index-header'>
-            <h1>{boardToEdit.title}</h1>
             <section className="head-title">
             <input type="text" 
                   name="title" 
-                  value={boardToEdit.title}
+                  value={boardTitleToEdit}
                   placeholder="new board title" 
                   onChange={handleChange}
                   onBlur={handleBlur}/>

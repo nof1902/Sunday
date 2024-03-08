@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById, RemoveTask, getEmptyBoard } from "../store/actions/board.actions.js";
-import { Outlet, useParams} from "react-router-dom";
+import { Navigate, Outlet, useNavigate, useParams} from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardsList } from "../cmps/BoardsList.jsx";
 import { SideNav } from "../cmps/SideNav.jsx";
@@ -12,16 +12,29 @@ import { BoardDetails } from "./BoardDetails.jsx";
 export function BoardIndex() {
   
   const params = useParams()
+  const navigate = useNavigate()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
-  // const board = useSelector((storeState) => storeState.boardModule.currBoard)
   
   useEffect(() => {
     loadBoards()
-  }, [])
+    // getBoards()
+  }, [params.id])
+
+  async function getBoards(){
+    try {
+      await loadBoards()
+    } catch (err) {
+      showErrorMsg(`Could not get boards`)
+      console.log('error',err)
+    }
+  }
 
 
   async function onRemoveBoard(boardId) {
     try {
+      if(params.id === boardId){
+        navigate(`/boards`)
+      }
       await removeBoard(boardId)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
@@ -63,7 +76,7 @@ export function BoardIndex() {
         <SideNav boards={boards} onRemoveBoard={onRemoveBoard} onAddBoard={onAddBoard} onUpdateBoard={onUpdateBoard}/>
       </section>
       <section className="board-main">
-        {!params.id && (<BoardsList boards={boards}/>)}
+        {!params.id && (<BoardsList boards={boards} onUpdateBoard={onUpdateBoard}/>)}
         {params.id && <BoardDetails />} 
       </section>
     </section>
