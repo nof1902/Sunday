@@ -4,7 +4,7 @@ import { useForm } from "../customHooks/useForm";
 export function SidePanelSlideHeader({ taskToEdit ,onCloseModal, saveTaskCall}) {
     
     const [isList, setIsList] = useState(false)
-    const [taskEdit, handleChange] = useForm(taskToEdit);
+    const [taskEdit, setTaskEdit ,handleChange] = useForm(taskToEdit);
     
     function handleBlur(){
         saveTaskCall(taskEdit);
