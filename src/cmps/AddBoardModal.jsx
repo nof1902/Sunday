@@ -6,7 +6,7 @@ import { useForm } from "../customHooks/useForm";
 
 export function AddBoardModal({ onAddBoard , handleCloseModal}) {
 
-  const [boardTitle, handleChange] = useForm({title: ''})
+  const [boardTitle, setBoardTitle,handleChange] = useForm({title: ''})
   const modalRef = useRef()
 
   useEffect(() => {
