@@ -20,8 +20,7 @@ export function BoardDetails() {
 
   useEffect(() => {
     getBoardById(params.id)
-    // loadBoard()
-  }, [params.id]);
+  }, []);
 
   async function loadBoard(){
     try{
@@ -83,7 +82,7 @@ export function BoardDetails() {
     }
   }
 
-  async function onSaveBoard(newBoardTitle) {
+  async function onUpdateBoard(newBoardTitle) {
     try{
       const updatedBoard = { ...currBoard, title: newBoardTitle };
       updateBoard(updatedBoard)
@@ -102,10 +101,10 @@ export function BoardDetails() {
   return (
     <section className="board-details">
       <BoardIndexHeader
-        boardTitle={currBoard.title}
+        board={currBoard}
         onSaveTask={onSaveTask}
         onSaveGroup={onSaveGroup}
-        onSaveBoard={onSaveBoard}
+        onUpdateBoard={onUpdateBoard}
         cmpsOrder={cmpsOrder}
       />
       <GroupList

@@ -98,13 +98,13 @@ export function BoardIndexHeader({
         <section className="addition-actions">
           <button
             className="add-task"
-            onClick={() => onSaveTask(board._id, null, createEmptyTask())}
+            onClick={() => onSaveTask(editBoard._id, null, createEmptyTask())}
           >
             New Task
           </button>
           <button
             className="add-group"
-            onClick={() => onSaveGroup(board._id, 0, getEmptyGroup(), {})}
+            onClick={() => onSaveGroup(editBoard._id, 0, getEmptyGroup(), {})}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
