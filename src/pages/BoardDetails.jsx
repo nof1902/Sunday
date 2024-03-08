@@ -19,8 +19,8 @@ export function BoardDetails() {
   const params = useParams();
 
   useEffect(() => {
-    getBoardById(params.id)
-  }, []);
+    loadBoard()
+  }, [params.id]);
 
   async function loadBoard(){
     try{
@@ -63,9 +63,8 @@ export function BoardDetails() {
 
   async function onSaveTask(groupId, task, activity = {}) {
     try {
-      let board = await SaveTask(currBoard._id, groupId, task, activity)
+      await SaveTask(currBoard._id, groupId, task, activity)
       showSuccessMsg(`Task added successfully`)
-      return board
     } catch (err) {
       showErrorMsg(`Could not add task`);
       console.log("error", err);
@@ -82,10 +81,9 @@ export function BoardDetails() {
     }
   }
 
-  async function onUpdateBoard(newBoardTitle) {
+  async function onUpdateBoard(updatedBoard) {
     try{
-      const updatedBoard = { ...currBoard, title: newBoardTitle };
-      updateBoard(updatedBoard)
+      await updateBoard(updatedBoard)
       showSuccessMsg(`Board update successfully`);
       console.log(currBoard.title)
     } catch (err){

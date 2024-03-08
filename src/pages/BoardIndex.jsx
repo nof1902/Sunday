@@ -16,18 +16,22 @@ export function BoardIndex() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
   
   useEffect(() => {
-    loadBoards()
-    // getBoards()
+    // importent! do not touch! - prevent flicker between cmps
+    if(params.id){
+      loadBoards(false)
+    } else {
+      loadBoards(true)
+    }
   }, [params.id])
 
-  async function getBoards(){
-    try {
-      await loadBoards()
-    } catch (err) {
-      showErrorMsg(`Could not get boards`)
-      console.log('error',err)
-    }
-  }
+  // async function getBoards(){
+  //   try {
+  //     await loadBoards()
+  //   } catch (err) {
+  //     showErrorMsg(`Could not get boards`)
+  //     console.log('error',err)
+  //   }
+  // }
 
 
   async function onRemoveBoard(boardId) {

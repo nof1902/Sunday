@@ -35,13 +35,14 @@ export function getActionUpdateBoard(board) {
   };
 }
 
-export async function loadBoards() {
+export async function loadBoards(resetCurrBoard = false) {
   try {
     const boards = await boardService.query();
     console.log("Boards from DB:", boards);
     store.dispatch({
       type: SET_BOARDS,
       boards,
+      resetCurrBoard
     });
   } catch (err) {
     console.log("Cannot load Boards", err);
@@ -52,7 +53,6 @@ export async function loadBoards() {
 export async function getBoardById(boardId) {
   try {
     const board = await boardService.getById(boardId);
-    console.log('getBoardById-action - board ', board)
     store.dispatch({
       type: GET_BOARD_BY_ID,
       board,
