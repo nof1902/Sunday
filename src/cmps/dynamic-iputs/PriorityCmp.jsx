@@ -38,7 +38,7 @@ export function PriorityCmp({ info, onUpdate }) {
 
     return (
         <section className="dynamic-cmp" style={{backgroundColor: infoToEdit.selectedPriority?.backgroundColor || 'rgb(196, 196, 196)'}} onClick={handleClickModal}>
-            <h4 className="selected-label">{infoToEdit.selectedPriority.label}</h4>
+            <h4 className="selected-label">{infoToEdit.selectedPriority?.label}</h4>
             {openEditModel && 
                 <section className="status-model">
                     <section className="status-picker-content">
