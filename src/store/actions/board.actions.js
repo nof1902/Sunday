@@ -5,12 +5,13 @@ import {
   showSuccessMsg,
   showErrorMsg,
 } from "../../services/event-bus.service.js";
+
+import { LOADING_DONE, LOADING_START } from "../reducers/system.reducer.js";
 import {
   REMOVE_BOARD,
   ADD_BOARD,
   UPDATE_BOARD,
   SET_BOARDS,
-  GET_BOARD_BY_ID,
   UNDO_REMOVE_BOARD,
   CLEAN_CURR_BOARD,
   SET_BOARD
@@ -39,6 +40,7 @@ export function getActionUpdateBoard(board) {
 
 export async function loadBoards(resetCurrBoard = false) {
   try {
+    store.dispatch({ type: LOADING_START })
     const boards = await boardService.query();
     console.log("Boards from DB:", boards);
     store.dispatch({
