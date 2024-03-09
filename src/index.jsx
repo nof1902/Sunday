@@ -11,6 +11,7 @@ import { HomePage } from "./pages/HomePage";
 import { BoardDetails } from './pages/BoardDetails';
 import './assets/styles/main.scss'
 import { SidePanelSlide } from './cmps/SidePanelSlide'
+import { Login } from './cmps/Login'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -19,6 +20,7 @@ root.render(
       {/* <RootCmp /> */}
       <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login  />} />
           <Route path="/boards" element={<BoardIndex />}>
               <Route path="/boards/:id" element={<BoardDetails />}/>
           </Route>
