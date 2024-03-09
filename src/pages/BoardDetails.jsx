@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
@@ -14,30 +14,11 @@ import {
 } from "../store/actions/board.actions.js";
 
 export function BoardDetails() {
-  const boards = useSelector((storeState) => storeState.boardModule.boards);
-  const [board, setBoard] = useState(null);
-  const params = useParams();
+  const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
 
-//   const cmpsOrder = board?.cmpsOrder
-// console.log('cmpsOrder', cmpsOrder);
-
-  useEffect(() => {
-    loadBoard();
-  }, [params.id, boards]);
-
-  async function loadBoard() {
+  async function onSaveGroup(index, group, activity) {
     try {
-      const currBoard = boards.find((b) => b._id === params.id);
-      setBoard(currBoard);
-    } catch (error) {
-      showErrorMsg("Could Not Loading Board");
-      console.log("error:", error);
-    }
-  }
-
-  async function onSaveGroup(boardId, index, group, activity) {
-    try {
-      SaveGroup(boardId, index, group, activity);
+      await SaveGroup(currBoard._id, index, group, activity);
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);
@@ -47,7 +28,7 @@ export function BoardDetails() {
 
   async function onRemoveGroup(groupId) {
     try {
-      RemoveGroup(params.id, groupId);
+      await RemoveGroup(currBoard._id, groupId);
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);
@@ -55,67 +36,59 @@ export function BoardDetails() {
     }
   }
 
-  async function onUpdateGroup(boardId, group, activity) {
+  async function onUpdateGroup(group, activity) {
     try {
-      // let updatedGroup;
-      // SaveGroup(boardId, null, group, activity).then(
-      //   updatedGroup = board.groups.filter(theGroup => theGroup.id === group.id)
-      // )
-      // showSuccessMsg(`Task added successfully`);
-      // console.log('updatedGroup',updatedGroup)
-      // return updatedGroup;
-      
-      SaveGroup(boardId, null, group, activity)
+      await SaveGroup(currBoard._id, null, group, activity)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
-      showSuccessMsg(`Could not add task`);
+      showErrorMsg(`Could not add task`);
       console.log("error", err);
     }
   }
 
-  async function onSaveTask(boardId, groupId, task, activity = {}) {
+  async function onSaveTask(groupId, task, activity = {}) {
     try {
-      let board = await SaveTask(boardId, groupId, task, activity)
+      await SaveTask(currBoard._id, groupId, task, activity)
       showSuccessMsg(`Task added successfully`)
-      return board
     } catch (err) {
-      showSuccessMsg(`Could not add task`);
+      showErrorMsg(`Could not add task`);
       console.log("error", err);
     }
   }
 
   async function onRemoveTask(groupId, taskId) {
     try {
-      RemoveTask(params.id, groupId, taskId);
+      await RemoveTask(currBoard._id, groupId, taskId);
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
-      showSuccessMsg(`Could not add task`);
+      showErrorMsg(`Could not add task`);
       console.log("error", err);
     }
   }
 
-  async function onUpdateBoard(boardToSave) {
-    try {
-      await updateBoard(boardToSave)
-      showSuccessMsg(`Task added successfully`);
-    } catch (err) {
-      showSuccessMsg(`Could not add task`);
+  async function onUpdateBoard(updatedBoard) {
+    try{
+      await updateBoard(updatedBoard)
+      showSuccessMsg(`Board update successfully`);
+      console.log(currBoard.title)
+    } catch (err){
+      showErrorMsg(`Could not add task`);
       console.log("error", err);
     }
+    
   }
 
-  if (!board) return <div>Loading...</div>;
-  const { groups , cmpsOrder } = board;
-
-  // console.log("groups", groups);
+  if (!currBoard) return <div>Loading...</div>;
+  const { groups , cmpsOrder } = currBoard;
 
   return (
     <section className="board-details">
       <BoardIndexHeader
-        board={board}
+        board={currBoard}
         onSaveTask={onSaveTask}
         onSaveGroup={onSaveGroup}
         onUpdateBoard={onUpdateBoard}
+        cmpsOrder={cmpsOrder}
       />
       <GroupList
         groups={groups}
@@ -128,7 +101,7 @@ export function BoardDetails() {
       <button
         className="new-group-btn"
         onClick={() =>
-          onSaveGroup(board._id, board.groups.length, getEmptyGroup(), {})
+          onSaveGroup(currBoard.groups.length, getEmptyGroup(), {})
         }
       >
         <svg

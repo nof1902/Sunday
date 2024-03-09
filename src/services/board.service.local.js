@@ -13,10 +13,9 @@ export const boardService = {
   saveTask,
   removeTask,
   saveGroup,
-  removeGroup
+  removeGroup,
 };
 window.cs = boardService;
-
 
 // localStorage.clear()
 // _createBoards()
@@ -77,7 +76,7 @@ async function saveTask(board, groupId, task, activity) {
     const tasks = group.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
     });
-    group = {...group, tasks: tasks}
+    group = { ...group, tasks: tasks };
   } else {
     task.id = utilService.makeId();
     group.tasks.push(task);
@@ -89,31 +88,32 @@ async function saveTask(board, groupId, task, activity) {
 }
 
 async function removeTask(board, groupId, taskId, activity) {
-  let group = getGroupFromBoardById(board, groupId)
-  const filteredTasks = group.tasks.filter(existTask => existTask.id !== taskId)
-  group = { ...group, tasks: filteredTasks }
+  let group = getGroupFromBoardById(board, groupId);
+  const filteredTasks = group.tasks.filter(
+    (existTask) => existTask.id !== taskId
+  );
+  group = { ...group, tasks: filteredTasks };
   board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
-  
+
   // board.activities.unshift(activity)
   return board;
 }
 
 async function removeGroup(board, groupId, activity) {
-
-  const filteredGroups = board.groups.filter(g => g.id !== groupId)
-  board = { ...board, groups: filteredGroups }
+  const filteredGroups = board.groups.filter((g) => g.id !== groupId);
+  board = { ...board, groups: filteredGroups };
   // board.activities.unshift(activity)
   return board;
 }
 
-async function saveGroup(board,index = null ,group, activity) {
-
+async function saveGroup(board, index = null, group, activity) {
   // if new group
-  if(index === 0){
-    board.groups.unshift(group)
-  } else if (index > 0){
-    board.groups.push(group)
-  } else if(!index){ //if update
+  if (index === 0) {
+    board.groups.unshift(group);
+  } else if (index > 0) {
+    board.groups.push(group);
+  } else if (!index) {
+    //if update
     board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
   }
 
@@ -146,7 +146,6 @@ async function addBoardMsg(boardId, txt) {
 //         "priority": "",
 //     }
 // }
-
 
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
@@ -181,13 +180,16 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 1",
-              status: {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'},
+              status: {
+                label: "Not Started",
+                backgroundColor: "rgb(196, 196, 196)",
+              },
               priority: "",
             },
             {
               id: utilService.makeId(),
               title: "Task 2",
-              status: {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'},
+              status: { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
               priority: "",
             },
           ],
@@ -201,14 +203,18 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 3",
-              status: {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'},
-              priority: "High",
-              status: "Stuck",
+              status: { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
+              priority: "High", // put id 
+              status: "Stuck",  // put id 
+              
             },
             {
               id: utilService.makeId(),
               title: "Task 4",
-              status: {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'},
+              status: {
+                label: "Working on it",
+                backgroundColor: "rgb(253, 171, 61)",
+              },
               priority: "Medium",
             },
           ],
@@ -216,8 +222,12 @@ function _createBoards() {
         },
       ],
       cmpsOrder: ["status", "priority"],
-      statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
-
+      statusPicker: [
+        { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
+        { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
+        { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
+        { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
+      ],
     },
     {
       _id: utilService.makeId(),
@@ -259,20 +269,22 @@ function _createBoards() {
           style: utilService.getRandomColor(),
         },
       ],
+      // 
       cmpsOrder: ["status", "priority"],
-      statusPicker: [ {label: 'Done', backgroundColor: ' rgb(0, 200, 117)'}, {label: 'Working on it', backgroundColor: 'rgb(253, 171, 61)'}, {label: 'Stuck', backgroundColor: 'rgb(226, 68, 92)'}, {label: 'Not Started', backgroundColor: 'rgb(196, 196, 196)'}],
-      priorityPicker: 
-      [{ label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
-      { label: "High", backgroundColor: "rgb(64, 22, 148)" },
-      { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
-      { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
-      { label: "", backgroundColor: "rgb(196, 196, 196)" },],
-      // priorityPicker: 
-      // [{ Critical: "rgb(51, 51, 51)" },
-      // { High: "rgb(64, 22, 148)" },
-      // { Medium: "rgb(85, 89, 223)" },
-      // { Low: "rgb(87, 155, 252)" },
-      // { NoLabel:  "rgb(196, 196, 196)" },]
+      statusPicker: [
+        { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
+        { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
+        { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
+        { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
+      ],
+      priorityPicker: [
+        { label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
+        { label: "High", backgroundColor: "rgb(64, 22, 148)" },
+        { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
+        { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
+        { label: "", backgroundColor: "rgb(196, 196, 196)" },
+      ],
+
     },
   ];
 

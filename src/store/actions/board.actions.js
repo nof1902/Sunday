@@ -5,7 +5,6 @@ import {
   showSuccessMsg,
   showErrorMsg,
 } from "../../services/event-bus.service.js";
-//import { ADD_CAR, ADD_TO_CART, CLEAR_CART, REMOVE_CAR, REMOVE_FROM_CART, SET_CARS, UNDO_REMOVE_CAR, UPDATE_CAR } from './car.reducer.js'
 import {
   REMOVE_BOARD,
   ADD_BOARD,
@@ -13,8 +12,9 @@ import {
   SET_BOARDS,
   GET_BOARD_BY_ID,
   UNDO_REMOVE_BOARD,
+  CLEAN_CURR_BOARD,
+  SET_BOARD
 } from "../reducers/board.reducer.js";
-import { SET_SCORE } from "../reducers/user.reducer.js";
 import { utilService } from "../../services/util.service.js";
 
 // Action Creators:
@@ -37,13 +37,14 @@ export function getActionUpdateBoard(board) {
   };
 }
 
-export async function loadBoards() {
+export async function loadBoards(resetCurrBoard = false) {
   try {
     const boards = await boardService.query();
     console.log("Boards from DB:", boards);
     store.dispatch({
       type: SET_BOARDS,
       boards,
+      resetCurrBoard
     });
   } catch (err) {
     console.log("Cannot load Boards", err);
@@ -51,20 +52,42 @@ export async function loadBoards() {
   }
 }
 
-export async function getBoardById(boardId) {
+// export async function getBoardById(boardId) {
+//   try {
+//     const board = await boardService.getById(boardId);
+//     store.dispatch({
+//       type: GET_BOARD_BY_ID,
+//       board,
+//     });
+//   } catch (err) {
+//     console.log("Cannot load Boards", err);
+//     throw err;
+//   }
+// }
+
+export async function getBoardByID(boardId) {
   try {
-    const board = await boardService.getById(boardId);
     store.dispatch({
-      type: GET_BOARD_BY_ID,
-      board,
+      type: SET_BOARD,
+      boardId
     });
-
-    return board;
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
   }
 }
+
+export async function cleanCurrBoard(){
+  try {
+    store.dispatch({
+      type: CLEAN_CURR_BOARD,
+    });
+  } catch (err) {
+    console.log("Cannot load Boards", err);
+    throw err;
+  }
+}
+
 
 export async function removeBoard(boardId) {
   try {
@@ -88,19 +111,18 @@ export async function addBoard(board) {
   }
 }
 
-export function updateBoard(board) {
+export async function updateBoard(board) {
   return boardService
     .save(board)
     .then((savedBoard) => {
-      // console.log('Updated Board:', savedBoard)
       store.dispatch(getActionUpdateBoard(savedBoard));
-      return savedBoard;
     })
     .catch((err) => {
       console.log("Cannot save Board", err);
       throw err;
     });
 }
+
 
 // by adding task from headerindex - the task automaticly
 export async function SaveTask(boardId, groupId, task, activity = {}) {
@@ -127,6 +149,15 @@ export async function RemoveGroup(boardId, groupId, activity = {}) {
   board = await boardService.removeGroup(board, groupId, activity);
   updateBoard(board);
 }
+
+export async function setUrlParamId(urlParamsID) {
+  store.dispatch({
+    type: SET_URL_PARAM_ID,
+    urlParamsID
+  })
+}
+
+
 
 // Demo for Optimistic Mutation
 // (IOW - Assuming the server call will work, so updating the UI first)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadBoards, addBoard, removeBoard, updateBoard, getBoardById, RemoveTask, getEmptyBoard } from "../store/actions/board.actions.js";
-import { useParams} from "react-router-dom";
+import { loadBoards, addBoard, removeBoard, updateBoard, RemoveTask, getEmptyBoard, setUrlParamId, cleanCurrBoard, getBoardByID } from "../store/actions/board.actions.js";
+import { Navigate, Outlet, useNavigate, useParams} from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardsList } from "../cmps/BoardsList.jsx";
 import { SideNav } from "../cmps/SideNav.jsx";
@@ -12,19 +12,32 @@ import { BoardDetails } from "./BoardDetails.jsx";
 export function BoardIndex() {
   
   const params = useParams()
+  const navigate = useNavigate()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
+  const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
   
   useEffect(() => {
     loadBoards()
   }, [])
 
+  useEffect(() => {
+    const currParamId = params?.id ? params.id : null;
+    if(currParamId){
+      getBoardByID(currParamId)
+    } else {
+      cleanCurrBoard()
+    }
+  }, [params])
 
   async function onRemoveBoard(boardId) {
     try {
+      if(params.id === boardId){
+        navigate(`/boards`)
+      }
       await removeBoard(boardId)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
-      showSuccessMsg(`Could not add task`)
+      showErrorMsg(`Could not add task`)
       console.log('error',err)
     }
   }
@@ -36,7 +49,7 @@ export function BoardIndex() {
       addBoard(newBoard)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
-      showSuccessMsg(`Could not add task`)
+      showErrorMsg(`Could not add task`)
       console.log('error',err)
     }
   }
@@ -51,6 +64,8 @@ export function BoardIndex() {
     }
   }
 
+
+
   if (!boards) return <div>Loading...</div>
 
   return (
@@ -62,8 +77,8 @@ export function BoardIndex() {
         <SideNav boards={boards} onRemoveBoard={onRemoveBoard} onAddBoard={onAddBoard} onUpdateBoard={onUpdateBoard}/>
       </section>
       <section className="board-main">
-        {!params.id && (<BoardsList boards={boards}/>)}
-        {params.id && <BoardDetails />}
+        {!currBoard && (<BoardsList boards={boards} onUpdateBoard={onUpdateBoard}/>)}
+        {currBoard && <BoardDetails />} 
       </section>
     </section>
   );
