@@ -7,6 +7,7 @@
     color: $clr10;
     cursor: pointer;
     position: relative;
+    transition: opacity 0.3s ease;
 
     .selected-label{
         font-weight: normal;
@@ -15,6 +16,7 @@
     }
 
     .status-model{
+        z-index: 100000;
         background-color: $primary-background-color;
         list-style: none;
         width: 220px;
@@ -30,7 +32,6 @@
         top: 100%;
         left: 50%;
         transform: translateX(-50%) translateY(4px);
-        z-index: 2;
 
         .status-picker-content{
             transition: height .15s ease;
@@ -53,7 +54,7 @@
                     border-radius: 2px;
     
                     &:hover {
-                        opacity: .85;
+                        opacity: .7;
                     }
                 }
             }
@@ -122,7 +123,6 @@
     // }
 
 
-    //הגדרות כלליות להכניס לטקסט בטבלה!!!!
     // font-size: 14px;
     // overflow: hidden;
     // text-overflow: ellipsis;
