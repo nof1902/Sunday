@@ -9,27 +9,12 @@ import {
   RemoveTask,
   SaveGroup,
   SaveTask,
-  getBoardById,
   getEmptyGroup,
   updateBoard,
 } from "../store/actions/board.actions.js";
 
 export function BoardDetails() {
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
-  const params = useParams();
-
-  useEffect(() => {
-    loadBoard()
-  }, [params.id]);
-
-  async function loadBoard(){
-    try{
-      await getBoardById(params.id)
-    } catch (err){
-      showSuccessMsg(`Could not add task`);
-      console.log("error", err);
-    }
-  }
 
   async function onSaveGroup(index, group, activity) {
     try {

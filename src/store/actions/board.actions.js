@@ -12,6 +12,8 @@ import {
   SET_BOARDS,
   GET_BOARD_BY_ID,
   UNDO_REMOVE_BOARD,
+  CLEAN_CURR_BOARD,
+  SET_BOARD
 } from "../reducers/board.reducer.js";
 import { utilService } from "../../services/util.service.js";
 
@@ -50,18 +52,42 @@ export async function loadBoards(resetCurrBoard = false) {
   }
 }
 
-export async function getBoardById(boardId) {
+// export async function getBoardById(boardId) {
+//   try {
+//     const board = await boardService.getById(boardId);
+//     store.dispatch({
+//       type: GET_BOARD_BY_ID,
+//       board,
+//     });
+//   } catch (err) {
+//     console.log("Cannot load Boards", err);
+//     throw err;
+//   }
+// }
+
+export async function getBoardByID(boardId) {
   try {
-    const board = await boardService.getById(boardId);
     store.dispatch({
-      type: GET_BOARD_BY_ID,
-      board,
+      type: SET_BOARD,
+      boardId
     });
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
   }
 }
+
+export async function cleanCurrBoard(){
+  try {
+    store.dispatch({
+      type: CLEAN_CURR_BOARD,
+    });
+  } catch (err) {
+    console.log("Cannot load Boards", err);
+    throw err;
+  }
+}
+
 
 export async function removeBoard(boardId) {
   try {
@@ -123,6 +149,15 @@ export async function RemoveGroup(boardId, groupId, activity = {}) {
   board = await boardService.removeGroup(board, groupId, activity);
   updateBoard(board);
 }
+
+export async function setUrlParamId(urlParamsID) {
+  store.dispatch({
+    type: SET_URL_PARAM_ID,
+    urlParamsID
+  })
+}
+
+
 
 // Demo for Optimistic Mutation
 // (IOW - Assuming the server call will work, so updating the UI first)

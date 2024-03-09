@@ -3,7 +3,8 @@ export const GET_BOARD_BY_ID = 'GET_BOARD_BY_ID'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
 export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
-
+export const CLEAN_CURR_BOARD = 'CLEAN_CURR_BOARD'
+export const SET_BOARD = 'SET_BOARD'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
 const initialState = {
@@ -17,16 +18,12 @@ export function boardReducer(state = initialState, action = {}) {
     var boards
     switch (action.type) {
         case SET_BOARDS:
-            console.log('boardReducer - SET_BOARDS - newState.currBoard - ', newState.currBoard)
-            // newState = { ...state, boards: action.boards}
-            newState = { ...state, boards: action.boards, currBoard: action.resetCurrBoard ? null : state.currBoard}
-            console.log('boardReducer - SET_BOARDS - newState.currBoard - ', newState.currBoard)
+            newState = { ...state, boards: action.boards}
             break
-        case GET_BOARD_BY_ID:
-            console.log('boardReducer - GET_BOARD_BY_ID - action.board - ', action.board)
-            newState = {...state, currBoard: action.board}
-            console.log('boardReducer - GET_BOARD_BY_ID - currBoard - ', newState.currBoard)
-            break;
+        case SET_BOARD:
+            const board = state.boards.find(board => board._id === action.boardId)
+            newState = { ...state, currBoard: board}
+        break;
         case REMOVE_BOARD:
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
             boards = state.boards.filter(board => board._id !== action.boardId)
@@ -35,12 +32,12 @@ export function boardReducer(state = initialState, action = {}) {
         case ADD_BOARD:
             newState = { ...state, boards: [...state.boards, action.board] ,currBoard: action.board}
             break
+        case CLEAN_CURR_BOARD:
+            newState = { ...state, currBoard: null}
+            break
         case UPDATE_BOARD:
-            console.log('boardReducer - UPDATE_BOARD - action.board - ', action.board)
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
             newState = { ...state, boards , currBoard: action.board}
-            // newState = { ...state , currBoard: action.board}
-            console.log('boardReducer - UPDATE_BOARD - currBoard - ', newState.currBoard)
             break
         case UNDO_REMOVE_BOARD:
             if (state.lastRemovedBoard) {
@@ -51,23 +48,3 @@ export function boardReducer(state = initialState, action = {}) {
     }
     return newState
 }
-
-
-/* 
-
-        
-            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            newState = { ...state, boards }
-
-case ADD_TO_CART:
-            newState = { ...state, cart: [...state.cart, action.car] }
-            break
-        case REMOVE_FROM_CART:
-            cart = state.cart.filter(car => car._id !== action.carId)
-            newState = { ...state, cart }
-            break
-        case CLEAR_CART:
-            newState = { ...state, cart: [] }
-            break
-
-*/
