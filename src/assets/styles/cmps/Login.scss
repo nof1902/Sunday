@@ -1,0 +1,62 @@
+
+.login-header {
+    background-color: #f0f0f0; /* Greyish background */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.login-header-logo { 
+    width: 180px; /* Adjust the width of the logo as needed */
+    height: 44px;
+}
+
+.login-container {
+    // display: flex;
+    // flex-direction: column;
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+.login-title {
+    color: rgb (51,51,51);
+    font-weight: 200;
+}
+
+.login-input-group {
+    margin-bottom: 15px;
+}
+
+.login-email {
+    margin-top: 30px;
+    font-size: 16px;
+    width: 360px;
+    height: 40px;
+
+}
+
+.login-password {
+   // margin-top: 30px;
+    font-size: 16px;
+    width: 360px;
+    height:40px
+}
+
+.btn-login {
+    font-size: 18px;
+    width:360px;
+    height:48px;
+}
+
+.login-alt-login{
+    font-weight: 300;
+    height:16px;
+    font-size: 16px;
+}
+
+.seperator-line {
+    border-top: 1px solid #999; /* Adjust the width and color as needed */
+        width: 100%; /* Set the width of the separator */
+        margin: 10px 0; /* Adjust the margin as needed */
+}
