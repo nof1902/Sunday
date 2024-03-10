@@ -45,7 +45,7 @@ export function PriorityCmp({ info, onUpdate }) {
       style={{background: backgroundColor}}
       onClick={handleClickModal}
     >
-      <span style={{background: darkerBackgroundColor}} class="fold"> </span>
+      <span style={{background: darkerBackgroundColor}} className="fold"> </span>
 
       <h4 className="selected-label">{infoToEdit.selectedPriority?.label}</h4>
       {openEditModel && (

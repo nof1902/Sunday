@@ -8,112 +8,66 @@ import {
 import { svgService } from "../svg.service";
 import { useEffect, useRef, useState } from "react";
 import { AddBoardModal } from "./AddBoardModal";
+import { SideNavPreview } from "./SideNavPreview";
 
 export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
-  const [isShowTextBox, setIsShowTextBox] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [boardTitleToChang, setBoardTitleToChang] = useState("");
-  const [inputFocused, setInputFocused] = useState(null);
-
+  const [showAddBoardModal, setShowAddBoardModal] = useState(false);
   const [filterText, setFilterText] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
-  const modalRef = useRef()
+  
+  // const [editableBoardId, setEditableBoardId] = useState("");
+  // const [isShowTextBox, setIsShowTextBox] = useState(false);
+  // const [boardTitleToChang, setBoardTitleToChang] = useState("");
+  // const [inputFocused, setInputFocused] = useState(null);
 
-  const [editableBoardId, setEditableBoardId] = useState("");
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        handleClickModal();
-      }
+    // add board modal
+    function setAddBoardModal(){
+      setShowAddBoardModal(!showAddBoardModal)
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+  // const handleInputBlur = (board) => {
+  //   setInputFocused(false);
+  //   onUpdateBoard(board);
+  // };
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickModal]);
+  const filteredBoards = boards.filter((board) => board.title?.includes(filterText));
 
-  const handleInputFocus = () => {
-    setInputFocused(true);
-  };
-
-  const handleInputBlur = (board) => {
-    setInputFocused(false);
-    onUpdateBoard(board);
-  };
-
-  const filteredBoards = boards.filter((board) =>
-    board.title?.includes(filterText)
-  );
-
-  // function onChangeBoardTitle(boardId) {
-  //   setBoardTitleToChang(board);
-  //   setIsShowTextBox(true);
+  // function handleChange(ev) {
+  //   const val = ev.target.value;
+  //   setBoardTitleToChang((prevBoard) => ({ ...prevBoard, title: val }));
   // }
 
-  function handleChange(ev) {
-    const val = ev.target.value;
-    setBoardTitleToChang((prevBoard) => ({ ...prevBoard, title: val }));
-  }
+//   const onOpenMenu = (boardid) => (ev) => {
+//     setIsMenuOpen(!isMenuOpen);
 
-  const onOpenMenu = (boardid) => (ev) => {
-    setIsMenuOpen(!isMenuOpen);
+//     const buttonRect = ev.target.getBoundingClientRect();
 
-    const buttonRect = ev.target.getBoundingClientRect();
+//     setMenuPosition({
+//       top: buttonRect.bottom + window.scrollY,
+//       left: buttonRect.left + window.scrollX + 40,
+//     });
+//   };
 
-    setMenuPosition({
-      top: buttonRect.bottom + window.scrollY,
-      left: buttonRect.left + window.scrollX + 40,
-    });
-  };
+//   function onDeletePressed(boardId) {
+//     handleClickModal()
+//     // setIsMenuOpen(!isMenuOpen);
+//     onRemoveBoard(boardId);
+//   }
 
-  function onDeletePressed(boardId) {
-    handleClickModal()
-    // setIsMenuOpen(!isMenuOpen);
-    onRemoveBoard(boardId);
-  }
+//   function onRenamePressed(boardId) {
+//     //alert ("onRenamePressed " + boardid)
+//     handleClickModal()
+//     // setIsMenuOpen(!isMenuOpen);
+//     setEditableBoardId(boardId);
+//   }
 
-  function onBoardChange({target}) {
-    let { value, name: field, type, checked } = target
-    // value = (type === 'number') ? +value : value
-    switch (type) {
-        case 'number':
-        case 'range':
-            value = +value
-            break;
-        case 'checkbox':
-            value = checked
+//   function handleClickModal(){
+//     setIsMenuOpen(!isMenuOpen);
+// }
 
-        default:
-            break;
-    }
-    setFields((prevFields) => ({ ...prevFields, [field]: value }))
-  }
-
-  function onRenamePressed(boardId) {
-    //alert ("onRenamePressed " + boardid)
-    handleClickModal()
-    // setIsMenuOpen(!isMenuOpen);
-    setEditableBoardId(boardId);
-  }
-
-  function handleClickModal(){
-    setIsMenuOpen(!isMenuOpen);
-}
-  function handleOpenModal() {
-    setShowModal(true);
-  }
-  function handleCloseModal() {
-    setShowModal(false);
-  }
-
-  console.log("Editable Boardid", editableBoardId);
-
-  // const params = useParams()
   return (
     <nav className="side-navigation">
       <section className="sidenav-header">
@@ -197,7 +151,7 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
               </button>
             </section>
 
-            <button className="add-board-btn" onClick={handleOpenModal}>
+            <button className="add-board-btn" onClick={setAddBoardModal}>
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -216,8 +170,26 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
               </svg>
             </button>
           </section>
+        </section>
 
-          <section className="sidenav-boards">
+        <ul className="boards-list">
+          {filteredBoards.map(board => (
+            <SideNavPreview key={board._id} board={board} onRemoveBoard={onRemoveBoard} onUpdateBoard={onUpdateBoard}/>
+          ))}
+        </ul>
+      </section>
+      
+      {showAddBoardModal && <AddBoardModal onAddBoard={onAddBoard} handleCloseModal={setAddBoardModal}/>}
+    </nav>
+  );
+}
+
+
+
+
+
+
+          {/* <section className="sidenav-boards">
             {filteredBoards.map((board) => (
               <div key={board._id} className="sidenav-board">
                 <svg
@@ -249,14 +221,14 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
                     {board.title}
                   </NavLink>
                 )}
-                {/* {isShowTextBox && (
+                {isShowTextBox && (
                   <input
                     className="change-board-title"
                     onFocus={handleInputFocus}
                     onBlur={() => handleInputBlur(board)}
                     onChange={() => handleChange(board)}
                   />
-                )} */}
+                )}
                 <button
                   className="more-btn-show"
                   onClick={onOpenMenu(board._id)}
@@ -335,17 +307,8 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
                         </label>{" "}
                       </div>
                     </section>
-
-                    {/* <button onClick={closeMenu}>Close Menu</button> */}
                   </div>
                 )}
               </div>
             ))}
-          </section>
-        </section>
-      </section>
-
-      {showModal && <AddBoardModal onAddBoard={onAddBoard} handleCloseModal={handleCloseModal}/>}
-    </nav>
-  );
-}
+          </section> */}

@@ -46,7 +46,7 @@ export function StatusCmp({ info, onUpdate }) {
       style={{ backgroundColor: backgroundColor }}
       onClick={handleClickModal}
     >
-      <span style={{ background: darkerBackgroundColor }} class="fold">
+      <span style={{ background: darkerBackgroundColor }} className="fold">
       </span>
       <h4 className="selected-label">{infoToEdit.selectedStatus?.label}</h4>
       {openEditModel && (
