@@ -6,7 +6,7 @@
     grid-template-columns: 1fr auto; 
     align-items: center;
     border-radius: $border-radius;
-    transition: background-color 0.2s; 
+    transition: background-color 0.2s;
     position: relative;
     
     &:hover {
@@ -29,6 +29,20 @@
         align-self: center;
         margin-left: 0.5em;
       }
+
+      input{
+          align-self: center;
+          margin-left: 0.5em;
+          border: 1px solid transparent;
+          font-weight: normal;
+          font-size: 11pt;
+
+        &:focus {
+            background-color: $clr10;
+            border: 1px solid $clr1;
+            outline: none;
+        }
+    }
       
     }
   
@@ -46,10 +60,6 @@
 
         &:hover{
             background-color: #E3E3E5;
-        }
-
-        svg{
-            
         }
 
     }
@@ -76,7 +86,7 @@
         padding: 8px;
 
         > * {
-            line-height: 4px;
+            line-height: 24px;
             padding: 2em;
             display: flex;
             flex-direction: row;
@@ -88,7 +98,7 @@
           h1{
             all: unset;
             font-size: 10pt;
-            margin-left: 0.8rem;
+            margin-left: 0.5rem;
           }
         }
 

@@ -1,10 +1,13 @@
 // import routes from '../routes'
-import { NavLink } from "react-router-dom";
-import { svgService } from "../svg.service";
-import { useEffect, useRef, useState } from "react";
-import { AddBoardModal } from "./AddBoardModal";
+import { useEffect, useRef } from "react";
+import { useForm } from "../customHooks/useForm";
 
-export function OptionsCmp({ board, onRemoveBoard, onUpdateBoard , onOpenMoreOptions}) {
+export function OptionsCmp({
+  board,
+  onRemoveBoard,
+  onRenameBoard,
+  onOpenMoreOptions,
+}) {
   const modalRef = useRef();
 
   useEffect(() => {
@@ -21,11 +24,13 @@ export function OptionsCmp({ board, onRemoveBoard, onUpdateBoard , onOpenMoreOpt
     };
   }, [onOpenMoreOptions]);
 
-
+  function onChangeBoardName(){
+    
+  }
 
   return (
     <section ref={modalRef} className="set-board-options">
-      <div onClick={() => onChangeBoardTitle()} className="update-board">
+      <div onClick={() => onRenameBoard()} className="update-board">
         <svg
           viewBox="0 0 20 20"
           fill="currentColor"

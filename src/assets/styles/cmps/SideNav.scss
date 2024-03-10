@@ -1,14 +1,32 @@
 .side-navigation{
     display: grid;
-    grid-template-rows: auto 1fr;
-    // grid-template-columns: 0.2em 1fr 0.2em;
+    grid-template-rows: auto auto 1fr;
     background-color: $clr10;
     border-start-end-radius: 10px;
     height: 100%;
+    position: relative;
+
+    .hide-nav{
+        position: absolute;
+        top: -0.2em;
+        right: 0;
+        margin: 0;
+        width: 35px;
+        height: 40px;
+        display: none;
+        justify-content: center;
+
+        .hide-nav-btn{
+            all: unset;
+        }
+    }
 
     .sidenav-header {
         border-block-end: 1px solid $clr11;
         padding: 0.8em;
+        display: grid;
+        grid-template-columns: 1fr 2em;
+        align-items: center;
 
         .sidenav-home {
             display: grid;
@@ -28,9 +46,6 @@
            }
         }
     }
-
-
-
     .sidenav-main {
         display: grid;
         grid-template-rows: auto 1fr;
@@ -160,89 +175,11 @@
             margin-left: 0.8em;
         }
     }
+
+    &:hover .hide-nav{
+        display: flex;
+        background-color: $clr17;
+        border-radius: $border-radius;
+    }
 }
-
-
-
-/*
-
-.boards-list {
-            display: grid;
-            grid-template-columns: 2em 1fr 2em;
-            align-items: center;
-            padding: 0.15em 0.6em;
-            font-size: 12pt;
-            color: $clr2;
-            border-radius: $border-radius;
-            margin: 0;
-            padding: 0;
-
-            .change-board-title{
-                margin: 0;
-                padding: 0;
-                border: hidden;
-                width: 100%;
-                all: unset;
-        
-                &:hover{
-                    border: 1px solid $clr11;
-                }
-        
-                &:focus{
-                    background-color: $clr10;
-                    border: 1px solid $clr1;
-                    outline: none;
-                }
-            }
-
-            &:hover {
-                background-color: $clr17;
-
-                .more-btn-show {
-                    color: $clr2;
-                    align-items: center;
-                    display: flex;
-                    justify-content: center;
-                    padding: 0.2em 0em;
-                    margin: 0.5em 0;
-                    border-radius: $border-radius;
-                    background-color: $clr17;
-                    opacity: 1;
-                }
-
-            }
-
-            //לעשות מצב של אקטיב-סלקטד
-            a:active {
-                // background-color: $clr14;
-            }
-
-            .more-btn-show {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-                padding: 0.2em 0em;
-                margin: 0.5em 0;
-                border-radius: $border-radius;
-                opacity: 0;
-            }
-            
-        }
-
-        a {
-            color: $clr2;
-         }
-     
-         a:hover {
-             text-decoration: none;
-         }
-
-*/
-
-
-
-
-
-
-
 

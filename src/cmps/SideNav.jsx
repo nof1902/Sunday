@@ -13,63 +13,40 @@ import { SideNavPreview } from "./SideNavPreview";
 export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
   const [showAddBoardModal, setShowAddBoardModal] = useState(false);
   const [filterText, setFilterText] = useState("");
-  
-  // const [editableBoardId, setEditableBoardId] = useState("");
-  // const [isShowTextBox, setIsShowTextBox] = useState(false);
-  // const [boardTitleToChang, setBoardTitleToChang] = useState("");
-  // const [inputFocused, setInputFocused] = useState(null);
 
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+  // add board modal
+  function setAddBoardModal() {
+    setShowAddBoardModal(!showAddBoardModal);
+  }
 
-
-    // add board modal
-    function setAddBoardModal(){
-      setShowAddBoardModal(!showAddBoardModal)
-    }
-
-  // const handleInputBlur = (board) => {
-  //   setInputFocused(false);
-  //   onUpdateBoard(board);
-  // };
-
-  const filteredBoards = boards.filter((board) => board.title?.includes(filterText));
-
-  // function handleChange(ev) {
-  //   const val = ev.target.value;
-  //   setBoardTitleToChang((prevBoard) => ({ ...prevBoard, title: val }));
-  // }
-
-//   const onOpenMenu = (boardid) => (ev) => {
-//     setIsMenuOpen(!isMenuOpen);
-
-//     const buttonRect = ev.target.getBoundingClientRect();
-
-//     setMenuPosition({
-//       top: buttonRect.bottom + window.scrollY,
-//       left: buttonRect.left + window.scrollX + 40,
-//     });
-//   };
-
-//   function onDeletePressed(boardId) {
-//     handleClickModal()
-//     // setIsMenuOpen(!isMenuOpen);
-//     onRemoveBoard(boardId);
-//   }
-
-//   function onRenamePressed(boardId) {
-//     //alert ("onRenamePressed " + boardid)
-//     handleClickModal()
-//     // setIsMenuOpen(!isMenuOpen);
-//     setEditableBoardId(boardId);
-//   }
-
-//   function handleClickModal(){
-//     setIsMenuOpen(!isMenuOpen);
-// }
+  const filteredBoards = boards.filter((board) =>
+    board.title?.includes(filterText)
+  );
 
   return (
     <nav className="side-navigation">
+      <section className="hide-nav">
+          <button className="hide-nav-btn">
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="14"
+                height="14"
+                role="button"
+                tabindex="0"
+                aria-hidden="false"
+                class="icon_38581124ed JtHJJ clickable_0f812f0b06 noFocusStyle_ad385b7e0c"
+                data-testid="icon"
+              >
+                <path
+                  d="M5.46967 10.5303L6 10L5.46967 9.46967C5.17678 9.76256 5.17678 10.2374 5.46967 10.5303ZM7.06066 10L13.5303 3.53033C13.8232 3.23744 13.8232 2.76256 13.5303 2.46967C13.2374 2.17678 12.7626 2.17678 12.4697 2.46967L5.46967 9.46967L6 10L5.46967 10.5303L12.4697 17.5303C12.7626 17.8232 13.2374 17.8232 13.5303 17.5303C13.8232 17.2374 13.8232 16.7626 13.5303 16.4697L7.06066 10Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+        </section>
       <section className="sidenav-header">
         <div className="sidenav-home">
           <svg
@@ -173,23 +150,29 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
         </section>
 
         <ul className="boards-list">
-          {filteredBoards.map(board => (
-            <SideNavPreview key={board._id} board={board} onRemoveBoard={onRemoveBoard} onUpdateBoard={onUpdateBoard}/>
+          {filteredBoards.map((board) => (
+            <SideNavPreview
+              key={board._id}
+              board={board}
+              onRemoveBoard={onRemoveBoard}
+              onUpdateBoard={onUpdateBoard}
+            />
           ))}
         </ul>
       </section>
-      
-      {showAddBoardModal && <AddBoardModal onAddBoard={onAddBoard} handleCloseModal={setAddBoardModal}/>}
+
+      {showAddBoardModal && (
+        <AddBoardModal
+          onAddBoard={onAddBoard}
+          handleCloseModal={setAddBoardModal}
+        />
+      )}
     </nav>
   );
 }
 
-
-
-
-
-
-          {/* <section className="sidenav-boards">
+{
+  /* <section className="sidenav-boards">
             {filteredBoards.map((board) => (
               <div key={board._id} className="sidenav-board">
                 <svg
@@ -311,4 +294,5 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
                 )}
               </div>
             ))}
-          </section> */}
+          </section> */
+}

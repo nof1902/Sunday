@@ -1,22 +1,41 @@
 // import routes from '../routes'
 import {
-    NavLink,
+    NavLink, useParams,
   } from "react-router-dom";
   import { svgService } from "../svg.service";
   import { useEffect, useRef, useState } from "react";
   import { AddBoardModal } from "./AddBoardModal";
 import { OptionsCmp } from "./OptionsCmp";
+import { useForm } from "../customHooks/useForm";
   
   export function SideNavPreview({ board, onRemoveBoard, onUpdateBoard }) {
 
     const [isOptionsModalOpen,SetIsOptionsModalOpen] = useState(false)
+    const [editBoard, setEditBoard, handleChange] = useForm(board);
+    const [isEditMode,setIsEditMode] = useState(false)
+    const activeBoardId = useParams() 
+    
+    useEffect(() => {
+      setEditBoard(board);
+    }, [board]);
+    
+    function handleBlur() {
+        setIsEditMode(!isEditMode)
+        onUpdateBoard(editBoard);
+    }
 
-    function onOpenMoreOptions(ev){
+    function onOpenMoreOptions(){
         SetIsOptionsModalOpen(!isOptionsModalOpen)
     }
 
+    function onRenameBoard(){
+        onOpenMoreOptions()
+        setIsEditMode(!isEditMode)
+    }
+
+
     return (
-            <li key={board._id} className="board-preview">
+            <li key={board._id} style={{background: (activeBoardId.id === board._id)? `#cce5ff`: ``}} className="board-preview">
                     <NavLink className='board-link' key={board._id} to={`/boards/${board._id}`}>
                         <svg
                             viewBox="0 0 20 20"
@@ -34,7 +53,18 @@ import { OptionsCmp } from "./OptionsCmp";
                                 clipRule="evenodd"
                             ></path>
                         </svg>
-                        <h4 className="board-title">{board.title}</h4>
+                        {isEditMode?
+                            (<input
+                                type="text"
+                                name="title"
+                                value={editBoard.title}
+                                placeholder="new board title"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                autoFocus
+                            />) :(
+                                <h4 className="board-title">{board.title}</h4>
+                            )} 
                     </NavLink>
                     <button className="more-btn-show" onClick={(ev, board) => onOpenMoreOptions(ev,board)}>
                       <svg
@@ -51,7 +81,7 @@ import { OptionsCmp } from "./OptionsCmp";
                         ></path>
                       </svg>
                     </button>
-                {isOptionsModalOpen && <OptionsCmp board={board} onRemoveBoard={onRemoveBoard} onUpdateBoard={onUpdateBoard} onOpenMoreOptions={onOpenMoreOptions}/>}
+                {isOptionsModalOpen && <OptionsCmp board={board} onRemoveBoard={onRemoveBoard} onRenameBoard={onRenameBoard} onOpenMoreOptions={onOpenMoreOptions}/>}
             </li>
     );
   }
