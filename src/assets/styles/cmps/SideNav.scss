@@ -160,6 +160,26 @@
                 font-size: 12pt;
                 color: $clr2;
                 border-radius: $border-radius;
+                margin: 0;
+                padding: 0;
+
+                .change-board-title{
+                    margin: 0;
+                    padding: 0;
+                    border: hidden;
+                    width: 100%;
+                    all: unset;
+            
+                    &:hover{
+                        border: 1px solid $clr11;
+                    }
+            
+                    &:focus{
+                        background-color: $clr10;
+                        border: 1px solid $clr1;
+                        outline: none;
+                    }
+                }
 
                 &:hover {
                     background-color: $clr15;
