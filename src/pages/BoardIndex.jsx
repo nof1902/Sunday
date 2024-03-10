@@ -15,6 +15,7 @@ export function BoardIndex() {
   const navigate = useNavigate()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
+  const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
   
   useEffect(() => {
     loadBoards()
@@ -66,7 +67,7 @@ export function BoardIndex() {
 
 
 
-  if (!boards) return <div>Loading...</div>
+  if (!boards) return <div>Loading... {isLoading}</div>
 
   return (
     <section className="board-index">

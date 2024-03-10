@@ -6,8 +6,19 @@ export const utilService = {
     randomPastTime,
     getRandomColor,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    darkenColor
 }
+
+
+function darkenColor(rgbString, amount) {
+    let [r, g, b] = rgbString.match(/\d+/g).map(Number);
+    r = Math.max(0, r - amount);
+    g = Math.max(0, g - amount);
+    b = Math.max(0, b - amount);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
 
 function makeId(length = 6) {
     var txt = ''
