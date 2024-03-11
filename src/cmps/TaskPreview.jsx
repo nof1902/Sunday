@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import { onToggleModal } from "../store/actions/app.actions";
 import { SidePanelSlideHeader } from "./SidePanelSlideHeader";
-import { PriorityCmp } from "./dynamic-iputs/PriorityCmp";
-import { StatusCmp } from "./dynamic-iputs/StatusCmp";
-import { useParams } from "react-router";
+import { DynamicCmp } from "./DynamicCmp";
 
 // import { svgService } from "../svg.service"
 
-export function TaskPreview({ task, deleteTask, saveTaskCall, cmpsOrder }) {
+export function TaskPreview({
+  task,
+  deleteTask,
+  saveTaskCall,
+  cmpsOrder,
+  statusPicker,
+  priorityPicker,
+}) {
   const [taskToEdit, setTaskToEdit] = useState(task);
   const [editMode, setEditMode] = useState(false);
   const [canSave, setCanSave] = useState(false);
@@ -27,7 +32,6 @@ export function TaskPreview({ task, deleteTask, saveTaskCall, cmpsOrder }) {
     const val = ev.target.value;
     setTaskToEdit((prevTitle) => ({ ...prevTitle, title: val }));
   }
-
 
   function handleInputBlur() {
     // Checking if there is a change and needs to be saved
@@ -134,53 +138,11 @@ export function TaskPreview({ task, deleteTask, saveTaskCall, cmpsOrder }) {
             cmpType={cmpType}
             onUpdate={onUpdate}
             taskToEdit={taskToEdit}
+            statusPicker ={statusPicker}
+            priorityPicker ={priorityPicker}
           />
         </section>
       ))}
     </section>
   );
 }
-
-export function DynamicCmp({ cmpType, onUpdate, taskToEdit }) {
-  let info = {};
-  const StatusInfo = [
-    { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
-    { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
-    { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
-    { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
-  ];
-  const PriorityInfo = [
-    { label: "Critical ⚠", backgroundColor: "rgb(51, 51, 51)" },
-    { label: "High", backgroundColor: "rgb(64, 22, 148)" },
-    { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
-    { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
-    { label: "", backgroundColor: "rgb(196, 196, 196)" },
-  ];
-
-  switch (cmpType) {
-    case "priority":
-      info = {
-        selectedPriority: taskToEdit.priority,
-        priorities: PriorityInfo,
-      };
-      return <PriorityCmp info={info} onUpdate={onUpdate} />;
-    case "status":
-      info = {
-        selectedStatus: taskToEdit.status,
-        statuses: StatusInfo,
-      };
-      return <StatusCmp info={info} onUpdate={onUpdate} />;
-    // case "member":
-    //     return <MemberPicker info={info} onUpdate={onUpdate} />;
-    default:
-      return <p>UNKNOWN {cmpType}</p>;
-  }
-}
-
-// const cmp1 = {
-//   type: 'status-picker',
-//   info: {
-//       selectedStatus: 'pending',
-//       statuses: [{}, {}]
-//   }
-// }

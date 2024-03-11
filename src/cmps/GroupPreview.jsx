@@ -15,6 +15,8 @@ export function GroupPreview({
   onRemoveGroup,
   onUpdateGroup,
   cmpsOrder,
+  statusPicker,
+  priorityPicker
 }) {
   const param = useParams();
 
@@ -158,6 +160,8 @@ export function GroupPreview({
           deleteTask={deleteTask}
           saveTaskCall={saveTaskCall}
           cmpsOrder={cmpsOrder}
+          statusPicker={statusPicker}
+          priorityPicker={priorityPicker}
         />
       </section>
       <section className="group-footer">

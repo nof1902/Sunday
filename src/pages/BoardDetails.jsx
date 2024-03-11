@@ -79,7 +79,7 @@ export function BoardDetails() {
   }
 
   if (!currBoard) return <div>Loading...</div>;
-  const { groups , cmpsOrder } = currBoard;
+  const { groups , cmpsOrder , statusPicker, priorityPicker} = currBoard;
 
   return (
     <section className="board-details">
@@ -97,6 +97,8 @@ export function BoardDetails() {
         onRemoveGroup={onRemoveGroup}
         onUpdateGroup={onUpdateGroup}
         cmpsOrder={cmpsOrder}
+        statusPicker={statusPicker}
+        priorityPicker={priorityPicker}
       />
       <button
         className="new-group-btn"
