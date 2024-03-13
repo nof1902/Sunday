@@ -17,14 +17,23 @@ import {
   updateBoard,
 } from "../store/actions/board.actions.js";
 
-export function BoardDetails({ onUpdateBoard }) {
+export function BoardDetails() {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
+  const params = useParams()
+  
+  useEffect(() => {
+    if(params.id){
+      getBoardByID(params.id)
+    } else {
+      cleanCurrBoard()
+    }
+  }, [params])
 
   async function onSaveGroup(index, group, activity) {
     try {
       const updatedBoard = await SaveGroup(currBoard._id, index, group, activity);
-      onUpdateBoard(updatedBoard)
+      // onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);
@@ -35,7 +44,7 @@ export function BoardDetails({ onUpdateBoard }) {
   async function onRemoveGroup(groupId) {
     try {
       const updatedBoard = await RemoveGroup(currBoard._id, groupId);
-      onUpdateBoard(updatedBoard)
+      // onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);
@@ -46,7 +55,7 @@ export function BoardDetails({ onUpdateBoard }) {
   async function onUpdateGroup(group, activity) {
     try {
       const updatedBoard = await SaveGroup(currBoard._id, null, group, activity)
-      onUpdateBoard(updatedBoard)
+      // onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -58,7 +67,7 @@ export function BoardDetails({ onUpdateBoard }) {
     try {
       
       const updatedBoard = await SaveTask(currBoard._id, groupId, task, activity)
-      onUpdateBoard(updatedBoard)
+      // onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -69,11 +78,21 @@ export function BoardDetails({ onUpdateBoard }) {
   async function onRemoveTask(groupId, taskId) {
     try {
       const updatedBoard = await RemoveTask(currBoard._id, groupId, taskId);
-      onUpdateBoard(updatedBoard)
+      // onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);
       console.log("error", err);
+    }
+  }
+
+  async function onUpdateBoard(boardToSave) {
+    try {
+        await updateBoard(boardToSave)
+        showSuccessMsg(`board updated`)
+    } catch (err) {
+        showErrorMsg('Cannot update board')
+        console.log('error',err)
     }
   }
 

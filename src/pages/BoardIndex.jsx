@@ -13,19 +13,11 @@ export function BoardIndex() {
   const params = useParams()
   const navigate = useNavigate()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
-  const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
+  // const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
   
   useEffect(() => {
     loadBoards()
   }, [])
-
-  useEffect(() => {
-    if(params.id){
-      getBoardByID(params.id)
-    } else {
-      cleanCurrBoard()
-    }
-  }, [params])
 
   async function onRemoveBoard(boardId) {
     try {
@@ -73,8 +65,8 @@ export function BoardIndex() {
         <SideNav boards={boards} onRemoveBoard={onRemoveBoard} onAddBoard={onAddBoard} onUpdateBoard={onUpdateBoard}/>
       </section>
       <section className="board-main">
-        {!currBoard && (<BoardsList boards={boards} onUpdateBoard={onUpdateBoard}/>)}
-        {currBoard && <BoardDetails onUpdateBoard={onUpdateBoard}/>} 
+        {!params.id && (<BoardsList boards={boards} onUpdateBoard={onUpdateBoard}/>)}
+        {params.id && <BoardDetails onUpdateBoard={onUpdateBoard}/>} 
       </section>
     </section>
   );

@@ -130,29 +130,29 @@ export async function updateBoard(board) {
 export async function SaveTask(boardId, groupId, task, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.saveTask(board, groupId, task, activity);
-  return board
-  // updateBoard(board);
+  updateBoard(board);
+  // return board
 }
 
 export async function RemoveTask(boardId, groupId, taskId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeTask(board, groupId, taskId, activity);
-  return board
-  // updateBoard(board);
+  updateBoard(board);
+  // return board
 }
 
 export async function SaveGroup(boardId, index, group, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.saveGroup(board, index, group, activity);
-  return board
-  // updateBoard(board);
+  updateBoard(board);
+  // return board
 }
 
 export async function RemoveGroup(boardId, groupId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeGroup(board, groupId, activity);
-  return board
-  // updateBoard(board);
+  updateBoard(board);
+  // return board
 }
 
 // Demo for Optimistic Mutation
