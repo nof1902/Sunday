@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+
 import {
   RemoveGroup,
   RemoveTask,
@@ -85,8 +87,46 @@ export function BoardDetails() {
   if (!currBoard) return <div>Loading...</div>;
   const { groups , cmpsOrder , statusPicker, priorityPicker} = currBoard;
 
+  const handleDragDrop = async (results) => {
+    const { source, destination, type } = results
+    // console.log(results)
+    if (!destination) return
+
+    if (
+      source.droppableId === destination.droppableId &&
+      source.index === destination.index
+    ) return
+
+
+    if(type === 'group') {
+      console.log('group')
+      const reorderdGroups = [...groups]
+
+
+      const sourceIndex = source.index
+      const destinationIndex = destination.index
+      console.log('sourceIndex', sourceIndex , 'destinationIndex', destinationIndex)
+
+
+      const [deletedGroup] = reorderdGroups.splice(sourceIndex, 1)
+      reorderdGroups.splice(destinationIndex, 0, deletedGroup)
+
+      // SetGroups(reorderdGroups)
+      
+      // currBoard.groups = [...reorderdGroups]
+      // console.log('currBoard', currBoard);
+      // await onUpdateBoard(currBoard)
+      return onUpdateBoard({...currBoard, groups: [...reorderdGroups] })
+    }
+
+
+  }
+
+
+
   return (
     <section className="board-details">
+    <DragDropContext onDragEnd={handleDragDrop}>
       <BoardIndexHeader
         board={currBoard}
         onSaveTask={onSaveTask}
@@ -94,7 +134,10 @@ export function BoardDetails() {
         onUpdateBoard={onUpdateBoard}
         cmpsOrder={cmpsOrder}
       />
-      <GroupList
+    <Droppable droppableId="GROUP" type="group">
+    {(provided) => (
+      <div {...provided.droppableProps} ref={provided.innerRef}>
+        <GroupList
         groups={groups}
         onSaveTask={onSaveTask}
         onRemoveTask={onRemoveTask}
@@ -104,6 +147,12 @@ export function BoardDetails() {
         statusPicker={statusPicker}
         priorityPicker={priorityPicker}
       />
+      {provided.placeholder}
+      </div>
+    )}
+    </Droppable>
+
+      
       <button
         className="new-group-btn"
         onClick={() =>
@@ -120,6 +169,7 @@ export function BoardDetails() {
         </svg>
         Add new group
       </button>
+      </DragDropContext>
     </section>
   );
 }
