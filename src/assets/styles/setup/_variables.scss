@@ -24,9 +24,11 @@ $primary-background-hover-color: rgba(103, 104, 121, 0.1);
 
 
 //Fonts
-$font-txt: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
-$font-title: Poppins, Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
-
+// $font-txt: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+// $font-title: Poppins, Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+$font-title: 'Poppins';
+$font-txt: 'Figtree';
+// $font-txt: Figtree;
 
 // $border-radius: 0.3em;
 $border-radius: 5px;

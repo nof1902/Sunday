@@ -1,7 +1,7 @@
 // shared for group-title & input for change it
 .text-style{ 
     font-weight: 500;
-    margin-inline-start: 0.5em;
+    margin-inline-start: 0.4em;
 }
 
 .group-preview {
@@ -16,6 +16,7 @@
         display: flex;
         justify-content: left;
         align-items: center;
+        margin-inline-start: 0.5em;
 
         .delete-btn {
             width: 23px;
@@ -36,6 +37,13 @@
             }
         }
         
+        .expansion-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-inline-start: 0.75em;
+        }
+
         .collapse-group {
             color: $clr13;
             transition: transform .2s;
@@ -54,7 +62,8 @@
 
     .tasks-header {
         display: grid;
-        grid-template-columns: 350px repeat(5, 145px);
+        // grid-template-columns: 325px repeat(5, 137px);
+        grid-template-columns: 325px repeat(auto-fill, 137px);
         overflow: auto;
         text-align: center;
         color: $clr2;

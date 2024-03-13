@@ -1,6 +1,69 @@
 @font-face {
-    // font-family: caveat;
-    // src: url(../../fonts/Caveat/Caveat-Regular.ttf);
+    font-family: 'Poppins';
+    // src: url(../../fonts/Poppins/Poppins-Regular.woff);
+    src: url('../../fonts/Poppins/Poppins-Regular.woff') format('woff');
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Poppins';
+    // src: url(../../fonts/Poppins/Poppins-Medium.woff);
+    src: url('../../fonts/Poppins/Poppins-Medium.woff') format('woff');
+    font-style: normal;
+    font-display: swap;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../../fonts/Poppins/Poppins-SemiBold.woff') format('woff');
+    font-style: normal;
+    font-display: swap;
+    font-weight: 600;
+}
+
+//Figtree
+//Regular 400
+@font-face {
+    font-family: 'Figtree'; 
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/Figtree/Figtree-Regular.woff2') format('woff2');
+    font-display: swap;
+  }
+  
+//Medium 500
+@font-face {
+    font-family: 'Figtree'; 
+    font-style: normal;
+    font-weight: 500;
+    src: url('../../fonts/Figtree/Figtree-Medium.woff2') format('woff2');
+    font-display: swap;
+  }
+  
+//SemiBold 600
+@font-face {
+    font-family: 'Figtree'; 
+    font-style: normal;
+    font-weight: 600;
+    src: url('../../fonts/Figtree/Figtree-SemiBold.woff2') format('woff2');
+    font-display: swap;
+  }
+
+//Bold 700
+@font-face {
+    font-family: 'Figtree'; 
+    font-style: normal;
+    font-weight: 700;
+    src: url('../../fonts/Figtree/Figtree-Bold.woff2') format('woff2');
+    font-display: swap;
+  } 
+
+
+@font-face {
+    // font-family: Figtree;
+    // src: url(../../fonts/Figtree/Caveat-Regular.ttf);
 }
 @font-face {
     // font-family: montserrat;
@@ -9,4 +72,4 @@
 
 
 
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');Poppins

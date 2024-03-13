@@ -100,7 +100,7 @@ export function BoardIndexHeader({
             className="add-task"
             onClick={() => onSaveTask(null, createEmptyTask())}
           >
-            New Task
+            New task
           </button>
           <button
             className="add-group"

@@ -103,11 +103,12 @@ export function GroupPreview({
             ></path>
           </svg>
         </button>
+        <div className="expansion-btn">
         <svg
           viewBox="0 0 20 20"
           color={group.style}
           fill="currentColor"
-          width="24"
+          width="22"
           height="24"
           role="button"
           tabIndex="0"
@@ -122,6 +123,8 @@ export function GroupPreview({
             clipRule="evenodd"
           ></path>
         </svg>
+        </div>
+        
         {isTitleGroupEditMode ? (
           <input
             className="new-input text-style group-title"
