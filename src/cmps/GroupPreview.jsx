@@ -7,6 +7,7 @@ import { MdOutlineExpandMore } from "react-icons/md";
 import { func } from "prop-types";
 import { useDebounce } from "../customHooks/useDebounce.js";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js";
+import { Droppable, Draggable } from "react-beautiful-dnd"
 
 export function GroupPreview({
   group,
@@ -151,21 +152,40 @@ export function GroupPreview({
         className="tasks-table"
         style={{ borderInlineStart: `7px solid ${group.style}` }}
       >
-        <section className="tasks-header">
+
+      <Droppable direction="horizontal" droppableId="COLUMN" type="column">
+      {(provided) => (
+        <section className="tasks-header" {...provided.droppableProps} ref={provided.innerRef}>
           <h4>Item</h4>
           {cmpsOrder.map((key, idx) => (
-            <h4 key={`${key}${idx}`}>{key}</h4>
+            <Draggable draggableId={`${key}${idx}`} key={idx} index={idx}>
+            {(provided) => (
+              <h4 key={`${key}${idx}`} {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>{key}</h4>
+            )}
+            </Draggable>
           ))}
+          {provided.placeholder}
+          <div>+</div>
         </section>
+      )}
+      </Droppable>
 
-        <TaskList
-          tasks={tasks}
-          deleteTask={deleteTask}
-          saveTaskCall={saveTaskCall}
-          cmpsOrder={cmpsOrder}
-          statusPicker={statusPicker}
-          priorityPicker={priorityPicker}
-        />
+      <Droppable droppableId={group.id} type="task">
+      {(provided) => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          <TaskList
+            tasks={tasks}
+            deleteTask={deleteTask}
+            saveTaskCall={saveTaskCall}
+            cmpsOrder={cmpsOrder}
+            statusPicker={statusPicker}
+            priorityPicker={priorityPicker}
+          />
+          {provided.placeholder}
+        </div>
+      )}
+      </Droppable>
+         
       </section>
       <section className="group-footer">
         <div
