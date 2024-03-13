@@ -17,15 +17,14 @@ import {
   updateBoard,
 } from "../store/actions/board.actions.js";
 
-export function BoardDetails() {
+export function BoardDetails({ onUpdateBoard }) {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
 
-  
-
   async function onSaveGroup(index, group, activity) {
     try {
-      await SaveGroup(currBoard._id, index, group, activity);
+      const updatedBoard = await SaveGroup(currBoard._id, index, group, activity);
+      onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);
@@ -35,7 +34,8 @@ export function BoardDetails() {
 
   async function onRemoveGroup(groupId) {
     try {
-      await RemoveGroup(currBoard._id, groupId);
+      const updatedBoard = await RemoveGroup(currBoard._id, groupId);
+      onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add task`);
@@ -45,7 +45,8 @@ export function BoardDetails() {
 
   async function onUpdateGroup(group, activity) {
     try {
-      await SaveGroup(currBoard._id, null, group, activity)
+      const updatedBoard = await SaveGroup(currBoard._id, null, group, activity)
+      onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -55,8 +56,9 @@ export function BoardDetails() {
 
   async function onSaveTask(groupId, task, activity = {}) {
     try {
-      // console.log(task)
-      await SaveTask(currBoard._id, groupId, task, activity)
+      
+      const updatedBoard = await SaveTask(currBoard._id, groupId, task, activity)
+      onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -66,20 +68,10 @@ export function BoardDetails() {
 
   async function onRemoveTask(groupId, taskId) {
     try {
-      await RemoveTask(currBoard._id, groupId, taskId);
+      const updatedBoard = await RemoveTask(currBoard._id, groupId, taskId);
+      onUpdateBoard(updatedBoard)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
-      showErrorMsg(`Could not add task`);
-      console.log("error", err);
-    }
-  }
-
-  async function onUpdateBoard(updatedBoard) {
-    try{
-      await updateBoard(updatedBoard)
-      showSuccessMsg(`Board update successfully`);
-      console.log(currBoard.title)
-    } catch (err){
       showErrorMsg(`Could not add task`);
       console.log("error", err);
     }
@@ -163,52 +155,51 @@ export function BoardDetails() {
   }
 
 
-
   return (
     <section className="board-details">
-    <DragDropContext onDragEnd={handleDragDrop}>
-      <BoardIndexHeader
-        board={currBoard}
-        onSaveTask={onSaveTask}
-        onSaveGroup={onSaveGroup}
-        onUpdateBoard={onUpdateBoard}
-        cmpsOrder={cmpsOrder}
-      />
-    <Droppable droppableId="GROUP" type="group">
-    {(provided) => (
-      <div {...provided.droppableProps} ref={provided.innerRef}>
-        <GroupList
-        groups={groups}
-        onSaveTask={onSaveTask}
-        onRemoveTask={onRemoveTask}
-        onRemoveGroup={onRemoveGroup}
-        onUpdateGroup={onUpdateGroup}
-        cmpsOrder={cmpsOrder}
-        statusPicker={statusPicker}
-        priorityPicker={priorityPicker}
-      />
-      {provided.placeholder}
-      </div>
-    )}
-    </Droppable>
+      <DragDropContext onDragEnd={handleDragDrop}>
+        <BoardIndexHeader
+          board={currBoard}
+          onSaveTask={onSaveTask}
+          onSaveGroup={onSaveGroup}
+          onUpdateBoard={onUpdateBoard}
+          cmpsOrder={cmpsOrder}
+        />
+      <Droppable droppableId="GROUP" type="group">
+      {(provided) => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          <GroupList
+          groups={groups}
+          onSaveTask={onSaveTask}
+          onRemoveTask={onRemoveTask}
+          onRemoveGroup={onRemoveGroup}
+          onUpdateGroup={onUpdateGroup}
+          cmpsOrder={cmpsOrder}
+          statusPicker={statusPicker}
+          priorityPicker={priorityPicker}
+        />
+        {provided.placeholder}
+        </div>
+      )}
+      </Droppable>
 
-      <button
-        className="new-group-btn"
-        onClick={() =>
-          onSaveGroup(currBoard.groups.length, getEmptyGroup(), {})
-        }
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24"
-          fill="#323338"
-          width="24"
+        <button
+          className="new-group-btn"
+          onClick={() =>
+            onSaveGroup(currBoard.groups.length, getEmptyGroup(), {})
+          }
         >
-          <path d="M11.3 18.6v-5.9H5.4v-1.4h5.9V5.4h1.4v5.9h5.9v1.4h-5.9v5.9Z"></path>
-        </svg>
-        Add new group
-      </button>
-      </DragDropContext>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            fill="#323338"
+            width="24"
+          >
+            <path d="M11.3 18.6v-5.9H5.4v-1.4h5.9V5.4h1.4v5.9h5.9v1.4h-5.9v5.9Z"></path>
+          </svg>
+          Add new group
+        </button>
+        </DragDropContext>
     </section>
   );
 }

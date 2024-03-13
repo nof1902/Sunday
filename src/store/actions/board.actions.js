@@ -130,36 +130,30 @@ export async function updateBoard(board) {
 export async function SaveTask(boardId, groupId, task, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.saveTask(board, groupId, task, activity);
-  updateBoard(board);
-  return board;
+  return board
+  // updateBoard(board);
 }
 
 export async function RemoveTask(boardId, groupId, taskId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeTask(board, groupId, taskId, activity);
-  updateBoard(board);
+  return board
+  // updateBoard(board);
 }
 
 export async function SaveGroup(boardId, index, group, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.saveGroup(board, index, group, activity);
-  updateBoard(board);
+  return board
+  // updateBoard(board);
 }
 
 export async function RemoveGroup(boardId, groupId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeGroup(board, groupId, activity);
-  updateBoard(board);
+  return board
+  // updateBoard(board);
 }
-
-export async function setUrlParamId(urlParamsID) {
-  store.dispatch({
-    type: SET_URL_PARAM_ID,
-    urlParamsID
-  })
-}
-
-
 
 // Demo for Optimistic Mutation
 // (IOW - Assuming the server call will work, so updating the UI first)
