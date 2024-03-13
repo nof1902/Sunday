@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { utilService } from "../../services/util.service";
+import { useEffectUpdate } from "../../customHooks/useEffectUpdate";
 
-export function StatusCmp({ info, onUpdate }) {
+export function StatusCmp({ info, onUpdateEntity }) {
   const [openEditModel, setOpenEditModel] = useState(false);
   const [infoToEdit, setInfoToEdit] = useState(info);
   const modalRef = useRef();
@@ -20,9 +21,11 @@ export function StatusCmp({ info, onUpdate }) {
     };
   }, [handleClickModal]);
 
-  useEffect(() => {
-    onUpdate(infoToEdit);
-  }, [infoToEdit]);
+
+  useEffectUpdate(() => {
+    onUpdateEntity(infoToEdit)
+  },[infoToEdit])
+
 
   function onChangeStatus({ label }) {
     setInfoToEdit((prevInfo) => ({

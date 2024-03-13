@@ -180,15 +180,15 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 1",
-              status: "Not Started",
-              priority: "Critical",
+              status: "",
+              priority: "",
               timeLine:''
             },
             {
               id: utilService.makeId(),
               title: "Task 2",
-              status: "Done",
-              priority: "Low",
+              status: "",
+              priority: "",
               timeLine:''
             },
           ],

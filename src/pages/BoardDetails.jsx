@@ -53,6 +53,7 @@ export function BoardDetails() {
 
   async function onSaveTask(groupId, task, activity = {}) {
     try {
+      // console.log(task)
       await SaveTask(currBoard._id, groupId, task, activity)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {

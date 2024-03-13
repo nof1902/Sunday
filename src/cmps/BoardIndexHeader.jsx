@@ -29,7 +29,7 @@ export function BoardIndexHeader({
   function createEmptyTask() {
     const newTask = getEmptyTask();
     board.cmpsOrder.forEach((component) => {
-      newTask[component] = {};
+      newTask[component] = '';
     });
     return newTask;
   }

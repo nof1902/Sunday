@@ -30,8 +30,8 @@ export function GroupPreview({
 
   useEffect(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
+      currGroup.tasks.push(task)
       onSaveTask(group.id, task);
-      currGroup.tasks.push(task);
       setTask(getEmptyTask());
       setInputFocused(null);
     }
@@ -44,7 +44,7 @@ export function GroupPreview({
   function createEmptyTask() {
     const newTask = getEmptyTask();
     cmpsOrder.forEach((component) => {
-      newTask[component] = {};
+      newTask[component] ='';
     });
     return newTask;
   }
@@ -67,14 +67,19 @@ export function GroupPreview({
     setInputFocused(true);
   }
 
-  function saveTaskCall(task) {
-    onSaveTask(group.id, task);
+  function saveTaskCall(taskToSave) {
+    setTask(taskToSave)
+    const newTaskToGroup = currGroup.tasks.map((task) => task.id === taskToSave.id ? taskToSave : task)
+    setCurrGroup((prevGroup) => ({
+      ...prevGroup,
+      tasks: newTaskToGroup,
+    }));
+    onSaveTask(group.id, taskToSave);
   }
 
   function handleTaskChange({ target }) {
     const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
-    console.log("task", task);
   }
 
   function deleteTask(taskId) {
