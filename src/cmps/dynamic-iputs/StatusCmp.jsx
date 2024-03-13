@@ -24,10 +24,10 @@ export function StatusCmp({ info, onUpdate }) {
     onUpdate(infoToEdit);
   }, [infoToEdit]);
 
-  function onChangeStatus({ label, backgroundColor }) {
+  function onChangeStatus({ label }) {
     setInfoToEdit((prevInfo) => ({
       ...prevInfo,
-      selectedStatus: { label: label, backgroundColor: backgroundColor },
+      selectedStatus: label,
     }));
     handleClickModal();
   }
@@ -36,8 +36,17 @@ export function StatusCmp({ info, onUpdate }) {
     setOpenEditModel(!openEditModel);
   }
 
-  const backgroundColor =
-    infoToEdit.selectedStatus?.backgroundColor || "rgb(196, 196, 196)";
+  function setBackgroundColor() {
+    if(infoToEdit.selectedStatus) {
+      const selectedStatusBackgroundColor = info.statuses.find((status) => 
+            (status.label === infoToEdit.selectedStatus));
+      return selectedStatusBackgroundColor ? selectedStatusBackgroundColor.backgroundColor : "rgb(196, 196, 196)";
+    } else {
+      return "rgb(196, 196, 196)";
+    }
+  }
+
+  const backgroundColor = setBackgroundColor();
   const darkerBackgroundColor = utilService.darkenColor(backgroundColor, 30);
 
   return (
@@ -48,7 +57,7 @@ export function StatusCmp({ info, onUpdate }) {
     >
       <span style={{ background: darkerBackgroundColor }} className="fold">
       </span>
-      <h4 className="selected-label">{infoToEdit.selectedStatus?.label}</h4>
+      <h4 className="selected-label">{infoToEdit.selectedStatus}</h4>
       {openEditModel && (
         <section className="status-model">
           <section className="status-picker-content">

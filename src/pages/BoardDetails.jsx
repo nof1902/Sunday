@@ -9,12 +9,17 @@ import {
   RemoveTask,
   SaveGroup,
   SaveTask,
+  cleanCurrBoard,
+  getBoardByID,
   getEmptyGroup,
   updateBoard,
 } from "../store/actions/board.actions.js";
 
 export function BoardDetails() {
+
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
+
+  
 
   async function onSaveGroup(index, group, activity) {
     try {
@@ -75,7 +80,6 @@ export function BoardDetails() {
       showErrorMsg(`Could not add task`);
       console.log("error", err);
     }
-    
   }
 
   if (!currBoard) return <div>Loading...</div>;

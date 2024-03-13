@@ -40,7 +40,7 @@ export function getActionUpdateBoard(board) {
 
 export async function loadBoards(resetCurrBoard = false) {
   try {
-    store.dispatch({ type: LOADING_START })
+    // store.dispatch({ type: LOADING_START })
     const boards = await boardService.query();
     console.log("Boards from DB:", boards);
     store.dispatch({
@@ -54,18 +54,18 @@ export async function loadBoards(resetCurrBoard = false) {
   }
 }
 
-// export async function getBoardById(boardId) {
-//   try {
-//     const board = await boardService.getById(boardId);
-//     store.dispatch({
-//       type: GET_BOARD_BY_ID,
-//       board,
-//     });
-//   } catch (err) {
-//     console.log("Cannot load Boards", err);
-//     throw err;
-//   }
-// }
+export async function getBoardById(boardId) {
+  try {
+    const board = await boardService.getById(boardId);
+    store.dispatch({
+      type: SET_BOARD,
+      board,
+    });
+  } catch (err) {
+    console.log("Cannot load Boards", err);
+    throw err;
+  }
+}
 
 export async function getBoardByID(boardId) {
   try {
@@ -234,8 +234,7 @@ export function getEmptyBoard() {
       },
     ],
     groups: [getEmptyGroup()],
-
-    cmpsOrder: ["status", "priority"],
+    cmpsOrder: ["status", "priority","timeline"],
     statusPicker: [
       { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
       { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
@@ -243,7 +242,7 @@ export function getEmptyBoard() {
       { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
     ],
     priorityPicker: [
-      { label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
+      { label: "Critical ⚠", backgroundColor: "rgb(51, 51, 51)" },
     { label: "High", backgroundColor: "rgb(64, 22, 148)" },
     { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
     { label: "Low", backgroundColor: "rgb(87, 155, 252)" },

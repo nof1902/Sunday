@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { loadBoards, addBoard, removeBoard, updateBoard, RemoveTask, getEmptyBoard, setUrlParamId, cleanCurrBoard, getBoardByID } from "../store/actions/board.actions.js";
+import { loadBoards, addBoard, removeBoard, updateBoard, RemoveTask, getEmptyBoard, setUrlParamId, cleanCurrBoard, getBoardByID, getBoardById } from "../store/actions/board.actions.js";
 import { Navigate, Outlet, useNavigate, useParams} from "react-router-dom";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardsList } from "../cmps/BoardsList.jsx";
@@ -10,21 +10,18 @@ import { BoardDetails } from "./BoardDetails.jsx";
 
 
 export function BoardIndex() {
-  
   const params = useParams()
   const navigate = useNavigate()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
-  const isLoading = useSelector((storeState) => storeState.systemModule.isLoading)
-  
+  console.log(params.id)
   useEffect(() => {
     loadBoards()
   }, [])
 
   useEffect(() => {
-    const currParamId = params?.id ? params.id : null;
-    if(currParamId){
-      getBoardByID(currParamId)
+    if(params.id){
+      getBoardByID(params.id)
     } else {
       cleanCurrBoard()
     }
@@ -43,10 +40,10 @@ export function BoardIndex() {
     }
   }
 
-  async function onAddBoard(Boardtitle) {
+  async function onAddBoard(BoardTitle) {
     try {
       const newBoard = getEmptyBoard()
-      newBoard.title = Boardtitle
+      newBoard.title = BoardTitle
       addBoard(newBoard)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
@@ -67,7 +64,7 @@ export function BoardIndex() {
 
 
 
-  if (!boards) return <div>Loading... {isLoading}</div>
+  if (!boards) return <div>Loading...</div>
 
   return (
     <section className="board-index">

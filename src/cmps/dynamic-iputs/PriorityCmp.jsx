@@ -24,10 +24,10 @@ export function PriorityCmp({ info, onUpdate }) {
     onUpdate(infoToEdit);
   }, [infoToEdit]);
 
-  function onChangeStatus({ label, backgroundColor }) {
+  function onChangeStatus( {label}) {
     setInfoToEdit((prevInfo) => ({
       ...prevInfo,
-      selectedPriority: { label: label, backgroundColor: backgroundColor },
+      selectedPriority: label,
     }));
     handleClickModal();
   }
@@ -36,7 +36,17 @@ export function PriorityCmp({ info, onUpdate }) {
     setOpenEditModel(!openEditModel);
   }
 
-  const backgroundColor = infoToEdit.selectedPriority?.backgroundColor || "rgb(196, 196, 196)"
+  function setBackgroundColor() {
+    if(infoToEdit.selectedPriority) {
+      const selectedPriorityBackgroundColor = info.priorities.find((priority) => 
+            (priority.label === infoToEdit.selectedPriority));
+      return selectedPriorityBackgroundColor ? selectedPriorityBackgroundColor.backgroundColor : "rgb(196, 196, 196)";
+    } else {
+      return "rgb(196, 196, 196)";
+    }
+  }
+
+  const backgroundColor = setBackgroundColor();
   const darkerBackgroundColor = utilService.darkenColor(backgroundColor, 30);
 
   return (
@@ -47,7 +57,7 @@ export function PriorityCmp({ info, onUpdate }) {
     >
       <span style={{background: darkerBackgroundColor}} className="fold"> </span>
 
-      <h4 className="selected-label">{infoToEdit.selectedPriority?.label}</h4>
+      <h4 className="selected-label">{infoToEdit.selectedPriority}</h4>
       {openEditModel && (
         <section className="status-model">
           <section className="status-picker-content">
