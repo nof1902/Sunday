@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import { DragDropContext, Droppable } from "react-beautiful-dnd"
 
 import {
   RemoveGroup,
@@ -99,12 +99,11 @@ export function BoardDetails() {
 
 
     if(type === 'group') {
-      console.log('group')
+      // console.log('group')
       const reorderdGroups = [...groups]
 
       const sourceIndex = source.index
       const destinationIndex = destination.index
-      console.log('sourceIndex', sourceIndex , 'destinationIndex', destinationIndex)
 
       const [deletedGroup] = reorderdGroups.splice(sourceIndex, 1)
       reorderdGroups.splice(destinationIndex, 0, deletedGroup)
@@ -118,12 +117,11 @@ export function BoardDetails() {
     }
 
     if (type === 'column') {
-      console.log('column')
+      // console.log('column')
       const reorderdColumn = [...cmpsOrder]
   
       const sourceIndex = source.index
       const destinationIndex = destination.index
-      console.log('sourceIndex', sourceIndex , 'destinationIndex', destinationIndex)
   
       const [deletedColumn] = reorderdColumn.splice(sourceIndex, 1)
       reorderdColumn.splice(destinationIndex, 0, deletedColumn)
@@ -135,6 +133,31 @@ export function BoardDetails() {
     }
 
 
+    if (type === 'task') {
+      // console.log('task')
+
+        const sourceIndex = source.index
+        const destinationIndex = destination.index
+  
+        const groupSourceIndex = groups.findIndex((group) => group.id === source.droppableId)
+        const groupDestinationIndex = groups.findIndex((group) => group.id === destination.droppableId)
+  
+        const newSourceTasks = [...groups[groupSourceIndex].tasks]
+        const newDestinationTasks = source.droppableId !== destination.droppableId ? [...groups[groupDestinationIndex].tasks] : newSourceTasks
+  
+        const [deletedTask] = newSourceTasks.splice(sourceIndex, 1)
+        newDestinationTasks.splice(destinationIndex, 0, deletedTask)
+  
+        const newGroups = [...groups]
+        newGroups[groupSourceIndex] = { ...groups[groupSourceIndex], tasks:[...newSourceTasks] }
+        newGroups[groupDestinationIndex] = { ...groups[groupDestinationIndex], tasks:[...newDestinationTasks] }
+
+        //  currBoard.groups = [...newGroups]     
+        //  await onUpdateBoard(currBoard)
+  
+        // SetGroups(newGroups)
+        return onUpdateBoard({...currBoard, groups: [...newGroups] })
+      }
 
   }
 
@@ -168,7 +191,6 @@ export function BoardDetails() {
     )}
     </Droppable>
 
-      
       <button
         className="new-group-btn"
         onClick={() =>

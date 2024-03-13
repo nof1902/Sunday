@@ -167,17 +167,22 @@ export function GroupPreview({
       )}
       </Droppable>
 
-
-        
-
-        <TaskList
-          tasks={tasks}
-          deleteTask={deleteTask}
-          saveTaskCall={saveTaskCall}
-          cmpsOrder={cmpsOrder}
-          statusPicker={statusPicker}
-          priorityPicker={priorityPicker}
-        />
+      <Droppable droppableId={group.id} type="task">
+      {(provided) => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          <TaskList
+            tasks={tasks}
+            deleteTask={deleteTask}
+            saveTaskCall={saveTaskCall}
+            cmpsOrder={cmpsOrder}
+            statusPicker={statusPicker}
+            priorityPicker={priorityPicker}
+          />
+          {provided.placeholder}
+        </div>
+      )}
+      </Droppable>
+         
       </section>
       <section className="group-footer">
         <div
