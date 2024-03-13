@@ -102,11 +102,9 @@ export function BoardDetails() {
       console.log('group')
       const reorderdGroups = [...groups]
 
-
       const sourceIndex = source.index
       const destinationIndex = destination.index
       console.log('sourceIndex', sourceIndex , 'destinationIndex', destinationIndex)
-
 
       const [deletedGroup] = reorderdGroups.splice(sourceIndex, 1)
       reorderdGroups.splice(destinationIndex, 0, deletedGroup)
@@ -118,6 +116,24 @@ export function BoardDetails() {
       // await onUpdateBoard(currBoard)
       return onUpdateBoard({...currBoard, groups: [...reorderdGroups] })
     }
+
+    if (type === 'column') {
+      console.log('column')
+      const reorderdColumn = [...cmpsOrder]
+  
+      const sourceIndex = source.index
+      const destinationIndex = destination.index
+      console.log('sourceIndex', sourceIndex , 'destinationIndex', destinationIndex)
+  
+      const [deletedColumn] = reorderdColumn.splice(sourceIndex, 1)
+      reorderdColumn.splice(destinationIndex, 0, deletedColumn)
+  
+      // currBoard.cmpsOrder = [...reorderdColumn]
+      // await onUpdateBoard(currBoard)
+      return onUpdateBoard({...currBoard, cmpsOrder: [...reorderdColumn] })
+      // return setColumnOrder(reorderdColumn)
+    }
+
 
 
   }
