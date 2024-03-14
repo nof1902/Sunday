@@ -8,7 +8,6 @@ import {
   getEmptyBoard,
   getBoardById,
   updateBoardOptimistic,
-  updateBoardNoCurr,
   updateBoardFromBoards,
 } from "../store/actions/board.actions.js";
 import { Navigate, Outlet, useNavigate, useParams } from "react-router-dom";

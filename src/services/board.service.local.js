@@ -39,8 +39,6 @@ async function query(filterBy = { status: "", title: "" }) {
   //     const regex = new RegExp(filterBy.txt, 'i')
   //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
   // }
-
-  console.log('boards ' , boards)
   return boards;
 }
 
@@ -117,6 +115,7 @@ async function removeGroup(board, groupId, activity) {
 }
 
 async function saveGroup(board, index = null, group, activity) {
+  console.log(group)
   // if new group
   if (index === 0) {
     board.groups.unshift(group);

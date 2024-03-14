@@ -14,7 +14,7 @@ export function GroupPreview({
   onSaveTask,
   onRemoveTask,
   onRemoveGroup,
-  onUpdateGroup,
+  onSaveGroup,
   cmpsOrder,
   statusPicker,
   priorityPicker
@@ -29,7 +29,7 @@ export function GroupPreview({
   const [ispreview, setIspreview] = useState(true);
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
 
-  useEffect(() => {
+  useEffectUpdate(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
       saveTaskCall(task)
       setTask(getEmptyTask());
@@ -38,17 +38,12 @@ export function GroupPreview({
   }, [inputFocused]);
 
   useEffectUpdate(() => {
-    // saveGroup()
-    onUpdateGroup(currGroup)
+    saveGroup()
   }, [debouncedGroup]);
 
-  // useEffectUpdate(() => {
-  //   saveGroup()
-  // }, [isTitleGroupEditMode === false]);
-
-  // async function saveGroup(){
-  //   await onUpdateGroup(currGroup);
-  // }
+  async function saveGroup(){
+    await onSaveGroup(null,currGroup);
+  }
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
@@ -65,6 +60,7 @@ export function GroupPreview({
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
+    console.log(currGroup)
   }
 
   function handleTaskInputBlur({ target }) {
@@ -77,13 +73,7 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    setTask(taskToSave)
     await onSaveTask(currGroup.id, taskToSave);
-    const newTaskToGroup = currGroup.tasks.map((task) => task.id === taskToSave.id ? taskToSave : task)
-    setCurrGroup((prevGroup) => ({
-      ...prevGroup,
-      tasks: newTaskToGroup,
-    }));
   }
 
   function handleTaskChange({ target }) {

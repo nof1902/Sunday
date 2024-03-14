@@ -140,20 +140,8 @@ export async function updateBoard(board) {
   }
 }
 
-export async function updateBoardNoCurr(board) {
-  try {
-    const savedBoard = await boardService.save(board);
-    return savedBoard;
-  } catch (err) {
-    console.log("Cannot update Board", err);
-    throw err;
-  }
-}
-
-
 // by adding task from headerindex - the task automaticly
 export async function SaveTask(boardId, groupId, task, activity = {}) {
-  console.log('action - task',task)
   let board = await boardService.getById(boardId);
   board = await boardService.saveTask(board, groupId, task, activity);
   // updateBoard(board);
@@ -168,6 +156,7 @@ export async function RemoveTask(boardId, groupId, taskId, activity = {}) {
 }
 
 export async function SaveGroup(boardId, index, group, activity = {}) {
+  console.log('SaveGroup' , group)
   let board = await boardService.getById(boardId);
   board = await boardService.saveGroup(board, index, group, activity);
   // updateBoard(board);

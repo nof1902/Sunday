@@ -18,12 +18,12 @@ export function boardReducer(state = initialState, action = {}) {
     var boards
     switch (action.type) {
         case SET_BOARDS:
-            if(action.board?._id === newState.currBoard?._id){
-                console.log('here')
-                newState = { ...state, boards: action.boards, currBoard: action.board}    
-            } else {
-                newState = { ...state, boards: action.boards}
-            }
+            // if(action.board?._id === newState.currBoard?._id){
+            //     newState = { ...state, boards: action.boards, currBoard: action.board}    
+            // } else {
+            //     newState = { ...state, boards: action.boards}
+            // }
+            newState = { ...state, boards: action.boards}
             break
         case SET_BOARD:
             newState = { ...state, currBoard: action.board}

@@ -40,8 +40,9 @@ export function BoardDetails(currBoardTitle) {
     }
   }
 
-  async function onSaveGroup(index, group, activity) {
+  async function onSaveGroup(index, group,activity = {}) {
     try {
+      console.log('boardDetails ',group)
       const boardToSave = await SaveGroup(currBoard._id, index, group, activity);
       await updateBoard(boardToSave)
       showSuccessMsg(`Group added successfully`);
@@ -191,7 +192,7 @@ export function BoardDetails(currBoardTitle) {
           onSaveTask={onSaveTask}
           onRemoveTask={onRemoveTask}
           onRemoveGroup={onRemoveGroup}
-          onUpdateGroup={onSaveGroup}
+          onSaveGroup={onSaveGroup}
           cmpsOrder={cmpsOrder}
           statusPicker={statusPicker}
           priorityPicker={priorityPicker}
