@@ -38,8 +38,17 @@ export function GroupPreview({
   }, [inputFocused]);
 
   useEffectUpdate(() => {
-    onUpdateGroup(currGroup);
+    // saveGroup()
+    onUpdateGroup(currGroup)
   }, [debouncedGroup]);
+
+  // useEffectUpdate(() => {
+  //   saveGroup()
+  // }, [isTitleGroupEditMode === false]);
+
+  // async function saveGroup(){
+  //   await onUpdateGroup(currGroup);
+  // }
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
@@ -82,8 +91,8 @@ export function GroupPreview({
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
   }
 
-  function deleteTask(taskId) {
-    onRemoveTask(group.id, taskId);
+  async function deleteTask(taskId) {
+    await onRemoveTask(group.id, taskId);
   }
 
   const { tasks } = group;

@@ -38,15 +38,15 @@ export function getActionUpdateBoard(board) {
   };
 }
 
-export async function loadBoards(resetCurrBoard = false) {
+export async function loadBoards() {
   try {
     // store.dispatch({ type: LOADING_START })
     const boards = await boardService.query();
+
     console.log("Boards from DB:", boards);
     store.dispatch({
       type: SET_BOARDS,
-      boards,
-      resetCurrBoard
+      boards
     });
   } catch (err) {
     console.log("Cannot load Boards", err);
@@ -61,18 +61,24 @@ export async function getBoardById(boardId) {
       type: SET_BOARD,
       board,
     });
+    return board
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
   }
 }
 
-export async function getBoardByID(boardId) {
+export async function updateBoardFromBoards(boards, boardIdToUpdate) {
   try {
+    console.log('boardIdToUpdate', boardIdToUpdate)
+    let board = await boardService.getById(boardIdToUpdate._id);
+    await boardService.save({...board, title: boardIdToUpdate.title});
     store.dispatch({
-      type: SET_BOARD,
-      boardId
+      type: SET_BOARDS,
+      boards,
+      board
     });
+    
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
@@ -127,6 +133,16 @@ export async function updateBoard(board) {
   try {
     const savedBoard = await boardService.save(board);
     store.dispatch(getActionUpdateBoard(savedBoard));
+    return savedBoard;
+  } catch (err) {
+    console.log("Cannot update Board", err);
+    throw err;
+  }
+}
+
+export async function updateBoardNoCurr(board) {
+  try {
+    const savedBoard = await boardService.save(board);
     return savedBoard;
   } catch (err) {
     console.log("Cannot update Board", err);

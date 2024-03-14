@@ -19,24 +19,16 @@ import {
 } from "../store/actions/board.actions.js";
 import { func } from "prop-types";
 
-export function BoardDetails() {
+export function BoardDetails(currBoardTitle) {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
-  // const [renderFlag,setRenderFlag] = useState(false)
   const params = useParams()
   
   useEffect(() => {
-    // if(params.id){
-    //   getBoard()
-    // } else {
-    //   cleanCurrBoard()
-    // }
-
     if(params.id){
       getBoard()
-      // setRenderFlag(false)
     }
-  }, [params.id])
+  }, [params.id,currBoardTitle])
 
   async function getBoard(){
     try {
@@ -47,7 +39,6 @@ export function BoardDetails() {
       console.log("error", err);
     }
   }
-
 
   async function onSaveGroup(index, group, activity) {
     try {
@@ -97,8 +88,7 @@ export function BoardDetails() {
 
   async function onUpdateBoard(boardToSave) {
     try {
-        await updateBoardOptimistic(boardToSave)
-        // setRenderFlag(true)
+        await updateBoard(boardToSave)
         showSuccessMsg(`board updated`)
     } catch (err) {
         showErrorMsg('Cannot update board')
@@ -135,7 +125,7 @@ export function BoardDetails() {
       // currBoard.groups = [...reorderdGroups]
       // console.log('currBoard', currBoard);
       // await onUpdateBoard(currBoard)
-      return onUpdateBoard({...currBoard, groups: [...reorderdGroups] })
+      return await updateBoardOptimistic({...currBoard, groups: [...reorderdGroups] })
     }
 
     if (type === 'column') {
@@ -150,7 +140,7 @@ export function BoardDetails() {
   
       // currBoard.cmpsOrder = [...reorderdColumn]
       // await onUpdateBoard(currBoard)
-      return onUpdateBoard({...currBoard, cmpsOrder: [...reorderdColumn] })
+      return await updateBoardOptimistic({...currBoard, cmpsOrder: [...reorderdColumn] })
       // return setColumnOrder(reorderdColumn)
     }
 
@@ -178,9 +168,8 @@ export function BoardDetails() {
         //  await onUpdateBoard(currBoard)
   
         // SetGroups(newGroups)
-        return onUpdateBoard({...currBoard, groups: [...newGroups] })
+        return await updateBoardOptimistic({...currBoard, groups: [...newGroups] })
       }
-
   }
 
 

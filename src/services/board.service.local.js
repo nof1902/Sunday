@@ -32,7 +32,7 @@ async function query(filterBy = { status: "", title: "" }) {
   boards = boards.map((board) => ({
     _id: board._id,
     title: board.title,
-    numOfGroups: board.groups.length
+    numOfGroups: board.groups?.length
   }))
   
   // if (filterBy.txt) {
@@ -70,7 +70,6 @@ function getGroupFromBoardById(board, groupId) {
 }
 
 async function saveTask(board, groupId, task, activity) {
-  console.log('new task? ', task)
   
   // if there is not specific group -> add to first group
   var groupToAddTaskTo = board.groups[0];
@@ -82,18 +81,13 @@ async function saveTask(board, groupId, task, activity) {
 
   // check if it is an update
   if (task && task.id) {
-    console.log('there')
-    console.log('task ', task)
     const tasks = groupToAddTaskTo.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
     });
     groupToAddTaskTo = { ...groupToAddTaskTo, tasks: tasks };
   } else {
-    console.log('here')
-    console.log('task' ,task)
     task.id = utilService.makeId();
     groupToAddTaskTo.tasks.push(task);
-    console.log('task' ,task)
   }
 
   board.groups = board.groups.map((g) => (g.id === groupToAddTaskTo.id ? groupToAddTaskTo : g));

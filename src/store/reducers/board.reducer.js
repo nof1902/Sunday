@@ -16,10 +16,14 @@ const initialState = {
 export function boardReducer(state = initialState, action = {}) {
     var newState = state
     var boards
-    var curBoard
     switch (action.type) {
         case SET_BOARDS:
-            newState = { ...state, boards: action.boards}
+            if(action.board?._id === newState.currBoard?._id){
+                console.log('here')
+                newState = { ...state, boards: action.boards, currBoard: action.board}    
+            } else {
+                newState = { ...state, boards: action.boards}
+            }
             break
         case SET_BOARD:
             newState = { ...state, currBoard: action.board}

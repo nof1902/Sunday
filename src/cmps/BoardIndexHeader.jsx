@@ -22,8 +22,8 @@ export function BoardIndexHeader({
     setEditBoard(board);
   }, [board]);
 
-  function handleBlur() {
-    onUpdateBoard(editBoard);
+  async function handleBlur() {
+    await onUpdateBoard(editBoard);
   }
 
   function createEmptyTask() {
