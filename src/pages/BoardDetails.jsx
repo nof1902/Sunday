@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
@@ -15,59 +15,68 @@ import {
   getBoardById,
   getEmptyGroup,
   updateBoard,
+  updateBoardOptimistic,
 } from "../store/actions/board.actions.js";
+import { func } from "prop-types";
 
 export function BoardDetails() {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
+  // const [renderFlag,setRenderFlag] = useState(false)
   const params = useParams()
   
   useEffect(() => {
+    // if(params.id){
+    //   getBoard()
+    // } else {
+    //   cleanCurrBoard()
+    // }
+
     if(params.id){
-      getBoardById(params.id)
-    } else {
-      cleanCurrBoard()
+      getBoard()
+      // setRenderFlag(false)
     }
   }, [params.id])
 
+  async function getBoard(){
+    try {
+      await getBoardById(params.id)
+      showSuccessMsg(`Group added successfully`);
+    } catch (err) {
+      showSuccessMsg(`Could not get the wanted board`);
+      console.log("error", err);
+    }
+  }
+
+
   async function onSaveGroup(index, group, activity) {
     try {
-      const updatedBoard = await SaveGroup(currBoard._id, index, group, activity);
-      // onUpdateBoard(updatedBoard)
-      showSuccessMsg(`Task added successfully`);
+      const boardToSave = await SaveGroup(currBoard._id, index, group, activity);
+      await updateBoard(boardToSave)
+      showSuccessMsg(`Group added successfully`);
     } catch (err) {
-      showSuccessMsg(`Could not add task`);
+      showSuccessMsg(`Could not add Group`);
       console.log("error", err);
     }
   }
 
   async function onRemoveGroup(groupId) {
     try {
-      const updatedBoard = await RemoveGroup(currBoard._id, groupId);
-      // onUpdateBoard(updatedBoard)
-      showSuccessMsg(`Task added successfully`);
+      const boardToSave = await RemoveGroup(currBoard._id, groupId);
+      await updateBoard(boardToSave)
+      showSuccessMsg(`Group removed successfully`);
     } catch (err) {
-      showSuccessMsg(`Could not add task`);
-      console.log("error", err);
-    }
-  }
-
-  async function onUpdateGroup(group, activity) {
-    try {
-      const updatedBoard = await SaveGroup(currBoard._id, null, group, activity)
-      // onUpdateBoard(updatedBoard)
-      showSuccessMsg(`Task added successfully`);
-    } catch (err) {
-      showErrorMsg(`Could not add task`);
+      showSuccessMsg(`Could not removed Group`);
       console.log("error", err);
     }
   }
 
   async function onSaveTask(groupId, task, activity = {}) {
     try {
-      
-      const updatedBoard = await SaveTask(currBoard._id, groupId, task, activity)
-      // onUpdateBoard(updatedBoard)
+      const boardToSave = await SaveTask(currBoard._id, groupId, task, activity)
+      console.log(boardToSave.groups)
+      await updateBoard(boardToSave)
+      console.log(boardToSave.groups)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -77,8 +86,8 @@ export function BoardDetails() {
 
   async function onRemoveTask(groupId, taskId) {
     try {
-      const updatedBoard = await RemoveTask(currBoard._id, groupId, taskId);
-      // onUpdateBoard(updatedBoard)
+      const boardToSave = await RemoveTask(currBoard._id, groupId, taskId);
+      await updateBoard(boardToSave)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -88,7 +97,8 @@ export function BoardDetails() {
 
   async function onUpdateBoard(boardToSave) {
     try {
-        await updateBoard(boardToSave)
+        await updateBoardOptimistic(boardToSave)
+        // setRenderFlag(true)
         showSuccessMsg(`board updated`)
     } catch (err) {
         showErrorMsg('Cannot update board')
@@ -192,7 +202,7 @@ export function BoardDetails() {
           onSaveTask={onSaveTask}
           onRemoveTask={onRemoveTask}
           onRemoveGroup={onRemoveGroup}
-          onUpdateGroup={onUpdateGroup}
+          onUpdateGroup={onSaveGroup}
           cmpsOrder={cmpsOrder}
           statusPicker={statusPicker}
           priorityPicker={priorityPicker}

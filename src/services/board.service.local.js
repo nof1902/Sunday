@@ -70,27 +70,35 @@ function getGroupFromBoardById(board, groupId) {
 }
 
 async function saveTask(board, groupId, task, activity) {
+  console.log('new task? ', task)
+  
   // if there is not specific group -> add to first group
-  var group = board.groups[0];
+  var groupToAddTaskTo = board.groups[0];
 
   // if there is specific group -> add according to groupId
   if (groupId) {
-    group = getGroupFromBoardById(board, groupId);
+    groupToAddTaskTo = getGroupFromBoardById(board, groupId);
   }
 
   // check if it is an update
   if (task && task.id) {
-    const tasks = group.tasks.map((existTask) => {
+    console.log('there')
+    console.log('task ', task)
+    const tasks = groupToAddTaskTo.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
     });
-    group = { ...group, tasks: tasks };
+    groupToAddTaskTo = { ...groupToAddTaskTo, tasks: tasks };
   } else {
+    console.log('here')
+    console.log('task' ,task)
     task.id = utilService.makeId();
-    group.tasks.push(task);
+    groupToAddTaskTo.tasks.push(task);
+    console.log('task' ,task)
   }
 
-  board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
-  // board.activities.unshift(activity)
+  board.groups = board.groups.map((g) => (g.id === groupToAddTaskTo.id ? groupToAddTaskTo : g));
+
+  // board = saveGroup(board, null, groupToAddTaskTo, activity)
   return board;
 }
 
@@ -100,6 +108,7 @@ async function removeTask(board, groupId, taskId, activity) {
     (existTask) => existTask.id !== taskId
   );
   group = { ...group, tasks: filteredTasks };
+
   board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
 
   // board.activities.unshift(activity)

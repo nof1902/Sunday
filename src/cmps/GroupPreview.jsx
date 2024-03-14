@@ -31,8 +31,7 @@ export function GroupPreview({
 
   useEffect(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
-      currGroup.tasks.push(task)
-      onSaveTask(group.id, task);
+      saveTaskCall(task)
       setTask(getEmptyTask());
       setInputFocused(null);
     }
@@ -68,14 +67,14 @@ export function GroupPreview({
     setInputFocused(true);
   }
 
-  function saveTaskCall(taskToSave) {
+  async function saveTaskCall(taskToSave) {
     setTask(taskToSave)
+    await onSaveTask(currGroup.id, taskToSave);
     const newTaskToGroup = currGroup.tasks.map((task) => task.id === taskToSave.id ? taskToSave : task)
     setCurrGroup((prevGroup) => ({
       ...prevGroup,
       tasks: newTaskToGroup,
     }));
-    onSaveTask(group.id, taskToSave);
   }
 
   function handleTaskChange({ target }) {

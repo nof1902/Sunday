@@ -34,6 +34,7 @@ export function BoardIndexHeader({
     return newTask;
   }
 
+
   return (
     <section className="board-index-header">
       <section className="head-title">

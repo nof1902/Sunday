@@ -104,7 +104,6 @@ export async function removeBoard(boardId) {
 export async function addBoard(board) {
   try {
     const savedBoard = await boardService.save(board);
-    console.log("Added Board", savedBoard);
     store.dispatch(getActionAddBoard(savedBoard));
     return savedBoard;
   } catch (err) {
@@ -113,46 +112,57 @@ export async function addBoard(board) {
   }
 }
 
+export async function updateBoardOptimistic(board) {
+  try {
+    store.dispatch(getActionUpdateBoard(board));
+    const savedBoard = await boardService.save(board);
+    return savedBoard;
+  } catch (err) {
+    console.log("Cannot update Board", err);
+    throw err;
+  }
+}
+
 export async function updateBoard(board) {
-  return boardService
-    .save(board)
-    .then((savedBoard) => {
-      store.dispatch(getActionUpdateBoard(savedBoard));
-    })
-    .catch((err) => {
-      console.log("Cannot save Board", err);
-      throw err;
-    });
+  try {
+    const savedBoard = await boardService.save(board);
+    store.dispatch(getActionUpdateBoard(savedBoard));
+    return savedBoard;
+  } catch (err) {
+    console.log("Cannot update Board", err);
+    throw err;
+  }
 }
 
 
 // by adding task from headerindex - the task automaticly
 export async function SaveTask(boardId, groupId, task, activity = {}) {
+  console.log('action - task',task)
   let board = await boardService.getById(boardId);
   board = await boardService.saveTask(board, groupId, task, activity);
-  updateBoard(board);
-  // return board
+  // updateBoard(board);
+  return board
 }
 
 export async function RemoveTask(boardId, groupId, taskId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeTask(board, groupId, taskId, activity);
-  updateBoard(board);
-  // return board
+  // updateBoard(board);
+  return board
 }
 
 export async function SaveGroup(boardId, index, group, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.saveGroup(board, index, group, activity);
-  updateBoard(board);
-  // return board
+  // updateBoard(board);
+  return board
 }
 
 export async function RemoveGroup(boardId, groupId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeGroup(board, groupId, activity);
-  updateBoard(board);
-  // return board
+  // updateBoard(board);
+  return board
 }
 
 // Demo for Optimistic Mutation
