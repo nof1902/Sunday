@@ -12,7 +12,7 @@ import {
   SaveGroup,
   SaveTask,
   cleanCurrBoard,
-  getBoardByID,
+  getBoardById,
   getEmptyGroup,
   updateBoard,
 } from "../store/actions/board.actions.js";
@@ -24,11 +24,11 @@ export function BoardDetails() {
   
   useEffect(() => {
     if(params.id){
-      getBoardByID(params.id)
+      getBoardById(params.id)
     } else {
       cleanCurrBoard()
     }
-  }, [params])
+  }, [params.id])
 
   async function onSaveGroup(index, group, activity) {
     try {

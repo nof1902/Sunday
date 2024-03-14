@@ -27,13 +27,20 @@ async function query(filterBy = { status: "", title: "" }) {
   }
 
   boards = await storageService.query(STORAGE_KEY);
+
+  // for now... will be in the backend
+  boards = boards.map((board) => ({
+    _id: board._id,
+    title: board.title,
+    numOfGroups: board.groups.length
+  }))
+  
   // if (filterBy.txt) {
   //     const regex = new RegExp(filterBy.txt, 'i')
   //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
   // }
-  // if (filterBy.price) {
-  //     boards = boards.filter(board => car.price <= filterBy.price)
-  // }
+
+  console.log('boards ' , boards)
   return boards;
 }
 
@@ -295,5 +302,5 @@ function _createBoards() {
 
   // }
   utilService.saveToStorage(STORAGE_KEY, boards);
-  console.log(boards.length, boards[0], boards[1]);
+  
 }

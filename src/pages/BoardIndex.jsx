@@ -13,7 +13,6 @@ export function BoardIndex() {
   const params = useParams()
   const navigate = useNavigate()
   const boards = useSelector((storeState) => storeState.boardModule.boards)
-  // const currBoard = useSelector((storeState) => storeState.boardModule.currBoard)
   
   useEffect(() => {
     loadBoards()
