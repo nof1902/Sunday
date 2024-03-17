@@ -81,11 +81,12 @@ import { useForm } from "../customHooks/useForm";
                         ></path>
                       </svg>
                     </button>
-                {isOptionsModalOpen && <OptionsCmp board={board} onRemoveBoard={onRemoveBoard} onRenameBoard={onRenameBoard} onOpenMoreOptions={onOpenMoreOptions}/>}
+                    {isOptionsModalOpen && <OptionsCmp board={board} onRemoveBoard={onRemoveBoard} onRenameBoard={onRenameBoard} onOpenMoreOptions={onOpenMoreOptions}/>}
             </li>
     );
   }
-  
+  // {isOptionsModalOpen && <OptionsCmp board={board} onRemoveBoard={onRemoveBoard} onRenameBoard={onRenameBoard} onOpenMoreOptions={onOpenMoreOptions}/>}
+
   /*
   
   <NavLink className='board-link' key={board._id} to={`/boards/${board._id}`}>

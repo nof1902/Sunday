@@ -7,8 +7,9 @@
         input{
             // font-size: 20pt;
             border: 1px solid transparent;
-            font-size: 32px;
-            font-weight: 600;
+            font-size: 33px;
+            font-weight: 500;
+            color: $clr2;
 
             &:focus {
                 background-color: $clr10;
@@ -35,22 +36,23 @@
 
         .selected-tab { 
             border-block-end: 2px solid $clr1;
-            padding-block-end: 4px;
+            padding-block-end: 2px;
 
             .main-table-tab {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 0.3em 0 0.3em 0.3em;
+                padding: 0.3em 0 0.3em 0.4em;
     
                 &:hover {
-                    background-color: $clr15;
+                    background-color: $clr17;
                     border-radius: $border-radius;
                 }
     
                 span {
                     padding-inline: 0.5em 1em;
-                    font-size: 11pt;
+                    // font-size: 11pt;
+                    font-size: 14px;
                     border-inline-end: 1px solid $clr11;
                 }
             }
@@ -62,8 +64,8 @@
             color: $clr2;
             margin: 0;
             border-radius: $border-radius;
-            width: 35px;
-            height: 34px;
+            width: 34px;
+            height: 32px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -72,7 +74,12 @@
             margin-block-end: 5px;
 
             &:hover {
-                background-color: $clr15;
+                background-color: $clr17;
+            }
+
+            & > span {
+                font-family: $font-txt;
+                font-size: 18px;
             }
         }
 
@@ -86,7 +93,7 @@
         .addition-actions{
             display: grid;
             grid-template-columns: auto auto;
-            padding: 1em 0;
+            padding: 0.85em 0;
             justify-content: start;
             
             :hover{
@@ -97,8 +104,9 @@
                 border-radius: 0.3em 0 0 0.3em;
                 margin: 0;
                 font-family: $font-txt;
-                font-size: 10pt;
-                padding: 0.4em 0.5em;
+                // font-size: 10pt;
+                font-size: 14px;
+                padding: 0.5em 0.55em;
                 border-right: 1px solid $clr9;
 
             }
@@ -108,7 +116,7 @@
                 display: flex;
                 align-items: center;
                 justify-items: center;
-                padding-inline: 0.3em;
+                padding-inline: 0.35em;
             }
         }
     }

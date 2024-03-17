@@ -108,8 +108,8 @@ export function TaskPreview({
           <svg
             viewBox="0 0 20 20"
             fill="currentColor"
-            width="24"
-            height="24"
+            width="22"
+            height="22"
             aria-hidden="true"
             className="icon_4b23d45e02 chat-without-update noFocusStyle_cff5f5a050"
             data-testid="icon"

@@ -191,6 +191,13 @@ function _createBoards() {
               priority: "Low",
               timeLine:''
             },
+            {
+              id: utilService.makeId(),
+              title: "Task 3",
+              status: "Done",
+              priority: "Low",
+              timeLine:''
+            },
           ],
           style: utilService.getRandomColor(),
         },

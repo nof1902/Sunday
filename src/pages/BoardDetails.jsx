@@ -20,7 +20,15 @@ import {
 export function BoardDetails() {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
+  const params = useParams()
 
+  useEffect(() => {
+    if(params.id){
+      getBoardByID(params.id)
+    } else {
+      cleanCurrBoard()
+    }
+  }, [params])
   
 
   async function onSaveGroup(index, group, activity) {
@@ -113,7 +121,7 @@ export function BoardDetails() {
       // currBoard.groups = [...reorderdGroups]
       // console.log('currBoard', currBoard);
       // await onUpdateBoard(currBoard)
-      return onUpdateBoard({...currBoard, groups: [...reorderdGroups] })
+      return await onUpdateBoard({...currBoard, groups: [...reorderdGroups] })
     }
 
     if (type === 'column') {
@@ -128,7 +136,7 @@ export function BoardDetails() {
   
       // currBoard.cmpsOrder = [...reorderdColumn]
       // await onUpdateBoard(currBoard)
-      return onUpdateBoard({...currBoard, cmpsOrder: [...reorderdColumn] })
+      return await onUpdateBoard({...currBoard, cmpsOrder: [...reorderdColumn] })
       // return setColumnOrder(reorderdColumn)
     }
 
@@ -156,7 +164,7 @@ export function BoardDetails() {
         //  await onUpdateBoard(currBoard)
   
         // SetGroups(newGroups)
-        return onUpdateBoard({...currBoard, groups: [...newGroups] })
+        return await onUpdateBoard({...currBoard, groups: [...newGroups] })
       }
 
   }

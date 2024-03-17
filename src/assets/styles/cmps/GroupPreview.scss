@@ -2,14 +2,17 @@
 .text-style{ 
     font-weight: 500;
     margin-inline-start: 0.4em;
+    margin-block: 0.65em;
+    font-size: 18px;
+    font-family: $font-title;
 }
 
 .group-preview {
-    margin-block-end: 1.2em;
+    margin-block-end: 1.5em;
     
     .tasks-table {
         // border-inline-start: 7px solid #F1F879;
-        border-start-start-radius: 7px;
+        border-start-start-radius: 6px;
     }
 
     .group-header{
@@ -26,10 +29,11 @@
             justify-content: center;
             padding: 0;
             margin-block: 0.6em;
-            margin-inline-start: -39px;
+            margin-inline-start: -37px;
             border-radius: $border-radius;
             background-color: $clr10;
             opacity: 0;
+            
 
             &:hover {
                 background-color: $clr15;
@@ -82,6 +86,7 @@
             // font-size: 0.9em;
             font-size: 14px;
             font-weight: 400;
+            font-family: $font-txt;
             margin: 0;
             // align-self: center;
             // height: 100%;
@@ -94,28 +99,69 @@
             white-space: nowrap;
         }
 
+        & > :last-child {
+            border-inline-end: none;
+            margin-inline-start: 0.3em;
+            width: 32px;
+            // border-radius: $border-radius;
+            // display: flex;
+            // padding: 0;
+            // height: 90%; 
+            // justify-content: center;
+            // align-items: center;
+
+            .add-column-btn {
+                color: $clr18;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: $border-radius;
+                padding: 0.2em;
+                
+
+                &:hover {
+                    background-color: $clr17;
+                }
+            }
+
+
+          }
+
     }
 
 
     .new-input {
-        width: 320px;
+        width: 300px;
         margin-inline-start: 1em;
         padding-inline: 1em;
         margin-block: 0.4em;
         border: 1px solid transparent;
+        // border: 1px solid #C5C8D5;
         border-radius: $border-radius;
         font-family: $font-txt;
+        font-size: 14px;
+        // color: #898A97;
+        //  color: $clr2;
+         color: $clr18;
+         background-color: transparent;
+         position: sticky;
 
         &::placeholder {
             font-family: $font-txt;
+            // color: #898A97;
+            // color: $clr2;
+            color: $clr18;
+            
+            
        }
 
-        &:hover {
-            border: 1px solid #e2e2e2; 
-        }
+        // &:hover {
+        //     border: 1px solid #C5C8D5; 
+        //     background-color: transparent;
+        // }
 
         &:focus {
-            border: 1px solid $clr12;
+            border: 1.5px solid $clr1;
             outline: none; 
             // background-color: $clr1WithAlpha;
             background-color: white;
@@ -138,23 +184,28 @@
             border-end-start-radius: 7px;
             border-start-start-radius: 0px;
             box-sizing: content-box;
-            // font-family: roboto;
             border-inline-start: 7px solid; 
+            display: flex;
+            align-items: center;
 
             &:hover {
                 z-index: 3;
                 box-shadow: 4px 3px 6px -3px #d0d4e4;
-                background-color: #F4F5F8;
+                // background-color: #F4F5F8;
+                background-color: $clr12;
 
-                .new-task-input{
-                    background-color: #F4F5F8;  
+                .new-input{
+                    // background-color: #F4F5F8; 
+                    // background-color: transparent; 
+                    border: 1px solid #C5C8D5; 
                 }
             }
         }
 
         .footer-stasus {
             display: grid;
-            grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: 330px repeat(auto-fill, 137px);
+            // grid-template-columns: 350px repeat(auto-fill, minmax(150px, 1fr));
             text-align: center;
             color: $clr2;
             height: 35px;
@@ -181,6 +232,7 @@
         
 
     }
+
 
 }
 
@@ -239,7 +291,7 @@
             //     }
 
             //     &:focus {
-            //         border: 1px solid $clr12;
+            //         border: 1px solid $clr1;
             //         outline: none; 
             //         // background-color: $clr1WithAlpha;
             //         background-color: white;

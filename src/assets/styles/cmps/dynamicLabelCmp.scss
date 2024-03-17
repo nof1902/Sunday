@@ -8,6 +8,7 @@
     cursor: pointer;
     position: relative;
     transition: opacity 0.3s ease;
+    border-bottom: 1px solid $clr11;
 
 
     .fold {
@@ -39,6 +40,7 @@
         font-weight: normal;
         margin: 0;
         padding: 0;
+        font-family: $font-txt;
     }
 
     .status-model{
