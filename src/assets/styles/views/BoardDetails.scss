@@ -2,7 +2,7 @@
 .board-details{
     // background-color: #ECEFF8;
     background-color: #ffffff;
-    padding-left: 2.4em;
+    padding-left: 2.1em;
     border-start-start-radius: 10px;
     // height: 90vh;
     // height: 100%;
@@ -14,17 +14,17 @@
         background-color: transparent;
         color: $clr8;
         font-family: $font-txt;
-        font-size: 0.8em;
+        // font-size: 0.8em;
+        font-size: 14px;
         border-radius: $border-radius;
-        padding: 0.4em 0.6em;
-        margin-block-end: 2em;
+        padding: 0.25em 0.5em;
+        margin: 2.5em 0;
         display: flex;
         align-items: center;
         justify-items: center;
 
         &:hover {
-            background-color: #DCDFEC;
-
+            background-color: $clr17;
         }
 
         svg {

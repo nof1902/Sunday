@@ -209,10 +209,12 @@ export function getEmptyTask() {
   return {
     id: "",
     title: "New Task",
-    // priority: "",
-    // status: "Not Started",
+    status: "Not Started",
+    priority: "",
+    timeline: '',
   };
 }
+
 
 export function getEmptyGroup() {
   return {
