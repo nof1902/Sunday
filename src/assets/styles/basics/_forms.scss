@@ -13,7 +13,7 @@ input {
     font-size: 0.9em;
     font-weight: 400;
     border: 1px solid $clr11;
-    padding: 1px 6px;
+    // padding: 1px 6px;
     border-radius: $border-radius;
     background-color: $clr10;
     font-family: $font-txt;
@@ -64,7 +64,7 @@ form > * {
 
     
     &:hover{
-        background-color: $clr7;
+        background-color: $clr17;
         
     }
 }

@@ -28,6 +28,8 @@ export function GroupPreview({
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
   const [ispreview, setIspreview] = useState(true);
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
+  // const [isFocus, setIsFocus] = useState(false);
+  // const footerfocus = isFocus ? "footer-focus" : ""
 
   useEffectUpdate(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
@@ -69,6 +71,7 @@ export function GroupPreview({
   }
 
   function handleTaskInputFocus() {
+    // setIsFocus(true)
     setInputFocused(true);
   }
 
@@ -107,11 +110,12 @@ export function GroupPreview({
             ></path>
           </svg>
         </button>
+        <div className="expansion-btn">
         <svg
           viewBox="0 0 20 20"
           color={group.style}
           fill="currentColor"
-          width="24"
+          width="22"
           height="24"
           role="button"
           tabIndex="0"
@@ -126,6 +130,8 @@ export function GroupPreview({
             clipRule="evenodd"
           ></path>
         </svg>
+        </div>
+        
         {isTitleGroupEditMode ? (
           <input
             className="new-input text-style group-title"
@@ -150,13 +156,13 @@ export function GroupPreview({
       </section>
       <section
         className="tasks-table"
-        style={{ borderInlineStart: `7px solid ${group.style}` }}
+        style={{ borderInlineStart: `6px solid ${group.style}` }}
       >
 
       <Droppable direction="horizontal" droppableId="COLUMN" type="column">
       {(provided) => (
         <section className="tasks-header" {...provided.droppableProps} ref={provided.innerRef}>
-          <h4>Item</h4>
+          <h4>Task</h4>
           {cmpsOrder.map((key, idx) => (
             <Draggable draggableId={`${key}${idx}`} key={idx} index={idx}>
             {(provided) => (
@@ -165,7 +171,11 @@ export function GroupPreview({
             </Draggable>
           ))}
           {provided.placeholder}
-          <div>+</div>
+          <div>
+          <div className="add-column-btn">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" role="button" tabIndex="0" aria-hidden="false" className="icon_582a7de6be add-column-menu-button__icon clickable_404a1f116c" data-testid="icon"><path d="M10.75 3C10.75 2.58579 10.4142 2.25 10 2.25C9.58579 2.25 9.25 2.58579 9.25 3V9.25H3C2.58579 9.25 2.25 9.58579 2.25 10C2.25 10.4142 2.58579 10.75 3 10.75H9.25V17C9.25 17.4142 9.58579 17.75 10 17.75C10.4142 17.75 10.75 17.4142 10.75 17V10.75H17C17.4142 10.75 17.75 10.4142 17.75 10C17.75 9.58579 17.4142 9.25 17 9.25H10.75V3Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
+          </div>
+          </div>
         </section>
       )}
       </Droppable>
@@ -191,8 +201,7 @@ export function GroupPreview({
         <div
           className="footer-new-task"
           style={{
-            borderInlineStart: `7px solid ${group.style}`,
-            opacity: ".5",
+            borderInlineStart: `6px solid rgba(${parseInt(group.style.slice(1, 3), 16)}, ${parseInt(group.style.slice(3, 5), 16)}, ${parseInt(group.style.slice(5, 7), 16)}, 0.5)`
           }}
         >
         <div className="footer-div-input">
@@ -204,7 +213,7 @@ export function GroupPreview({
             id="newTask"
             name="title"
             type="text"
-            placeholder="+ Add item"
+            placeholder="+ Add task"
             onChange={handleTaskChange}
             onBlur={handleTaskInputBlur}
             onFocus={handleTaskInputFocus}

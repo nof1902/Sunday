@@ -10,23 +10,30 @@ $clr8: #38393E; // regular text (not h1..)
 $clr9: #0060b9; //hover buttons
 $clr10: #ffffff; //For white background
 $clr11: #d0d4e4; //table border and btn border
-$clr12: #0073ea; //focus on input and hover on addMessage-icon
+$clr12: #F5F6F8; //hover on table
 $clr13: rgb(162, 93, 220);
 $clr14: #cce5ff; //sidenav - selected
 $clr15: #dcdfec;//sidenav - hover
 $clr16:  rgb(50, 51, 56);
 $clr1WithAlpha: rgba($clr1, 0.2);
 $clr17:  #F0F0F1; // hover links 2
+$clr18: #676879; // placeholder and secondary text color
 
 $primary-background-color: #ffffff;
 $primary-background-hover-color: rgba(103, 104, 121, 0.1);
 
 
 
-//Fonts
-$font-txt: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
-$font-title: Poppins, Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+// --pulse-background-color-rgb: 245, 246, 248;
 
+
+
+//Fonts
+// $font-txt: Figtree, Poppins, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+// $font-title: Poppins, Figtree, Roboto, Noto Sans Hebrew, Noto Kufi Arabic, Noto Sans JP, sans-serif;
+$font-title: 'Poppins';
+$font-txt: 'Figtree';
+// $font-txt: Figtree;
 
 // $border-radius: 0.3em;
 $border-radius: 5px;

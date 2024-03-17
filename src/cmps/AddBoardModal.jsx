@@ -60,8 +60,8 @@ export function AddBoardModal({ onAddBoard, handleCloseModal }) {
             onChange={handleChange}
           />
           <section className="form-actions">
-            <button onClick={handleCloseModal}>Cancel</button>
-            <button type="submit" onClick={handleCreateBoard}>
+            <button className="cancel-form-actions" onClick={handleCloseModal}>Cancel</button>
+            <button className="create-form-actions" type="submit" onClick={handleCreateBoard}>
               Create Board
             </button>
           </section>
