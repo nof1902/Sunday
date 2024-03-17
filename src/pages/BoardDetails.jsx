@@ -27,7 +27,6 @@ export function BoardDetails(currBoardTitle) {
   
   useEffect(() => {
     if(params.id){
-      // console.log('again')
       getBoard()
       setUpdate(false)
     }

@@ -9,20 +9,15 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
   const [openEditModel, setOpenEditModel] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [infoToEdit, setInfoToEdit] = useState(info);
-  const debouncedInfoToEdit = useDebounce(infoToEdit, 500);
   const modalRef = useRef();
-
-  const pastMonth = new Date();
+  
   const defaultSelected = {
-    from: pastMonth,
-    to: addDays(pastMonth, 1),
+    from: new Date(),
+    to: addDays(new Date(), 1)
   };
+  
+  const [range, setRange] = useState(isValidDate(info.selectedTimeLine) || defaultSelected)
 
-  
-  const [range, setRange] = useState((infoToEdit?.selectedTimeLine?.to && 
-                                      infoToEdit?.selectedTimeLine?.from)
-                                       || defaultSelected);
-  
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -37,25 +32,36 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
     };
   }, [handleClickModal]);
 
-  useEffectUpdate(() => {
-      onUpdateEntity(infoToEdit)
-  },[debouncedInfoToEdit])
 
-  function handleChange(range) {
+  function handleChange(range){
+
+    setRange(range)
+    
     setInfoToEdit((prevInfo) => ({
       ...prevInfo,
       selectedTimeLine: range,
     }));
+
+    onUpdateEntity(range)
   }
+
 
   function handleClickModal() {
     setOpenEditModel(!openEditModel);
   }
 
+  function isValidDate(date){
+      if(date.from && date.to){
+        return date
+      }
+
+      return null
+  }
+
   const backgroundColor = setBackgroundColor(info);
 
   function setBackgroundColor(info) {
-    if (info.selectedTimeLine) {
+    if (isValidDate(info.selectedTimeLine)) {
       return `#333333`;
     }
     return "rgb(196, 196, 196)";
@@ -70,28 +76,19 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
         onMouseLeave={() => setIsHovered(false)}
         className="set-time-line"
       >
-        {!info.selectedTimeLine && (
+        {isValidDate(info.selectedTimeLine) === null &&(
           <span className="empty-time-for-task">
             {isHovered ? "Set Dates" : "-"}
           </span>
         )}
-
-        {info.selectedTimeLine &&(
-          <span className="empty-time-for-task">
-            {isHovered
-              ? `${formatDistance(range.from, range.to)}`
-              : `${format(range.from, "LLL d")}–${format(range.to, "LLL d")}`}
-          </span>
-        )}
-        {/* {info.selectedTimeLine && openEditModel &&(
+        {isValidDate(info.selectedTimeLine) &&(
           <span className="empty-time-for-task">
             {isHovered
               ? `${formatDistance(info.selectedTimeLine.from, info.selectedTimeLine.to)}`
-              : `${format(range.from, "LLL d")}–${format(range.to, "LLL d")}`}
+              : `${format(info.selectedTimeLine.from, "LLL d")}–${format(info.selectedTimeLine.to, "LLL d")}`}
           </span>
-        )} */}
-        </ button>
-
+        )}
+      </ button>
 
       {openEditModel && (
         <section ref={modalRef} className="calender-model">
@@ -102,10 +99,9 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
             captionLayout="dropdown-buttons"
             fromYear={2015}
             toYear={2025}
-            defaultMonth={pastMonth}
+            defaultMonth={new Date()}
             selected={range}
-            onSelect={setRange}
-            onDayClick={handleChange}
+            onSelect={handleChange}
           />
         </section>
       )}

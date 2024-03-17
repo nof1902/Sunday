@@ -7,9 +7,11 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker,
 
     let info
     function onUpdateEntity(info){
+      if(info.to){
+        onUpdate(cmpType, info)  
+        return
+      }
       const choseEntity = Object.values(info)[0]
-
-      console.log('onUpdateEntity', info)
       onUpdate(cmpType, choseEntity)
     }
 

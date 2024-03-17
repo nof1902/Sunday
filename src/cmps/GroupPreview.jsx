@@ -32,9 +32,7 @@ export function GroupPreview({
 
   useEffect(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
-      currGroup.tasks.push(task)
       saveTaskCall(task)
-      saveGroup(currGroup)
       setTask(getEmptyTask());
       setInputFocused(null);
     }
@@ -65,11 +63,13 @@ export function GroupPreview({
 
   async function handleGroupTitleBlur({ target }) {
     if (target.value !== "") setIsTitleGroupEditMode(false);
+    // onSaveGroup(null,currGroup);
   }
 
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
+    console.log('currGroup ', currGroup)
   }
 
   async function handleTaskInputBlur({ target }) {
@@ -82,7 +82,24 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    await onSaveTask(currGroup.id, taskToSave);
+    
+    onSaveTask(currGroup.id, taskToSave);
+    const isTaskExist = currGroup.tasks.find(task.id === taskToSave.id)
+    if(isTaskExist){
+      setCurrGroup((prevGroup) => ({
+        ...prevGroup,
+        tasks: prevGroup.tasks.map((task) => 
+        task.id === taskToSave.id ? { ...task, ...taskToSave } : task
+        ),
+      }));      
+    } else {
+      setCurrGroup((prevGroup) => ({
+        ...prevGroup,
+        tasks: [...prevGroup.tasks, taskToSave],
+      }));
+      onSaveGroup(null,currGroup);
+    }
+
   }
 
   function handleTaskChange({ target }) {
