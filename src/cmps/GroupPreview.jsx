@@ -41,12 +41,15 @@ export function GroupPreview({
   }, [inputFocused]);
 
   useEffectUpdate(() => {
+    async function saveGroup(){
+      await onSaveGroup(null,currGroup);
+    }
     saveGroup()
-  }, [debouncedGroup]);
+  }, [currGroup]);
 
-  async function saveGroup(){
-    await onSaveGroup(null,currGroup);
-  }
+  // useEffect(() => {
+  //   setCurrGroup({...group})
+  // }, [group])
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
@@ -85,7 +88,6 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    
     onSaveTask(currGroup.id, taskToSave);
     const isTaskExist = currGroup.tasks.find(task.id === taskToSave.id)
     if(isTaskExist){
@@ -100,9 +102,9 @@ export function GroupPreview({
         ...prevGroup,
         tasks: [...prevGroup.tasks, taskToSave],
       }));
-      onSaveGroup(null,currGroup);
     }
-
+    
+    onSaveGroup(null,currGroup);
   }
 
   function handleTaskChange({ target }) {
