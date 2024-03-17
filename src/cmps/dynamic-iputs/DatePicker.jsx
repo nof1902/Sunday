@@ -12,20 +12,8 @@ export function DatePicker() {
       to: addDays(pastMonth, 4),
     };
     
+    
     const [range, setRange] = useState(defaultSelected)
-
-    let footer = <p>Please pick the first day.</p>;
-    if (range?.from) {
-      if (!range.to) {
-        footer = <p>{format(range.from, "PPP")}</p>;
-      } else if (range.to) {
-        footer = (
-          <p>
-            {format(range.from, "PPP")}–{format(range.to, "PPP")}
-          </p>
-        );
-      }
-    }
 
   console.log(range)
 
@@ -38,7 +26,6 @@ export function DatePicker() {
         captionLayout="dropdown-buttons" fromYear={2015} toYear={2025}
         defaultMonth={pastMonth}
         selected={range}
-        // footer={footer}
         onSelect={setRange}
       />
     </section>

@@ -14,7 +14,7 @@ export function GroupPreview({
   onSaveTask,
   onRemoveTask,
   onRemoveGroup,
-  onUpdateGroup,
+  onSaveGroup,
   cmpsOrder,
   statusPicker,
   priorityPicker
@@ -31,23 +31,26 @@ export function GroupPreview({
   // const [isFocus, setIsFocus] = useState(false);
   // const footerfocus = isFocus ? "footer-focus" : ""
 
-  useEffect(() => {
+  useEffectUpdate(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
-      onSaveTask(group.id, task);
-      currGroup.tasks.push(task);
+      saveTaskCall(task)
       setTask(getEmptyTask());
       setInputFocused(null);
     }
   }, [inputFocused]);
 
   useEffectUpdate(() => {
-    onUpdateGroup(currGroup);
+    saveGroup()
   }, [debouncedGroup]);
+
+  async function saveGroup(){
+    await onSaveGroup(null,currGroup);
+  }
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
     cmpsOrder.forEach((component) => {
-      newTask[component] = {};
+      newTask[component] ='';
     });
     return newTask;
   }
@@ -59,6 +62,7 @@ export function GroupPreview({
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
+    console.log(currGroup)
   }
 
   function handleTaskInputBlur({ target }) {
@@ -71,18 +75,17 @@ export function GroupPreview({
     setInputFocused(true);
   }
 
-  function saveTaskCall(task) {
-    onSaveTask(group.id, task);
+  async function saveTaskCall(taskToSave) {
+    await onSaveTask(currGroup.id, taskToSave);
   }
 
   function handleTaskChange({ target }) {
     const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
-    console.log("task", task);
   }
 
-  function deleteTask(taskId) {
-    onRemoveTask(group.id, taskId);
+  async function deleteTask(taskId) {
+    await onRemoveTask(group.id, taskId);
   }
 
   const { tasks } = group;

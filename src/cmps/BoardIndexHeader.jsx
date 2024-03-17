@@ -22,17 +22,18 @@ export function BoardIndexHeader({
     setEditBoard(board);
   }, [board]);
 
-  function handleBlur() {
-    onUpdateBoard(editBoard);
+  async function handleBlur() {
+    await onUpdateBoard(editBoard);
   }
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
     board.cmpsOrder.forEach((component) => {
-      newTask[component] = {};
+      newTask[component] = '';
     });
     return newTask;
   }
+
 
   return (
     <section className="board-index-header">

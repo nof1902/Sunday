@@ -1,7 +1,8 @@
+import { useEffectUpdate } from "../../customHooks/useEffectUpdate";
 import { utilService } from "../../services/util.service";
 import { useEffect, useRef, useState } from "react";
 
-export function PriorityCmp({ info, onUpdate }) {
+export function PriorityCmp({ info, onUpdateEntity }) {
   const [openEditModel, setOpenEditModel] = useState(false);
   const [infoToEdit, setInfoToEdit] = useState(info);
   const modalRef = useRef();
@@ -20,9 +21,11 @@ export function PriorityCmp({ info, onUpdate }) {
     };
   }, [handleClickModal]);
 
-  useEffect(() => {
-    onUpdate(infoToEdit);
-  }, [infoToEdit]);
+
+  useEffectUpdate(() => {
+    onUpdateEntity(infoToEdit)
+  },[infoToEdit])
+
 
   function onChangeStatus( {label}) {
     setInfoToEdit((prevInfo) => ({

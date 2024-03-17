@@ -30,7 +30,7 @@ export function BoardPreview({ board }) {
           </svg>
           <h1 className="board-title">{board.title}</h1>
         </section>
-        <h1 className="board-num-of-groups">{board.groups.length} Groups</h1>
+        <h1 className="board-num-of-groups">{board.numOfGroups} Groups</h1>
       </Link>
     </li>
   );

@@ -38,15 +38,15 @@ export function getActionUpdateBoard(board) {
   };
 }
 
-export async function loadBoards(resetCurrBoard = false) {
+export async function loadBoards() {
   try {
     // store.dispatch({ type: LOADING_START })
     const boards = await boardService.query();
+
     console.log("Boards from DB:", boards);
     store.dispatch({
       type: SET_BOARDS,
-      boards,
-      resetCurrBoard
+      boards
     });
   } catch (err) {
     console.log("Cannot load Boards", err);
@@ -61,18 +61,24 @@ export async function getBoardById(boardId) {
       type: SET_BOARD,
       board,
     });
+    return board
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
   }
 }
 
-export async function getBoardByID(boardId) {
+export async function updateBoardFromBoards(boards, boardIdToUpdate) {
   try {
+    console.log('boardIdToUpdate', boardIdToUpdate)
+    let board = await boardService.getById(boardIdToUpdate._id);
+    await boardService.save({...board, title: boardIdToUpdate.title});
     store.dispatch({
-      type: SET_BOARD,
-      boardId
+      type: SET_BOARDS,
+      boards,
+      board
     });
+    
   } catch (err) {
     console.log("Cannot load Boards", err);
     throw err;
@@ -104,7 +110,6 @@ export async function removeBoard(boardId) {
 export async function addBoard(board) {
   try {
     const savedBoard = await boardService.save(board);
-    console.log("Added Board", savedBoard);
     store.dispatch(getActionAddBoard(savedBoard));
     return savedBoard;
   } catch (err) {
@@ -113,53 +118,57 @@ export async function addBoard(board) {
   }
 }
 
-export async function updateBoard(board) {
-  return boardService
-    .save(board)
-    .then((savedBoard) => {
-      store.dispatch(getActionUpdateBoard(savedBoard));
-    })
-    .catch((err) => {
-      console.log("Cannot save Board", err);
-      throw err;
-    });
+export async function updateBoardOptimistic(board) {
+  try {
+    store.dispatch(getActionUpdateBoard(board));
+    const savedBoard = await boardService.save(board);
+    return savedBoard;
+  } catch (err) {
+    console.log("Cannot update Board", err);
+    throw err;
+  }
 }
 
+export async function updateBoard(board) {
+  try {
+    const savedBoard = await boardService.save(board);
+    store.dispatch(getActionUpdateBoard(savedBoard));
+    return savedBoard;
+  } catch (err) {
+    console.log("Cannot update Board", err);
+    throw err;
+  }
+}
 
 // by adding task from headerindex - the task automaticly
 export async function SaveTask(boardId, groupId, task, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.saveTask(board, groupId, task, activity);
-  updateBoard(board);
-  return board;
+  // updateBoard(board);
+  return board
 }
 
 export async function RemoveTask(boardId, groupId, taskId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeTask(board, groupId, taskId, activity);
-  updateBoard(board);
+  // updateBoard(board);
+  return board
 }
 
 export async function SaveGroup(boardId, index, group, activity = {}) {
+  console.log('SaveGroup' , group)
   let board = await boardService.getById(boardId);
   board = await boardService.saveGroup(board, index, group, activity);
-  updateBoard(board);
+  // updateBoard(board);
+  return board
 }
 
 export async function RemoveGroup(boardId, groupId, activity = {}) {
   let board = await boardService.getById(boardId);
   board = await boardService.removeGroup(board, groupId, activity);
-  updateBoard(board);
+  // updateBoard(board);
+  return board
 }
-
-export async function setUrlParamId(urlParamsID) {
-  store.dispatch({
-    type: SET_URL_PARAM_ID,
-    urlParamsID
-  })
-}
-
-
 
 // Demo for Optimistic Mutation
 // (IOW - Assuming the server call will work, so updating the UI first)

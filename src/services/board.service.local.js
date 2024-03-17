@@ -27,12 +27,17 @@ async function query(filterBy = { status: "", title: "" }) {
   }
 
   boards = await storageService.query(STORAGE_KEY);
+
+  // for now... will be in the backend
+  boards = boards.map((board) => ({
+    _id: board._id,
+    title: board.title,
+    numOfGroups: board.groups?.length
+  }))
+  
   // if (filterBy.txt) {
   //     const regex = new RegExp(filterBy.txt, 'i')
   //     boards = boards.filter(board => regex.test(car.vendor) || regex.test(car.description))
-  // }
-  // if (filterBy.price) {
-  //     boards = boards.filter(board => car.price <= filterBy.price)
   // }
   return boards;
 }
@@ -63,27 +68,29 @@ function getGroupFromBoardById(board, groupId) {
 }
 
 async function saveTask(board, groupId, task, activity) {
+  
   // if there is not specific group -> add to first group
-  var group = board.groups[0];
+  var groupToAddTaskTo = board.groups[0];
 
   // if there is specific group -> add according to groupId
   if (groupId) {
-    group = getGroupFromBoardById(board, groupId);
+    groupToAddTaskTo = getGroupFromBoardById(board, groupId);
   }
 
   // check if it is an update
   if (task && task.id) {
-    const tasks = group.tasks.map((existTask) => {
+    const tasks = groupToAddTaskTo.tasks.map((existTask) => {
       return existTask.id === task.id ? task : existTask;
     });
-    group = { ...group, tasks: tasks };
+    groupToAddTaskTo = { ...groupToAddTaskTo, tasks: tasks };
   } else {
     task.id = utilService.makeId();
-    group.tasks.push(task);
+    groupToAddTaskTo.tasks.push(task);
   }
 
-  board.groups = board.groups.map((g) => (g.id === groupId ? group : g));
-  // board.activities.unshift(activity)
+  board.groups = board.groups.map((g) => (g.id === groupToAddTaskTo.id ? groupToAddTaskTo : g));
+
+  // board = saveGroup(board, null, groupToAddTaskTo, activity)
   return board;
 }
 
@@ -93,6 +100,7 @@ async function removeTask(board, groupId, taskId, activity) {
     (existTask) => existTask.id !== taskId
   );
   group = { ...group, tasks: filteredTasks };
+
   board.groups = board.groups.map((g) => (g.id === group.id ? group : g));
 
   // board.activities.unshift(activity)
@@ -107,6 +115,7 @@ async function removeGroup(board, groupId, activity) {
 }
 
 async function saveGroup(board, index = null, group, activity) {
+  console.log(group)
   // if new group
   if (index === 0) {
     board.groups.unshift(group);
@@ -180,15 +189,15 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 1",
-              status: "Not Started",
-              priority: "Critical",
+              status: "",
+              priority: "",
               timeLine:''
             },
             {
               id: utilService.makeId(),
               title: "Task 2",
-              status: "Done",
-              priority: "Low",
+              status: "",
+              priority: "",
               timeLine:''
             },
             {
@@ -302,5 +311,5 @@ function _createBoards() {
 
   // }
   utilService.saveToStorage(STORAGE_KEY, boards);
-  console.log(boards.length, boards[0], boards[1]);
+  
 }

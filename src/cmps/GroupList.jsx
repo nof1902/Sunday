@@ -6,7 +6,7 @@ export function GroupList({
   onSaveTask,
   onRemoveTask,
   onRemoveGroup,
-  onUpdateGroup,
+  onSaveGroup,
   cmpsOrder,
   statusPicker,
   priorityPicker
@@ -23,7 +23,7 @@ export function GroupList({
             onSaveTask={onSaveTask}
             onRemoveTask={onRemoveTask}
             onRemoveGroup={onRemoveGroup}
-            onUpdateGroup={onUpdateGroup}
+            onSaveGroup={onSaveGroup}
             cmpsOrder={cmpsOrder}
             statusPicker={statusPicker}
             priorityPicker={priorityPicker}

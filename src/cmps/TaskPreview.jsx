@@ -61,9 +61,9 @@ export function TaskPreview({
     });
   }
 
-  function onUpdate(info) {
+  function onUpdate(cmpType,choseEntity) {
+    setTaskToEdit((prevTask) => ({ ...prevTask, [cmpType]: choseEntity }));
     setCanSave(true);
-    setTaskToEdit((prevTask) => ({ ...prevTask, status: info.selectedStatus }));
   }
 
   return (
