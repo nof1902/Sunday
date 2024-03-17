@@ -89,7 +89,7 @@ export function GroupPreview({
 
   async function saveTaskCall(taskToSave) {
     onSaveTask(currGroup.id, taskToSave);
-    const isTaskExist = currGroup.tasks.find(task.id === taskToSave.id)
+    const isTaskExist = currGroup.tasks.find((task) => task.id === taskToSave.id)
     if(isTaskExist){
       setCurrGroup((prevGroup) => ({
         ...prevGroup,

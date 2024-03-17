@@ -28,7 +28,7 @@ export function BoardIndexHeader({
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
-    cmpsOrder.forEach((component) => {
+    board.cmpsOrder.forEach((component) => {
 
       if(newTask[component] === 'timeLine'){
         newTask[component] ={};
