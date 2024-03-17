@@ -27,11 +27,14 @@ export function GroupPreview({
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
   const [ispreview, setIspreview] = useState(true);
+
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
 
-  useEffectUpdate(() => {
+  useEffect(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
+      currGroup.tasks.push(task)
       saveTaskCall(task)
+      saveGroup(currGroup)
       setTask(getEmptyTask());
       setInputFocused(null);
     }
@@ -48,22 +51,28 @@ export function GroupPreview({
   function createEmptyTask() {
     const newTask = getEmptyTask();
     cmpsOrder.forEach((component) => {
-      newTask[component] ='';
+
+      if(newTask[component] === 'timeLine'){
+        newTask[component] ={};
+      }
+
+      else{
+        newTask[component] = ''
+      }
     });
     return newTask;
   }
 
-  function handleGroupTitleBlur({ target }) {
+  async function handleGroupTitleBlur({ target }) {
     if (target.value !== "") setIsTitleGroupEditMode(false);
   }
 
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
-    console.log(currGroup)
   }
 
-  function handleTaskInputBlur({ target }) {
+  async function handleTaskInputBlur({ target }) {
     if (target.value !== "") setInputFocused(false);
     target.value = "";
   }

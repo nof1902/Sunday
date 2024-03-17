@@ -28,8 +28,15 @@ export function BoardIndexHeader({
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
-    board.cmpsOrder.forEach((component) => {
-      newTask[component] = '';
+    cmpsOrder.forEach((component) => {
+
+      if(newTask[component] === 'timeLine'){
+        newTask[component] ={};
+      }
+
+      else{
+        newTask[component] = ''
+      }
     });
     return newTask;
   }
