@@ -123,12 +123,12 @@
         display: block;
 
         .footer-new-task {
-            border-block-end: 1px solid #e2e2e2;
-            height: 35px;
+            // border-block-end: 1px solid #e2e2e2;
+            // height: 35px;
             border-inline-start: 7px solid #ededed80;
             border-end-start-radius: 7px;
             border-start-start-radius: 0px;
-            box-sizing: content-box;
+            // box-sizing: content-box;
             // font-family: roboto;
             border-inline-start: 7px solid; 
 
@@ -140,6 +140,13 @@
                 .new-task-input{
                     background-color: #F4F5F8;  
                 }
+            }
+
+            .footer-div-input {
+                border-block-end: 1px solid #e2e2e2;
+                height: 35px;
+                display: flex;
+                align-items: center;
             }
         }
 

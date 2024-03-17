@@ -195,7 +195,8 @@ export function GroupPreview({
             opacity: ".5",
           }}
         >
-          <label htmlFor="newTask" hidden>
+        <div className="footer-div-input">
+        <label htmlFor="newTask" hidden>
             add new task
           </label>
           <input
@@ -208,6 +209,8 @@ export function GroupPreview({
             onBlur={handleTaskInputBlur}
             onFocus={handleTaskInputFocus}
           />
+        </div>
+          <div></div>
         </div>
         {
           <section className="footer-stasus">

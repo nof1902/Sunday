@@ -4,11 +4,12 @@
 
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 350px repeat(auto-fill, 145px);
-    
+    // grid-template-columns: 350px repeat(auto-fill, 145px);
+    grid-template-columns: 350px auto 1fr;
+
     text-align: center;
     color: $clr2;
-    border-block-end: 1px solid $clr11;
+    // border-block-end: 1px solid $clr11;
     height: 35px;
     padding: 0;
     // border-inline-start: 6px solid rgb(162, 93, 220);
@@ -32,6 +33,8 @@
     .task-header {
         display: grid;
         grid-template-columns: 30px auto 70px;
+        // border-inline-end: 1px solid $clr11;
+        border-block-end: 1px solid $clr11;
 
         .delete-btn {
             width: 23px;
@@ -107,6 +110,17 @@
         }
     }
 
+    .task-columns {
+        display: grid;
+        grid-auto-flow: column;
+        // grid-template-columns: repeat(auto-fill, 145px);
+        border-block-end: 1px solid $clr11;
+         
+        & > * {
+            width: 145px;
+        }
+    }
+
     .dynamic-cmps-section{
         .dynamic-cmps-sectio-list{
            all: unset;
@@ -130,6 +144,9 @@
     }
 
   
+    .task-end {
+        border-block-end: 1px solid $clr11;
+    }
 
 }
 
