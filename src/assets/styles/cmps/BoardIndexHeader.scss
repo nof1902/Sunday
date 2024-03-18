@@ -117,8 +117,46 @@
                 align-items: center;
                 justify-items: center;
                 padding-inline: 0.35em;
+                position: relative;
+
             }
+
+            .set-board-options {
+                position: absolute;
+                width: 264px;
+                display: grid;
+                grid-template-rows: repeat(auto);
+                bottom: 25.5em;
+                left: 21em;
+                border-radius: $border-radius;
+                box-shadow: 0 4px 17px 6px rgba(0,0,0,.1);
+                background-color:$clr10;
+                width: 12em;
+                z-index: 5;
+                padding: 8px;
+                
+
+                .svg-title{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 0.3em;
+                    border-radius: $border-radius;
+    
+                    h1{
+                        all: unset;
+                        font-size: 14px;
+                        margin-left: 0.8em;
+                      }
+                }
+        
+                :hover{
+                    background-color: $clr17; 
+                }
+              }
         }
     }
+
 }
 

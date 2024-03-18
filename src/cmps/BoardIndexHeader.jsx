@@ -7,6 +7,7 @@ import {
 } from "../store/actions/board.actions";
 import { useEffect, useState } from "react";
 import { useForm } from "../customHooks/useForm";
+import { OptionsActionsCmp } from "./OptionsActionsCmp";
 
 // import { storeSaveTask } from "../store/board.actions"
 
@@ -17,6 +18,7 @@ export function BoardIndexHeader({
   onUpdateBoard,
 }) {
   const [editBoard, setEditBoard, handleChange] = useForm(board);
+  const [isOptionsModalOpen,setIsOptionsModalOpen] = useState(false)
 
   useEffect(() => {
     setEditBoard(board);
@@ -41,6 +43,9 @@ export function BoardIndexHeader({
     return newTask;
   }
 
+  function handleSetModal() {
+    setIsOptionsModalOpen(!isOptionsModalOpen)
+  }
 
   return (
     <section className="board-index-header">
@@ -97,7 +102,7 @@ export function BoardIndexHeader({
           </button>
           <button
             className="add-group"
-            onClick={() => onSaveGroup( 0, getEmptyGroup(), {})}
+            onClick={handleSetModal}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,29 +119,10 @@ export function BoardIndexHeader({
               <path d="m6 9 6 6 6-6" />
             </svg>
           </button>
+          {isOptionsModalOpen && <OptionsActionsCmp onAction={onSaveGroup} handleSetModal={handleSetModal} actionType={'addGroup'}/>}
         </section>
       </section>
     </section>
   );
 }
 
-
-
-// <button className="plus-btn">
-//           <svg
-//             viewBox="0 0 20 20"
-//             fill="currentColor"
-//             width="18"
-//             height="18"
-//             aria-hidden="true"
-//             className="icon_d24b689566 noFocusStyle_07ecef1878"
-//             data-testid="icon"
-//           >
-//             <path
-//               d="M10.75 6C10.75 5.58579 10.4142 5.25 10 5.25C9.58579 5.25 9.25 5.58579 9.25 6V9.25H6C5.58579 9.25 5.25 9.58579 5.25 10C5.25 10.4142 5.58579 10.75 6 10.75H9.25V14C9.25 14.4142 9.58579 14.75 10 14.75C10.4142 14.75 10.75 14.4142 10.75 14V10.75H14C14.4142 10.75 14.75 10.4142 14.75 10C14.75 9.58579 14.4142 9.25 14 9.25H10.75V6Z"
-//               fill="currentColor"
-//               fillRule="evenodd"
-//               clipRule="evenodd"
-//             ></path>
-//           </svg>
-//         </button>

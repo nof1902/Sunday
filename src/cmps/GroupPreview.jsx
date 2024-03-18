@@ -8,6 +8,7 @@ import { func } from "prop-types";
 import { useDebounce } from "../customHooks/useDebounce.js";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js";
 import { Droppable, Draggable } from "react-beautiful-dnd"
+import { OptionsActionsCmp } from "./OptionsActionsCmp.jsx";
 
 export function GroupPreview({
   group,
@@ -26,11 +27,12 @@ export function GroupPreview({
   const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
+  // open actions window
+  const [isOptionsModalOpen,setIsOptionsModalOpen] = useState(false)
   const [ispreview, setIspreview] = useState(true);
 
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
-  // const [isFocus, setIsFocus] = useState(false);
-  // const footerfocus = isFocus ? "footer-focus" : ""
+
 
   useEffect(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
@@ -46,10 +48,6 @@ export function GroupPreview({
     }
     saveGroup()
   }, [currGroup]);
-
-  // useEffect(() => {
-  //   setCurrGroup({...group})
-  // }, [group])
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
@@ -116,13 +114,17 @@ export function GroupPreview({
     await onRemoveTask(group.id, taskId);
   }
 
+  function handleSetModal() {
+    setIsOptionsModalOpen(!isOptionsModalOpen)
+  }
+
   const { tasks } = group;
 
 
   return (
     <section className={groupClass}>
       <section className="group-header">
-        <button className="delete-btn" onClick={() => onRemoveGroup(group.id)}>
+        <button className="delete-btn" onClick={handleSetModal}>
           <svg
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -138,6 +140,7 @@ export function GroupPreview({
             ></path>
           </svg>
         </button>
+        {isOptionsModalOpen && <OptionsActionsCmp onAction={onRemoveGroup} onActionProps={group.id} handleSetModal={handleSetModal} actionType={'removeGroup'}/>}
         <div className="expansion-btn">
         <svg
           viewBox="0 0 20 20"
@@ -258,31 +261,3 @@ export function GroupPreview({
     </section>
   );
 }
-
-// onKeyPress={handleKeyPress}
-
-// useEffect(() => {
-//   // const taskInput = taskTitleRef.current;
-
-//   if (taskInput) {
-//     taskInput.addEventListener('focus', handleFocus)
-//     taskInput.addEventListener('blur', handleBlur)
-
-//     return () => {
-//       taskInput.removeEventListener('focus', handleFocus)
-//       taskInput.removeEventListener('blur', handleBlur)
-//     };
-
-//   }
-
-// }, []);
-
-//   useEffectUpdate(() => {
-//     onUpdateGroup(param.id,currGroup)
-// }, [debouncedGroup])
-
-// useEffect(() => {
-//   if(isEditMode ===true && currGroup !== group){
-//     onUpdateGroup(param.id,currGroup)
-//   }
-// }, [currGroup])
