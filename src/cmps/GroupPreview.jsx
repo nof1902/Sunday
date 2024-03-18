@@ -162,7 +162,10 @@ export function GroupPreview({
       <Droppable direction="horizontal" droppableId="COLUMN" type="column">
       {(provided) => (
         <section className="tasks-header" {...provided.droppableProps} ref={provided.innerRef}>
-          <h4>Task</h4>
+          <div>
+            <h4>Task</h4>
+          </div>
+          <div className="group-column-div">
           {cmpsOrder.map((key, idx) => (
             <Draggable draggableId={`${key}${idx}`} key={idx} index={idx}>
             {(provided) => (
@@ -171,10 +174,12 @@ export function GroupPreview({
             </Draggable>
           ))}
           {provided.placeholder}
-          <div>
-          <div className="add-column-btn">
-          <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" role="button" tabIndex="0" aria-hidden="false" className="icon_582a7de6be add-column-menu-button__icon clickable_404a1f116c" data-testid="icon"><path d="M10.75 3C10.75 2.58579 10.4142 2.25 10 2.25C9.58579 2.25 9.25 2.58579 9.25 3V9.25H3C2.58579 9.25 2.25 9.58579 2.25 10C2.25 10.4142 2.58579 10.75 3 10.75H9.25V17C9.25 17.4142 9.58579 17.75 10 17.75C10.4142 17.75 10.75 17.4142 10.75 17V10.75H17C17.4142 10.75 17.75 10.4142 17.75 10C17.75 9.58579 17.4142 9.25 17 9.25H10.75V3Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
           </div>
+          
+          <div>
+            <div className="add-column-btn">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18" role="button" tabIndex="0" aria-hidden="false" className="icon_582a7de6be add-column-menu-button__icon clickable_404a1f116c" data-testid="icon"><path d="M10.75 3C10.75 2.58579 10.4142 2.25 10 2.25C9.58579 2.25 9.25 2.58579 9.25 3V9.25H3C2.58579 9.25 2.25 9.58579 2.25 10C2.25 10.4142 2.58579 10.75 3 10.75H9.25V17C9.25 17.4142 9.58579 17.75 10 17.75C10.4142 17.75 10.75 17.4142 10.75 17V10.75H17C17.4142 10.75 17.75 10.4142 17.75 10C17.75 9.58579 17.4142 9.25 17 9.25H10.75V3Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
+            </div>
           </div>
         </section>
       )}
@@ -196,7 +201,7 @@ export function GroupPreview({
       )}
       </Droppable>
          
-      </section>
+    </section>
       <section className="group-footer">
         <div
           className="footer-new-task"
@@ -223,10 +228,14 @@ export function GroupPreview({
         </div>
         {
           <section className="footer-stasus">
-            <span></span>
+            <div></div>
+            <div className="footer-summary">
             {cmpsOrder.map((item, idx) => (
               <span key={idx}></span>
             ))}
+            </div>
+            <div></div>
+            
           </section>
         }
       </section>
