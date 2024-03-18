@@ -7,6 +7,10 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker,
 
     let info
     function onUpdateEntity(info){
+      if(info.to){
+        onUpdate(cmpType, info)  
+        return
+      }
       const choseEntity = Object.values(info)[0]
       onUpdate(cmpType, choseEntity)
     }
@@ -24,11 +28,11 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker,
           statuses: statusPicker,
         };
         return <StatusCmp info={info} onUpdateEntity={onUpdateEntity} />;
-      case "timeline":
+      case "timeLine":
         info = {
             selectedTimeLine: taskToEdit.timeLine,
         }
-          return <TimeLineCmp info={info} onUpdateEntity={onUpdateEntity} />;
+        return <TimeLineCmp info={info} onUpdateEntity={onUpdateEntity} />;
       default:
         return <p>UNKNOWN {cmpType}</p>;
     }

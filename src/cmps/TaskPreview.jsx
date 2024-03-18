@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { onToggleModal } from "../store/actions/app.actions";
 import { SidePanelSlideHeader } from "./SidePanelSlideHeader";
 import { DynamicCmp } from "./DynamicCmp";
+import { OptionsActionsCmp } from "./OptionsActionsCmp";
 
 // import { svgService } from "../svg.service"
 
@@ -16,6 +17,7 @@ export function TaskPreview({
   const [taskToEdit, setTaskToEdit] = useState(task);
   const [editMode, setEditMode] = useState(false);
   const [canSave, setCanSave] = useState(false);
+  const [isOptionsModalOpen,setIsOptionsModalOpen] = useState(false)
 
   useEffect(() => {
     if (canSave) {
@@ -66,10 +68,14 @@ export function TaskPreview({
     setCanSave(true);
   }
 
+  function handleSetModal() {
+    setIsOptionsModalOpen(!isOptionsModalOpen)
+  }
+
   return (
     <section className="task-preview">
       <div className="task-header">
-        <button className="delete-btn" onClick={() => deleteTask(task.id)}>
+        <button className="delete-btn" onClick={handleSetModal}>
           <svg
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -85,7 +91,7 @@ export function TaskPreview({
             ></path>
           </svg>
         </button>
-
+        {isOptionsModalOpen && <OptionsActionsCmp onAction={deleteTask} onActionProps={task.id} handleSetModal={handleSetModal} actionType={'removeTask'}/>}
         <div className="task-table">
           {editMode ? (
             <input

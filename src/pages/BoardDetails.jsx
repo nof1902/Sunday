@@ -22,13 +22,15 @@ import { func } from "prop-types";
 export function BoardDetails(currBoardTitle) {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
+  const [update,setUpdate] = useState(false)
   const params = useParams()
   
   useEffect(() => {
     if(params.id){
       getBoard()
+      setUpdate(false)
     }
-  }, [params.id,currBoardTitle])
+  }, [params.id,currBoardTitle,update === true])
 
   async function getBoard(){
     try {
@@ -44,7 +46,9 @@ export function BoardDetails(currBoardTitle) {
     try {
       console.log('boardDetails ',group)
       const boardToSave = await SaveGroup(currBoard._id, index, group, activity);
+      // await updateBoardOptimistic(boardToSave)
       await updateBoard(boardToSave)
+      setUpdate(true)
       showSuccessMsg(`Group added successfully`);
     } catch (err) {
       showSuccessMsg(`Could not add Group`);
@@ -66,9 +70,9 @@ export function BoardDetails(currBoardTitle) {
   async function onSaveTask(groupId, task, activity = {}) {
     try {
       const boardToSave = await SaveTask(currBoard._id, groupId, task, activity)
-      console.log(boardToSave.groups)
       await updateBoard(boardToSave)
-      console.log(boardToSave.groups)
+      setUpdate(true)
+      // await updateBoardOptimistic(boardToSave)
       showSuccessMsg(`Task added successfully`)
     } catch (err) {
       showErrorMsg(`Could not add task`);
@@ -102,7 +106,6 @@ export function BoardDetails(currBoardTitle) {
 
   const handleDragDrop = async (results) => {
     const { source, destination, type } = results
-    // console.log(results)
     if (!destination) return
 
     if (
@@ -112,7 +115,6 @@ export function BoardDetails(currBoardTitle) {
 
 
     if(type === 'group') {
-      // console.log('group')
       const reorderdGroups = [...groups]
 
       const sourceIndex = source.index
@@ -121,11 +123,6 @@ export function BoardDetails(currBoardTitle) {
       const [deletedGroup] = reorderdGroups.splice(sourceIndex, 1)
       reorderdGroups.splice(destinationIndex, 0, deletedGroup)
 
-      // SetGroups(reorderdGroups)
-      
-      // currBoard.groups = [...reorderdGroups]
-      // console.log('currBoard', currBoard);
-      // await onUpdateBoard(currBoard)
       return await updateBoardOptimistic({...currBoard, groups: [...reorderdGroups] })
     }
 

@@ -8,6 +8,7 @@ import { func } from "prop-types";
 import { useDebounce } from "../customHooks/useDebounce.js";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js";
 import { Droppable, Draggable } from "react-beautiful-dnd"
+import { OptionsActionsCmp } from "./OptionsActionsCmp.jsx";
 
 export function GroupPreview({
   group,
@@ -26,12 +27,14 @@ export function GroupPreview({
   const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
+  // open actions window
+  const [isOptionsModalOpen,setIsOptionsModalOpen] = useState(false)
   const [ispreview, setIspreview] = useState(true);
-  const groupClass = ispreview ? "group-preview" : "group-unpreview";
-  // const [isFocus, setIsFocus] = useState(false);
-  // const footerfocus = isFocus ? "footer-focus" : ""
 
-  useEffectUpdate(() => {
+  const groupClass = ispreview ? "group-preview" : "group-unpreview";
+
+
+  useEffect(() => {
     if (inputFocused === false && task !== getEmptyTask()) {
       saveTaskCall(task)
       setTask(getEmptyTask());
@@ -40,32 +43,39 @@ export function GroupPreview({
   }, [inputFocused]);
 
   useEffectUpdate(() => {
+    async function saveGroup(){
+      await onSaveGroup(null,currGroup);
+    }
     saveGroup()
-  }, [debouncedGroup]);
-
-  async function saveGroup(){
-    await onSaveGroup(null,currGroup);
-  }
+  }, [currGroup]);
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
     cmpsOrder.forEach((component) => {
-      newTask[component] ='';
+
+      if(newTask[component] === 'timeLine'){
+        newTask[component] ={};
+      }
+
+      else{
+        newTask[component] = ''
+      }
     });
     return newTask;
   }
 
-  function handleGroupTitleBlur({ target }) {
+  async function handleGroupTitleBlur({ target }) {
     if (target.value !== "") setIsTitleGroupEditMode(false);
+    // onSaveGroup(null,currGroup);
   }
 
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
-    console.log(currGroup)
+    console.log('currGroup ', currGroup)
   }
 
-  function handleTaskInputBlur({ target }) {
+  async function handleTaskInputBlur({ target }) {
     if (target.value !== "") setInputFocused(false);
     target.value = "";
   }
@@ -76,7 +86,23 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    await onSaveTask(currGroup.id, taskToSave);
+    onSaveTask(currGroup.id, taskToSave);
+    const isTaskExist = currGroup.tasks.find((task) => task.id === taskToSave.id)
+    if(isTaskExist){
+      setCurrGroup((prevGroup) => ({
+        ...prevGroup,
+        tasks: prevGroup.tasks.map((task) => 
+        task.id === taskToSave.id ? { ...task, ...taskToSave } : task
+        ),
+      }));      
+    } else {
+      setCurrGroup((prevGroup) => ({
+        ...prevGroup,
+        tasks: [...prevGroup.tasks, taskToSave],
+      }));
+    }
+    
+    onSaveGroup(null,currGroup);
   }
 
   function handleTaskChange({ target }) {
@@ -88,13 +114,17 @@ export function GroupPreview({
     await onRemoveTask(group.id, taskId);
   }
 
+  function handleSetModal() {
+    setIsOptionsModalOpen(!isOptionsModalOpen)
+  }
+
   const { tasks } = group;
 
 
   return (
     <section className={groupClass}>
       <section className="group-header">
-        <button className="delete-btn" onClick={() => onRemoveGroup(group.id)}>
+        <button className="delete-btn" onClick={handleSetModal}>
           <svg
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -110,6 +140,7 @@ export function GroupPreview({
             ></path>
           </svg>
         </button>
+        {isOptionsModalOpen && <OptionsActionsCmp onAction={onRemoveGroup} onActionProps={group.id} handleSetModal={handleSetModal} actionType={'removeGroup'}/>}
         <div className="expansion-btn">
         <svg
           viewBox="0 0 20 20"
@@ -242,31 +273,3 @@ export function GroupPreview({
     </section>
   );
 }
-
-// onKeyPress={handleKeyPress}
-
-// useEffect(() => {
-//   // const taskInput = taskTitleRef.current;
-
-//   if (taskInput) {
-//     taskInput.addEventListener('focus', handleFocus)
-//     taskInput.addEventListener('blur', handleBlur)
-
-//     return () => {
-//       taskInput.removeEventListener('focus', handleFocus)
-//       taskInput.removeEventListener('blur', handleBlur)
-//     };
-
-//   }
-
-// }, []);
-
-//   useEffectUpdate(() => {
-//     onUpdateGroup(param.id,currGroup)
-// }, [debouncedGroup])
-
-// useEffect(() => {
-//   if(isEditMode ===true && currGroup !== group){
-//     onUpdateGroup(param.id,currGroup)
-//   }
-// }, [currGroup])

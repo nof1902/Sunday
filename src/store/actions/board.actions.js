@@ -245,7 +245,7 @@ export function getEmptyBoard() {
       },
     ],
     groups: [getEmptyGroup()],
-    cmpsOrder: ["status", "priority","timeline"],
+    cmpsOrder: ["status", "priority","timeLine"],
     statusPicker: [
       { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
       { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },

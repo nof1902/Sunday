@@ -191,14 +191,14 @@ function _createBoards() {
               title: "Task 1",
               status: "",
               priority: "",
-              timeLine:''
+              timeLine:{}
             },
             {
               id: utilService.makeId(),
               title: "Task 2",
               status: "",
               priority: "",
-              timeLine:''
+              timeLine:{}
             },
             {
               id: utilService.makeId(),
@@ -220,7 +220,7 @@ function _createBoards() {
               title: "Task 3",
               status: "Stuck",  // put id 
               priority: "High", // put id 
-              timeLine:''
+              timeLine:{}
               
             },
             {
@@ -228,13 +228,13 @@ function _createBoards() {
               title: "Task 4",
               status: "Working on it",
               priority: "Medium",
-              timeLine:''
+              timeLine:{}
             },
           ],
           style: utilService.getRandomColor(),
         },
       ],
-      cmpsOrder: ["status", "priority","timeline"],
+      cmpsOrder: ["status", "priority","timeLine"],
       statusPicker: [
         { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
         { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
@@ -278,21 +278,21 @@ function _createBoards() {
               title: "Task 5",
               priority: "Critical",
               status: "Done",
-              timeLine:''
+              timeLine:{}
             },
             {
               id: utilService.makeId(),
               title: "Task 6",
               priority: "Low",
               status: "Workink on it",
-              timeLine:''
+              timeLine:{}
             },
           ],
           style: utilService.getRandomColor(),
         },
       ],
       // 
-      cmpsOrder: ["status", "priority","timeline"],
+      cmpsOrder: ["status", "priority","timeLine"],
       statusPicker: [
         { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
         { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
