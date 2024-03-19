@@ -273,6 +273,28 @@ function _createBoards() {
                 from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 19 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
+            },
+            {
+              id: utilService.makeId(),
+              title: "table design",
+              people: "u101",
+              status: "Done",
+              priority: "High",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 19 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "add group btn",
+              people: "u101",
+              status: "Done",
+              priority: "High",
+              timeLine:{
+                from: 'Sun Mar 11 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 18 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
             }
           ],
           style: utilService.getRandomColor(),
