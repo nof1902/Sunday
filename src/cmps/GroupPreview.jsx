@@ -275,7 +275,9 @@ export function GroupPreview({
             <div></div>
             <div className="footer-summary">
             {cmpsOrder.map((item, idx) => (
-              <span key={idx}></span>
+              <span key={idx}>
+                <SummeryDynamicCmp group={group} cmpType={item} statusPicker={statusPicker} priorityPicker={priorityPicker}/>
+              </span>
             ))}
             </div>
             <div></div>
