@@ -38,6 +38,8 @@
     .defult-person-img {
         width: 25px;
         height: 25px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 4px 0px $clr11;
     }
 
     .selected-label{
@@ -193,6 +195,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        box-sizing: content-box;
+        box-shadow: 0px 0px 4px 0px $clr18;
     }
 
 }

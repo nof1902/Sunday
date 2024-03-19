@@ -218,7 +218,7 @@ function _createBoards() {
               people: "",
               status: "Done",
               priority: "Low",
-              timeLine:''
+              timeLine:{}
             },
           ],
           style: utilService.getRandomColor(),
@@ -249,7 +249,7 @@ function _createBoards() {
           style: utilService.getRandomColor(),
         },
       ],
-      cmpsOrder: ["status", "priority","timeLine"],
+      cmpsOrder: ["people", "status", "priority", "timeLine"],
       statusPicker: [
         { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
         { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
