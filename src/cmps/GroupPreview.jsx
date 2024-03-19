@@ -18,7 +18,8 @@ export function GroupPreview({
   onSaveGroup,
   cmpsOrder,
   statusPicker,
-  priorityPicker
+  priorityPicker,
+  members
 }) {
   const param = useParams();
 
@@ -61,6 +62,7 @@ export function GroupPreview({
         newTask[component] = ''
       }
     });
+
     return newTask;
   }
 
@@ -86,8 +88,9 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    onSaveTask(currGroup.id, taskToSave);
+    await onSaveTask(currGroup.id, taskToSave);
     const isTaskExist = currGroup.tasks.find((task) => task.id === taskToSave.id)
+    
     if(isTaskExist){
       setCurrGroup((prevGroup) => ({
         ...prevGroup,
@@ -101,6 +104,7 @@ export function GroupPreview({
         tasks: [...prevGroup.tasks, taskToSave],
       }));
     }
+
     
     onSaveGroup(null,currGroup);
   }
@@ -108,10 +112,18 @@ export function GroupPreview({
   function handleTaskChange({ target }) {
     const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
+    console.log('task', task);
   }
 
   async function deleteTask(taskId) {
-    await onRemoveTask(group.id, taskId);
+    onRemoveTask(group.id, taskId);
+    setCurrGroup((prevGroup) => ({
+      ...prevGroup,
+      tasks: prevGroup.tasks.filter((task) => 
+      task.id !== taskId
+      ),
+    }))
+    onSaveGroup(null,currGroup);
   }
 
   function handleSetModal() {
@@ -226,6 +238,7 @@ export function GroupPreview({
             cmpsOrder={cmpsOrder}
             statusPicker={statusPicker}
             priorityPicker={priorityPicker}
+            members={members}
           />
           {provided.placeholder}
         </div>

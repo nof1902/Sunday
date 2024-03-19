@@ -209,9 +209,10 @@ export function getEmptyTask() {
   return {
     id: "",
     title: "New Task",
-    status: "Not Started",
-    priority: "",
-    timeline: '',
+    // people: "",
+    // status: "Not Started",
+    // priority: "",
+    // timeline: '',
   };
 }
 
@@ -239,13 +240,23 @@ export function getEmptyBoard() {
     },
     members: [
       {
-        _id: "",
-        fullname: "",
+        _id: "u101",
+        fullname: "Sapir Teper",
+        imgUrl: "",
+      },
+      {
+        _id: "u102",
+        fullname: "Nofar Melamed",
+        imgUrl: "",
+      },
+      {
+        _id: "u103",
+        fullname: "Oren Melamed",
         imgUrl: "",
       },
     ],
     groups: [getEmptyGroup()],
-    cmpsOrder: ["status", "priority","timeLine"],
+    cmpsOrder: ["people", "status", "priority","timeLine"],
     statusPicker: [
       { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
       { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },

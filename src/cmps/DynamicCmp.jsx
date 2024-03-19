@@ -1,9 +1,9 @@
+import { PeopleCmp } from "./dynamic-iputs/PeopleCmp";
 import { PriorityCmp } from "./dynamic-iputs/PriorityCmp";
 import { StatusCmp } from "./dynamic-iputs/StatusCmp";
 import { TimeLineCmp } from "./dynamic-iputs/TimeLineCmp";
 
-export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker,
-    priorityPicker}) {
+export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priorityPicker, members}) {
 
     let info
     function onUpdateEntity(info){
@@ -16,6 +16,12 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker,
     }
 
     switch (cmpType) {
+      case "people":
+        info = {
+          selectedUser: taskToEdit.people,
+          members: members,
+        };
+        return <PeopleCmp info={info} onUpdateEntity={onUpdateEntity} />;
       case "priority":
         info = {
           selectedPriority: taskToEdit.priority,

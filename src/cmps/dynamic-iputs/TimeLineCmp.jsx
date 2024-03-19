@@ -51,7 +51,7 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
   }
 
   function isValidDate(date){
-      if(date.from && date.to){
+      if(date?.from && date?.to){
         return date
       }
 

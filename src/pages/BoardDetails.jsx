@@ -83,6 +83,7 @@ export function BoardDetails(currBoardTitle) {
   async function onRemoveTask(groupId, taskId) {
     try {
       const boardToSave = await RemoveTask(currBoard._id, groupId, taskId);
+      // await updateBoardOptimistic(boardToSave)
       await updateBoard(boardToSave)
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
@@ -102,7 +103,7 @@ export function BoardDetails(currBoardTitle) {
   }
 
   if (!currBoard) return <div>Loading...</div>;
-  const { groups , cmpsOrder , statusPicker, priorityPicker} = currBoard;
+  const { groups , cmpsOrder , statusPicker, priorityPicker, members} = currBoard;
 
   const handleDragDrop = async (results) => {
     const { source, destination, type } = results
@@ -148,7 +149,11 @@ export function BoardDetails(currBoardTitle) {
 
         const sourceIndex = source.index
         const destinationIndex = destination.index
-  
+        console.log('sourceIndex', sourceIndex);
+        console.log('destinationIndex', destinationIndex);
+        
+        console.log('source.droppableId', source.droppableId);
+        console.log('destination.droppableId', destination.droppableId);
         const groupSourceIndex = groups.findIndex((group) => group.id === source.droppableId)
         const groupDestinationIndex = groups.findIndex((group) => group.id === destination.droppableId)
   
@@ -161,7 +166,7 @@ export function BoardDetails(currBoardTitle) {
         const newGroups = [...groups]
         newGroups[groupSourceIndex] = { ...groups[groupSourceIndex], tasks:[...newSourceTasks] }
         newGroups[groupDestinationIndex] = { ...groups[groupDestinationIndex], tasks:[...newDestinationTasks] }
-
+        console.log('newGroups', newGroups);
         //  currBoard.groups = [...newGroups]     
         //  await onUpdateBoard(currBoard)
   
@@ -193,6 +198,7 @@ export function BoardDetails(currBoardTitle) {
           cmpsOrder={cmpsOrder}
           statusPicker={statusPicker}
           priorityPicker={priorityPicker}
+          members={members}
         />
         {provided.placeholder}
         </div>

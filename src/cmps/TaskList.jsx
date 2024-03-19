@@ -8,6 +8,7 @@ export function TaskList({
   cmpsOrder,
   statusPicker,
   priorityPicker,
+  members,
 }) {
 
 
@@ -24,6 +25,7 @@ export function TaskList({
               cmpsOrder={cmpsOrder}
               statusPicker={statusPicker}
               priorityPicker={priorityPicker}
+              members={members}
             />
           </li>
         )}
