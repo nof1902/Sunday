@@ -13,6 +13,7 @@ export function TaskPreview({
   cmpsOrder,
   statusPicker,
   priorityPicker,
+  members,
 }) {
   const [taskToEdit, setTaskToEdit] = useState(task);
   const [editMode, setEditMode] = useState(false);
@@ -146,6 +147,7 @@ export function TaskPreview({
             taskToEdit={taskToEdit}
             statusPicker ={statusPicker}
             priorityPicker ={priorityPicker}
+            members={members}
           />
         </section>
       ))}

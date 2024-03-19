@@ -18,7 +18,8 @@ export function GroupPreview({
   onSaveGroup,
   cmpsOrder,
   statusPicker,
-  priorityPicker
+  priorityPicker,
+  members
 }) {
   const param = useParams();
 
@@ -226,6 +227,7 @@ export function GroupPreview({
             cmpsOrder={cmpsOrder}
             statusPicker={statusPicker}
             priorityPicker={priorityPicker}
+            members={members}
           />
           {provided.placeholder}
         </div>

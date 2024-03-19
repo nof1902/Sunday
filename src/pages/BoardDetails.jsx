@@ -102,7 +102,7 @@ export function BoardDetails(currBoardTitle) {
   }
 
   if (!currBoard) return <div>Loading...</div>;
-  const { groups , cmpsOrder , statusPicker, priorityPicker} = currBoard;
+  const { groups , cmpsOrder , statusPicker, priorityPicker, members} = currBoard;
 
   const handleDragDrop = async (results) => {
     const { source, destination, type } = results
@@ -193,6 +193,7 @@ export function BoardDetails(currBoardTitle) {
           cmpsOrder={cmpsOrder}
           statusPicker={statusPicker}
           priorityPicker={priorityPicker}
+          members={members}
         />
         {provided.placeholder}
         </div>

@@ -175,8 +175,18 @@ function _createBoards() {
       },
       members: [
         {
-          _id: "",
-          fullname: "",
+          _id: "u101",
+          fullname: "Sapir Teper",
+          imgUrl: "",
+        },
+        {
+          _id: "u102",
+          fullname: "Nofar Melamed",
+          imgUrl: "",
+        },
+        {
+          _id: "u103",
+          fullname: "Oren Melamed",
           imgUrl: "",
         },
       ],
@@ -189,6 +199,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 1",
+              people: "",
               status: "",
               priority: "",
               timeLine:{}
@@ -196,6 +207,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 2",
+              people: "",
               status: "",
               priority: "",
               timeLine:{}
@@ -203,6 +215,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 3",
+              people: "",
               status: "Done",
               priority: "Low",
               timeLine:''
@@ -218,6 +231,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 3",
+              people: "u101",
               status: "Stuck",  // put id 
               priority: "High", // put id 
               timeLine:{}
@@ -226,6 +240,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 4",
+              people: "",
               status: "Working on it",
               priority: "Medium",
               timeLine:{}
@@ -261,8 +276,18 @@ function _createBoards() {
       },
       members: [
         {
-          _id: "",
-          fullname: "",
+          _id: "u101",
+          fullname: "Sapir Teper",
+          imgUrl: "",
+        },
+        {
+          _id: "u102",
+          fullname: "Nofar Melamed",
+          imgUrl: "",
+        },
+        {
+          _id: "u103",
+          fullname: "Oren Melamed",
           imgUrl: "",
         },
       ],
@@ -276,6 +301,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 5",
+              people: "",
               priority: "Critical",
               status: "Done",
               timeLine:{}
@@ -283,6 +309,7 @@ function _createBoards() {
             {
               id: utilService.makeId(),
               title: "Task 6",
+              people: "u101",
               priority: "Low",
               status: "Workink on it",
               timeLine:{}
@@ -292,9 +319,9 @@ function _createBoards() {
         },
       ],
       // 
-      cmpsOrder: ["status", "priority","timeLine"],
+      cmpsOrder: ["people", "status", "priority", "timeLine"],
       statusPicker: [
-        { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
+        { label: "Done", backgroundColor: "rgb(0, 200, 117)" },
         { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
         { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
         { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
@@ -312,4 +339,18 @@ function _createBoards() {
   // }
   utilService.saveToStorage(STORAGE_KEY, boards);
   
+}
+
+
+const user = {
+  "_id": "u101",
+  "fullname": "Sapir Teper",
+  "username": "Sapir@ababmi.com",
+  "password": "Sapir123",
+  "imgUrl": "http://some-img.jpg",
+  "mentions": [{ //optional
+      "id": "m101",
+      "boardId": "m101",
+      "taskId": "t101"
+  }]
 }

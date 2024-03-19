@@ -209,6 +209,7 @@ export function getEmptyTask() {
   return {
     id: "",
     title: "New Task",
+    people: "",
     status: "Not Started",
     priority: "",
     timeline: '',
@@ -239,8 +240,18 @@ export function getEmptyBoard() {
     },
     members: [
       {
-        _id: "",
-        fullname: "",
+        _id: "u101",
+        fullname: "Sapir Teper",
+        imgUrl: "",
+      },
+      {
+        _id: "u102",
+        fullname: "Nofar Melamed",
+        imgUrl: "",
+      },
+      {
+        _id: "u103",
+        fullname: "Oren Melamed",
         imgUrl: "",
       },
     ],
