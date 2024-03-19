@@ -16,7 +16,7 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
     to: addDays(new Date(), 1)
   };
   
-  const [range, setRange] = useState(isValidDate(info.selectedTimeLine) || defaultSelected)
+  const [range, setRange] = useState(isValidDate(info?.selectedTimeLine) || defaultSelected)
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -51,7 +51,7 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
   }
 
   function isValidDate(date){
-      if(date.from && date.to){
+      if(date?.from && date?.to){
         return date
       }
 

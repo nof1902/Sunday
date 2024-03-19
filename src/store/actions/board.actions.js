@@ -180,7 +180,7 @@ export function onRemoveBoardOptimistic(boardId) {
   showSuccessMsg("Board removed");
 
   boardService
-    .remove(carId)
+    .remove(boardId)
     .then(() => {
       console.log("Server Reported - Deleted Successfully");
     })
@@ -209,9 +209,9 @@ export function getEmptyTask() {
   return {
     id: "",
     title: "New Task",
-    status: "Not Started",
-    priority: "",
-    timeline: '',
+    // status: "Not Started",
+    // priority: "",
+    // timeline: '',
   };
 }
 

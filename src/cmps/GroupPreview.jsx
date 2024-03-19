@@ -9,6 +9,7 @@ import { useDebounce } from "../customHooks/useDebounce.js";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js";
 import { Droppable, Draggable } from "react-beautiful-dnd"
 import { OptionsActionsCmp } from "./OptionsActionsCmp.jsx";
+import { SummeryDynamicCmp } from "./SummeryDynamicCmp.jsx";
 
 export function GroupPreview({
   group,
@@ -35,10 +36,10 @@ export function GroupPreview({
 
 
   useEffect(() => {
-    if (inputFocused === false && task !== getEmptyTask()) {
+    if (inputFocused === false) {
+      setInputFocused(null);
       saveTaskCall(task)
       setTask(getEmptyTask());
-      setInputFocused(null);
     }
   }, [inputFocused]);
 
@@ -72,7 +73,6 @@ export function GroupPreview({
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
-    console.log('currGroup ', currGroup)
   }
 
   async function handleTaskInputBlur({ target }) {
@@ -86,7 +86,7 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    onSaveTask(currGroup.id, taskToSave);
+    await onSaveTask(currGroup.id, taskToSave);
     const isTaskExist = currGroup.tasks.find((task) => task.id === taskToSave.id)
     if(isTaskExist){
       setCurrGroup((prevGroup) => ({
@@ -102,7 +102,7 @@ export function GroupPreview({
       }));
     }
     
-    onSaveGroup(null,currGroup);
+    await onSaveGroup(null,currGroup);
   }
 
   function handleTaskChange({ target }) {
@@ -111,7 +111,16 @@ export function GroupPreview({
   }
 
   async function deleteTask(taskId) {
-    await onRemoveTask(group.id, taskId);
+    onRemoveTask(group.id, taskId);
+    
+    setCurrGroup((prevGroup) => ({
+      ...prevGroup,
+      tasks: prevGroup.tasks.filter((task) => 
+      task.id !== taskId
+      ),
+    }))
+
+    onSaveGroup(null,currGroup);
   }
 
   function handleSetModal() {
@@ -252,10 +261,18 @@ export function GroupPreview({
         {
           <section className="footer-stasus">
             <span></span>
-            {cmpsOrder.map((item, idx) => (
-              <span key={idx}></span>
-            ))}
+            {cmpsOrder.map((cmpType, idx) => (
+          <section key={idx}>
+            <SummeryDynamicCmp
+              group={currGroup}
+              cmpType={cmpType}
+              statusPicker ={statusPicker}
+              priorityPicker ={priorityPicker}
+            />
           </section>
+        ))}
+          </section>
+
         }
       </section>
     </section>

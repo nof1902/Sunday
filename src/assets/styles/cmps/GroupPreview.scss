@@ -250,8 +250,8 @@
 
             > * {
                 border-inline-end: 1px solid #e2e2e2;
-                align-self: center;
                 height: 100%;
+                width: 100%;
                 border-block-end: 1px solid #e2e2e2;
             }
 
@@ -263,6 +263,7 @@
                 border-inline-start: 1px solid #e2e2e2;
                 border-end-start-radius: 10px;
             }
+
         }
 
         
@@ -291,9 +292,12 @@
         }
 
     }
-
-
 }
+
+
+
+
+
         // taken by - .tasks-header
         // border-left: none;
         // border-right: none;
