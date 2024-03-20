@@ -12,12 +12,12 @@ export function TimeLineSummery({ group }) {
     const taskStart = new Date(task.timeLine.from);
     const taskEnd = new Date(task.timeLine.to);
 
-    if (taskEnd < minDate) {
-      minDate = taskEnd;
+    if (taskStart < minDate) {
+      minDate = taskStart;
     }
 
-    if (taskStart > maxDate) {
-      maxDate = taskStart;
+    if (taskEnd > maxDate) {
+      maxDate = taskEnd;
     }
   });
 
