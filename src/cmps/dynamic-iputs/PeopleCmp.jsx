@@ -56,8 +56,12 @@ export function PeopleCmp({ info, onUpdateEntity }) {
 
   return (
     <section className="dynamic-cmp" onClick={handleClickModal}>
+    <section className="people-cmp">
+    <span className="pople-pluse-icon">+</span>
     { !user && <img src="src/Images/defult-person.svg" className="defult-person-img" title="" alt="" aria-hidden="true" /> }
     { user && <div className="person-img"><span>{user.fullname[0]}</span></div> }
+    </section>
+
 
       {openEditModel && (
         <section className="status-model">
