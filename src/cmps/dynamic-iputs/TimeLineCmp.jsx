@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { addDays, format, formatDistance } from "date-fns";
+import { addDays, differenceInDays, format, formatDistance, isAfter, isPast } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { useEffectUpdate } from "../../customHooks/useEffectUpdate";
 import "react-day-picker/dist/style.css";
 import { useDebounce } from "../../customHooks/useDebounce";
 
-export function TimeLineCmp({ info, onUpdateEntity }) {
+export function TimeLineCmp({ info, onUpdateEntity, groupStyle }) {
   const [openEditModel, setOpenEditModel] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [infoToEdit, setInfoToEdit] = useState(info);
@@ -58,35 +58,40 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
       return null
   }
 
-  const backgroundColor = setBackgroundColor(info);
 
-  function setBackgroundColor(info) {
-    if (isValidDate(info.selectedTimeLine)) {
-      return `#333333`;
+  function onHover() {
+    if (!info.selectedTimeLine) return "-"; // Return a placeholder if there's no selected timeline
+    if (isHovered) {
+      return formatDistance(info.selectedTimeLine.from, info.selectedTimeLine.to);
+    } else {
+      if (format(info.selectedTimeLine.from, "LLL") !== format(info.selectedTimeLine.to, "LLL")) {
+        return `${format(info.selectedTimeLine.from, "LLL d")}-${format(info.selectedTimeLine.to, "LLL d")}`;
+      } else {
+        return `${format(info.selectedTimeLine.from, "d")}-${format(info.selectedTimeLine.to, "d LLL")}`;
+      }
     }
-    return "rgb(196, 196, 196)";
   }
+
+  const background = (info.selectedTimeLine.from && info.selectedTimeLine.to)  ? `#333333` : "rgb(196, 196, 196)" 
 
   return (
     <section className="timeline">
       <button
         onClick={handleClickModal}
-        style={{ background: backgroundColor }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="set-time-line"
+        style={{ background: background}}
+        className="time-line-btn"
       >
         {isValidDate(info.selectedTimeLine) === null &&(
-          <span className="empty-time-for-task">
-            {isHovered ? "Set Dates" : "-"}
-          </span>
+        <span className="time-for-task">
+          {isHovered ? "Set Dates" : "-"}
+        </span>
         )}
         {isValidDate(info.selectedTimeLine) &&(
-          <span className="empty-time-for-task">
-            {isHovered
-              ? `${formatDistance(info.selectedTimeLine.from, info.selectedTimeLine.to)}`
-              : `${format(info.selectedTimeLine.from, "LLL d")}–${format(info.selectedTimeLine.to, "LLL d")}`}
-          </span>
+        <span className="time-for-task">
+          {onHover()}
+        </span>
         )}
       </ button>
 

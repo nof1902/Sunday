@@ -14,6 +14,7 @@ export function TaskPreview({
   statusPicker,
   priorityPicker,
   members,
+  groupStyle
 }) {
   const [taskToEdit, setTaskToEdit] = useState(task);
   const [editMode, setEditMode] = useState(false);
@@ -148,6 +149,7 @@ export function TaskPreview({
             statusPicker ={statusPicker}
             priorityPicker ={priorityPicker}
             members={members}
+            groupStyle={groupStyle}
           />
         </section>
       ))}
