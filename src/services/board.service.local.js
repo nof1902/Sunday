@@ -464,13 +464,13 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "UI",
+          title: "Test",
           archivedAt: 1589983468418,
           tasks: [
             {
               id: utilService.makeId(),
-              title: "Sapir Test",
-              people: "u101",
+              title: "unit test",
+              people: "",
               priority: "Critical",
               status: "",
               timeLine:{
