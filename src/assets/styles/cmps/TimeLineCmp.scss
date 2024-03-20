@@ -9,7 +9,7 @@
     padding: 0;
     position: relative;
 
-    .set-time-line {
+    .time-line-btn {
         all: unset;
         cursor: pointer;
         width: 90%;
@@ -23,11 +23,11 @@
         margin: 0;
         padding: 0;
         
-        .empty-time-for-task {
-            margin: 0;
-            padding: 0;
-            color: white;
-            font-weight: normal;
+        .time-for-task {
+          font-size: 10pt;
+          margin: 0;
+          padding: 0;
+          color: white;
         }
 
       }

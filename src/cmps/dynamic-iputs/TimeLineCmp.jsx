@@ -58,8 +58,6 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
       return null
   }
 
-  const backgroundColor = setBackgroundColor(info);
-
   function setBackgroundColor(info) {
     if (isValidDate(info.selectedTimeLine)) {
       return `#333333`;
@@ -71,18 +69,18 @@ export function TimeLineCmp({ info, onUpdateEntity }) {
     <section className="timeline">
       <button
         onClick={handleClickModal}
-        style={{ background: backgroundColor }}
+        style={{ background: setBackgroundColor(info) }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="set-time-line"
+        className="time-line-btn"
       >
         {isValidDate(info.selectedTimeLine) === null &&(
-          <span className="empty-time-for-task">
+          <span className="time-for-task">
             {isHovered ? "Set Dates" : "-"}
           </span>
         )}
         {isValidDate(info.selectedTimeLine) &&(
-          <span className="empty-time-for-task">
+          <span className="time-for-task">
             {isHovered
               ? `${formatDistance(info.selectedTimeLine.from, info.selectedTimeLine.to)}`
               : `${format(info.selectedTimeLine.from, "LLL d")}–${format(info.selectedTimeLine.to, "LLL d")}`}
