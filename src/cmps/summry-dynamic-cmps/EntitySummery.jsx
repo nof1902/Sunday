@@ -29,7 +29,7 @@ export function EntitySummery({ group, summeryEntity, entityPicker }) {
 
   function sortByPickerOrder(a, b) {
     return sortOrder[a[0]] - sortOrder[b[0]];
-  };
+  }
 
   const sortedEntries = Object.entries(summeryEntityPercentage).sort(sortByPickerOrder);
 
