@@ -239,6 +239,7 @@ export function GroupPreview({
             statusPicker={statusPicker}
             priorityPicker={priorityPicker}
             members={members}
+            groupStyle={group.style}
           />
           {provided.placeholder}
         </div>
