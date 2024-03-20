@@ -30,7 +30,7 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priori
         return <PriorityCmp info={info} onUpdateEntity={onUpdateEntity} />;
       case "status":
         info = {
-          selectedStatus: taskToEdit.status || { label: "", backgroundColor: "rgb(196, 196, 196)" },
+          selectedStatus: taskToEdit.status,
           statuses: statusPicker,
         };
         return <StatusCmp info={info} onUpdateEntity={onUpdateEntity} />;

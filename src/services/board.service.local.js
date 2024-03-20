@@ -472,7 +472,7 @@ function _createBoards() {
               title: "Sapir Test",
               people: "u101",
               priority: "Critical",
-              status: { label: "Done", backgroundColor: "rgb(0, 200, 117)" },
+              status: "",
               timeLine:{
                 from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 20 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
@@ -483,7 +483,7 @@ function _createBoards() {
               title: "another test",
               people: "",
               priority: "Low",
-              status: { label: "", backgroundColor: "rgb(196, 196, 196)" },
+              status: "",
               timeLine:{
                 from: 'Sun Mar 13 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 18 2024 00:00:00 GMT+0300 (Israel Daylight Time)'

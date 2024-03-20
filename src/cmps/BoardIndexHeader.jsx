@@ -34,11 +34,7 @@ export function BoardIndexHeader({
 
       if(newTask[component] === 'timeLine'){
         newTask[component] ={};
-      }
-      if(newTask[component] === 'status'){
-        newTask[component] ={ label: "", backgroundColor: "rgb(196, 196, 196)" };
-      }
-      else{
+      } else {
         newTask[component] = ''
       }
     });
