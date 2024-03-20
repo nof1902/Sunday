@@ -203,7 +203,7 @@ function _createBoards() {
               status: "Stuck",
               priority: "Low",
               timeLine:{
-                from: 'Sun Apr 10 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                from: 'Sun Feb 10 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
@@ -214,7 +214,7 @@ function _createBoards() {
               status: "Stuck",
               priority: "Low",
               timeLine:{
-                from: 'Sun Apr 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                from: 'Sun Feb 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 25 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
