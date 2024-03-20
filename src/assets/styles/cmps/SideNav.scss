@@ -1,9 +1,9 @@
 .side-navigation{
-    height: 100%;
     display: grid;
     grid-template-rows: auto auto 1fr;
     background-color: $clr10;
     border-start-end-radius: 10px;
+    height: 100vh;
     position: relative;
 
     .hide-nav{
