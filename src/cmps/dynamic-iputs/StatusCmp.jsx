@@ -8,6 +8,7 @@ export function StatusCmp({ info, onUpdateEntity }) {
   const modalRef = useRef();
 
   useEffect(() => {
+    console.log('info', info);
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         handleClickModal();
