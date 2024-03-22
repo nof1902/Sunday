@@ -1,5 +1,5 @@
 
-import { format, formatDistance } from "date-fns";
+import { differenceInDays, format, formatDistance, isAfter, isPast } from "date-fns";
 import { useState } from "react";
 
 export function TimeLineSummery({ group }) {
@@ -9,7 +9,7 @@ export function TimeLineSummery({ group }) {
   let maxDate = new Date(0)
 
   group.tasks.forEach((task) => {
-    const taskStart = new Date(task.timeLine.from);
+    const taskStart = new Date(task.timeLine?.from);
     const taskEnd = new Date(task.timeLine.to);
 
     if (taskStart < minDate) {
@@ -22,13 +22,45 @@ export function TimeLineSummery({ group }) {
   });
 
   const hasTimelineData = group.tasks.length > 0
-  
-  function setBackgroundColor() {
-    return hasTimelineData ? `#333333` : "rgb(196, 196, 196)"
+
+  function calculateTimeLeftToBackgroundColor( from , to ) {
+
+    if(!hasTimelineData){
+      return {
+        pastStyle: {
+          width: `50%`,
+          background: "rgb(196, 196, 196)",
+        },
+        futureStyle: {
+          width: `50%`,
+          background: "rgb(196, 196, 196)",
+        },
+      };
+    }
+    const totalDuration = differenceInDays(to, from);
+    const daysLast = differenceInDays(new Date(), from);
+    const pastRatio = (daysLast / totalDuration) * 100;
+    const futureRatio = 100 - pastRatio;
+
+    const pastColor = isPast(from) ? group.style :'#000000';
+    const futureColor = isAfter(to, new Date()) ? '#000000' : group.style;
+    
+    return {
+      pastStyle: {
+        width: `${pastRatio}%`,
+        background: pastColor,
+      },
+      futureStyle: {
+        width: `${futureRatio}%`,
+        background: futureColor,
+      },
+    };
   }
 
+  const backgroundStyle = calculateTimeLeftToBackgroundColor(minDate, maxDate);
+
   function onHover() {
-    if (!hasTimelineData) return "-"; // Return a placeholder if there's no selected timeline
+    if (!hasTimelineData) return "-"; 
     if (isHovered) {
       return formatDistance(minDate, maxDate);
     } else {
@@ -43,11 +75,13 @@ export function TimeLineSummery({ group }) {
     return (
       <section className="timeline">
         <button
-          style={{ background: setBackgroundColor() }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className="time-line-btn"
-        ><span className="time-for-task summery">{onHover()}</span>
+        >
+          <div className="background-color-past" style={backgroundStyle.pastStyle} />
+        <div className="background-color-future" style={backgroundStyle.futureStyle} />
+          <span className="time-for-task summery">{onHover()}</span>
         </button>
       </section>
     );

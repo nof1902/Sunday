@@ -1,14 +1,14 @@
 .board-index{
     display: grid;
-    grid-template-columns: 253px 1fr;
+    grid-template-columns: 253px  10px 1fr;
     grid-template-rows:auto 1fr;
     grid-template-areas:
-        "h h"
-        "sn m"
-        "sn m";
+        "h h h"
+        "sn l m"
+        "sn  l m";
     background-color: $clr3;
     height: 100%;
-    gap: 0px 10px;
+    // gap: 0px 10px;
 
     .header {
         grid-area: h; 
@@ -17,6 +17,12 @@
     .side-nav {
         grid-area: sn; 
         height: 100%;
+    }
+
+    .line{
+        grid-area: l;
+        height: 100vh;
+        background-color: $clr3;
     }
 
     .board-main {

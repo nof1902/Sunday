@@ -22,6 +22,7 @@
     }
 
     .sidenav-header {
+        grid-template-areas: 1 / 1 / 1 / 1;
         border-block-end: 1px solid $clr11;
         padding: 0.5em;
         display: grid;

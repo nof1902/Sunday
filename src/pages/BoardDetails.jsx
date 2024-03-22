@@ -128,7 +128,6 @@ export function BoardDetails(currBoardTitle) {
     }
 
     if (type === 'column') {
-      // console.log('column')
       const reorderdColumn = [...cmpsOrder]
   
       const sourceIndex = source.index
@@ -136,16 +135,12 @@ export function BoardDetails(currBoardTitle) {
   
       const [deletedColumn] = reorderdColumn.splice(sourceIndex, 1)
       reorderdColumn.splice(destinationIndex, 0, deletedColumn)
-  
-      // currBoard.cmpsOrder = [...reorderdColumn]
-      // await onUpdateBoard(currBoard)
+
       return await updateBoardOptimistic({...currBoard, cmpsOrder: [...reorderdColumn] })
-      // return setColumnOrder(reorderdColumn)
     }
 
 
     if (type === 'task') {
-      // console.log('task')
 
         const sourceIndex = source.index
         const destinationIndex = destination.index
@@ -167,10 +162,7 @@ export function BoardDetails(currBoardTitle) {
         newGroups[groupSourceIndex] = { ...groups[groupSourceIndex], tasks:[...newSourceTasks] }
         newGroups[groupDestinationIndex] = { ...groups[groupDestinationIndex], tasks:[...newDestinationTasks] }
         console.log('newGroups', newGroups);
-        //  currBoard.groups = [...newGroups]     
-        //  await onUpdateBoard(currBoard)
-  
-        // SetGroups(newGroups)
+
         return await updateBoardOptimistic({...currBoard, groups: [...newGroups] })
       }
   }
