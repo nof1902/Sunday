@@ -1,9 +1,8 @@
 .side-navigation{
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1fr;
     background-color: $clr10;
     border-start-end-radius: 10px;
-    height: 100vh;
     position: relative;
 
     .hide-nav{
@@ -22,7 +21,6 @@
     }
 
     .sidenav-header {
-        grid-template-areas: 1 / 1 / 1 / 1;
         border-block-end: 1px solid $clr11;
         padding: 0.5em;
         display: grid;
@@ -48,10 +46,6 @@
            & :first-child {
             margin-inline-start: 2px;
            }
-
-        //    & > a {
-        //     font-size: 14px;
-        //    }
 
            a:active{
                 color: inherit;
