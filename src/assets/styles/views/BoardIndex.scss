@@ -5,10 +5,9 @@
     grid-template-areas:
         "h h h"
         "sn l m"
-        "sn  l m";
+        "sn l m";
     background-color: $clr3;
     height: 100%;
-    // gap: 0px 10px;
 
     .header {
         grid-area: h; 
