@@ -209,7 +209,7 @@ function _createBoards() {
               status: "Stuck",
               priority: "Low",
               timeLine:{
-                from: 'Sun Mar 10 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                from: 'Sun Feb 10 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
@@ -220,13 +220,13 @@ function _createBoards() {
               status: "Stuck",
               priority: "Low",
               timeLine:{
-                from: 'Sun Mar 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                from: 'Sun Feb 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
                 to: 'Sat Mar 25 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
             {
               id: utilService.makeId(),
-              title: "Sticky Title",
+              title: "sticky Title",
               people: "u101",
               status: "Working on it",
               priority: "High",
@@ -237,7 +237,7 @@ function _createBoards() {
             },
             {
               id: utilService.makeId(),
-              title: "Add Contact Page",
+              title: "add Contact Page",
               people: "u101",
               status: "Working on it",
               priority: "High",
@@ -248,7 +248,7 @@ function _createBoards() {
             },
             {
               id: utilService.makeId(),
-              title: "Improve Tool Bar navigation",
+              title: "improve Tool Bar navigation",
               people: "u103",
               status: "Stuck",
               priority: "Critical",
@@ -257,18 +257,6 @@ function _createBoards() {
                 to: 'Sat Mar 22 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
-            {
-              id: utilService.makeId(),
-              title: "task - add member comp",
-              people: "u101",
-              status: "Done",
-              priority: "Medium",
-              timeLine:{
-                from: 'Sun Mar 13 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 18 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
-              }
-            }
-            ,
             {
               id: utilService.makeId(),
               title: "drag and drop",
@@ -282,24 +270,24 @@ function _createBoards() {
             },
             {
               id: utilService.makeId(),
-              title: "table design",
+              title: "design task table",
               people: "u101",
               status: "Done",
-              priority: "High",
+              priority: "Critical",
               timeLine:{
                 from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 19 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+                to: 'Sat Mar 20 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
             {
               id: utilService.makeId(),
-              title: "add group btn",
+              title: "add members column to table",
               people: "u101",
               status: "Done",
-              priority: "High",
+              priority: "Medium",
               timeLine:{
-                from: 'Sun Mar 11 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 18 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             }
           ],
