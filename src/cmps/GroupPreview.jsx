@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { TaskList } from "./TaskList.jsx";
 import { getEmptyTask } from "../store/actions/board.actions.js";
 import { useParams } from "react-router";
-
+import { utilService } from "../services/util.service";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { func } from "prop-types";
 import { useDebounce } from "../customHooks/useDebounce.js";
@@ -132,7 +132,8 @@ export function GroupPreview({
   }
 
   const { tasks } = group;
-
+  // const rgbValues = group.style.match(/\d+/g);
+  // const rgbaColor = `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.5)`;
 
   return (
     <section className={groupClass}>
@@ -253,7 +254,7 @@ export function GroupPreview({
         <div
           className="footer-new-task"
           style={{
-            borderInlineStart: `6px solid rgba(${parseInt(group.style.slice(1, 3), 16)}, ${parseInt(group.style.slice(3, 5), 16)}, ${parseInt(group.style.slice(5, 7), 16)}, 0.5)`
+            borderInlineStart: `6px solid ${utilService.getColorAlfa(group.style)}`
           }}
         >
         <div className="footer-div-input">

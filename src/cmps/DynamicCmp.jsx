@@ -11,14 +11,14 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priori
         return
       }
 
-      if(idxToSave === 0) {
-        console.log('idxToSave === 0');
-        const choseEntity = Object.values(info)[0]
-        onUpdate(cmpType, choseEntity)
-      } else if(idxToSave === 1) {
-        console.log('idxToSave === 1');
+      if(idxToSave === 1){
+        //save statuses array - stasusPicker
         const statusPickerToSave = Object.values(info)[1]
         onSaveStatusPicker(statusPickerToSave)
+      } else {
+        //save the selectes value
+        const choseEntity = Object.values(info)[0]
+        onUpdate(cmpType, choseEntity)
       }
 
     }

@@ -46,7 +46,7 @@
             width: 264px;
             display: grid;
             grid-template-rows: repeat(auto);
-            bottom: 5.7em;
+            bottom: 3.7em;
             left: -1em;
             border-radius: $border-radius;
             box-shadow: 0 4px 17px 6px rgba(0,0,0,.1);
@@ -233,7 +233,7 @@
             border-inline-start: 7px solid $clr11;
             border-end-start-radius: 7px;
             border-start-start-radius: 0px;
-            border-inline-start: 7px solid; 
+            border-inline-start: 6px solid; 
             display: grid;
             grid-template-columns: 325px 1fr;
             height: 35px;

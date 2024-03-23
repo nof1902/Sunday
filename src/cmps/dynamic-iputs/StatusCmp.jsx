@@ -4,7 +4,7 @@ import { useEffectUpdate } from "../../customHooks/useEffectUpdate";
 
 export function StatusCmp({ info, onUpdateEntity }) {
   const [openEditModel, setOpenEditModel] = useState(false);
-  const [openEditOption, setOpenEditOption] = useState(true);
+  const [openEditOption, setOpenEditOption] = useState(false);
   const [infoToEdit, setInfoToEdit] = useState(info);
   const modalRef = useRef();
 
@@ -61,11 +61,13 @@ export function StatusCmp({ info, onUpdateEntity }) {
 
   
   function handleClickApply() {
-    console.log('Apply')
     setOpenEditOption(!openEditOption);
     onUpdateEntity(infoToEdit, 1)
   }
 
+  function handleChangeColor() {
+    console.log('ChangeColor')
+  }
 
   function setBackgroundColor() {
     if(infoToEdit.selectedStatus) {
@@ -124,7 +126,7 @@ export function StatusCmp({ info, onUpdateEntity }) {
               {
                 infoToEdit.statuses.map((status, idx) => (
                 <li className="item" key={idx} >
-                <div className="status-color-div" style={{ backgroundColor: status.backgroundColor }} >
+                <div className="status-color-div" style={{ backgroundColor: status.backgroundColor }} onClick={handleChangeColor}>
                 </div>
                   <input
                   type="text"
