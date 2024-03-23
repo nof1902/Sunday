@@ -170,6 +170,17 @@ export async function RemoveGroup(boardId, groupId, activity = {}) {
   return board
 }
 
+export async function SaveStatusPicker(boardId, statusPicker) {
+  console.log('statusPicker' , statusPicker)
+  let board = await boardService.getById(boardId);
+  board = await boardService.saveStatusPicker(board, statusPicker);
+  // updateBoard(board);
+  return board
+}
+
+
+
+
 // Demo for Optimistic Mutation
 // (IOW - Assuming the server call will work, so updating the UI first)
 export function onRemoveBoardOptimistic(boardId) {

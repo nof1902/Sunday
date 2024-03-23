@@ -14,6 +14,7 @@ export const boardService = {
   removeTask,
   saveGroup,
   removeGroup,
+  saveStatusPicker,
 };
 window.cs = boardService;
 
@@ -128,6 +129,11 @@ async function saveGroup(board, index = null, group, activity) {
 
   // board.activities.unshift(activity)
 
+  return board;
+}
+
+async function saveStatusPicker(board, statusPicker) {
+  board.statusPicker = statusPicker;
   return board;
 }
 

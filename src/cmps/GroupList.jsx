@@ -10,7 +10,8 @@ export function GroupList({
   cmpsOrder,
   statusPicker,
   priorityPicker,
-  members
+  members,
+  onSaveStatusPicker,
 }) {
   // if (!groups) return <div>Loading...</div>
   return (
@@ -29,6 +30,7 @@ export function GroupList({
             statusPicker={statusPicker}
             priorityPicker={priorityPicker}
             members={members}
+            onSaveStatusPicker={onSaveStatusPicker}
           />
         </li>
         )}

@@ -14,7 +14,8 @@ export function TaskPreview({
   statusPicker,
   priorityPicker,
   members,
-  groupStyle
+  groupStyle,
+  onSaveStatusPicker
 }) {
   const [taskToEdit, setTaskToEdit] = useState(task);
   const [editMode, setEditMode] = useState(false);
@@ -65,7 +66,7 @@ export function TaskPreview({
     });
   }
 
-  function onUpdate(cmpType,choseEntity) {
+  function onUpdate(cmpType, choseEntity) {
     setTaskToEdit((prevTask) => ({ ...prevTask, [cmpType]: choseEntity }));
     setCanSave(true);
   }
@@ -150,6 +151,7 @@ export function TaskPreview({
             priorityPicker ={priorityPicker}
             members={members}
             groupStyle={groupStyle}
+            onSaveStatusPicker={onSaveStatusPicker}
           />
         </section>
       ))}
