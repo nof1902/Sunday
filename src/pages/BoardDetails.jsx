@@ -16,6 +16,7 @@ import {
   getEmptyGroup,
   updateBoard,
   updateBoardOptimistic,
+  SaveStatusPicker,
 } from "../store/actions/board.actions.js";
 import { func } from "prop-types";
 
@@ -79,6 +80,18 @@ export function BoardDetails(currBoardTitle) {
       console.log("error", err);
     }
   }
+
+  async function onSaveStatusPicker(StatusesToSave) {
+    try {
+      const boardToSave = await SaveStatusPicker(currBoard._id, StatusesToSave)
+      await updateBoard(boardToSave)
+      // setUpdate(true)
+    } catch (err) {
+      showErrorMsg(`Could not add task`);
+      console.log("error", err);
+    }
+  }
+
 
   async function onRemoveTask(groupId, taskId) {
     try {
@@ -191,6 +204,7 @@ export function BoardDetails(currBoardTitle) {
           statusPicker={statusPicker}
           priorityPicker={priorityPicker}
           members={members}
+          onSaveStatusPicker={onSaveStatusPicker}
         />
         {provided.placeholder}
         </div>

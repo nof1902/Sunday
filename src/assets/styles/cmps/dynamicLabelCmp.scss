@@ -91,6 +91,10 @@
                         opacity: .7;
                     }
                 }
+
+                
+
+
             }
 
             .people-items-container {
@@ -136,9 +140,88 @@
             }
         }
 
+        
+        //edit model
+        .status-edit-content{
+
+            transition: height .15s ease;
+            padding: 16px 16px 8px;
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            .items-container{
+                all: unset;
+
+                .item {
+                    width: 150px;
+                    cursor: pointer;
+                    transition: transform .1s ease-in-out, opacity .1s ease-in-out;
+                    margin-bottom: 8px;
+                    line-height: 29px;
+                    text-align: center;
+                    border-radius: 4px;
+                    border: 1px solid #e6e9ef;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4px 4px;
+
+                    .status-color-div {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 5px;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+                    }
+    
+                    .status-input-label {
+                        color: $clr2;
+                        border: none;
+                        width: 80%;
+                        padding-left: 1em;
+                    }
+                    
+                }
+
+                .status-change-color {
+                    background-color: #ffffff;
+                    position: absolute;
+                    top: 4em;
+                    padding: 1em;
+                    border-radius: 8px;
+                    display: grid;
+                    grid-template-columns: repeat(4, auto);
+                    gap: 8px;
+                    box-shadow: 0px 7px 20px rgb(81 81 81 / 20%);
+                    z-index: 3;
+
+                    
+                    * {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 5px;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+                    }
+                }
+
+                
+
+            }
+
+
+
+            
+        }
+
         .status-picker-footer{
             padding: 0 8px 2px 8px;
-
+            width: 90%;
+            
             .horizontal-divider {
                 background-color: $clr11;
                 height: 0.5px;

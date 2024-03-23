@@ -7,7 +7,9 @@ export const utilService = {
     getRandomColor,
     saveToStorage,
     loadFromStorage,
-    darkenColor
+    darkenColor,
+    getColorAlfa,
+    bringColor,
 }
 
 
@@ -65,14 +67,58 @@ function debounce(func, timeout = 300) {
     }
 }
 
+
+  
+function bringColor() {
+    const rgbColors = [
+        "rgb(23, 90, 99)",
+        "rgb(3, 127, 76)",
+        "rgb(0, 200, 117)",
+        "rgb(156, 211, 38)",
+        "rgb(202, 182, 65)",
+        "rgb(255, 203, 0)",
+        "rgb(120, 75, 209)",
+        "rgb(157, 80, 221)",
+        "rgb(0, 126, 181)",
+        "rgb(87, 155, 252)",
+        "rgb(102, 204, 255)",
+        "rgb(187, 51, 84)",
+        "rgb(223, 47, 74)",
+        "rgb(255, 0, 127)",
+        "rgb(255, 90, 196)",
+        "rgb(255, 100, 46)",
+        "rgb(253, 171, 61)",
+        "rgb(127, 83, 71)",
+        "rgb(196, 196, 196)",
+        "rgb(117, 117, 117)"
+      ]
+
+      return rgbColors
+}
+
+
+
 function getRandomColor() {
-    let letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
+    const rgbColors = bringColor(); // Get the array of predefined colors
+    const randomIndex = Math.floor(Math.random() * rgbColors.length); // Generate a random index
+    console.log('color', rgbColors[randomIndex]);
+    return rgbColors[randomIndex]; // Return the color at the random index
+}
+
+  function getColorAlfa(rgbColor) {
+  const rgbValues = rgbColor.match(/\d+/g);
+  const rgbaColor = `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.5)`;
+  return rgbaColor;
+}
+
+// function getRandomColor() {
+//     let letters = '0123456789ABCDEF';
+//     let color = '#';
+//     for (let i = 0; i < 6; i++) {
+//       color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+//   }
 
 function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
