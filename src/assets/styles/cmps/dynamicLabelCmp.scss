@@ -139,6 +139,8 @@
                 }
             }
         }
+
+        
         //edit model
         .status-edit-content{
 
@@ -161,25 +163,51 @@
                     border: 1px solid #e6e9ef;
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     padding: 4px 4px;
 
                     .status-color-div {
                         width: 24px;
                         height: 24px;
                         border-radius: 5px;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
                     }
     
                     .status-input-label {
-                        // padding-inline: 0.3em;
-                        // margin-inline: 0.5em;
                         color: $clr2;
                         border: none;
                         width: 80%;
                         padding-left: 1em;
                     }
+                    
                 }
 
+                .status-change-color {
+                    background-color: #ffffff;
+                    position: absolute;
+                    top: 4em;
+                    padding: 1em;
+                    border-radius: 8px;
+                    display: grid;
+                    grid-template-columns: repeat(4, auto);
+                    gap: 8px;
+                    box-shadow: 0px 7px 20px rgb(81 81 81 / 20%);
+                    z-index: 3;
 
+                    
+                    * {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 5px;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
+                    }
+                }
 
                 
 

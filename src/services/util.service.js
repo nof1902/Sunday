@@ -9,6 +9,7 @@ export const utilService = {
     loadFromStorage,
     darkenColor,
     getColorAlfa,
+    bringColor,
 }
 
 
