@@ -30,12 +30,14 @@ export function GroupPreview({
   const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
+
   // open actions window
   const [isOptionsModalOpen,setIsOptionsModalOpen] = useState(false)
   const [ispreview, setIspreview] = useState(true);
+  const [openColorModel, setOpenColorModel] = useState(false);
 
   const groupClass = ispreview ? "group-preview" : "group-unpreview";
-
+  const inputBlueTitle = isTitleGroupEditMode ? "blue-input" : "";
 
   useEffect(() => {
     if (inputFocused === false) {
@@ -68,8 +70,9 @@ export function GroupPreview({
     return newTask;
   }
 
-  async function handleGroupTitleBlur({ target }) {
-    if (target.value !== "") setIsTitleGroupEditMode(false);
+  async function handleGroupTitleBlur(ev) {
+    ev.stopPropagation()
+    if (ev.target.value !== "") setIsTitleGroupEditMode(false);
     // onSaveGroup(null,currGroup);
   }
 
@@ -130,56 +133,40 @@ export function GroupPreview({
   function handleSetModal() {
     setIsOptionsModalOpen(!isOptionsModalOpen)
   }
+  
+  //open color model
+  function handleOpenColorModel() {
+    setOpenColorModel(!openColorModel)
+  }
+
+  function onChangeColor(rgbColor) {
+    setOpenColorModel(!openColorModel)
+    setCurrGroup((prevGroup) => ({ ...prevGroup, style: rgbColor }));
+  }
 
   const { tasks } = group;
-  // const rgbValues = group.style.match(/\d+/g);
-  // const rgbaColor = `rgba(${rgbValues[0]}, ${rgbValues[1]}, ${rgbValues[2]}, 0.5)`;
 
   return (
     <section className={groupClass}>
       <section className="group-header">
         <button className="delete-btn" onClick={handleSetModal}>
-          <svg
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            width="20"
-            height="20"
-            aria-hidden="true"
-            className="icon_d24b689566 noFocusStyle_07ecef1878"
-            data-testid="icon"
-          >
-            <path
-              d="M6 10.5C6 11.3284 5.32843 12 4.5 12 3.67157 12 3 11.3284 3 10.5 3 9.67157 3.67157 9 4.5 9 5.32843 9 6 9.67157 6 10.5zM11.8333 10.5C11.8333 11.3284 11.1618 12 10.3333 12 9.50492 12 8.83334 11.3284 8.83334 10.5 8.83334 9.67157 9.50492 9 10.3333 9 11.1618 9 11.8333 9.67157 11.8333 10.5zM17.6667 10.5C17.6667 11.3284 16.9951 12 16.1667 12 15.3383 12 14.6667 11.3284 14.6667 10.5 14.6667 9.67157 15.3383 9 16.1667 9 16.9951 9 17.6667 9.67157 17.6667 10.5z"
-              fill="currentColor"
-            ></path>
+          <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true" className="icon_d24b689566 noFocusStyle_07ecef1878" data-testid="icon" >
+            <path d="M6 10.5C6 11.3284 5.32843 12 4.5 12 3.67157 12 3 11.3284 3 10.5 3 9.67157 3.67157 9 4.5 9 5.32843 9 6 9.67157 6 10.5zM11.8333 10.5C11.8333 11.3284 11.1618 12 10.3333 12 9.50492 12 8.83334 11.3284 8.83334 10.5 8.83334 9.67157 9.50492 9 10.3333 9 11.1618 9 11.8333 9.67157 11.8333 10.5zM17.6667 10.5C17.6667 11.3284 16.9951 12 16.1667 12 15.3383 12 14.6667 11.3284 14.6667 10.5 14.6667 9.67157 15.3383 9 16.1667 9 16.9951 9 17.6667 9.67157 17.6667 10.5z" fill="currentColor" ></path>
           </svg>
         </button>
         {isOptionsModalOpen && <OptionsActionsCmp onAction={onRemoveGroup} onActionProps={group.id} handleSetModal={handleSetModal} actionType={'removeGroup'}/>}
         <div className="expansion-btn">
-        <svg
-          viewBox="0 0 20 20"
-          color={group.style}
-          fill="currentColor"
-          width="22"
-          height="24"
-          role="button"
-          tabIndex="0"
-          aria-hidden="false"
-          className="icon_4b23d45e02 collapsible-icon clickable_f2c35f1e3f"
-          data-testid="icon"
-        >
-          <path
-            d="M10.5303 12.5303L10 12L9.46967 12.5303C9.76256 12.8232 10.2374 12.8232 10.5303 12.5303ZM10 10.9393L6.53033 7.46967C6.23744 7.17678 5.76256 7.17678 5.46967 7.46967C5.17678 7.76256 5.17678 8.23744 5.46967 8.53033L9.46967 12.5303L10 12L10.5303 12.5303L14.5303 8.53033C14.8232 8.23744 14.8232 7.76256 14.5303 7.46967C14.2374 7.17678 13.7626 7.17678 13.4697 7.46967L10 10.9393Z"
-            fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          ></path>
+        <svg viewBox="0 0 20 20" color={group.style}  fill="currentColor" width="22" height="24" role="button" tabIndex="0" aria-hidden="false"
+          className="icon_4b23d45e02 collapsible-icon clickable_f2c35f1e3f" data-testid="icon" >
+          <path d="M10.5303 12.5303L10 12L9.46967 12.5303C9.76256 12.8232 10.2374 12.8232 10.5303 12.5303ZM10 10.9393L6.53033 7.46967C6.23744 7.17678 5.76256 7.17678 5.46967 7.46967C5.17678 7.76256 5.17678 8.23744 5.46967 8.53033L9.46967 12.5303L10 12L10.5303 12.5303L14.5303 8.53033C14.8232 8.23744 14.8232 7.76256 14.5303 7.46967C14.2374 7.17678 13.7626 7.17678 13.4697 7.46967L10 10.9393Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
         </svg>
         </div>
         
         {isTitleGroupEditMode ? (
+          <div className={`group-title-div ${inputBlueTitle}`}>
+          <div className="group-color-div" style={{ backgroundColor: `${group.style}` }} onClick={handleOpenColorModel}></div>
           <input
-            className="new-input text-style group-title"
+            className="group-title-input"
             autoFocus
             style={{ color: group.style }}
             name="title"
@@ -189,14 +176,23 @@ export function GroupPreview({
             onChange={handleGroupTitleChange}
             onBlur={handleGroupTitleBlur}
           />
+          { openColorModel && 
+            <div className="model-change-color">
+            { utilService.bringColor().map((rgbColor, idx) => (
+                <div key={idx} onClick={() => onChangeColor(rgbColor)} style={{ backgroundColor: rgbColor }}></div>
+              ))}
+            </div>
+          }
+          </div>
         ) : (
-          <h3
-            className="text-style"
+            <h3
+            className="group-title-h3"
             onClick={() => setIsTitleGroupEditMode(true)}
             style={{ color: group.style }}
           >
             {group.title}
           </h3>
+        
         )}
       </section>
       <section
