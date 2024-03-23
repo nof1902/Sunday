@@ -90,10 +90,87 @@
             margin-inline: 0.5em;
         }
 
-        .group-title {
+        .group-title-div {
+            color: rgb(196, 196, 196);
+            font-family: $font-title;
             font-weight: 500;
-            margin-inline-start: 0.5em;
+            border: 1px solid $clr11;
+            padding: 0px 6px;
+            font-size: 18px;
+            margin-block: 5px;
+            border-radius: $border-radius;
+            margin-inline-start: 0.2em;
+            width: 70%;
+            display: flex;
+            align-items: center;
+
+            .group-color-div {
+                width: 16px;
+                height: 16px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+
+            .model-change-color {
+                background-color: #ffffff;
+                position: absolute;
+                top: 2.5em;
+                padding: 1em;
+                border-radius: 8px;
+                display: grid;
+                grid-template-columns: repeat(4, auto);
+                gap: 8px;
+                box-shadow: 0px 7px 20px rgb(81 81 81 / 20%);
+                z-index: 3;
+
+                
+                * {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 5px;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 0.7;
+                    }
+                }
+            }
+
+            .group-title-input {
+                font-family:  $font-title;
+                font-weight: 500;
+                border: none;
+                padding: 2px 6px;
+                font-size: 18px;
+                margin-inline-start: 0.2em;
+                
+            }
         }
+        
+        .blue-input {
+            border-color: $clr1;
+        }
+        
+
+        .group-title-h3 {
+            all: unset;
+            font-family: $font-title;
+            font-weight: 500;
+            color: rgb(196, 196, 196);
+            border: 1px solid transparent;
+            padding: 6px 6px;
+            font-size: 18px;
+            line-height: 1;
+            margin-block: 5px;
+            border-radius: $border-radius;
+            margin-inline-start: 0.2em;
+
+            &:hover {
+                border: 1px solid $clr11;
+            }
+        }
+
     }
 
     .group-header:hover > * {
