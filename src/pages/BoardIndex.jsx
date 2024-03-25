@@ -89,6 +89,7 @@ export function BoardIndex() {
           onUpdateBoard={onUpdateBoardTitle}
         />
       </section>
+      <div className="line"></div>
       <section className="board-main">
         {!params.id && <BoardsList boards={boards} />}
         {params.id && <BoardDetails currBoardTitle={currBoardTitle}/>}

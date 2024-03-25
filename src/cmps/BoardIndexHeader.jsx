@@ -34,9 +34,7 @@ export function BoardIndexHeader({
 
       if(newTask[component] === 'timeLine'){
         newTask[component] ={};
-      }
-
-      else{
+      } else {
         newTask[component] = ''
       }
     });

@@ -9,8 +9,8 @@ export function TaskList({
   statusPicker,
   priorityPicker,
   members,
+  groupStyle
 }) {
-
 
   return (
     <ul className="task-list">
@@ -26,6 +26,7 @@ export function TaskList({
               statusPicker={statusPicker}
               priorityPicker={priorityPicker}
               members={members}
+              groupStyle={groupStyle}
             />
           </li>
         )}

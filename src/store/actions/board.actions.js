@@ -180,7 +180,7 @@ export function onRemoveBoardOptimistic(boardId) {
   showSuccessMsg("Board removed");
 
   boardService
-    .remove(carId)
+    .remove(boardId)
     .then(() => {
       console.log("Server Reported - Deleted Successfully");
     })
@@ -209,10 +209,10 @@ export function getEmptyTask() {
   return {
     id: "",
     title: "New Task",
-    people: "",
-    status: "Not Started",
-    priority: "",
-    timeline: '',
+    // people: "",
+    // status: "Not Started",
+    // priority: "",
+    // timeline: '',
   };
 }
 
@@ -256,7 +256,7 @@ export function getEmptyBoard() {
       },
     ],
     groups: [getEmptyGroup()],
-    cmpsOrder: ["status", "priority","timeLine"],
+    cmpsOrder: ["people", "status", "priority","timeLine"],
     statusPicker: [
       { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
       { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },

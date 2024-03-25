@@ -3,11 +3,10 @@ import { PriorityCmp } from "./dynamic-iputs/PriorityCmp";
 import { StatusCmp } from "./dynamic-iputs/StatusCmp";
 import { TimeLineCmp } from "./dynamic-iputs/TimeLineCmp";
 
-export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priorityPicker, members}) {
-
+export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priorityPicker, members, groupStyle}) {
     let info
     function onUpdateEntity(info){
-      if(info.to){
+      if(info?.to){
         onUpdate(cmpType, info)  
         return
       }
@@ -38,7 +37,7 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priori
         info = {
             selectedTimeLine: taskToEdit.timeLine,
         }
-        return <TimeLineCmp info={info} onUpdateEntity={onUpdateEntity} />;
+        return <TimeLineCmp info={info} onUpdateEntity={onUpdateEntity} groupStyle={groupStyle} />;
       default:
         return <p>UNKNOWN {cmpType}</p>;
     }

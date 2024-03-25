@@ -165,7 +165,7 @@ function _createBoards() {
   var boards = [
     {
       _id: utilService.makeId(),
-      title: "First Board",
+      title: "Team Sunday: 17 - 21/3",
       isStarred: false,
       archivedAt: 1589983468418,
       createdBy: {
@@ -193,63 +193,133 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "Group 1",
+          title: "Development",
           archivedAt: 1589983468418,
           tasks: [
             {
               id: utilService.makeId(),
-              title: "Task 1",
-              people: "",
-              status: "",
-              priority: "",
-              timeLine:{}
-            },
-            {
-              id: utilService.makeId(),
-              title: "Task 2",
-              people: "",
-              status: "",
-              priority: "",
-              timeLine:{}
-            },
-            {
-              id: utilService.makeId(),
-              title: "Task 3",
-              people: "",
-              status: "Done",
+              title: "add page navigation",
+              people: "u103",
+              status: "Stuck",
               priority: "Low",
-              timeLine:''
+              timeLine:{
+                from: 'Sun Feb 10 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
             },
+            {
+              id: utilService.makeId(),
+              title: "add edit options",
+              people: "u103",
+              status: "Stuck",
+              priority: "Low",
+              timeLine:{
+                from: 'Sun Feb 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 25 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "sticky Title",
+              people: "u101",
+              status: "Working on it",
+              priority: "High",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 20 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "add Contact Page",
+              people: "u101",
+              status: "Working on it",
+              priority: "High",
+              timeLine:{
+                from: 'Sun Mar 18 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 22 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "improve Tool Bar navigation",
+              people: "u103",
+              status: "Stuck",
+              priority: "Critical",
+              timeLine:{
+                from: 'Sun Mar 18 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 22 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "drag and drop",
+              people: "u101",
+              status: "Done",
+              priority: "Critical",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 19 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "design task table",
+              people: "u101",
+              status: "Done",
+              priority: "Critical",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 20 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "add members column to table",
+              people: "u101",
+              status: "Done",
+              priority: "Medium",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            }
           ],
           style: utilService.getRandomColor(),
         },
         {
           id: utilService.makeId(),
-          title: "Group 2",
+          title: "QA Tests",
           archivedAt: 1589983468418,
           tasks: [
             {
               id: utilService.makeId(),
-              title: "Task 3",
-              people: "u101",
-              status: "Stuck",  // put id 
+              title: "Chat information",
+              people: "",
+              status: "Working on it",  // put id 
               priority: "High", // put id 
-              timeLine:{}
+              timeLine:{
+                from: 'Sun Mar 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 19 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
               
             },
             {
               id: utilService.makeId(),
-              title: "Task 4",
+              title: "Sign-in tests",
               people: "",
               status: "Working on it",
               priority: "Medium",
-              timeLine:{}
+              timeLine: {
+                from: 'Sun Mar 12 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
             },
           ],
           style: utilService.getRandomColor(),
         },
       ],
-      cmpsOrder: ["status", "priority","timeLine"],
+      cmpsOrder: ["people", "status", "priority", "timeLine"],
       statusPicker: [
         { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
         { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
@@ -266,7 +336,7 @@ function _createBoards() {
     },
     {
       _id: utilService.makeId(),
-      title: "Second Board",
+      title: "UI Team Sunday",
       isStarred: false,
       archivedAt: 1589983468418,
       createdBy: {
@@ -295,24 +365,117 @@ function _createBoards() {
       groups: [
         {
           id: utilService.makeId(),
-          title: "Group 1",
+          title: "UI",
           archivedAt: 1589983468418,
           tasks: [
             {
               id: utilService.makeId(),
-              title: "Task 5",
-              people: "",
+              title: "Change HomePage - first part",
+              people: "u101",
               priority: "Critical",
-              status: "Done",
-              timeLine:{}
+              status: "Stuck",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 20 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
             },
             {
               id: utilService.makeId(),
-              title: "Task 6",
+              title: "Add fonts to sccs files",
               people: "u101",
               priority: "Low",
-              status: "Workink on it",
-              timeLine:{}
+              status: "Working on it",
+              timeLine:{
+                from: 'Sun Mar 13 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 18 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "change padding buttons",
+              people: "u102",
+              priority: "Medium",
+              status: "Done",
+              timeLine:{
+                from: 'Sun Mar 21 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 26 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            }
+          ],
+          style: utilService.getRandomColor(),
+        },
+      ],
+      // 
+      cmpsOrder: ["people", "status", "priority", "timeLine"],
+      statusPicker: [
+        { label: "Done", backgroundColor: "rgb(0, 200, 117)" },
+        { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
+        { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
+        { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
+      ],
+      priorityPicker: [
+        { label: "Critical", backgroundColor: "rgb(51, 51, 51)" },
+        { label: "High", backgroundColor: "rgb(64, 22, 148)" },
+        { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
+        { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
+        { label: "", backgroundColor: "rgb(196, 196, 196)" },
+      ],
+    },
+    {
+      _id: utilService.makeId(),
+      title: "Test",
+      isStarred: false,
+      archivedAt: 1589983468418,
+      createdBy: {
+        _id: "",
+        fullname: "",
+        imgUrl: "",
+      },
+      members: [
+        {
+          _id: "u101",
+          fullname: "Sapir Teper",
+          imgUrl: "",
+        },
+        {
+          _id: "u102",
+          fullname: "Nofar Melamed",
+          imgUrl: "",
+        },
+        {
+          _id: "u103",
+          fullname: "Oren Melamed",
+          imgUrl: "",
+        },
+      ],
+
+      groups: [
+        {
+          id: utilService.makeId(),
+          title: "Test",
+          archivedAt: 1589983468418,
+          tasks: [
+            {
+              id: utilService.makeId(),
+              title: "unit test",
+              people: "",
+              priority: "Critical",
+              status: "",
+              timeLine:{
+                from: 'Sun Mar 17 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 20 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+            {
+              id: utilService.makeId(),
+              title: "another test",
+              people: "",
+              priority: "Low",
+              status: "",
+              timeLine:{
+                from: 'Sun Mar 13 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 18 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
             },
           ],
           style: utilService.getRandomColor(),

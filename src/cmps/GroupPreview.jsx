@@ -9,6 +9,7 @@ import { useDebounce } from "../customHooks/useDebounce.js";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js";
 import { Droppable, Draggable } from "react-beautiful-dnd"
 import { OptionsActionsCmp } from "./OptionsActionsCmp.jsx";
+import { SummeryDynamicCmp } from "./SummeryDynamicCmp.jsx";
 
 export function GroupPreview({
   group,
@@ -36,10 +37,10 @@ export function GroupPreview({
 
 
   useEffect(() => {
-    if (inputFocused === false && task !== getEmptyTask()) {
+    if (inputFocused === false) {
+      setInputFocused(null);
       saveTaskCall(task)
       setTask(getEmptyTask());
-      setInputFocused(null);
     }
   }, [inputFocused]);
 
@@ -62,6 +63,7 @@ export function GroupPreview({
         newTask[component] = ''
       }
     });
+
     return newTask;
   }
 
@@ -73,7 +75,6 @@ export function GroupPreview({
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
-    console.log('currGroup ', currGroup)
   }
 
   async function handleTaskInputBlur({ target }) {
@@ -87,8 +88,9 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    onSaveTask(currGroup.id, taskToSave);
+    await onSaveTask(currGroup.id, taskToSave);
     const isTaskExist = currGroup.tasks.find((task) => task.id === taskToSave.id)
+    
     if(isTaskExist){
       setCurrGroup((prevGroup) => ({
         ...prevGroup,
@@ -102,6 +104,7 @@ export function GroupPreview({
         tasks: [...prevGroup.tasks, taskToSave],
       }));
     }
+
     
     onSaveGroup(null,currGroup);
   }
@@ -109,10 +112,18 @@ export function GroupPreview({
   function handleTaskChange({ target }) {
     const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
+    console.log('task', task);
   }
 
   async function deleteTask(taskId) {
-    await onRemoveTask(group.id, taskId);
+    onRemoveTask(group.id, taskId);
+    setCurrGroup((prevGroup) => ({
+      ...prevGroup,
+      tasks: prevGroup.tasks.filter((task) => 
+      task.id !== taskId
+      ),
+    }))
+    onSaveGroup(null,currGroup);
   }
 
   function handleSetModal() {
@@ -228,6 +239,7 @@ export function GroupPreview({
             statusPicker={statusPicker}
             priorityPicker={priorityPicker}
             members={members}
+            groupStyle={group.style}
           />
           {provided.placeholder}
         </div>
@@ -264,12 +276,15 @@ export function GroupPreview({
             <div></div>
             <div className="footer-summary">
             {cmpsOrder.map((item, idx) => (
-              <span key={idx}></span>
+              <span key={idx}>
+                <SummeryDynamicCmp group={group} cmpType={item} statusPicker={statusPicker} priorityPicker={priorityPicker}/>
+              </span>
             ))}
             </div>
             <div></div>
             
           </section>
+
         }
       </section>
     </section>

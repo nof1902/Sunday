@@ -40,6 +40,8 @@
         height: 25px;
         border-radius: 50%;
         box-shadow: 0px 0px 4px 0px $clr11;
+        border-radius: 50%;
+        box-shadow: 0px 0px 4px 0px $clr11;
     }
 
     .selected-label{
@@ -107,6 +109,7 @@
             .people-items-container {
                 all: unset;
 
+                //for open modal
                 //for open modal
                 .people-item {
                     width: 170px;
