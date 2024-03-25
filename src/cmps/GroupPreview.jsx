@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { TaskList } from "./TaskList.jsx";
 import { getEmptyTask } from "../store/actions/board.actions.js";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import { utilService } from "../services/util.service";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { func } from "prop-types";
-import { useDebounce } from "../customHooks/useDebounce.js";
+// import { useDebounce } from "../customHooks/useDebounce.js";
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js";
 import { Droppable, Draggable } from "react-beautiful-dnd"
 import { OptionsActionsCmp } from "./OptionsActionsCmp.jsx";
@@ -23,21 +23,21 @@ export function GroupPreview({
   members,
   onSaveStatusPicker
 }) {
-  const param = useParams();
+  // const param = useParams();
 
   const [task, setTask] = useState(createEmptyTask());
   const [currGroup, setCurrGroup] = useState(group);
-  const debouncedGroup = useDebounce(currGroup);
+  // const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
 
   // open actions window
   const [isOptionsModalOpen,setIsOptionsModalOpen] = useState(false)
-  const [ispreview, setIspreview] = useState(true);
+  const [isGroupOpen, setIsGroupOpen] = useState(true);
   const [openColorModel, setOpenColorModel] = useState(false);
 
-  const groupClass = ispreview ? "group-preview" : "group-unpreview";
   const inputBlueTitle = isTitleGroupEditMode ? "blue-input" : "";
+
 
   useEffect(() => {
     if (inputFocused === false) {
@@ -70,9 +70,27 @@ export function GroupPreview({
     return newTask;
   }
 
+  function handleGroupPreview() {
+    setIsGroupOpen(!isGroupOpen)
+  }
+
+  function handleKeyDown(ev) {
+    if (ev.key === "Enter") {
+      if (ev.target.id === "newTask"){
+        setInputFocused(false);
+        ev.target.value = "";
+      }
+      else {
+        setIsTitleGroupEditMode(false);
+      }  
+    }
+  }
+
   async function handleGroupTitleBlur(ev) {
     ev.stopPropagation()
-    if (ev.target.value !== "") setIsTitleGroupEditMode(false);
+    if (ev.target.value !== "") {
+      setIsTitleGroupEditMode(false);
+    } 
     // onSaveGroup(null,currGroup);
   }
 
@@ -87,7 +105,6 @@ export function GroupPreview({
   }
 
   function handleTaskInputFocus() {
-    // setIsFocus(true)
     setInputFocused(true);
   }
 
@@ -109,7 +126,6 @@ export function GroupPreview({
       }));
     }
 
-    
     onSaveGroup(null,currGroup);
   }
 
@@ -134,10 +150,10 @@ export function GroupPreview({
     setIsOptionsModalOpen(!isOptionsModalOpen)
   }
   
-  //open color model
-  function handleOpenColorModel() {
-    setOpenColorModel(!openColorModel)
-  }
+  // //open color model
+  // function handleOpenColorModel() {
+  //   setOpenColorModel(!openColorModel)
+  // }
 
   function onChangeColor(rgbColor) {
     setOpenColorModel(!openColorModel)
@@ -147,7 +163,9 @@ export function GroupPreview({
   const { tasks } = group;
 
   return (
-    <section className={groupClass}>
+    <>
+    { isGroupOpen && 
+      <section className="group-preview">
       <section className="group-header">
         <button className="delete-btn" onClick={handleSetModal}>
           <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true" className="icon_d24b689566 noFocusStyle_07ecef1878" data-testid="icon" >
@@ -155,7 +173,7 @@ export function GroupPreview({
           </svg>
         </button>
         {isOptionsModalOpen && <OptionsActionsCmp onAction={onRemoveGroup} onActionProps={group.id} handleSetModal={handleSetModal} actionType={'removeGroup'}/>}
-        <div className="expansion-btn">
+        <div className="expansion-btn" onClick={handleGroupPreview}>
         <svg viewBox="0 0 20 20" color={group.style}  fill="currentColor" width="22" height="24" role="button" tabIndex="0" aria-hidden="false"
           className="icon_4b23d45e02 collapsible-icon clickable_f2c35f1e3f" data-testid="icon" >
           <path d="M10.5303 12.5303L10 12L9.46967 12.5303C9.76256 12.8232 10.2374 12.8232 10.5303 12.5303ZM10 10.9393L6.53033 7.46967C6.23744 7.17678 5.76256 7.17678 5.46967 7.46967C5.17678 7.76256 5.17678 8.23744 5.46967 8.53033L9.46967 12.5303L10 12L10.5303 12.5303L14.5303 8.53033C14.8232 8.23744 14.8232 7.76256 14.5303 7.46967C14.2374 7.17678 13.7626 7.17678 13.4697 7.46967L10 10.9393Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
@@ -164,7 +182,7 @@ export function GroupPreview({
         
         {isTitleGroupEditMode ? (
           <div className={`group-title-div ${inputBlueTitle}`}>
-          <div className="group-color-div" style={{ backgroundColor: `${group.style}` }} onClick={handleOpenColorModel}></div>
+          <div className="group-color-div" style={{ backgroundColor: `${group.style}` }} onClick={() => setOpenColorModel(true)}></div>
           <input
             className="group-title-input"
             autoFocus
@@ -175,6 +193,7 @@ export function GroupPreview({
             value={currGroup.title}
             onChange={handleGroupTitleChange}
             onBlur={handleGroupTitleBlur}
+            onKeyDown={handleKeyDown}
           />
           { openColorModel && 
             <div className="model-change-color">
@@ -266,6 +285,7 @@ export function GroupPreview({
             onChange={handleTaskChange}
             onBlur={handleTaskInputBlur}
             onFocus={handleTaskInputFocus}
+            onKeyDown={handleKeyDown}
           />
         </div>
           <div></div>
@@ -283,9 +303,72 @@ export function GroupPreview({
             <div></div>
             
           </section>
-
         }
       </section>
     </section>
+    }
+    
+
+    { !isGroupOpen && 
+    <section className="group-unpreview" style={{ borderInlineStart: `6px solid ${group.style}` }}>  
+      <section className="task-header-unpreview">
+      
+      <div className="task-title">
+        <div className="expansion-btn" onClick={handleGroupPreview}>
+          <svg viewBox="0 0 20 20" color={group.style} fill="currentColor" width="22" height="24" role="button" tabIndex="0" aria-hidden="false"
+            className="icon_4b23d45e02 collapsible-icon clickable_f2c35f1e3f" data-testid="icon" >
+            <path d="M10.5303 12.5303L10 12L9.46967 12.5303C9.76256 12.8232 10.2374 12.8232 10.5303 12.5303ZM10 10.9393L6.53033 7.46967C6.23744 7.17678 5.76256 7.17678 5.46967 7.46967C5.17678 7.76256 5.17678 8.23744 5.46967 8.53033L9.46967 12.5303L10 12L10.5303 12.5303L14.5303 8.53033C14.8232 8.23744 14.8232 7.76256 14.5303 7.46967C14.2374 7.17678 13.7626 7.17678 13.4697 7.46967L10 10.9393Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path>
+          </svg>
+          </div>
+
+          {isTitleGroupEditMode ? (
+              <div className={`group-title-div ${inputBlueTitle}`}>
+              <div className="group-color-div" style={{ backgroundColor: `${group.style}` }} onClick={() => setOpenColorModel(true)}></div>
+              <input
+                className="group-title-input"
+                autoFocus
+                style={{ color: group.style }}
+                name="title"
+                type="text"
+                id="edit-group-title-unpreview"
+                value={currGroup.title}
+                onChange={handleGroupTitleChange}
+                onBlur={handleGroupTitleBlur}
+                onKeyDown={handleKeyDown}
+              />
+              { openColorModel && 
+                <div className="model-change-color">
+                { utilService.bringColor().map((rgbColor, idx) => (
+                    <div key={idx} onClick={() => onChangeColor(rgbColor)} style={{ backgroundColor: rgbColor }}></div>
+                  ))}
+                </div>
+              }
+              </div>
+            ) : (
+              <h3 onClick={() => setIsTitleGroupEditMode(true)}style={{ color: group.style }} >
+              {group.title}
+            </h3>  
+            )}
+
+        </div>
+      
+        <span>{tasks.length} Task</span>
+      </section>
+      
+      <div className="group-column-div">
+      {cmpsOrder.map((key, idx) => (
+        <div key={`${key}${idx}`}>
+          <h4>{key}</h4>
+          <div className="summery-div">
+            <SummeryDynamicCmp group={group} cmpType={key} statusPicker={statusPicker} priorityPicker={priorityPicker}/>
+          </div>
+        </div>
+      ))}
+      </div>
+    </section>
+    }
+
+    
+    </>
   );
 }
