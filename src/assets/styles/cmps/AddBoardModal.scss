@@ -1,4 +1,6 @@
 .add-board-modal {
+    z-index: 5;
+    // position:static;
     position: fixed;
     top: 20%;
     bottom: 20%;
@@ -10,7 +12,6 @@
     box-shadow: 0 0 0 100vmax rgba(0,0,0,.5);
     background-color: $clr10;
     
-    z-index: 2;
     // color: white;
     
     button.close {
@@ -25,6 +26,7 @@
     }
 
     .content {
+        z-index: 5;
         display: grid;
         grid-template-rows: auto 1fr;
         padding: 1.5em;
