@@ -10,7 +10,6 @@ export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priori
         onUpdate(cmpType, info)  
         return
       }
-
       if(idxToSave === 1){
         //save statuses array - stasusPicker
         const statusPickerToSave = Object.values(info)[1]
