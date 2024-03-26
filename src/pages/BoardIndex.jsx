@@ -5,7 +5,6 @@ import {
   addBoard,
   removeBoard,
   updateBoard,
-  getEmptyBoard,
   getBoardById,
   updateBoardOptimistic,
   updateBoardFromBoards,
@@ -25,7 +24,7 @@ export function BoardIndex() {
 
   useEffect(() => {
     loadBoards();
-  }, [currBoardTitle]);
+  }, [currBoardTitle,params.id]);
 
   async function onRemoveBoard(boardId) {
     try {
@@ -42,9 +41,10 @@ export function BoardIndex() {
 
   async function onAddBoard(BoardTitle) {
     try {
-      const newBoard = getEmptyBoard();
-      newBoard.title = BoardTitle;
-      addBoard(newBoard);
+      // const newBoard = getEmptyBoard();
+      // newBoard.title = BoardTitle;
+      const savedNewBoard = await addBoard(BoardTitle);
+      navigate(`/boards/${savedNewBoard._id}`);
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);

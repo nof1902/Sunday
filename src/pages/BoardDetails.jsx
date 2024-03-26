@@ -28,8 +28,8 @@ export function BoardDetails(currBoardTitle) {
   
   useEffect(() => {
     if(params.id){
-      getBoard()
       setUpdate(false)
+      getBoard()
     }
   }, [params.id,currBoardTitle,update === true])
 

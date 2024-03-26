@@ -22,9 +22,9 @@ export function AddBoardModal({ onAddBoard, handleCloseModal }) {
     };
   }, [handleCloseModal]);
 
-  function handleCreateBoard(e) {
+  async function handleCreateBoard(e) {
     e.preventDefault();
-    onAddBoard(boardTitle.title);
+    await onAddBoard(boardTitle.title);
     handleCloseModal();
   }
 

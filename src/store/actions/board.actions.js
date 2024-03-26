@@ -107,9 +107,9 @@ export async function removeBoard(boardId) {
   }
 }
 
-export async function addBoard(board) {
+export async function addBoard(boardTitle) {
   try {
-    const savedBoard = await boardService.save(board);
+    const savedBoard = await boardService.createBoard(boardTitle);
     store.dispatch(getActionAddBoard(savedBoard));
     return savedBoard;
   } catch (err) {
@@ -121,7 +121,7 @@ export async function addBoard(board) {
 export async function updateBoardOptimistic(board) {
   try {
     store.dispatch(getActionUpdateBoard(board));
-    const savedBoard = await boardService.save(board);
+    const savedBoard = await boardService.updateBoard(board);
     return savedBoard;
   } catch (err) {
     console.log("Cannot update Board", err);
@@ -132,7 +132,7 @@ export async function updateBoardOptimistic(board) {
 export async function updateBoard(board) {
   // console.log('board', board);
   try {
-    const savedBoard = await boardService.save(board);
+    const savedBoard = await boardService.updateBoard(board);
     store.dispatch(getActionUpdateBoard(savedBoard));
     return savedBoard;
   } catch (err) {
