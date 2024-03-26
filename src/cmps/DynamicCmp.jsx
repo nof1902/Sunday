@@ -3,18 +3,18 @@ import { PriorityCmp } from "./dynamic-iputs/PriorityCmp";
 import { StatusCmp } from "./dynamic-iputs/StatusCmp";
 import { TimeLineCmp } from "./dynamic-iputs/TimeLineCmp";
 
-export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priorityPicker, members, groupStyle, onSaveStatusPicker}) {
+export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priorityPicker, members, groupStyle, onSaveCmpEdit}) {
     let info
-    function onUpdateEntity(info, idxToSave = 0){
+    function onUpdateEntity(info, cmpNameToSave = null){
       if(info?.to){
         onUpdate(cmpType, info)  
         return
       }
 
-      if(idxToSave === 1){
+      if(cmpNameToSave != null){
         //save statuses array - stasusPicker
-        const statusPickerToSave = Object.values(info)[1]
-        onSaveStatusPicker(statusPickerToSave)
+        const cmpPickerToSave = Object.values(info)[1]
+        onSaveCmpEdit(cmpNameToSave, cmpPickerToSave)
       } else {
         //save the selectes value
         const choseEntity = Object.values(info)[0]

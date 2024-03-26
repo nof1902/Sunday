@@ -130,6 +130,7 @@ export async function updateBoardOptimistic(board) {
 }
 
 export async function updateBoard(board) {
+  // console.log('board', board);
   try {
     const savedBoard = await boardService.save(board);
     store.dispatch(getActionUpdateBoard(savedBoard));

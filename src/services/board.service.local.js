@@ -334,7 +334,7 @@ function _createBoards() {
         { label: "High", backgroundColor: "rgb(64, 22, 148)" },
         { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
         { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
-        { label: "", backgroundColor: "rgb(196, 196, 196)" },
+        // { label: "", backgroundColor: "rgb(196, 196, 196)" },
       ],
     },
     {
@@ -421,7 +421,7 @@ function _createBoards() {
         { label: "High", backgroundColor: "rgb(64, 22, 148)" },
         { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
         { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
-        { label: "", backgroundColor: "rgb(196, 196, 196)" },
+        // { label: "", backgroundColor: "rgb(196, 196, 196)" },
       ],
     },
     {
@@ -497,7 +497,7 @@ function _createBoards() {
         { label: "High", backgroundColor: "rgb(64, 22, 148)" },
         { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
         { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
-        { label: "", backgroundColor: "rgb(196, 196, 196)" },
+        // { label: "", backgroundColor: "rgb(196, 196, 196)" },
       ],
     },
   ];

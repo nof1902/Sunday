@@ -21,12 +21,13 @@ export function GroupPreview({
   statusPicker,
   priorityPicker,
   members,
-  onSaveStatusPicker
+  onSaveCmpEdit
 }) {
   // const param = useParams();
 
   const [task, setTask] = useState(createEmptyTask());
   const [currGroup, setCurrGroup] = useState(group);
+  // const [editTitle, setEditTitle] = useState(group.title);
   // const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
@@ -97,6 +98,8 @@ export function GroupPreview({
   function handleGroupTitleChange({ target }) {
     const { name: field, value } = target;
     setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
+
+    // setEditTitle((prevTitle) => ({ ...prevTitle, [field]: value }));
   }
 
   async function handleTaskInputBlur({ target }) {
@@ -160,6 +163,7 @@ export function GroupPreview({
     setCurrGroup((prevGroup) => ({ ...prevGroup, style: rgbColor }));
   }
 
+  // const { tasks } = currGroup;
   const { tasks } = group;
 
   return (
@@ -257,7 +261,7 @@ export function GroupPreview({
             priorityPicker={priorityPicker}
             members={members}
             groupStyle={group.style}
-            onSaveStatusPicker={onSaveStatusPicker}
+            onSaveCmpEdit={onSaveCmpEdit}
           />
           {provided.placeholder}
         </div>
