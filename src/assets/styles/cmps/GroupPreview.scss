@@ -468,7 +468,8 @@
                 width: 70%;
                 display: flex;
                 align-items: center;
-    
+                z-index: 5;
+
                 .group-color-div {
                     width: 16px;
                     height: 16px;
@@ -478,6 +479,7 @@
     
     
                 .model-change-color {
+                    z-index: 5;
                     background-color: #ffffff;
                     position: absolute;
                     top: 2.5em;
@@ -487,7 +489,7 @@
                     grid-template-columns: repeat(4, auto);
                     gap: 8px;
                     box-shadow: 0px 7px 20px rgb(81 81 81 / 20%);
-                    z-index: 100;
+                   
     
                     
                     * {

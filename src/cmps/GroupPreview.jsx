@@ -21,12 +21,12 @@ export function GroupPreview({
   statusPicker,
   priorityPicker,
   members,
-  onSaveStatusPicker
+  onSaveCmpEdit
 }) {
   // const param = useParams();
 
   const [task, setTask] = useState(createEmptyTask());
-  const [currGroup, setCurrGroup] = useState(group);
+  const [editTitle, setEditTitle] = useState(group.title);
   // const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
@@ -47,12 +47,6 @@ export function GroupPreview({
     }
   }, [inputFocused]);
 
-  useEffectUpdate(() => {
-    async function saveGroup(){
-      await onSaveGroup(null,currGroup);
-    }
-    saveGroup()
-  }, [currGroup]);
 
   function createEmptyTask() {
     const newTask = getEmptyTask();
@@ -91,12 +85,12 @@ export function GroupPreview({
     if (ev.target.value !== "") {
       setIsTitleGroupEditMode(false);
     } 
+    await onSaveGroup(null, {...group, title: editTitle});
     // onSaveGroup(null,currGroup);
   }
 
   function handleGroupTitleChange({ target }) {
-    const { name: field, value } = target;
-    setCurrGroup((prevGroup) => ({ ...prevGroup, [field]: value }));
+    setEditTitle(target.value)
   }
 
   async function handleTaskInputBlur({ target }) {
@@ -109,41 +103,28 @@ export function GroupPreview({
   }
 
   async function saveTaskCall(taskToSave) {
-    await onSaveTask(currGroup.id, taskToSave);
-    const isTaskExist = currGroup.tasks.find((task) => task.id === taskToSave.id)
-    
+    await onSaveTask(group.id, taskToSave);
+    const isTaskExist = group.tasks.find((task) => task.id === taskToSave.id)
+
     if(isTaskExist){
-      setCurrGroup((prevGroup) => ({
-        ...prevGroup,
-        tasks: prevGroup.tasks.map((task) => 
-        task.id === taskToSave.id ? { ...task, ...taskToSave } : task
-        ),
-      }));      
+      group.tasks = group.tasks.map((task) => 
+      task.id === taskToSave.id ? { ...task, ...taskToSave } : task
+      )    
     } else {
-      setCurrGroup((prevGroup) => ({
-        ...prevGroup,
-        tasks: [...prevGroup.tasks, taskToSave],
-      }));
+      group.tasks.push(taskToSave)
     }
-    
-    onSaveGroup(null,currGroup);
+    await onSaveGroup(null, group);
   }
 
   function handleTaskChange({ target }) {
     const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
-    console.log('task', task);
+    // console.log('task', task);
   }
 
   async function deleteTask(taskId) {
     onRemoveTask(group.id, taskId);
-    setCurrGroup((prevGroup) => ({
-      ...prevGroup,
-      tasks: prevGroup.tasks.filter((task) => 
-      task.id !== taskId
-      ),
-    }))
-    onSaveGroup(null,currGroup);
+    onSaveGroup(null, group);
   }
 
   function handleSetModal() {
@@ -155,9 +136,9 @@ export function GroupPreview({
   //   setOpenColorModel(!openColorModel)
   // }
 
-  function onChangeColor(rgbColor) {
+  async function onChangeColor(rgbColor) {
     setOpenColorModel(!openColorModel)
-    setCurrGroup((prevGroup) => ({ ...prevGroup, style: rgbColor }));
+    await onSaveGroup(null, {...group, style: rgbColor});
   }
 
   const { tasks } = group;
@@ -190,7 +171,7 @@ export function GroupPreview({
             name="title"
             type="text"
             id="edit-group-title"
-            value={currGroup.title}
+            value={editTitle}
             onChange={handleGroupTitleChange}
             onBlur={handleGroupTitleBlur}
             onKeyDown={handleKeyDown}
@@ -257,7 +238,7 @@ export function GroupPreview({
             priorityPicker={priorityPicker}
             members={members}
             groupStyle={group.style}
-            onSaveStatusPicker={onSaveStatusPicker}
+            onSaveCmpEdit={onSaveCmpEdit}
           />
           {provided.placeholder}
         </div>
@@ -331,7 +312,7 @@ export function GroupPreview({
                 name="title"
                 type="text"
                 id="edit-group-title-unpreview"
-                value={currGroup.title}
+                value={editTitle}
                 onChange={handleGroupTitleChange}
                 onBlur={handleGroupTitleBlur}
                 onKeyDown={handleKeyDown}
