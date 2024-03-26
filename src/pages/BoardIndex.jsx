@@ -44,7 +44,8 @@ export function BoardIndex() {
     try {
       const newBoard = getEmptyBoard();
       newBoard.title = BoardTitle;
-      addBoard(newBoard);
+      const savedNewBoard = await addBoard(newBoard);
+      navigate(`/boards/${savedNewBoard._id}`);
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);

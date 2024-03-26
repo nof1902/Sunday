@@ -10,7 +10,7 @@ export function TimeLineSummery({ group }) {
 
   group.tasks.forEach((task) => {
     const taskStart = new Date(task.timeLine?.from);
-    const taskEnd = new Date(task.timeLine.to);
+    const taskEnd = new Date(task.timeLine?.to);
 
     if (taskStart < minDate) {
       minDate = taskStart;
