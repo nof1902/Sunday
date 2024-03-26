@@ -23,11 +23,9 @@ export function GroupPreview({
   members,
   onSaveCmpEdit
 }) {
-  // const param = useParams();
 
   const [task, setTask] = useState(createEmptyTask());
   const [editTitle, setEditTitle] = useState(group.title);
-  // const debouncedGroup = useDebounce(currGroup);
   const [inputFocused, setInputFocused] = useState(null);
   const [isTitleGroupEditMode, setIsTitleGroupEditMode] = useState(null);
 
@@ -76,6 +74,7 @@ export function GroupPreview({
       }
       else {
         setIsTitleGroupEditMode(false);
+        onSaveGroup(null, {...group, title: editTitle});
       }  
     }
   }
@@ -86,7 +85,6 @@ export function GroupPreview({
       setIsTitleGroupEditMode(false);
     } 
     await onSaveGroup(null, {...group, title: editTitle});
-    // onSaveGroup(null,currGroup);
   }
 
   function handleGroupTitleChange({ target }) {
@@ -119,7 +117,6 @@ export function GroupPreview({
   function handleTaskChange({ target }) {
     const { name: field, value } = target;
     setTask((prevTask) => ({ ...prevTask, [field]: value }));
-    // console.log('task', task);
   }
 
   async function deleteTask(taskId) {
@@ -130,11 +127,6 @@ export function GroupPreview({
   function handleSetModal() {
     setIsOptionsModalOpen(!isOptionsModalOpen)
   }
-  
-  // //open color model
-  // function handleOpenColorModel() {
-  //   setOpenColorModel(!openColorModel)
-  // }
 
   async function onChangeColor(rgbColor) {
     setOpenColorModel(!openColorModel)
