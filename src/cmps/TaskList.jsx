@@ -10,7 +10,7 @@ export function TaskList({
   priorityPicker,
   members,
   groupStyle,
-  onSaveStatusPicker
+  onSaveCmpEdit
 }) {
 
   return (
@@ -28,7 +28,7 @@ export function TaskList({
               priorityPicker={priorityPicker}
               members={members}
               groupStyle={groupStyle}
-              onSaveStatusPicker={onSaveStatusPicker}
+              onSaveCmpEdit={onSaveCmpEdit}
             />
           </li>
         )}

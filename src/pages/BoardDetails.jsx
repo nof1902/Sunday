@@ -1,24 +1,21 @@
 import { useEffect, useState } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
+import { useParams } from "react-router-dom";
 import { BoardIndexHeader } from "../cmps/BoardIndexHeader.jsx";
 import { GroupList } from "../cmps/GroupList.jsx";
-import { DragDropContext, Droppable } from "react-beautiful-dnd"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 import {
   RemoveGroup,
   RemoveTask,
   SaveGroup,
   SaveTask,
-  cleanCurrBoard,
   getBoardById,
   getEmptyGroup,
   updateBoard,
-  updateBoardOptimistic,
-  SaveStatusPicker,
+  updateBoardOptimistic
 } from "../store/actions/board.actions.js";
-import { func } from "prop-types";
 
 export function BoardDetails(currBoardTitle) {
 
@@ -82,17 +79,6 @@ export function BoardDetails(currBoardTitle) {
     }
   }
 
-  async function onSaveStatusPicker(StatusesToSave) {
-    try {
-      const boardToSave = await SaveStatusPicker(currBoard._id, StatusesToSave)
-      await updateBoard(boardToSave)
-      // setUpdate(true)
-    } catch (err) {
-      showErrorMsg(`Could not add task`);
-      console.log("error", err);
-    }
-  }
-
 
   async function onRemoveTask(groupId, taskId) {
     try {
@@ -115,6 +101,40 @@ export function BoardDetails(currBoardTitle) {
         console.log('error',err)
     }
   }
+
+   
+  async function onSaveCmpEdit(cmpType, cmpPickerToSave) {
+    // console.log('cmpType', cmpType);
+    // console.log('cmpPickerToSave', cmpPickerToSave);
+    try {
+      if(cmpType === "statusPicker") {
+        const boardToSave = {...currBoard, statusPicker: cmpPickerToSave}
+        // console.log("cmpPickerToSave", cmpPickerToSave);
+         console.log("boardToSave", boardToSave);
+        await onUpdateBoard(boardToSave)
+      } else if(cmpType === "priorityPicker") {
+        const boardToSave = {...currBoard, priorityPicker: cmpPickerToSave}
+        // console.log("cmpPickerToSave", cmpPickerToSave);
+         console.log("boardToSave", boardToSave);
+        await onUpdateBoard(boardToSave)
+      }
+    } catch (err) {
+        showErrorMsg('Cannot update board')
+        console.log('error',err)
+    }
+    
+  }
+
+  // async function onSaveStatusPicker(StatusesToSave) {
+  //   try {
+  //     const boardToSave = await SaveStatusPicker(currBoard._id, StatusesToSave)
+  //     await updateBoard(boardToSave)
+  //     // setUpdate(true)
+  //   } catch (err) {
+  //     showErrorMsg(`Could not add task`);
+  //     console.log("error", err);
+  //   }
+  // }
 
   if (!currBoard) return <div>Loading...</div>;
   const { groups , cmpsOrder , statusPicker, priorityPicker, members} = currBoard;
@@ -158,11 +178,7 @@ export function BoardDetails(currBoardTitle) {
 
         const sourceIndex = source.index
         const destinationIndex = destination.index
-        console.log('sourceIndex', sourceIndex);
-        console.log('destinationIndex', destinationIndex);
         
-        console.log('source.droppableId', source.droppableId);
-        console.log('destination.droppableId', destination.droppableId);
         const groupSourceIndex = groups.findIndex((group) => group.id === source.droppableId)
         const groupDestinationIndex = groups.findIndex((group) => group.id === destination.droppableId)
   
@@ -175,7 +191,6 @@ export function BoardDetails(currBoardTitle) {
         const newGroups = [...groups]
         newGroups[groupSourceIndex] = { ...groups[groupSourceIndex], tasks:[...newSourceTasks] }
         newGroups[groupDestinationIndex] = { ...groups[groupDestinationIndex], tasks:[...newDestinationTasks] }
-        console.log('newGroups', newGroups);
 
         return await updateBoardOptimistic({...currBoard, groups: [...newGroups] })
       }
@@ -205,7 +220,7 @@ export function BoardDetails(currBoardTitle) {
           statusPicker={statusPicker}
           priorityPicker={priorityPicker}
           members={members}
-          onSaveStatusPicker={onSaveStatusPicker}
+          onSaveCmpEdit={onSaveCmpEdit}
         />
         {provided.placeholder}
         </div>

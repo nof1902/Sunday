@@ -137,6 +137,7 @@ export async function updateBoardOptimistic(board) {
 }
 
 export async function updateBoard(board) {
+  // console.log('board', board);
   try {
     const savedBoard = await boardService.update(board);
     store.dispatch(getActionUpdateBoard(savedBoard));
@@ -245,3 +246,48 @@ export function getEmptyGroup() {
   };
 }
 
+export function getEmptyBoard() {
+  return {
+    _id: "",
+    title: "New board",
+    isStarred: false,
+    archivedAt: 1589983468418,
+    createdBy: {
+      _id: "",
+      fullname: "",
+      imgUrl: "",
+    },
+    members: [
+      {
+        _id: "u101",
+        fullname: "Sapir Teper",
+        imgUrl: "",
+      },
+      {
+        _id: "u102",
+        fullname: "Nofar Melamed",
+        imgUrl: "",
+      },
+      {
+        _id: "u103",
+        fullname: "Oren Melamed",
+        imgUrl: "",
+      },
+    ],
+    groups: [getEmptyGroup()],
+    cmpsOrder: ["people", "status", "priority","timeLine"],
+    statusPicker: [
+      { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
+      { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
+      { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
+      { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
+    ],
+    priorityPicker: [
+      { label: "Critical ⚠", backgroundColor: "rgb(51, 51, 51)" },
+    { label: "High", backgroundColor: "rgb(64, 22, 148)" },
+    { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
+    { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
+    // { label: "", backgroundColor: "rgb(196, 196, 196)" },
+  ],
+  };
+}

@@ -31,14 +31,11 @@ export function StatusCmp({ info, onUpdateEntity }) {
   },[infoToEdit.selectedStatus])
   
 
+  
   function onChangeStatus({ label }) {
-    setInfoToEdit((prevInfo) => ({
-      ...prevInfo,
-      selectedStatus: label,
-    }));
+    setInfoToEdit((prevInfo) => ({ ...prevInfo, selectedStatus: label }));
     handleClickModal();
   }
-
 
   function handleClickModal() {
     setOpenEditModel(!openEditModel);
@@ -58,13 +55,15 @@ export function StatusCmp({ info, onUpdateEntity }) {
       updatedStatuses[idx] = { ...updatedStatuses[idx], label: val }; 
       return { ...prevInfo, statuses: updatedStatuses }; 
     });
-    
   }
 
       //save and close edit modal
   function handleClickApply() {
     setOpenEditOption(!openEditOption);
-    onUpdateEntity(infoToEdit, 1)
+    console.log('infoToEdit', infoToEdit);
+    onUpdateEntity(infoToEdit, "statusPicker")
+
+
   }
 
     //open edit color modal
@@ -103,13 +102,13 @@ export function StatusCmp({ info, onUpdateEntity }) {
       style={{ backgroundColor: backgroundColor }}
       onClick={handleClickModal}
     >
-      <span style={{ background: darkerBackgroundColor }} className="fold">
-      </span>
+      <span style={{ background: darkerBackgroundColor }} className="fold"></span>
+      
       <h4 className="selected-label">{infoToEdit.selectedStatus}</h4>
       {openEditModel && (
-        <section className="status-model">
+        <section className="status-model" ref={modalRef}>
           <section className="status-picker-content">
-            <ul ref={modalRef} className="items-container">
+            <ul className="items-container">
               {infoToEdit.statuses.map((status, idx) => (
                 <li
                   className="item"
@@ -134,9 +133,9 @@ export function StatusCmp({ info, onUpdateEntity }) {
       )}
 
       {openEditOption && (
-        <section className="status-model">
+        <section className="status-model" ref={modalRef}>
           <section className="status-edit-content">
-            <ul ref={modalRef} className="items-container">
+            <ul className="items-container">
               {
                 infoToEdit.statuses.map((status, idx) => (
                 <li className="item" key={idx} >
