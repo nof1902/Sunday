@@ -41,8 +41,6 @@ export function BoardIndex() {
 
   async function onAddBoard(BoardTitle) {
     try {
-      // const newBoard = getEmptyBoard();
-      // newBoard.title = BoardTitle;
       const savedNewBoard = await addBoard(BoardTitle);
       navigate(`/boards/${savedNewBoard._id}`);
       showSuccessMsg(`Task added successfully`);

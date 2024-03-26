@@ -55,7 +55,7 @@ async function remove(boardId) {
 
 async function createBoard(boardTitle) {
   const newBoard = getEmptyBoard()
-  newBoard.createdBy = userService.getLoggedinUser();
+  newBoard.createdBy = userService.getLoggedinUser(); //at back - no need
   newBoard.title = boardTitle;
 
   const savedBoard = await storageService.post(STORAGE_KEY, newBoard);
