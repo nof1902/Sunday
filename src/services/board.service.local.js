@@ -7,8 +7,8 @@ const STORAGE_KEY = "board";
 export const boardService = {
   query,
   getById,
-  createBoard,
-  updateBoard,
+  create,
+  update,
   remove,
   addBoardMsg,
   saveTask,
@@ -53,7 +53,7 @@ async function remove(boardId) {
   await storageService.remove(STORAGE_KEY, boardId);
 }
 
-async function createBoard(boardTitle) {
+async function create(boardTitle) {
   const newBoard = getEmptyBoard()
   newBoard.createdBy = userService.getLoggedinUser(); //at back - no need
   newBoard.title = boardTitle;
@@ -63,7 +63,7 @@ async function createBoard(boardTitle) {
   return savedBoard;
 }
 
-async function updateBoard(board) {
+async function update(board) {
   const savedBoard = await storageService.put(STORAGE_KEY, board);
   return savedBoard;
 }

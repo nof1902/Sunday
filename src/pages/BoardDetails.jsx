@@ -25,15 +25,12 @@ export function BoardDetails(currBoardTitle) {
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
   const [update,setUpdate] = useState(false)
   const params = useParams()
-
-
-  console.log('currBoard- id + title', currBoard?._id, currBoard?.title)
   
   useEffect(() => {
     if(params.id){
+      getBoardById(params.id)
       setUpdate(false)
       getBoard()
-      getBoardById(params.id)
     }
   }, [params.id,currBoardTitle,update === true])
 

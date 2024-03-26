@@ -1,4 +1,5 @@
-import { boardService } from "../../services/board.service.local.js";
+import { boardService } from "../../services/board.service.js";
+// import { boardService } from "../../services/board.service.local.js";
 import { userService } from "../../services/user.service.js";
 import { store } from "../store.js";
 import {
@@ -53,6 +54,12 @@ export async function loadBoards() {
     throw err;
   }
 }
+
+// query,
+// getById,
+// create,
+// update,
+// remove
 
 export async function getBoardById(boardId) {
   try {
@@ -109,7 +116,7 @@ export async function removeBoard(boardId) {
 
 export async function addBoard(boardTitle) {
   try {
-    const savedBoard = await boardService.createBoard(boardTitle);
+    const savedBoard = await boardService.create(boardTitle);
     store.dispatch(getActionAddBoard(savedBoard));
     return savedBoard;
   } catch (err) {
@@ -131,7 +138,7 @@ export async function updateBoardOptimistic(board) {
 
 export async function updateBoard(board) {
   try {
-    const savedBoard = await boardService.updateBoard(board);
+    const savedBoard = await boardService.update(board);
     store.dispatch(getActionUpdateBoard(savedBoard));
     return savedBoard;
   } catch (err) {
