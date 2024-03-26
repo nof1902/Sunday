@@ -33,10 +33,7 @@ export function StatusCmp({ info, onUpdateEntity }) {
 
   
   function onChangeStatus({ label }) {
-    setInfoToEdit((prevInfo) => ({
-      ...prevInfo,
-      selectedStatus: label,
-    }));
+    setInfoToEdit((prevInfo) => ({ ...prevInfo, selectedStatus: label }));
     handleClickModal();
   }
 
@@ -58,13 +55,15 @@ export function StatusCmp({ info, onUpdateEntity }) {
       updatedStatuses[idx] = { ...updatedStatuses[idx], label: val }; 
       return { ...prevInfo, statuses: updatedStatuses }; 
     });
-    
   }
 
       //save and close edit modal
   function handleClickApply() {
     setOpenEditOption(!openEditOption);
+    console.log('infoToEdit', infoToEdit);
     onUpdateEntity(infoToEdit, "statusPicker")
+
+
   }
 
     //open edit color modal
