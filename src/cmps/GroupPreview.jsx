@@ -125,7 +125,7 @@ export function GroupPreview({
         tasks: [...prevGroup.tasks, taskToSave],
       }));
     }
-
+    
     onSaveGroup(null,currGroup);
   }
 

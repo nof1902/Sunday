@@ -99,10 +99,10 @@ function bringColor() {
 
 
 function getRandomColor() {
-    const rgbColors = bringColor(); // Get the array of predefined colors
-    const randomIndex = Math.floor(Math.random() * rgbColors.length); // Generate a random index
+    const rgbColors = bringColor();
+    const randomIndex = Math.floor(Math.random() * rgbColors.length); 
     console.log('color', rgbColors[randomIndex]);
-    return rgbColors[randomIndex]; // Return the color at the random index
+    return rgbColors[randomIndex]; 
 }
 
   function getColorAlfa(rgbColor) {

@@ -7,7 +7,8 @@ const STORAGE_KEY = "board";
 export const boardService = {
   query,
   getById,
-  save,
+  createBoard,
+  updateBoard,
   remove,
   addBoardMsg,
   saveTask,
@@ -52,15 +53,18 @@ async function remove(boardId) {
   await storageService.remove(STORAGE_KEY, boardId);
 }
 
-async function save(board) {
-  var savedBoard;
-  if (board._id) {
-    savedBoard = await storageService.put(STORAGE_KEY, board);
-  } else {
-    // Later, owner is set by the backend
-    board.owner = userService.getLoggedinUser();
-    savedBoard = await storageService.post(STORAGE_KEY, board);
-  }
+async function createBoard(boardTitle) {
+  const newBoard = getEmptyBoard()
+  newBoard.createdBy = userService.getLoggedinUser();
+  newBoard.title = boardTitle;
+
+  const savedBoard = await storageService.post(STORAGE_KEY, newBoard);
+  
+  return savedBoard;
+}
+
+async function updateBoard(board) {
+  const savedBoard = await storageService.put(STORAGE_KEY, board);
   return savedBoard;
 }
 
@@ -162,6 +166,65 @@ async function addBoardMsg(boardId, txt) {
 // TEST DATA
 // storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
 
+export function getEmptyGroup() {
+  return {
+    id: utilService.makeId(),
+    title: "New Group",
+    archivedAt: 1589983468418,
+    tasks: [],
+    style: utilService.getRandomColor(),
+  };
+}
+
+export function getEmptyBoard() {
+  return {
+    _id: "",
+    title: "New board",
+    isStarred: false,
+    archivedAt: 1589983468418,
+    createdBy: {
+      _id: "",
+      fullname: "",
+      imgUrl: "",
+    },
+    members: [
+      {
+        _id: "u101",
+        fullname: "Sapir Teper",
+        imgUrl: "",
+      },
+      {
+        _id: "u102",
+        fullname: "Nofar Melamed",
+        imgUrl: "",
+      },
+      {
+        _id: "u103",
+        fullname: "Oren Melamed",
+        imgUrl: "",
+      },
+    ],
+    groups: [getEmptyGroup()],
+    cmpsOrder: ["people", "status", "priority","timeLine"],
+    statusPicker: [
+      { label: "Done", backgroundColor: " rgb(0, 200, 117)" },
+      { label: "Working on it", backgroundColor: "rgb(253, 171, 61)" },
+      { label: "Stuck", backgroundColor: "rgb(226, 68, 92)" },
+      { label: "Not Started", backgroundColor: "rgb(196, 196, 196)" },
+    ],
+    priorityPicker: [
+      { label: "Critical ⚠", backgroundColor: "rgb(51, 51, 51)" },
+    { label: "High", backgroundColor: "rgb(64, 22, 148)" },
+    { label: "Medium", backgroundColor: "rgb(85, 89, 223)" },
+    { label: "Low", backgroundColor: "rgb(87, 155, 252)" },
+    { label: "", backgroundColor: "rgb(196, 196, 196)" },
+  ],
+  };
+}
+
+
+
+
 function _createBoards() {
   // let boards = utilService.loadFromStorage(STORAGE_KEY)
   // if (!boards || !boards.length){
@@ -207,7 +270,7 @@ function _createBoards() {
               priority: "Low",
               timeLine:{
                 from: 'Sun Feb 10 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+                to: 'Sat Apr 3 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
             {
@@ -218,7 +281,7 @@ function _createBoards() {
               priority: "Low",
               timeLine:{
                 from: 'Sun Feb 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 25 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+                to: 'Sat Apr 9 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
             {
@@ -299,11 +362,11 @@ function _createBoards() {
               id: utilService.makeId(),
               title: "Chat information",
               people: "",
-              status: "Working on it",  // put id 
+              status: "Done",  // put id 
               priority: "High", // put id 
               timeLine:{
-                from: 'Sun Mar 14 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 19 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+                from: 'Sun Mar 21 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 26 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
               
             },
@@ -314,13 +377,44 @@ function _createBoards() {
               status: "Working on it",
               priority: "Medium",
               timeLine: {
-                from: 'Sun Mar 12 2024 00:00:00 GMT+0200 (Israel Standard Time)',
-                to: 'Sat Mar 21 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+                from: 'Sun Mar 20 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 27 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
               }
             },
           ],
           style: utilService.getRandomColor(),
         },
+        {
+          id: utilService.makeId(),
+          title: "Bugs",
+          archivedAt: 1589983468418,
+          tasks: [
+            {
+              id: utilService.makeId(),
+              title: "flicker when new task is added",
+              people: "u102",
+              status: "Working on it",  // put id 
+              priority: "Critical", // put id 
+              timeLine:{
+                from: 'Sun Mar 24 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Thu Mar 28 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+              
+            },
+            {
+              id: utilService.makeId(),
+              title: "filter task does not work",
+              people: "u102",
+              status: "Working on it",
+              priority: "High",
+              timeLine: {
+                from: 'Sun Mar 24 2024 00:00:00 GMT+0200 (Israel Standard Time)',
+                to: 'Sat Mar 28 2024 00:00:00 GMT+0300 (Israel Daylight Time)'
+              }
+            },
+          ],
+          style: utilService.getRandomColor(),
+        }
       ],
       cmpsOrder: ["people", "status", "priority", "timeLine"],
       statusPicker: [
