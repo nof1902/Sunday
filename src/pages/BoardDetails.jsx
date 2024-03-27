@@ -105,18 +105,23 @@ export function BoardDetails(currBoardTitle) {
   async function onSaveCmpEdit(cmpType, cmpPickerToSave) {
     // console.log('cmpType', cmpType);
     // console.log('cmpPickerToSave', cmpPickerToSave);
+    
     try {
-      if(cmpType === "statusPicker") {
-        const boardToSave = {...currBoard, statusPicker: cmpPickerToSave}
-        // console.log("cmpPickerToSave", cmpPickerToSave);
-         console.log("boardToSave", boardToSave);
-        await onUpdateBoard(boardToSave)
-      } else if(cmpType === "priorityPicker") {
-        const boardToSave = {...currBoard, priorityPicker: cmpPickerToSave}
-        // console.log("cmpPickerToSave", cmpPickerToSave);
-         console.log("boardToSave", boardToSave);
-        await onUpdateBoard(boardToSave)
-      }
+
+      const boardToSave = {...currBoard, [cmpType]: cmpPickerToSave}
+      await onUpdateBoard(boardToSave)
+
+      // if(cmpType === "statusPicker") {
+      //   const boardToSave = {...currBoard, statusPicker: cmpPickerToSave}
+      //   console.log("cmpPickerToSave", cmpPickerToSave);
+      //    console.log("boardToSave", boardToSave);
+      //   await onUpdateBoard(boardToSave)
+      // } else if(cmpType === "priorityPicker") {
+      //   const boardToSave = {...currBoard, priorityPicker: cmpPickerToSave}
+      //   console.log("cmpPickerToSave", cmpPickerToSave);
+      //    console.log("boardToSave", boardToSave);
+      //   await onUpdateBoard(boardToSave)
+      // }
     } catch (err) {
         showErrorMsg('Cannot update board')
         console.log('error',err)
