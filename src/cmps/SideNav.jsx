@@ -65,7 +65,7 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
               clipRule="evenodd"
             ></path>
           </svg>
-          <NavLink to={`/boards`}>Home</NavLink>
+          <NavLink to={`/board`}>Home</NavLink>
         </div>
       </section>
 
@@ -185,7 +185,7 @@ export function SideNav({ boards, onRemoveBoard, onAddBoard, onUpdateBoard }) {
                     onBlur={(e) => onBoardChange(e, board)}
                   />
                 ) : (
-                  <NavLink key={board._id} to={`/boards/${board._id}`}>
+                  <NavLink key={board._id} to={`/board/${board._id}`}>
                     {board.title}
                   </NavLink>
                 )}

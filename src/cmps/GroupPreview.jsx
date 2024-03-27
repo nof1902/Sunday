@@ -111,7 +111,7 @@ export function GroupPreview({
     } else {
       group.tasks.push(taskToSave)
     }
-    await onSaveGroup(null, group);
+    // await onSaveGroup(null, group);
   }
 
   function handleTaskChange({ target }) {
@@ -121,7 +121,6 @@ export function GroupPreview({
 
   async function deleteTask(taskId) {
     onRemoveTask(group.id, taskId);
-    onSaveGroup(null, group);
   }
 
   function handleSetModal() {

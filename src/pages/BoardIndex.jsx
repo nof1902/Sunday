@@ -29,7 +29,7 @@ export function BoardIndex() {
   async function onRemoveBoard(boardId) {
     try {
       if (params.id === boardId) {
-        navigate(`/boards`);
+        navigate(`/board`);
       }
       await removeBoard(boardId);
       showSuccessMsg(`Task added successfully`);
@@ -42,7 +42,7 @@ export function BoardIndex() {
   async function onAddBoard(BoardTitle) {
     try {
       const savedNewBoard = await addBoard(BoardTitle);
-      navigate(`/boards/${savedNewBoard._id}`);
+      navigate(`/board/${savedNewBoard._id}`);
       showSuccessMsg(`Task added successfully`);
     } catch (err) {
       showErrorMsg(`Could not add task`);

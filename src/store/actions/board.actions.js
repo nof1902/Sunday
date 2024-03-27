@@ -128,7 +128,7 @@ export async function addBoard(boardTitle) {
 export async function updateBoardOptimistic(board) {
   try {
     store.dispatch(getActionUpdateBoard(board));
-    const savedBoard = await boardService.updateBoard(board);
+    const savedBoard = await boardService.update(board);
     return savedBoard;
   } catch (err) {
     console.log("Cannot update Board", err);

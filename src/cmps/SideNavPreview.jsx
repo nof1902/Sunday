@@ -36,7 +36,7 @@ import { useForm } from "../customHooks/useForm";
 
     return (
             <li key={board._id} style={{background: (activeBoardId.id === board._id)? `#cce5ff`: ``}} className="board-preview">
-                    <NavLink className='board-link' key={board._id} to={`/boards/${board._id}`}>
+                    <NavLink className='board-link' key={board._id} to={`/board/${board._id}`}>
                         <svg
                             viewBox="0 0 20 20"
                             fill="currentColor"

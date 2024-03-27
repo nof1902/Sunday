@@ -21,8 +21,8 @@ root.render(
       <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login  />} />
-          <Route path="/boards" element={<BoardIndex />}>
-              <Route path="/boards/:id" element={<BoardDetails />}/>
+          <Route path="/board" element={<BoardIndex />}>
+              <Route path="/board/:id" element={<BoardDetails />}/>
           </Route>
       </Routes>
       <SidePanelSlide />

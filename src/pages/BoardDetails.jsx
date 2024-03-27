@@ -110,7 +110,7 @@ export function BoardDetails(currBoardTitle) {
       if(cmpType === "statusPicker") {
         const boardToSave = {...currBoard, statusPicker: cmpPickerToSave}
         // console.log("cmpPickerToSave", cmpPickerToSave);
-         console.log("boardToSave", boardToSave);
+        //  console.log("boardToSave", boardToSave);
         await onUpdateBoard(boardToSave)
       } else if(cmpType === "priorityPicker") {
         const boardToSave = {...currBoard, priorityPicker: cmpPickerToSave}
@@ -139,7 +139,8 @@ export function BoardDetails(currBoardTitle) {
   if (!currBoard) return <div>Loading...</div>;
   const { groups , cmpsOrder , statusPicker, priorityPicker, members} = currBoard;
 
-  const handleDragDrop = async (results) => {
+
+  async function handleDragDrop(results){
     const { source, destination, type } = results
     if (!destination) return
 
@@ -148,9 +149,21 @@ export function BoardDetails(currBoardTitle) {
       source.index === destination.index
     ) return
 
+    switch (type) {
+      case "group":
+        return groupDragDrop(source, destination)
+      case "column":
+        return columnDragDrop(source, destination)
+      case "task":
+        return taskDragDrop(source, destination)
+      default:
+        return
 
-    if(type === 'group') {
-      const reorderdGroups = [...groups]
+    }
+  }
+
+  async function groupDragDrop(source, destination){
+    const reorderdGroups = [...groups]
 
       const sourceIndex = source.index
       const destinationIndex = destination.index
@@ -159,23 +172,21 @@ export function BoardDetails(currBoardTitle) {
       reorderdGroups.splice(destinationIndex, 0, deletedGroup)
 
       return await updateBoardOptimistic({...currBoard, groups: [...reorderdGroups] })
-    }
+  }
 
-    if (type === 'column') {
-      const reorderdColumn = [...cmpsOrder]
+  async function columnDragDrop(source, destination){
+    const reorderdColumn = [...cmpsOrder]
   
-      const sourceIndex = source.index
-      const destinationIndex = destination.index
-  
-      const [deletedColumn] = reorderdColumn.splice(sourceIndex, 1)
-      reorderdColumn.splice(destinationIndex, 0, deletedColumn)
+    const sourceIndex = source.index
+    const destinationIndex = destination.index
 
-      return await updateBoardOptimistic({...currBoard, cmpsOrder: [...reorderdColumn] })
-    }
+    const [deletedColumn] = reorderdColumn.splice(sourceIndex, 1)
+    reorderdColumn.splice(destinationIndex, 0, deletedColumn)
 
+    return await updateBoardOptimistic({...currBoard, cmpsOrder: [...reorderdColumn] })
+  }
 
-    if (type === 'task') {
-
+  async function taskDragDrop(source, destination){
         const sourceIndex = source.index
         const destinationIndex = destination.index
         
@@ -193,7 +204,6 @@ export function BoardDetails(currBoardTitle) {
         newGroups[groupDestinationIndex] = { ...groups[groupDestinationIndex], tasks:[...newDestinationTasks] }
 
         return await updateBoardOptimistic({...currBoard, groups: [...newGroups] })
-      }
   }
 
 
@@ -247,3 +257,67 @@ export function BoardDetails(currBoardTitle) {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+  // const handleDragDrop = async (results) => {
+  //   const { source, destination, type } = results
+  //   if (!destination) return
+
+  //   if (
+  //     source.droppableId === destination.droppableId &&
+  //     source.index === destination.index
+  //   ) return
+
+
+  //   if(type === 'group') {
+  //     const reorderdGroups = [...groups]
+
+  //     const sourceIndex = source.index
+  //     const destinationIndex = destination.index
+
+  //     const [deletedGroup] = reorderdGroups.splice(sourceIndex, 1)
+  //     reorderdGroups.splice(destinationIndex, 0, deletedGroup)
+
+  //     return await updateBoardOptimistic({...currBoard, groups: [...reorderdGroups] })
+  //   }
+
+  //   if (type === 'column') {
+  //     const reorderdColumn = [...cmpsOrder]
+  
+  //     const sourceIndex = source.index
+  //     const destinationIndex = destination.index
+  
+  //     const [deletedColumn] = reorderdColumn.splice(sourceIndex, 1)
+  //     reorderdColumn.splice(destinationIndex, 0, deletedColumn)
+
+  //     return await updateBoardOptimistic({...currBoard, cmpsOrder: [...reorderdColumn] })
+  //   }
+
+
+  //   if (type === 'task') {
+
+  //       const sourceIndex = source.index
+  //       const destinationIndex = destination.index
+        
+  //       const groupSourceIndex = groups.findIndex((group) => group.id === source.droppableId)
+  //       const groupDestinationIndex = groups.findIndex((group) => group.id === destination.droppableId)
+  
+  //       const newSourceTasks = [...groups[groupSourceIndex].tasks]
+  //       const newDestinationTasks = source.droppableId !== destination.droppableId ? [...groups[groupDestinationIndex].tasks] : newSourceTasks
+  
+  //       const [deletedTask] = newSourceTasks.splice(sourceIndex, 1)
+  //       newDestinationTasks.splice(destinationIndex, 0, deletedTask)
+  
+  //       const newGroups = [...groups]
+  //       newGroups[groupSourceIndex] = { ...groups[groupSourceIndex], tasks:[...newSourceTasks] }
+  //       newGroups[groupDestinationIndex] = { ...groups[groupDestinationIndex], tasks:[...newDestinationTasks] }
+
+  //       return await updateBoardOptimistic({...currBoard, groups: [...newGroups] })
+  //     }
+  // }
