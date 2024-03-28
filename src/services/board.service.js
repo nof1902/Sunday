@@ -46,9 +46,11 @@ async function remove(boardId) {
     return board
 }
 
-async function create(boardTitle) {
+async function create(title) {
+
+  console.log("boardTitle" , title)
     // savedBoard = await httpService.post(BASE_URL, boardTitle)
-    const {data: savedBoard} = await axios.post(BASE_URL , boardTitle)
+    const {data: savedBoard} = await axios.post(BASE_URL , {title})
     return savedBoard
 }
 

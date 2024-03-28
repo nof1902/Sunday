@@ -68,21 +68,21 @@ export function TimeLineCmp({ info, onUpdateEntity, groupStyle }) {
     if (!info.selectedTimeLine) return "-"; // Return a placeholder if there's no selected timeline
     if (isHovered) {
       return formatDistance(
-        info.selectedTimeLine.from,
-        info.selectedTimeLine.to
+        info.selectedTimeLine?.from,
+        info.selectedTimeLine?.to
       );
     } else {
       if (
-        format(info.selectedTimeLine.from, "LLL") !==
-        format(info.selectedTimeLine.to, "LLL")
+        format(info.selectedTimeLine?.from, "LLL") !==
+        format(info.selectedTimeLine?.to, "LLL")
       ) {
-        return `${format(info.selectedTimeLine.from, "LLL d")}-${format(
-          info.selectedTimeLine.to,
+        return `${format(info.selectedTimeLine?.from, "LLL d")}-${format(
+          info.selectedTimeLine?.to,
           "LLL d"
         )}`;
       } else {
-        return `${format(info.selectedTimeLine.from, "d")}-${format(
-          info.selectedTimeLine.to,
+        return `${format(info.selectedTimeLine?.from, "d")}-${format(
+          info.selectedTimeLine?.to,
           "d LLL"
         )}`;
       }
