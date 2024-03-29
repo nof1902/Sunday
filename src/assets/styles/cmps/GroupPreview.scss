@@ -331,22 +331,23 @@
             }
 
             & > * {    
-                border-block-end: 1px solid $clr11;
+                // border-block-end: 1px solid $clr11;
             }
 
             .footer-div-input {
                 margin-bottom: 8em;
-                border-block-end: 1px solid $clr11;
                 height: 35px;
                 display: flex;
                 align-items: center;
                 box-shadow:  0 8px 8px -8px rgba(0, 0, 0, 0.1);
                 box-sizing: content-box;
+                // border-block-end: 1px solid $clr11;
             }
 
         }
 
         .footer-stasus {
+            border-block-start: 1px solid $clr11;
             display: grid;
             grid-template-columns: 330px auto 1fr;
             text-align: center;
