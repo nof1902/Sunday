@@ -17,8 +17,9 @@ body{
     font-family: $font-txt;
     font-size: rem(18px);
     margin: 0;
-    max-width: 100%;
-    margin: auto;
+    max-width: 100vw;
+    // margin: auto;
+    overflow:hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -47,6 +48,7 @@ span {
 
 a {
     text-decoration: none;
+
 }
 // a:hover {
 //     text-decoration: underline;

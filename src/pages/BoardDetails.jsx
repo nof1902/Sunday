@@ -214,51 +214,57 @@ export function BoardDetails(currBoardTitle) {
 
   return (
     <section className="board-details">
-      <DragDropContext onDragEnd={handleDragDrop}>
-        <BoardIndexHeader
-          board={currBoard}
-          onSaveTask={onSaveTask}
-          onSaveGroup={onSaveGroup}
-          onUpdateBoard={onUpdateBoard}
-          cmpsOrder={cmpsOrder}
-        />
-      <Droppable droppableId="GROUP" type="group">
-      {(provided) => (
-        <div {...provided.droppableProps} ref={provided.innerRef}>
-          <GroupList
-          groups={groups}
-          onSaveTask={onSaveTask}
-          onRemoveTask={onRemoveTask}
-          onRemoveGroup={onRemoveGroup}
-          onSaveGroup={onSaveGroup}
-          cmpsOrder={cmpsOrder}
-          statusPicker={statusPicker}
-          priorityPicker={priorityPicker}
-          members={members}
-          onSaveCmpEdit={onSaveCmpEdit}
-        />
-        {provided.placeholder}
-        </div>
-      )}
-      </Droppable>
+      <div></div>
+      <div className="board-details-main">
+        <div></div>
+        <DragDropContext onDragEnd={handleDragDrop}>
+            <BoardIndexHeader
+              board={currBoard}
+              onSaveTask={onSaveTask}
+              onSaveGroup={onSaveGroup}
+              onUpdateBoard={onUpdateBoard}
+              cmpsOrder={cmpsOrder}
+              />
+          <div class="scrollable-div">
+            <Droppable droppableId="GROUP" type="group">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                <GroupList
+                groups={groups}
+                onSaveTask={onSaveTask}
+                onRemoveTask={onRemoveTask}
+                onRemoveGroup={onRemoveGroup}
+                onSaveGroup={onSaveGroup}
+                cmpsOrder={cmpsOrder}
+                statusPicker={statusPicker}
+                priorityPicker={priorityPicker}
+                members={members}
+                onSaveCmpEdit={onSaveCmpEdit}
+                />
+              {provided.placeholder}
+              </div>
+            )}
+            </Droppable>
 
-        <button
-          className="new-group-btn"
-          onClick={() =>
-            onSaveGroup(currBoard.groups.length, getEmptyGroup(), {})
-          }
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            fill="#323338"
-            width="24"
-          >
-            <path d="M11.3 18.6v-5.9H5.4v-1.4h5.9V5.4h1.4v5.9h5.9v1.4h-5.9v5.9Z"></path>
-          </svg>
-          Add new group
-        </button>
+            <button
+              className="new-group-btn"
+              onClick={() =>
+                onSaveGroup(currBoard.groups.length, getEmptyGroup(), {})
+              }
+              >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                fill="#323338"
+                width="24"
+                >
+                <path d="M11.3 18.6v-5.9H5.4v-1.4h5.9V5.4h1.4v5.9h5.9v1.4h-5.9v5.9Z"></path>
+              </svg>
+              Add new group
+            </button>
+          </div>
         </DragDropContext>
+      </div>
     </section>
   );
 }

@@ -56,11 +56,6 @@ export function BoardIndexHeader({
           onChange={handleChange}
           onBlur={handleBlur}
         />
-
-        <p>
-          Manage any type of project. Assign owners, set timelines and keep
-          track of where your project stands
-        </p>
       </section>
 
       <section className="board-data-display">
