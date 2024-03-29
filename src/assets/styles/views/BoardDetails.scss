@@ -1,9 +1,9 @@
 
 .board-details{
-    display: grid;
-    grid-template-columns: 2em 1fr 2em;
-    background-color: #ffffff;
-    border-start-start-radius: 10px;
+    // display: grid;
+    // grid-template-columns: 2em 1fr 2em;
+    // background-color: #ffffff;
+    // border-start-start-radius: 10px;
     margin: 0;
     padding: 0;
    
@@ -33,6 +33,7 @@
             justify-items: center;
             width: fit-content;
             text-align: center;
+            margin-inline-start: 2.5em;
     
             &:hover {
                 background-color: $clr17;
