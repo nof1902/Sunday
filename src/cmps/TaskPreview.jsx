@@ -4,8 +4,6 @@ import { SidePanelSlideHeader } from "./SidePanelSlideHeader";
 import { DynamicCmp } from "./DynamicCmp";
 import { OptionsActionsCmp } from "./OptionsActionsCmp";
 
-// import { svgService } from "../svg.service"
-
 export function TaskPreview({
   task,
   deleteTask,

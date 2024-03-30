@@ -1,12 +1,8 @@
 // import routes from '../routes'
 import {
   NavLink,
-  Outlet,
-  UNSAFE_DataRouterStateContext,
-  useParams,
 } from "react-router-dom";
-import { svgService } from "../svg.service";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { AddBoardModal } from "./AddBoardModal";
 import { SideNavPreview } from "./SideNavPreview";
 

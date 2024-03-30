@@ -1,6 +1,5 @@
 // import routes from '../routes'
 import { NavLink, useParams } from "react-router-dom";
-import { svgService } from "../svg.service";
 import { useEffect, useRef } from "react";
 import { useForm } from "../customHooks/useForm";
 

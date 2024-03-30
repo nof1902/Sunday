@@ -2,7 +2,6 @@
 import {
     NavLink, useParams,
   } from "react-router-dom";
-  import { svgService } from "../svg.service";
   import { useEffect, useRef, useState } from "react";
   import { AddBoardModal } from "./AddBoardModal";
 import { OptionsCmp } from "./OptionsCmp";
