@@ -103,13 +103,13 @@ export function TimeLineCmp({ info, onUpdateEntity, groupStyle }) {
         },
       };
     }
-    const totalDuration = differenceInDays(range.to, range.from);
-    const daysLast = differenceInDays(new Date(), range.from);
+    const totalDuration = differenceInDays(range?.to, range?.from);
+    const daysLast = differenceInDays(new Date(), range?.from);
     const pastRatio = (daysLast / totalDuration) * 100;
     const futureRatio = 100 - pastRatio;
 
-    const pastColor = isPast(range.from) ? groupStyle :'#000000';
-    const futureColor = isAfter(range.to, new Date()) ? '#000000' : groupStyle;
+    const pastColor = isPast(range?.from) ? groupStyle :'#000000';
+    const futureColor = isAfter(range?.to, new Date()) ? '#000000' : groupStyle;
 
     return {
       pastStyle: {

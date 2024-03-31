@@ -214,18 +214,18 @@ export function BoardDetails(currBoardTitle) {
 
   return (
     <section className="board-details">
-      <div></div>
       <div className="board-details-main">
-        <div></div>
+        <div className="style-mrg"></div>
         <DragDropContext onDragEnd={handleDragDrop}>
-            <BoardIndexHeader
-              board={currBoard}
-              onSaveTask={onSaveTask}
-              onSaveGroup={onSaveGroup}
-              onUpdateBoard={onUpdateBoard}
-              cmpsOrder={cmpsOrder}
-              />
-          <div class="scrollable-div">
+            <div className="sticky-board-header">
+              <BoardIndexHeader
+                board={currBoard}
+                onSaveTask={onSaveTask}
+                onSaveGroup={onSaveGroup}
+                onUpdateBoard={onUpdateBoard}
+                cmpsOrder={cmpsOrder}
+                />
+            </div>
             <Droppable droppableId="GROUP" type="group">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -262,7 +262,6 @@ export function BoardDetails(currBoardTitle) {
               </svg>
               Add new group
             </button>
-          </div>
         </DragDropContext>
       </div>
     </section>

@@ -1,22 +1,22 @@
 
 .board-details{
-    // display: grid;
-    // grid-template-columns: 2em 1fr 2em;
-    // background-color: #ffffff;
-    // border-start-start-radius: 10px;
     margin: 0;
     padding: 0;
    
     .board-details-main {
         display: grid;
-        grid-template-rows: 2em 1fr;
         margin: 0; 
+        position: relative;
 
-        .scrollable-div {
-            height: 75vh;
-            overflow-y: scroll; 
-            // overflow-x: scroll; 
-            border-radius: 10px 0 0 0;
+        .style-mrg{
+            z-index: 4;
+            background-color: white;
+        }
+
+        .sticky-board-header{
+            position: sticky;
+            top: 0;
+            z-index: 4;
         }
 
         .new-group-btn {

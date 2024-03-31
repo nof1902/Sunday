@@ -57,11 +57,11 @@
       }
 
       .calender-model{
-        z-index: 1;
+        z-index: 5;
         background-color: $primary-background-color;
         list-style: none;
         width: fit-content;
-        bottom: 70%;
+        top: 70%;
         border-radius: 8px;
         box-shadow: 0 8px 16px 0 #00000052;
         font-size: 14px;
