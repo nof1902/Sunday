@@ -8,13 +8,12 @@ export function PeopleCmp({ info, onUpdateEntity }) {
   const modalRef = useRef();
   const { selectedUser, members } = info;
 
-
   useEffect(() => {
-    findUser()
-  }, [info])
+    findUser();
+  }, [info]);
 
   function findUser() {
-    const userSelected = members.find(member => member._id === selectedUser);
+    const userSelected = members.find((member) => member._id === selectedUser);
     if (userSelected) {
       setUser(userSelected);
     }
@@ -34,11 +33,9 @@ export function PeopleCmp({ info, onUpdateEntity }) {
     };
   }, [handleClickModal]);
 
-
   useEffectUpdate(() => {
-    onUpdateEntity(infoToEdit)
-  },[infoToEdit])
-
+    onUpdateEntity(infoToEdit);
+  }, [infoToEdit]);
 
   function onChangeMember({ _id }) {
     setInfoToEdit((prevInfo) => ({
@@ -47,26 +44,41 @@ export function PeopleCmp({ info, onUpdateEntity }) {
     }));
     handleClickModal();
   }
- 
+
   function handleClickModal() {
     setOpenEditModel(!openEditModel);
   }
 
-
-
   return (
     <section className="dynamic-cmp" onClick={handleClickModal}>
-    <section className="people-cmp">
-    <span className="pople-pluse-icon">+</span>
-    { !user && <img src="src/Images/defult-person.svg" className="defult-person-img" title="" alt="" aria-hidden="true" /> }
-    { user && <img src={`src/Images/${user.fullname}.jpg`} className="person-img" title={user.fullname} alt={user.fullname} aria-hidden="true" /> }
-    </section>
-
+      <section className="people-cmp">
+        <span className="pople-pluse-icon">+</span>
+        {!user && (
+          <img
+            src="src/Images/defult-person.svg"
+            className="defult-person-img"
+            title=""
+            alt=""
+            aria-hidden="true"
+          />
+        )}
+        {user && (
+          <img
+            src={`/src/Images/${user.fullname}.jpg`}
+            className="person-img"
+            title={user.fullname}
+            alt={user.fullname}
+            aria-hidden="true"
+          />
+        )}
+      </section>
 
       {openEditModel && (
         <section className="status-model">
           <section className="status-picker-content">
-            <div className="people-title"><span>Suggested people</span></div>
+            <div className="people-title">
+              <span>Suggested people</span>
+            </div>
             <ul ref={modalRef} className="people-items-container">
               {members.map((member, idx) => (
                 <li
@@ -74,9 +86,25 @@ export function PeopleCmp({ info, onUpdateEntity }) {
                   key={idx}
                   onClick={() => onChangeMember(member)}
                 >
-                  { member.imgUrl && <img src={member.imgUrl} className="choose-person-img" title={member.fullname} alt={member.fullname} aria-hidden="true" />}
+                  {member.imgUrl && (
+                    <img
+                      src={member.imgUrl}
+                      className="choose-person-img"
+                      title={member.fullname}
+                      alt={member.fullname}
+                      aria-hidden="true"
+                    />
+                  )}
                   {/* { !member.imgUrl && <div className="choose-person"><span>{member.fullname[0]}</span></div>} */}
-                  { !member.imgUrl && <img src={`src/Images/${member.fullname}.jpg`} className="choose-person-img" title={member.fullname} alt={member.fullname} aria-hidden="true" />}
+                  {!member.imgUrl && (
+                    <img
+                      src={`/src/Images/${member.fullname}.jpg`}
+                      className="choose-person-img"
+                      title={member.fullname}
+                      alt={member.fullname}
+                      aria-hidden="true"
+                    />
+                  )}
                   <span>{member.fullname}</span>
                 </li>
               ))}
