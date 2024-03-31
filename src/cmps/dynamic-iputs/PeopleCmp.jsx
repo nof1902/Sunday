@@ -59,7 +59,7 @@ export function PeopleCmp({ info, onUpdateEntity }) {
     <section className="people-cmp">
     <span className="pople-pluse-icon">+</span>
     { !user && <img src="src/Images/defult-person.svg" className="defult-person-img" title="" alt="" aria-hidden="true" /> }
-    { user && <div className="person-img"><span>{user.fullname[0]}</span></div> }
+    { user && <img src={`src/Images/${user.fullname}.jpg`} className="person-img" title={user.fullname} alt={user.fullname} aria-hidden="true" /> }
     </section>
 
 
@@ -75,7 +75,8 @@ export function PeopleCmp({ info, onUpdateEntity }) {
                   onClick={() => onChangeMember(member)}
                 >
                   { member.imgUrl && <img src={member.imgUrl} className="choose-person-img" title={member.fullname} alt={member.fullname} aria-hidden="true" />}
-                  { !member.imgUrl && <div className="choose-person"><span>{member.fullname[0]}</span></div>}
+                  {/* { !member.imgUrl && <div className="choose-person"><span>{member.fullname[0]}</span></div>} */}
+                  { !member.imgUrl && <img src={`src/Images/${member.fullname}.jpg`} className="choose-person-img" title={member.fullname} alt={member.fullname} aria-hidden="true" />}
                   <span>{member.fullname}</span>
                 </li>
               ))}
