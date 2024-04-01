@@ -3,7 +3,7 @@
     grid-template-columns: repeat(2, auto) 1fr repeat(2, auto);
     grid-template-rows: auto;
     align-items: center;
-    margin-top: 0.2em;
+    margin-top: 0.1em;
     margin-bottom: 0.2em;
     margin-left: 0.45em;
     
@@ -20,6 +20,13 @@
         cursor: pointer;
         padding: 0.55em;
         border-radius: 0.3em;
+
+        button{
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+        }
 
         .menu{
             transition: color 0.3s;

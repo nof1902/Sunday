@@ -1,5 +1,33 @@
+
 .boards-list{
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(180px,260px));
-    grid-gap: 1rem;
+    grid-template-columns: 2em 1fr 2em;
+    grid-template-rows: 5em 1fr;
+
+    .boards-list-header{
+        grid-area: 1/2/1/3;
+        display: grid;
+        grid-template-columns: repeat(2, auto-fill), 1fr;
+        background-color: white;
+        
+        .welcome-sec{
+            
+            * > {
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+
+    .board-of-boards{
+        grid-area: 2/2/2/3;
+        .boards{
+            
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(180px,260px));
+            grid-gap: 1rem;
+        }
+
+    }
+    
 }
