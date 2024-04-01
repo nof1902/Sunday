@@ -88,8 +88,10 @@ export function BoardIndex() {
       </section>
       <div className="line"></div>
       <section className="board-main">
-        {!params.id && <BoardsList boards={boards} />}
-        {params.id && <BoardDetails isLoading={isLoading} currBoardTitle={currBoardTitle}/>}
+        
+      {/* <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div> */}
+        {/* {!params.id && <BoardsList isLoading={isLoading} boards={boards} />} */}
+        {/* {params.id && <BoardDetails isLoading={isLoading} currBoardTitle={currBoardTitle}/>} */}
       </section>
     </section>
   );
