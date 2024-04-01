@@ -10,6 +10,7 @@ export const utilService = {
     darkenColor,
     getColorAlfa,
     bringColor,
+    cmpsOrderCapsLk,
 }
 
 
@@ -129,3 +130,18 @@ function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
+function cmpsOrderCapsLk(key) {
+    switch (key) {
+        case "people":
+          return "Person"
+        case "status":
+          return "Status"
+        case "priority":
+          return "Priority"
+        case "timeLine":
+            return "TimeLine"
+        default:
+          return
+  
+      }
+}
