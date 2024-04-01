@@ -141,7 +141,7 @@ export function BoardDetails(isLoading, currBoardTitle) {
   //   }
   // }
 
-  if (!currBoard) return  <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>;
+  if (!currBoard || currBoard._id !== params.id) return  <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>;
   const { groups , cmpsOrder , statusPicker, priorityPicker, members} = currBoard;
 
 

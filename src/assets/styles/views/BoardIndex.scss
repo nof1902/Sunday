@@ -39,13 +39,15 @@
         .isLoading{
             display: grid;
             place-items: center;
+            height: 100vh;
             img{
                 width: fit-content;
             }
         }
     }
-
-    
+ 
 }
+
+
 
 

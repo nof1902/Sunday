@@ -71,7 +71,7 @@ export function BoardIndex() {
     }
   }
 
-  if (!boards) return <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>;
+  // if (!boards.length < 1) return <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>;
 
   return (
     <section className="board-index">
@@ -88,10 +88,9 @@ export function BoardIndex() {
       </section>
       <div className="line"></div>
       <section className="board-main">
-        
-      {/* <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div> */}
-        {/* {!params.id && <BoardsList isLoading={isLoading} boards={boards} />} */}
-        {/* {params.id && <BoardDetails isLoading={isLoading} currBoardTitle={currBoardTitle}/>} */}
+        {boards.length < 1 && <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>}
+        {boards && !params.id && <BoardsList boards={boards} />}
+        {boards && params.id && <BoardDetails isLoading={isLoading} currBoardTitle={currBoardTitle}/>}
       </section>
     </section>
   );
