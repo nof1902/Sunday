@@ -49,6 +49,26 @@
             font-weight: 300;
         }
     }
+
+    .conected-user{
+
+        .user{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            all: unset;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgb(253, 171, 61);
+            padding: 0.2em;
+
+            h1{
+                align-self: center;
+                margin: 0;
+            }
+        }
+    }
 }
 
     
