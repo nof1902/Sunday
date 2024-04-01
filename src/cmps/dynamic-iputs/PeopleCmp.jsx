@@ -55,7 +55,7 @@ export function PeopleCmp({ info, onUpdateEntity }) {
         <span className="pople-pluse-icon">+</span>
         {!user && (
           <img
-            src="src/Images/defult-person.svg"
+            src="/public/Images/defult-person.svg"
             className="defult-person-img"
             title=""
             alt=""
@@ -64,7 +64,7 @@ export function PeopleCmp({ info, onUpdateEntity }) {
         )}
         {user && (
           <img
-            src={`/src/Images/${user.fullname}.jpg`}
+            src={`/public/Images/${user.fullname}.jpg`}
             className="person-img"
             title={user.fullname}
             alt={user.fullname}
@@ -98,7 +98,7 @@ export function PeopleCmp({ info, onUpdateEntity }) {
                   {/* { !member.imgUrl && <div className="choose-person"><span>{member.fullname[0]}</span></div>} */}
                   {!member.imgUrl && (
                     <img
-                      src={`/src/Images/${member.fullname}.jpg`}
+                      src={`/public/Images/${member.fullname}.jpg`}
                       className="choose-person-img"
                       title={member.fullname}
                       alt={member.fullname}
