@@ -15,7 +15,8 @@ import {
   SET_BOARDS,
   UNDO_REMOVE_BOARD,
   CLEAN_CURR_BOARD,
-  SET_BOARD
+  SET_BOARD,
+  IS_LOADING
 } from "../reducers/board.reducer.js";
 import { utilService } from "../../services/util.service.js";
 
@@ -41,7 +42,9 @@ export function getActionUpdateBoard(board) {
 
 export async function loadBoards() {
   try {
-    // store.dispatch({ type: LOADING_START })
+    store.dispatch({
+      type: IS_LOADING,
+    });
     const boards = await boardService.query();
 
     console.log("Boards from DB:", boards);
@@ -63,6 +66,9 @@ export async function loadBoards() {
 
 export async function getBoardById(boardId) {
   try {
+    store.dispatch({
+      type: IS_LOADING,
+    });
     const board = await boardService.getById(boardId);
     store.dispatch({
       type: SET_BOARD,

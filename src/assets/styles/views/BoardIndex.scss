@@ -35,6 +35,14 @@
         overflow-y: scroll; 
         height: 90vh;
         top: 0;
+
+        .isLoading{
+            display: grid;
+            place-items: center;
+            img{
+                width: 100%;
+            }
+        }
     }
 
     

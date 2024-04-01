@@ -17,7 +17,7 @@ import {
   updateBoardOptimistic
 } from "../store/actions/board.actions.js";
 
-export function BoardDetails(currBoardTitle) {
+export function BoardDetails(isLoading, currBoardTitle) {
 
   const currBoard = useSelector((storeState) => storeState.boardModule.currBoard);
   const [update,setUpdate] = useState(false)
@@ -141,7 +141,7 @@ export function BoardDetails(currBoardTitle) {
   //   }
   // }
 
-  if (!currBoard) return <div>Loading...</div>;
+  if (!currBoard) return  <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>;
   const { groups , cmpsOrder , statusPicker, priorityPicker, members} = currBoard;
 
 
