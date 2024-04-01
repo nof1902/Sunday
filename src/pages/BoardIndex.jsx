@@ -19,6 +19,7 @@ export function BoardIndex() {
   const navigate = useNavigate();
   const boards = useSelector((storeState) => storeState.boardModule.boards);
   const currBoardTitle = useSelector((storeState) => storeState.boardModule.currBoard?.title);
+  const isLoading = useSelector(storeState => storeState.boardModule.isLoading)
 
   useEffect(() => {
     loadBoards();
@@ -70,7 +71,7 @@ export function BoardIndex() {
     }
   }
 
-  if (!boards) return <div>Loading...</div>;
+  // if (!boards.length < 1) return <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>;
 
   return (
     <section className="board-index">
@@ -87,8 +88,9 @@ export function BoardIndex() {
       </section>
       <div className="line"></div>
       <section className="board-main">
-        {!params.id && <BoardsList boards={boards} />}
-        {params.id && <BoardDetails currBoardTitle={currBoardTitle}/>}
+        {boards.length < 1 && <div className="isLoading"><img src={"./Images/loading.gif"} alt="loading..."/></div>}
+        {boards && !params.id && <BoardsList boards={boards} />}
+        {boards && params.id && <BoardDetails isLoading={isLoading} currBoardTitle={currBoardTitle}/>}
       </section>
     </section>
   );

@@ -5,12 +5,14 @@ export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const CLEAN_CURR_BOARD = 'CLEAN_CURR_BOARD'
 export const SET_BOARD = 'SET_BOARD'
+export const IS_LOADING = 'IS_LOADING'
 export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
 const initialState = {
     boards: [],
     currBoard: null,
-    lastRemovedBoard: null
+    lastRemovedBoard: null,
+    isLoading: false
 }
 
 export function boardReducer(state = initialState, action = {}) {
@@ -18,10 +20,10 @@ export function boardReducer(state = initialState, action = {}) {
     var boards
     switch (action.type) {
         case SET_BOARDS:
-            newState = { ...state, boards: action.boards}
+            newState = { ...state, boards: action.boards,isLoading: false}
             break
         case SET_BOARD:
-            newState = { ...state, currBoard: action.board}
+            newState = { ...state, currBoard: action.board,isLoading: false}
         break;
         case REMOVE_BOARD:
             const lastRemovedBoard = state.boards.find(board => board._id === action.boardId)
@@ -41,6 +43,9 @@ export function boardReducer(state = initialState, action = {}) {
             if (state.lastRemovedBoard) {
                 newState = { ...state, boards: [...state.boards, state.lastRemovedBoard], lastRemovedBoard: null }
             }
+            break
+        case IS_LOADING:
+            newState = { ...state, isLoading: true}
             break
         default:
     }
