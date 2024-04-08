@@ -69,15 +69,16 @@
 
         .status-picker-content{
             transition: height .15s ease;
-            padding: 16px 16px 8px;
+            padding: 22px 22px 8px;
             overflow-x: auto;
             overflow-y: hidden;
+            width: 100%;
 
             .items-container{
                 all: unset;
 
                 > * {
-                    width: 130px;
+                    // width: 130px;
                     color: $primary-background-color;
                     
                     cursor: pointer;
@@ -220,7 +221,7 @@
         }
 
         .status-picker-footer{
-            padding: 0 8px 2px 8px;
+            padding: 0 8px 8px 8px;
             width: 90%;
             
             .horizontal-divider {

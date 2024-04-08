@@ -47,10 +47,35 @@ span {
 }
 
 a {
+    all: unset;
     text-decoration: none;
-
 }
 // a:hover {
 //     text-decoration: underline;
 // }
+
+
+
+
+
+
+/* For WebKit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 10px; /* Adjust the width as needed */
+    
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b4b3b3; /* Thumb color */
+    border-radius: 4px; /* Roundness of the thumb */
+}
+
+// * {
+//     scrollbar-width: auto;
+//     scrollbar-color: #b4b3b3 #f1f1f1;
+//   }
 

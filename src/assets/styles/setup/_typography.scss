@@ -1,4 +1,13 @@
 @font-face {
+  font-family: 'Poppins';
+  // src: url(../../fonts/Poppins/Poppins-Regular.woff);
+  src: url('../../fonts/Poppins/Poppins-Light.woff') format('woff');
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+}
+
+@font-face {
     font-family: 'Poppins';
     // src: url(../../fonts/Poppins/Poppins-Regular.woff);
     src: url('../../fonts/Poppins/Poppins-Regular.woff') format('woff');

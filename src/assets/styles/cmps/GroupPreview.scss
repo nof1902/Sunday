@@ -336,6 +336,7 @@
             display: grid;
             grid-template-columns: 325px 1fr;
             height: 35px;
+            border-block-end: 1px solid #d0d4e4;
 
             &:hover {
                 z-index: 3;
@@ -366,7 +367,7 @@
         }
 
         .footer-stasus {
-            border-block-start: 1px solid $clr11;
+            // border-block-start: 1px solid $clr11;
             display: grid;
             grid-template-columns: 330px auto 1fr;
             text-align: center;
