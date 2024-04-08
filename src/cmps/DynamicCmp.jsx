@@ -5,6 +5,7 @@ import { TimeLineCmp } from "./dynamic-iputs/TimeLineCmp";
 
 export function DynamicCmp({ cmpType, onUpdate, taskToEdit, statusPicker, priorityPicker, members, groupStyle, onSaveCmpEdit}) {
     let info
+    
     function onUpdateEntity(info, cmpNameToSave = null){
       if(info?.to){
         onUpdate(cmpType, info)  

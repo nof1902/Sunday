@@ -81,9 +81,11 @@ export function BoardIndexHeader({
           </section>
         </div>
 
-        <button className="plus-btn">
-          <span>+</span>
-        </button>
+        {
+        //   <button className="plus-btn">
+        //   <span>+</span>
+        // </button>
+      }
       </section>
       <section className="board-actions">
         <section className="addition-actions">
