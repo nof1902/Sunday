@@ -11,6 +11,7 @@ export const utilService = {
     getColorAlfa,
     bringColor,
     cmpsOrderCapsLk,
+    bringColorArray,
 }
 
 
@@ -95,6 +96,21 @@ function bringColor() {
       ]
 
       return rgbColors
+}
+
+function bringColorArray() {
+    const colorsArray = [
+        {id: 's1', color: '#ff158a', active: false, txt: 'Creative & Design', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/Creative.png'},
+        {id: 's2', color: '#ffcc00', active: false, txt: 'Operation', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/ops.png'},
+        {id: 's3', color: '#f04095', active: false, txt: 'Marketing', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/marketing.png'},
+        {id: 's4', color: '#ff9900', active: false, txt: 'Project Management', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/Projects.png'},
+        {id: 's5', color: '#579bfc', active: false, txt: 'Task management', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/Tasks.png'},
+        {id: 's6', color: '#ff7575', active: false, txt: 'HR', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/HR.png'},
+        {id: 's7', color: '#00c875', active: false, txt: 'IT', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP/tabstags+color/IT.png'},
+        {id: 's8', color: '#6161ff', active: false, txt: 'More Workflows', src: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NaamaGros/HP_tests/wm_icons/more.png'},
+      ]
+
+      return colorsArray
 }
 
 
